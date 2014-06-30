@@ -19,9 +19,41 @@
   citecolor = red
 }
 
-\title{ A markup language to \\define markup languages }
-\subtitle{ Using regular expressions to generate \\XML from any document  }
+\title{ A language for defining markup languages }
+\subtitle{ Using regular expressions to convert annotated documents \\into hierarchical documents }
 \author{ Christopher OKHRAVI \\ UPPSALA UNIVERSITY }
+
+
+%
+% Defining research questions
+%
+\newcommand\researchquestionformat[1]{\begin{quote}#1\end{quote}}
+\newcommand\firstresearchquestion{\researchquestionformat{%
+  \textbf{(RQ1) Research question 1} \\
+  Can the verbosity of document annotation formats (e.g. \texttt{XML}) be decreased, by allowing authors themselves to design annotation formats?%
+}}
+
+
+\newcommand\secondresearchquestion{\researchquestionformat{%
+  \textbf{(RQ4) Research question 4} \\
+  Can a \texttt{Domain Specific Language (DSL)} be defined, such that a semi-technical author can employ it to design a document annotation format?
+
+  Requiring (A) the combined complexity of the DSL and the annotated document is less than that of a document annotated in a traditional markup language with fixed syntax (e.g. \texttt{XML}).
+
+  Without (B) sacrificing any flexibility of the original markup language.
+}}
+
+\newcommand\thirdresearchquestion{\researchquestionformat{%
+  \textbf{(RQ2) Research question 2} \\
+  Can a process be defined, such that any document can be converted into \texttt{XML} format, using \texttt{Regular Expressions} as rules for document hierarchy?
+}}
+
+\newcommand\fourthresearchquestion{\researchquestionformat{%
+  \textbf{(RQ3) Research question 3} \\
+  Can a language be defined, such that it is a subset of \texttt{Regular Expressions}, where most control characters are replaced by assumptions? Where the intent of the subset is to express annotations of document hierarchy.
+}}
+
+
 
 
 
@@ -37,7 +69,22 @@
 Lorem ipsum.
 
 \section{Research questions}
-Lorem ipsum.
+The question of interest is as follows.
+
+\firstresearchquestion
+
+Given that there are a multitude of potentials solutions to the question, one path must be chosen. This thesis concerns itself with the approach outlined in the more detailed question below.
+
+\secondresearchquestion
+
+To explore the possibility of the above question the author has chosen to evaluate whether \texttt{Regular Expressions} can be used to define annotation rules that enables an annotated document to be converted into \texttt{XML}. As expressed by the question below:
+
+\thirdresearchquestion
+
+Given that \texttt{Regular Expressions} may cause the level of complexity to increase (which previously stated as explicitly unwanted) the author has chosen to suggest the use of a simplified subset of the language. As expressed in the question below:
+
+\fourthresearchquestion
+
 
 \section{Delimitations}
 Lorem ipsum.
