@@ -36,6 +36,10 @@
 
 \newcommand\secondresearchquestion{\researchquestionformat{%
   \textbf{(RQ2) Research question 2} \\
+  Can an annotation language
+  For an author to be able to design an annotation language, this author must design a domain-specific-language (DSL), a parser, a compiler and a transformation engine. Consequently we come to the point where we instead ask ourselves the following question:
+
+
   Can a \texttt{Domain Specific Language (DSL)} be defined, such that a semi-technical author can employ it to design a document annotation format?
 
   Requiring (A) the combined complexity of the DSL and the annotated document is less than that of a document annotated in a traditional markup language with fixed syntax (e.g. \texttt{XML}).
@@ -73,7 +77,39 @@ The question of interest is as follows.
 
 \firstresearchquestion
 
-Given that there are a multitude of potentials solutions to the question, one path must be chosen. This thesis concerns itself with the approach outlined in the more detailed question below.
+Let's break down what it means to be able to work with an arbitrarily annotated document. Initially, the author would of course have to decide upon an annotation syntax. If the syntax doesn't look like any existing annotation syntax we immediately run into a problem. To be able to convert our arbitrary syntax into any other structured format (such as a \texttt{PDF} or a \texttt{HTML} document) we would need a parser that can ``read and treat'' the document as a tree\footnote{ We'll return to discuss why free text documents (regardless of annotation syntax) can be treated as a trees.}.
+
+Assume we've created a parser that can ``read and treat'' an arbitrary document written in our syntax. Assume we've written this parser in any programming language of your choice. Assume the parser, written in your programming language of choice, builds up the document tree in memory. Now obviously the next problem arise. A document tree in memory does not do us any good if we cannot export this tree from memory into any other format of our wishing. This means we've only covered the first subproblem of two. We'll express this second subproblem as -- converting the tree representation of the document from memory into any given concrete format of our choosing, that in turn can be written to disk.
+
+In summary -- the first subproblem is an ``interpretation problem'', whereas the second a ``transformation problem''. Without making any assumptions about whether the tools exist or not -- let us formalize these two as requirements for tools: For an author to be able to work with an arbitrary annotation syntax one would need:
+
+\begin{enumerate}
+\item A parser (that ``reads the annotated document as a tree''),
+\item A transformation engine (that ``converts the read document into a tree'').
+\end{enumerate}
+
+In fact, the problem stated above is not actually that complicated. In fact, given a moderately skilled programmer, the problem can easily be solved today -- without introducing any new tools. Let's look at an example.
+
+Assume a document author is approaching this problem. Assume that the author in question, after designing a custom annotation syntax, constructs a set of \texttt{Regular Expressions} that utilizes captures to distinguish data from annotations. Assume then that the author would apply these regular expressions to the document (written in the custom annotation syntax)  using one of the few engines that convert \texttt{regex captures} to \texttt{XML}. Perhaps the author might even write a custom \texttt{regex} to \texttt{XML} converter -- given the lack of existence\footnote{ Search strategies are declared in the method section of the thesis.} of a of a ``de facto'' standardized conversion strategy\footnote{ The conversion is not trivial, and thus many different solutions may be considered ``correct''. Further investigation is found in the empirical sections of this thesis.}.
+
+Given that \texttt{regex} is a widely used (\#REF!), and perhaps the most common, way of searching plain-text (\#REF!), it is a fitting technique for identifying annotations in semi-structured text. Further, \texttt{XML} is a widely used (\#REF!), and perhaps the most common, way of representing documents as hierarchies of information, where annotations are easily separated from data.
+
+Further, \texttt{XML} is a suitable output format because of it being free from semantics. Put this in contrast to for example \texttt{HTML} or \texttt{LaTeX} which both have semantic properties embedded into their specifications. Consider for example the paragraph element in \texttt{HTML} (\texttt{<p>..</p>}). The element denotes semantic significance to the contents inside it. It denotes a paragraph. The same problem arise when using, previously mentioned, \texttt{LaTeX}. According to the the project documentation it is a ``typesetting system [...] for producing [...] documents'' \footnote{ http://www.techscribe.co.uk/ta/latex-introduction.pdf}. Semantically, it is tightly bound to the ``idea'' of the physical document (\#REF!). 
+
+Given that \texttt{XML} lives in an eco-system with other useful languages and tools -- such as \texttt{XSL}, \texttt{XSLT}, \texttt{XPath}, \texttt{DOM} etc. -- it has also proven to be a useful data transportation format (\#REF!). Meaning that if two given systems need to share data, \texttt{XML} can serve as a neutral intermediate format.
+
+Consequently, the idea is to use \texttt{regex}:es to parse an arbitrarily (but known) annotated document, and convert the parsed result into \texttt{XML}. For the purpose of allowing an author to turn an arbitrary annotation syntax into virtually any other structured format. Using \texttt{XML} as an intermediate format, and \texttt{regex} as a means of parsing.
+
+While this all seems reasonable, we have yet not to address the question of why this approach would need any further research. Given that the two above discussed techniques are both well documented and well used -- it might seem this technique is highly employable today.
+
+\begin{enumerate}
+\item design/use a parser (that ``reads the annotated document''),
+\item design/use a compiler (that ``converts the read document into a tree''),
+\item design/use a transformation engine.
+\end{enumerate}
+
+
+Streamlining,   argue  Consequently we come to the point where we instead ask ourselves the following question:
 
 \secondresearchquestion
 
