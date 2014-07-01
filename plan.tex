@@ -35,7 +35,7 @@
 
 
 \newcommand\secondresearchquestion{\researchquestionformat{%
-  \textbf{(RQ4) Research question 4} \\
+  \textbf{(RQ2) Research question 2} \\
   Can a \texttt{Domain Specific Language (DSL)} be defined, such that a semi-technical author can employ it to design a document annotation format?
 
   Requiring (A) the combined complexity of the DSL and the annotated document is less than that of a document annotated in a traditional markup language with fixed syntax (e.g. \texttt{XML}).
@@ -44,12 +44,12 @@
 }}
 
 \newcommand\thirdresearchquestion{\researchquestionformat{%
-  \textbf{(RQ2) Research question 2} \\
+  \textbf{(RQ3) Research question 3} \\
   Can a process be defined, such that any document can be converted into \texttt{XML} format, using \texttt{Regular Expressions} as rules for document hierarchy?
 }}
 
 \newcommand\fourthresearchquestion{\researchquestionformat{%
-  \textbf{(RQ3) Research question 3} \\
+  \textbf{(RQ4) Research question 4} \\
   Can a language be defined, such that it is a subset of \texttt{Regular Expressions}, where most control characters are replaced by assumptions? Where the intent of the subset is to express annotations of document hierarchy.
 }}
 
@@ -102,8 +102,44 @@ Lorem ipsum.
 
 
 
-\chapter{Theory}
+\chapter{Literature review}
 Lorem ipsum.
+
+\section{Annotating documents}
+What does it mean to annotate? What are common document annotation formats?
+
+\section{Object notation as a subset of annotation}
+An explanation as to why object notation is a subset of annotations. Meaning that formats like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring.
+
+\section{Common markup languages}
+Exploring a comprehensive list of existing markup languages, including light-weight flavors such as markdown.
+
+\section{Semantic coupling}
+Exploring the level of semantic coupling between the annotation format and it's intended output.
+
+
+
+
+
+\chapter{Empirics}
+Lorem ipsum.
+
+
+\section{SimEx -- A control structure-light subset of regex}
+...
+
+
+\section{Flexup -- A DSL for expressing regex to XML conversions}
+...
+
+\subsection{The annotated file (\texttt{.fup})}
+...
+
+\subsection{The annotation definitions file (\texttt{.fupd})}
+...
+
+\subsection{The binary}
+...
 
 
 
