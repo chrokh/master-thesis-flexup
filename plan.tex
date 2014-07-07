@@ -6,6 +6,9 @@
 \usepackage[utf8]{inputenc} % åäö
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage[toc]{glossaries}
+
+
 
 \setkomafont{disposition}{\normalfont\bfseries}
 
@@ -60,12 +63,30 @@
 
 
 
+\newglossaryentry{document authoring}
+{
+  name={Document Authoring},
+  description={The act of writing literature.}
+}
+\makeglossaries
+
+
+
+
+
 
 \begin{document}
 
 \maketitle
 \tableofcontents
 \pagebreak
+
+
+
+\glsaddall
+\printglossary
+
+
 
 
 
