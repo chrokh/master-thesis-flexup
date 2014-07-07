@@ -10,3 +10,8 @@
 *.snm
 *.synctex.gz
 *.toc
+*.dvi
+*.glg
+*.glo
+*.gls
+*.ist
