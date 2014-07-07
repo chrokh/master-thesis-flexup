@@ -156,11 +156,92 @@ Given that markup languages are prolifically used in areas other than document a
 
 
 \chapter{Method}
-
-
-
-\section{Data analysis}
 Lorem ipsum.
+
+This thesis employs design research, as outlined by Oates (\#REF!), as a means of producing \emph{Constructs} and an \emph{Instantiation}. The first is the result of a literature review, whereas the second a result of artifact development. These are explained in further depth below, where the whole research process is outlined.
+
+
+\section{Phase I -- Literature review of markup languages}
+The first undertaking of the thesis is a literature review aiming to summarize and classify the larger bulk of current and previous markup languages.
+
+The outcome of this literature review is a large table that classifies and compares markup languages. Markup languages are listed on the y-axis, whereas identified aspects or properties are listed on the x-axis.
+
+To delimit the subset of markup languages to a set that seemingly have provided value to the public, the author has decided to use the crowd-sourced, online encyclopedia Wikipedia as starting point. If a certain thing have been mentioned on Wikipedia, the author argue, it must at the very least be known by a few people.
+
+From an article titled ``List of markup languages''\footnote{http://en.wikipedia.org/wiki/List\_of\_markup\_languages} (\#REF!), the author have followed links (into any number of depths) whenever the links implies articles that might introduce the author to yet another markup language.
+
+To, however, minimize the risk of accidentally looking past any splendid markup language that might (e.g.) have been more narrowly applied by researchers, the following search matrix has been constructed. The matrix served as a base for query construction when searching articles via the academically oriented search engine Google Scholar.
+
+\vspace{6pt}
+\begin{tabular}{ |l|l|l|l| }
+  \hline
+  list            & of & markup     & languages \\\hline
+  review          & ..   & annotation & languages \\\hline
+  summary         & ..   & .. & .. \\\hline
+  classification  & ..   & .. & .. \\\hline
+  comparison      & ..   & .. & .. \\\hline
+  categorization  & ..   & .. & .. \\\hline
+\end{tabular}
+\vspace{6pt}
+
+Grammatical inflections (such as the infliction listings of list) of all words were of course used, even though not explicitly mentioned in the search matrix.
+
+The total number of markup languages found and analyzed were approximately 50 (\#TODO!).
+
+
+\subsection{Data analysis}
+Whenever a new markup language was encountered, the following strategy was applied:
+
+\begin{enumerate}
+\item Add another row to the resulting table for this particular markup language.
+\item Consult more literature about this markup language, using the following questions as guidelines: (a) When was it created? (b) By whom? (c) With what intent? (d) How was it actually used? (e) What characteristics make it different from other markup languages? (f) How did it contribute to the future of markup languages?
+\item During the above mentioned literature review, when unique aspects of the markup language where found, a new column was introduced to the resulting table. Marking the presence of that aspect in the cell corresponding to the language and that aspect. Further, all the already existing markup languages were revisited and re-evaluated according to the newly introduced aspect.
+\item During the above mentioned literature review, not only answers to the questions outlined in step 2 were sought. Step 3 shows how the classification of aspects were conducted. Consequently, when reading about a given markup language, all the previous classified aspects were 
+\end{enumerate}
+
+[INSERT FLOWCHART DIAGRAM OF THE PROCESS HERE]
+
+
+\subsection{Deliverables}
+The literature review was intended to produce two deliverables. First, a classification system for markup languages. This classification system is part of the thesis's contribution in terms of what Oates (\#REF!) defines as a \emph{Construct}.
+
+The second outcome of the literature review is the table consisting of classified markup languages. The intent is to show which of the markup languages of today that are free from semantic coupling. This thesis is only concerned with languages free from semantic coupling, and with a list of markup languages that fit this criteria we consequently have something to measure the artifact (which is explained in the following section) against.
+
+
+
+\section{Phase II -- Designing a new markup language}
+During the second major phase of this thesis -- or rather -- during the empirical phase of this thesis the intent was to produce an artifact. In essence the intention (as more thoroughly described in the research questions section) was to design a new markup language, free from semantics.
+
+However, two requirements were posed upon this new language. It must be (1) equally powerful to any existing markup language. Secondly, it must be (2) less complex than any existing markup language. This of course raises a number of questions.
+
+
+
+\begin{enumerate}
+\item How can we measure \emph{power}?
+\item How can we measure \emph{complexity}?
+\end{enumerate}
+
+The answer to the first question is quite simple given that it will simply be tactically avoided. By constructing a language intended to be converted into the most powerful language identified in the literature review (phase I), the effective power of the language will simply be the same as that of the other language. The \emph{real} power of the language would of course be less, given that all it does is convert to another more powerful language -- however this discussion is considered out of scope.
+
+\subsection{Quantitative measurement of markup complexity}
+To answer the second question a complexity measure will be introduced. Complexity will be measured by applying the following formula:\\\\
+GIVEN A DOCUMENT X:\\
+\texttt{complexity = C x M}\\
+WHERE:\\
+\texttt{C = number of concepts needed}\\
+AND:\\
+\texttt{M = number of meta characters needed}.
+
+
+
+\subsection{Requirements gathering}
+Finding data sample. Books from Amazon.
+Grouping different concepts in books.
+Constructing a sample document.
+
+\subsection{Evaluation}
+Constructing the sample document in all the other semantically free languages identified in the literature review -- and then comparing complexity using the quantitative measure previously discussed.
+
 
 
 
