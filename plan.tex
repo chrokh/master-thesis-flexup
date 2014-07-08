@@ -95,20 +95,50 @@
 
 
 \chapter{Introduction}
+
 - A brief history of writing from pens, to the printing press, to computers and word processors, to markup languages.
  
+
+
+\section{Exploring annotation formats}
+
+- What does it mean to annotate? What are common document annotation formats?
+
+- Examples of markup languages and showcase of some syntax examples.
+
 - A brief overview of markup languages and how they can be used for (1) Document authoring, and (2) Data transport.
 
-- Exploring the problem of verbosity in markup languages, and leading the reader towards the area of research.
+- The relevance of markup for fiction and non-fiction.
 
 
 
-\section{Research questions}
+\section{Markup is not just data transportation}
+An explanation as to why object notation is a subset of annotations. Meaning that formats like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring. \texttt{XML} for example can be used for data transport, but in this thesis we'll focus on its markup properties. Consequently also ignore formats like \texttt{JSON}, \texttt{YAML} etc.
+
+
+
+\section{The problem of verbosity}
+
+- Exploring the problem of verbosity in markup languages
+
+- Briefly exploring how verbose markup disrupts ``flow''.
+
+- Also looking at how minimization cause other issues such as where \texttt{Markdown} is too simple. And where \texttt{Jade} causes forced line-break problems.
+
+- Giving utterly verbose examples from e.g. LaTeX (at seemingly simple tasks such as centering a text-box). Looking at the same solution from an XML perspective. Then briefly suggesting how we instead could do this with much less markup. Leading the reader towards the area of research.
+
+
+
+
+
+
+
+\chapter{Research questions}
 Let us formulate this problem as a research question.
 
 \firstresearchquestion
 
-Let's break down what it means to be able to work with an arbitrarily annotated document. Initially, the author would of course have to decide upon an annotation syntax. If the syntax doesn't look like any existing annotation syntax we immediately run into a problem. To be able to convert our arbitrary syntax into any other structured format (such as a \texttt{PDF} or a \texttt{HTML} document) we would need a parser that can ``read and treat'' the document as a tree\footnote{ We'll return to discuss why free text documents (regardless of annotation syntax) can be treated as a trees. %TODO: This is not true, think of the underline/highlight example - i.e. overlapping tags}.
+Let's break down what it means to be able to work with an arbitrarily annotated document. Initially, the author would of course have to decide upon an annotation syntax. If the syntax doesn't look like any existing annotation syntax we immediately run into a problem. To be able to convert our arbitrary syntax into any other structured format (such as a \texttt{PDF} or a \texttt{HTML} document) we would need a parser that can ``read and treat'' the document as a tree\footnote{ We'll return to discuss why free text documents (regardless of annotation syntax) can be treated as a trees. }. %TODO: This is not true, think of the underline/highlight example - i.e. overlapping tags
 
 Assume we've created a parser that can ``read and treat'' an arbitrary document written in our syntax. Assume we've written this parser in any programming language of your choice. Assume the parser, written in your programming language of choice, builds up the document tree in memory. Now obviously the next problem arise. A document tree in memory does not do us any good if we cannot export this tree from memory into any other format of our wishing. This means we've only covered the first subproblem of two. We'll express this second subproblem as -- converting the tree representation of the document from memory into any given concrete format of our choosing, that in turn can be written to disk.
 
@@ -255,17 +285,6 @@ Constructing the sample document in all the other semantically free languages id
 \chapter{Literature review}
 Lorem ipsum.
 
-\section{Annotating documents}
-What does it mean to annotate? What are common document annotation formats?
-
-\section{Object notation as a subset of annotation}
-An explanation as to why object notation is a subset of annotations. Meaning that formats like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring.
-
-\section{Common markup languages}
-Exploring a comprehensive list of existing markup languages, including light-weight flavors such as markdown.
-
-\section{Semantic coupling}
-Exploring the level of semantic coupling between the annotation format and it's intended output.
 
 
 
