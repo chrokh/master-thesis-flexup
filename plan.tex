@@ -61,6 +61,10 @@
 }}
 
 
+\newcommand{\tab}{\hspace*{6pt}}
+\newcommand{\tabb}{\tab\tab}
+
+
 
 
 \newglossaryentry{document authoring}
@@ -212,7 +216,7 @@ The second outcome of the literature review is the table consisting of classifie
 \section{Phase II -- Designing a new markup language}
 During the second major phase of this thesis -- or rather -- during the empirical phase of this thesis the intent was to produce an artifact. In essence the intention (as more thoroughly described in the research questions section) was to design a new markup language, free from semantics.
 
-However, two requirements were posed upon this new language. It must be (1) equally powerful to any existing markup language. Secondly, it must be (2) less complex than any existing markup language. This of course raises a number of questions.
+However, two requirements were posed upon this new language. It must be (1) \emph{equally powerful} to any existing markup language. Secondly, it must have a (2) \emph{lower syntactical complexity} than any existing markup language. This of course raises a number of questions.
 
 
 
@@ -221,18 +225,18 @@ However, two requirements were posed upon this new language. It must be (1) equa
 \item How can we measure \emph{complexity}?
 \end{enumerate}
 
-The answer to the first question is quite simple given that it will simply be tactically avoided. By constructing a language intended to be converted into the most powerful language identified in the literature review (phase I), the effective power of the language will simply be the same as that of the other language. The \emph{real} power of the language would of course be less, given that all it does is convert to another more powerful language -- however this discussion is considered out of scope.
+\paragraph{Matching power by converting to another language}
+The first question is the easier one, as it will not actually be answered. By constructing a language that is intended to be converted into the most powerful language identified in the literature review (phase I). Consequently the effective power of the developed language (the artifact) will be equal to the language it is converted into. Of course, the real power of the artifact language will probably be much lower, as it is merely a transitional language. Measuring the level of power of the language in itself, has been considered outside the scope of this thesis.
 
-\subsection{Quantitative measurement of markup complexity}
+\paragraph{Measuring syntactical complexity through a quantitative formula}
 To answer the second question a complexity measure will be introduced. Complexity will be measured by applying the following formula:\\\\
-\texttt{Assume that... }\\
-\texttt{C = (number of concepts needed) }\\
-\texttt{M = (number of meta characters needed) }\\
-\texttt{For a given markup document X, }\\
-\texttt{we express its expressive complexity as... }\\
-\texttt{complexity = C * M }\\
-
-
+\texttt{ASSUME THAT}\\
+\texttt{\tabb C = (number of concepts needed to markup document X) }\\
+\texttt{\tabb M = (number of meta characters needed to markup document X) }\\
+\texttt{FOR A GIVEN MARKUP DOCUMENT X, }\\
+\texttt{WE EXPRESS IT'S SYNTACTICAL COMPLEXITY AS: }\\
+\texttt{\tabb complexity = C * M }
+% TODO: Needs to be converted to some nicer fig-box
 
 
 \subsection{Requirements gathering}
