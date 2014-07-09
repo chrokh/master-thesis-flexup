@@ -7,6 +7,8 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage[toc]{glossaries}
+\usepackage{xcolor}
+\usepackage{listings}
 
 
 
@@ -66,6 +68,21 @@
 
 
 
+\newenvironment{example}
+{ \hrulefill \vspace{12pt} \\ }
+{ \\\\ \vspace{12pt} \hrulefill }
+
+
+\lstset{
+  language=XML,
+  basicstyle=\color[rgb]{0.3,0.3,0.3}\ttfamily,
+  backgroundcolor=\color[rgb]{0.98,0.98,0.98},
+  showstringspaces=false,
+  breaklines,
+  breakatwhitespace,
+}
+
+
 
 \newglossaryentry{document authoring}
 {
@@ -118,7 +135,215 @@ An explanation as to why object notation is a subset of annotations. Meaning tha
 
 
 \section{The problem of verbosity}
+The problem discussed in this thesis is that markup languages easily become verbose. Thus, documents expressed in a certain markup language must be wrapped in this verbosity. Thus, authors must not only concern, but learn to understand and work with this verbosity. Let's look at what we mean with verbosity.
 
+Assume we are writing a cookbook and what to use markup to express the following recipe:
+
+\begin{example}
+\tab\tab\tab \textbf{PANCAKES}\\
+\tab\tab\tab A secret from the ancient world.\\
+\tab\tab\tab \emph{8 servings}.\\
+
+\begin{tabular}{l l l}
+Flour & 1 1/2 & cups \\
+Baking powder & 3 1/2 & tbps \\
+Salt & 1 & tbps \\
+Sugar & 1 & tbps \\
+Milk & 1 & cups \\
+Egg & 1 & pcs\\
+Butter, melted & 3 & tbps \\
+\end{tabular}
+\end{example}
+
+Notice how we can distinguish different parts of the ``document'' merely by looking at it. The header, the preamble, the servings information. Also note how the ingredients seem to be organized in some kind of a table. We can of course achieve the visual effect of the above by simply making use of the \texttt{tab} character. This would however not maintain any semantic information about the columns and rows in the table. In fact, looking closer at the above example, it becomes obvious that the columns depict ingredient name, amount and measurement -- in corresponding order. Whereas each row depicts an ingredient. 
+
+\paragraph{Describing the recipe using XML}
+Remember that we are attempting to model the contents of the document, not necessarily it's visuals. Let's look at how we could depict this using XML.
+\begin{lstlisting}
+<recipe name="Pancakes">
+  <description>A secret from the ancient world.</description>
+  <ingredients servings="8">
+    <ingredient amount="1 1/2" measurement="cups">
+      Flour
+    </ingredient>
+    <ingredient amount="3 1/2" measurement="tbps">
+      Baking powder
+    </ingredient>
+    <ingredient amount="1" measurement="tbps">
+      Salt
+    </ingredient>
+    <ingredient amount="1" measurement="tbps">
+      Sugar
+    </ingredient>
+    <ingredient amount="1" measurement="cups">
+      Milk
+    </ingredient>
+    <ingredient amount="1" measurement="pcs">
+      Egg
+    </ingredient>
+    <ingredient amount="3" measurement="tbps">
+      Butter, melted
+    </ingredient>
+  </ingredients>
+</recipe>
+\end{lstlisting}
+Any person with elemental knowledge of XML, I argue, would have no problem reading and interpreting the above document. However, consider for a moment, the number of meta characters in relation to the number of content characters. With the term \emph{meta characters}, we refer to \emph{control characters}. Any character that was not in the original document. Meaning, information that was implicit in the original document.
+
+\paragraph{Describing the recipe using SGML}
+XML was actually derived from a language called SGML (Standard Generalized Markup Language) (\#REF!). A language that usually becomes less verbose than XML, as it does not require the author to repeat the name of an element upon closing it. This of course help us get rid of a number of characters, and consequently lower the verbosity. Consider the following example.
+
+\begin{lstlisting}
+<recipe name="Pancakes">
+  <description>A secret from the ancient world.</>
+  <ingredients servings="8">
+    <ingredient amount="1 1/2" measurement="cups">Flour</>
+    <ingredient amount="3 1/2" measurement="tbps">Baking powder</>
+    <ingredient amount="1" measurement="tbps">Salt</>
+    <ingredient amount="1" measurement="tbps">Sugar</>
+    <ingredient amount="1" measurement="cups">Milk</>
+    <ingredient amount="1" measurement="pcs">Egg</>
+    <ingredient amount="3" measurement="tbps">Butter, melted</>
+  </>
+</>
+\end{lstlisting}
+
+
+
+\paragraph{Describing the recipe using Jade}
+Naturally there are of course those that realized that constantly typing out the ``less-than'', ``greater than'', and ``slash'' characters quite quickly becomes annoying for document authors. Consequently languages such \texttt{Jade}. and \texttt{YAML} (YAML Ain't Markup Language) have been developed. Both of these languages are what is commonly known as white-space sensitive. A concept also used in the programming language \texttt{Python}. In the case of \texttt{Jade} this means carriage returns and indentation is used as a means of detecting delimitations between elements.
+
+Let's look at an example:
+
+\begin{lstlisting}
+recipe(name="Pancakes")
+  description A secret from the ancient world
+  ingredients(servings="8")
+    ingredient(amount="1 1/2", measurement="cups") Flour
+    ingredient(amount="3 1/2", measurement="tbps") Baking powder
+    ingredient(amount="1", measurement="tbps") Salt
+    ingredient(amount="1", measurement="tbps") Sugar
+    ingredient(amount="1", measurement="cups") Milk
+    ingredient(amount="1", measurement="pcs") Egg
+    ingredient(amount="3", measurement="tbps") Butter, melted
+\end{lstlisting}
+
+
+
+\paragraph{Describing the recipe using Markdown}
+If we leave the realm of languages free from semantics we encounter other useful creations such as \texttt{Markdown}. Being bound by semantics, a lot more can be ``implicit'' rather than ``explicit''. \texttt{Markdown} is a format intended to be converted to \texttt{HTML} (\#REF!).
+
+To explore the possibilities of the semantically coupled formats, let us instead attempt to model the given document from a visual point of view. Since the format is semantically coupled it is impossible to model the document from a ``data-focused'' point of view. Consider the example below.
+% TODO: If we use the term data-focused here then I probably need to revisit the idea of saying that markup for writers is not data transportation oriented. I was wrong.
+\begin{lstlisting}
+# PANCAKES
+A secret from the ancient world.
+**8 servings**
+| Flour          | 1   | tbps  |
+| Baking powder  | 1   | tbps  |
+| Salt           | 1   | tbps  |
+| Sugar          | 1   | tbps  |
+| Milk           | 1   | tbps  |
+| Egg            | 1   | tbps  |
+| Butter, melted | 1   | tbps  |
+\end{lstlisting}
+
+The above code would roughly translate to the following HTML.
+\begin{lstlisting}
+<h1>PANCAKES</h1>
+<p>A secret from the ancient world.</p>
+<p><em>8 servings</em></p>
+<table>
+  <tr>
+    <td>Flour</td>
+    <td>1</td>
+    <td>tbps</td>
+  </tr>
+  <tr>
+    <td>Baking</td>
+    <td>1</td>
+    <td>tbps</td>
+  </tr>
+  <tr>
+    <td>Salt</td>
+    <td>1</td>
+    <td>tbps</td>
+  </tr>
+  <tr>
+    <td>Sugar</td>
+    <td>1</td>
+    <td>tbps</td>
+  </tr>
+  <tr>
+    <td>Milk</td>
+    <td>1</td>
+    <td>tbps</td>
+  </tr>
+  <tr>
+    <td>Egg</td>
+    <td>1</td>
+    <td>tbps</td>
+  </tr>
+  <tr>
+    <td>Butter melted</td>
+    <td>1</td>
+    <td>tbps</td>
+  </tr>
+</table>
+\end{lstlisting}
+
+
+
+
+\paragraph{Describing a recipe using LaTeX}
+Continuing on the path of semantically coupled languages we could of course also express this document in LaTeX.
+
+Write about Turing Completeness.
+
+Contrast it to Markdown.
+
+Could it be so that when power increase then complexity also increase?
+\begin{lstlisting}
+\textbf{PANCAKES}\\
+A secret from the ancient world.\\
+\emph{8 servings}.\\
+
+\begin{tabular}{l l l}
+Flour          & 1 1/2 & cups \\
+Baking powder  & 3 1/2 & tbps \\
+Salt           & 1     & tbps \\
+Sugar          & 1     & tbps \\
+Milk           & 1     & cups \\
+Egg            & 1     & pcs\\
+Butter, melted & 3     & tbps \\
+\end{tabular}
+\end{lstlisting}
+
+
+
+\paragraph{Meta character analysis of the different languages}
+Let us reflect and run some quick character counts.
+
+\vspace{12pt}
+\begin{tabular}{l c c c c}
+Language
+& Semantically coupled
+& Tot. chars.
+& Meta chars.
+& Increase (approx.)
+\\
+\hline
+Original & -   & 164 & 0   & 0\\
+XML      & NO  & 701 & 537 & 4.27\\
+Markdown & YES & 289 & 125 & 1.76
+\end{tabular}
+\vspace{12pt}
+
+
+
+
+
+
+\section{TODO}
 - Exploring the problem of verbosity in markup languages
 
 - Briefly exploring how verbose markup disrupts ``flow''.
