@@ -134,7 +134,185 @@ An explanation as to why object notation is a subset of annotations. Meaning tha
 
 
 
-\section{The problem of verbosity}
+
+
+
+\section{Markup Language Taxonomy}
+
+\subsection{Can we see it as a matrix?}
+
+\begin{tabular}{ l | c | c | c }
+    & Presentation-bound (\(P\)) & Presentation-free (\(\neg P \))
+    \\ \hline
+
+    Domain-bound (\(D\)) 
+    \\ \hline
+
+    Domain-free (\(\neg D\))
+\end{tabular}
+
+\begin{tabular}{ l | l }
+    \(\neg P \wedge \neg D\) &
+    \(P \wedge \neg D\) \\
+    \hline
+    \(\neg P \wedge D\) &
+    \(P \wedge D\)
+\end{tabular}
+
+\subsection{Foo}
+Presentational
+Procedural
+Descriptive
+Semantic-free
+Syntax-free
+
+
+\subsection{Abstraction from presentation}
+
+\begin{tabular}{ l | l | l }
+  \textbf{Category} &
+  \textbf{Examples} &
+  \textbf{Description}
+  \\ \hline
+
+  Presentational
+  & Older WYSIG word processors
+  & Embedding binary codes
+  \\
+
+
+  Procedural
+  & \LaTeX, PostScript, troff
+  & Instruction-oriented markup
+  \\
+
+
+  Descriptive
+  & XML, Word ML
+  & Conceptual descriptions rather than visual
+  \\
+\end{tabular}
+
+
+\subsection{Abstraction from domain}
+
+\begin{tabular}{ l | l | l }
+  \textbf{Category} &
+  \textbf{Examples} &
+  \textbf{Description}
+  \\ \hline
+
+  Fixed
+  & Older WYSIG word processors
+  & Embedding binary codes
+  \\
+
+
+  Free
+  & \LaTeX, PostScript, troff
+  & Instruction-oriented markup
+  \\
+
+\end{tabular}
+
+
+
+
+
+
+
+\section{A brief history of Markup Languages}
+
+\begin{tabular}{ l | l | l | l }
+  \textbf{Year} &
+  \textbf{Language} &
+  \textbf{Semantic-free} &
+  \textbf{Mixed-content}
+  \\ \hline
+
+  1967 &
+  \href{http://en.wikipedia.org/wiki/RUNOFF}{RUNOFF, ROFF}
+
+  \\ \hline
+  1969 &
+  \href{http://en.wikipedia.org/wiki/IBM_Generalized_Markup_Language}{GML}
+
+  \\ \hline
+  1973 &
+  \href{http://en.wikipedia.org/wiki/Nroff}{NROFF}
+
+  \\ \hline
+  1978 &
+  TeX
+
+  \\ \hline
+  1980 &
+  \href{http://www.dtic.mil/docs/citations/ADA125287}{Scribe}
+
+  \\ \hline
+  1986 &
+  \href{http://en.wikipedia.org/wiki/SGML}{SGML}
+
+  \\ \hline
+  1979 &
+  \href{http://www.troff.org/history.html}{TROFF}
+
+  \\ \hline
+  1990 &
+  \href{http://en.wikipedia.org/wiki/Groff_(software)}{GROFF}
+
+  \\ \hline
+  1991 &
+  \href{http://alistapart.com/article/a-brief-history-of-markup}{HTML}
+
+  \\ \hline
+  1992 &
+  \href{http://en.wikipedia.org/wiki/Setext}{Setext}
+
+
+  \\ \hline
+  2000
+  & \href{http://public.ccsds.org/publications/archive/641x0b2.pdf}{Parameter Value Language}
+  & ??
+
+  \\ \hline
+  2002 &
+  \href{http://en.wikipedia.org/wiki/Asciidoc}{AsciiDoc}
+
+  \\ \hline
+  2003 &
+  \href{http://en.wikipedia.org/wiki/Org-mode}{OrgMode}
+
+  \\ \hline
+  2004 &
+  \href{http://en.wikipedia.org/wiki/Markdown}{Markdown}+
+
+
+  \\ \hline
+  &
+  \href{http://en.wikipedia.org/wiki/Textile_(markup_language)}{Textile 2} (TODO: 1?)
+\end{tabular}
+
+
+
+
+
+
+
+
+\section{Problem outline}
+\subsection{Still procedural}
+Why are we still writing LaTeX documents at the procedural level?
+\subsection{Verbosity and cognitive overhead}
+\subsection{Declarative at the highest level of abstraction}
+Expressing declaratively at the highest level of abstraction. At the intersection of all imaginable formats.
+\subsection{Symbiosis and packages}
+\subsection{An ideal workflow}
+Put the image here.
+
+
+
+\subsection{Verbosity and cognitive overhead}
 The problem discussed in this thesis is that markup languages easily become verbose. Thus, documents expressed in a certain markup language must be wrapped in this verbosity. Thus, authors must not only concern, but learn to understand and work with this verbosity. Let's look at what we mean with verbosity.
 
 Assume we are writing a cookbook and what to use markup to express the following recipe:
@@ -353,162 +531,6 @@ Markdown & YES & 289 & 125 & 1.76
 - Giving utterly verbose examples from e.g. LaTeX (at seemingly simple tasks such as centering a text-box). Looking at the same solution from an XML perspective. Then briefly suggesting how we instead could do this with much less markup. Leading the reader towards the area of research.
 
 A need for headings numbered according to context is expressed
-
-
-
-\section{Markup Language Taxonomy}
-
-\subsection{Can we see it as a matrix?}
-
-\begin{tabular}{ l | c | c | c }
-    & Presentation-bound (\(P\)) & Presentation-free (\(\neg P \))
-    \\ \hline
-
-    Domain-bound (\(D\)) 
-    \\ \hline
-
-    Domain-free (\(\neg D\))
-\end{tabular}
-
-\begin{tabular}{ l | l }
-    \(\neg P \wedge \neg D\) &
-    \(P \wedge \neg D\) \\
-    \hline
-    \(\neg P \wedge D\) &
-    \(P \wedge D\)
-\end{tabular}
-
-\subsection{Foo}
-Presentational
-Procedural
-Descriptive
-Semantic-free
-Syntax-free
-
-
-\subsection{Abstraction from presentation}
-
-\begin{tabular}{ l | l | l }
-  \textbf{Category} &
-  \textbf{Examples} &
-  \textbf{Description}
-  \\ \hline
-
-  Presentational
-  & Older WYSIG word processors
-  & Embedding binary codes
-  \\
-
-
-  Procedural
-  & \LaTeX, PostScript, troff
-  & Instruction-oriented markup
-  \\
-
-
-  Descriptive
-  & XML, Word ML
-  & Conceptual descriptions rather than visual
-  \\
-\end{tabular}
-
-
-\subsection{Abstraction from domain}
-
-\begin{tabular}{ l | l | l }
-  \textbf{Category} &
-  \textbf{Examples} &
-  \textbf{Description}
-  \\ \hline
-
-  Fixed
-  & Older WYSIG word processors
-  & Embedding binary codes
-  \\
-
-
-  Free
-  & \LaTeX, PostScript, troff
-  & Instruction-oriented markup
-  \\
-
-\end{tabular}
-
-
-
-\section{A brief history of Markup Languages}
-
-\begin{tabular}{ l | l | l | l }
-  \textbf{Year} &
-  \textbf{Language} &
-  \textbf{Semantic-free} &
-  \textbf{Mixed-content}
-  \\ \hline
-
-  1967 &
-  \href{http://en.wikipedia.org/wiki/RUNOFF}{RUNOFF, ROFF}
-
-  \\ \hline
-  1969 &
-  \href{http://en.wikipedia.org/wiki/IBM_Generalized_Markup_Language}{GML}
-
-  \\ \hline
-  1973 &
-  \href{http://en.wikipedia.org/wiki/Nroff}{NROFF}
-
-  \\ \hline
-  1978 &
-  TeX
-
-  \\ \hline
-  1980 &
-  \href{http://www.dtic.mil/docs/citations/ADA125287}{Scribe}
-
-  \\ \hline
-  1986 &
-  \href{http://en.wikipedia.org/wiki/SGML}{SGML}
-
-  \\ \hline
-  1979 &
-  \href{http://www.troff.org/history.html}{TROFF}
-
-  \\ \hline
-  1990 &
-  \href{http://en.wikipedia.org/wiki/Groff_(software)}{GROFF}
-
-  \\ \hline
-  1991 &
-  \href{http://alistapart.com/article/a-brief-history-of-markup}{HTML}
-
-  \\ \hline
-  1992 &
-  \href{http://en.wikipedia.org/wiki/Setext}{Setext}
-
-
-  \\ \hline
-  2000
-  & \href{http://public.ccsds.org/publications/archive/641x0b2.pdf}{Parameter Value Language}
-  & ??
-
-  \\ \hline
-  2002 &
-  \href{http://en.wikipedia.org/wiki/Asciidoc}{AsciiDoc}
-
-  \\ \hline
-  2003 &
-  \href{http://en.wikipedia.org/wiki/Org-mode}{OrgMode}
-
-  \\ \hline
-  2004 &
-  \href{http://en.wikipedia.org/wiki/Markdown}{Markdown}+
-
-
-  \\ \hline
-  &
-  \href{http://en.wikipedia.org/wiki/Textile_(markup_language)}{Textile 2} (TODO: 1?)
-\end{tabular}
-
-
 
 
 
