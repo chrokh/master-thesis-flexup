@@ -9,6 +9,9 @@
 \usepackage[toc]{glossaries}
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{tikz}
+\usepackage[T1]{fontenc}
+\usepackage{ulem}
 
 
 
@@ -25,7 +28,7 @@
 }
 
 \title{ A language for expressing \\ abstract markup languages }
-\subtitle{Spawned from a holistic view of contemporary authorship.}
+\subtitle{Responding to change -- through a holistic view of contemporary authorship.}
 \author{ Christopher OKHRAVI \\ UPPSALA UNIVERSITY }
 
 
@@ -75,7 +78,7 @@
 
 \lstset{
   language=XML,
-  basicstyle=\color[rgb]{0.3,0.3,0.3}\ttfamily,
+  basicstyle=\color[rgb]{0.3,0.3,0.3}\ttfamily\scriptsize,
   backgroundcolor=\color[rgb]{0.98,0.98,0.98},
   showstringspaces=false,
   breaklines,
@@ -84,10 +87,13 @@
 
 
 
-\newglossaryentry{document authoring}
-{
+\newglossaryentry{document authoring}{
   name={Document Authoring},
   description={The act of writing literature.}
+}
+\newglossaryentry{EBNF}{
+  name={EBNF},
+  description={Extended Backus-Naur Form}
 }
 \makeglossaries
 
@@ -153,6 +159,9 @@ A linguistic note in the spirit of Scribe (1980).
 
 \chapter{Introduction}
 
+Since the invention of the writing on the wall, mankind has struggled with an interesting problem of change. Be it change in medium or means (e.g. the process of production or the means of storage). Every generation bear the burden of passing the collective body of knowledge on to the next. Every generation that cause medium or means of the written word to significantly change --  face a somewhat trivial dilemma. To somehow transcend (transform) all existing written content to fit the new ways of today, or leave the currently collected body of human knowledge to slowly perish with time.
+
+\paragraph{TODO}
 - A brief history of writing from pens, to the printing press, to computers and word processors, to markup languages.
  
 
@@ -240,7 +249,139 @@ A linguistic note in the spirit of Scribe (1980).
 
 
 
-\section{Mixed content separates documents from data}
+\section{Mixed content}
+When discussing markup languages -- I often find the need to make a distinction between intentions of (1) \emph{data modeling} and (2) \emph{document authoring}. One could of course argue that any imaginable document (in the document authoring sense) could be encoded in a particular data structure. That is however not the argument I am opposing here. I argue that some languages are more suited for intermingling non-marked up text with marked up text.
+
+The first official W3C working draft\footnote{The idea of mixed-content survived review and became part of the recommended specification.} of XML (1996)\footnote{http:\/\/www.w3.org/TR/1998/REC-xml-19980210\#sec-mixed-content} already contained the idea of what was referred to as ``mixed content''. Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
+
+\begin{lstlisting}
+element ::= EmptyElemTag | STag content ETag 
+content ::= (element | CharData)*
+\end{lstlisting}
+
+In essence -- any non-terminal \texttt{element} can either produce an \texttt{EmptyElemTag} (i.e. self-closing tag), or the set of a \texttt{STag} (i.e. opening tag) followed by \texttt{content}, followed by an \texttt{ETag} (i.e. closing tag). The non-terminals \texttt{start} (e.g. \texttt{<foo>}) and \texttt{end} (e.g. \texttt{</foo>}) will terminate without any risk of indirect recursion back to the non-terminal \texttt{element}. The non-terminal \texttt{content} is the one interesting to this example.
+
+In the XML 1.0 (1998) specification the following is true\footnote{This is of course merely a partial extraction of the syntax used in the specification.} for the EBNF syntax. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
+
+This essentially mean that the non-terminal \texttt{content} can produce either a new \texttt{element} (causing indirect recursion) or \texttt{CharData} (i.e. a string), any number of times. Subsequently allowing for any combination of any length of the two.
+
+
+
+\subsection{Exploring Mixed Content via example}
+I argue, that Mixed content is a fundamental, and necessary, property of markup languages. The following example is partially intended to help enforce this. Assume we have a formatted paragraph of text, as outlined in Figure \ref{fig:mixed-content-paragraph}.
+
+
+\begin{figure}[h]
+\centering
+\fbox{
+The color \underline{is \textbf{now}} \sout{red}.
+}
+\caption{An example paragraph with formatting.}
+\label{fig:mixed-content-paragraph}
+\end{figure}
+
+
+Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold and underline, and finally (4) strike-through.
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{l | l}
+  \textbf{Token} &
+  \textbf{Type}
+  \\ \hline
+
+  "The color" &
+  plain-text
+  \\ \hline
+
+  "is" &
+  underline 
+  \\ \hline
+
+  "now" &
+  underline-and-bold
+  \\ \hline
+
+  "red" &
+  strike-through
+  \\ \hline
+
+  "." &
+  plain-text
+  \\ \hline
+
+\end{tabular}
+\caption{Identifying the tokens of Figure \ref{fig:mixed-content-paragraph}}
+\label{fig:mixed-content-table}
+\end{figure}
+
+Mignet et al. (2003) analyzed different aspects of what they referred to as ``The XML web'' (i.e. "the subset of the Web made of XML documents only"). During this study it was found that 72\% of all documents utilize mixed content. Almost three out of four documents use mixed content. Mignet et al. (2003) conclude that they invalidate the folklore which underestimate the importance of mixed content in XML. Given that XML (in contrast to HTML -- the de facto language of the web) is commonly used a data transportation format, one can reasonably assume that the number of HTML documents making use of mixed content is even higher.
+
+
+
+Further, anyone who has ever authored a free-text-oriented document in a markup language of the XML-family (counting improper HTML subsets such as HTML5) I expect have some appreciation of how absurd document creation would be without mixed content.
+
+[plain, underline, bold-and-underline, strikethrough, plain]
+
+of this particular paragraph is that two  fact that two words are underlined, whereas only one 
+
+
+
+Assuming we have a markup language Let us now consider
+
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+    sibling distance=4cm,
+  ]
+  \node{<paragraph>}
+  child {node {"The color"}}
+  child {node {<underline>}
+    child {node {"is"}}
+    child {node {<bold>}
+      child {node {"now"}}
+    }
+  }
+  child {
+    node {<strikethrough>}{
+      child {node {"red"}}
+    }
+  }
+  child {node {"."}}
+  ;
+  \end{tikzpicture}
+
+  \caption{The example paragraph from \ref{fig:mixed-content-paragraph} represented as a pre-order tree.}
+\end{figure}
+
+
+
+
+
+\begin{lstlisting}
+<msg>
+  The color <emph>is <keyword>red</keyword></emph> now.
+</msg>
+\end{lstlisting}
+
+
+
+\begin{lstlisting}
+{
+  "msg": [
+    "The color ",
+    { "emph": ["is", { "keyword": "red" }], },
+    "now."
+  ]
+}
+\end{lstlisting}
+
+
+
+
+
 Markup is not just data transportation. An explanation as to why object notation is a subset of annotations. Meaning that formats like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring. \texttt{XML} for example can be used for data transport, but in this thesis we'll focus on its markup properties. Consequently also ignore formats like \texttt{JSON}, \texttt{YAML} etc.
 
 Maybe we can even use parse-tree's to symbolize the problem. To show that it is not possible to unambiguously represent mixed content. One needs to perform computation on the parse tree to derive the data.
