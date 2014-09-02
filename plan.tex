@@ -24,8 +24,8 @@
   citecolor = red
 }
 
-\title{ A language for defining markup languages }
-\subtitle{ A domain-specific language for expressing context-free grammars for markup languages }
+\title{ A language for expressing \\ abstract markup languages }
+\subtitle{Spawned from a holistic view of contemporary authorship.}
 \author{ Christopher OKHRAVI \\ UPPSALA UNIVERSITY }
 
 
@@ -104,6 +104,35 @@
 
 
 
+
+
+% % % % % % % % % % % % % % % % % % % % % % 
+%
+%
+%
+%    The linguistic note
+%
+%
+%
+% % % % % % % % % % % % % % % % % % % % % %
+\chapter*{A linguistic note}
+A linguistic note in the spirit of Scribe (1980).
+ 
+
+
+
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % 
+%
+%
+%
+%    Glossary
+%
+%
+%
+% % % % % % % % % % % % % % % % % % % % % %
 \glsaddall
 \printglossary
 
@@ -111,117 +140,24 @@
 
 
 
+
+% % % % % % % % % % % % % % % % % % % % % % 
+%
+%
+%
+%     Introduction
+%
+%
+%
+% % % % % % % % % % % % % % % % % % % % % %
+
 \chapter{Introduction}
 
 - A brief history of writing from pens, to the printing press, to computers and word processors, to markup languages.
  
 
 
-\section{Exploring annotation formats}
-
-- What does it mean to annotate? What are common document annotation formats?
-
-- Examples of markup languages and showcase of some syntax examples.
-
-- A brief overview of markup languages and how they can be used for (1) Document authoring, and (2) Data transport.
-
-- The relevance of markup for fiction and non-fiction.
-
-
-
-\section{Markup is not just data transportation}
-An explanation as to why object notation is a subset of annotations. Meaning that formats like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring. \texttt{XML} for example can be used for data transport, but in this thesis we'll focus on its markup properties. Consequently also ignore formats like \texttt{JSON}, \texttt{YAML} etc.
-
-
-
-
-
-
-\section{Markup Language Taxonomy}
-
-\subsection{Can we see it as a matrix?}
-
-\begin{tabular}{ l | c | c | c }
-    & Presentation-bound (\(P\)) & Presentation-free (\(\neg P \))
-    \\ \hline
-
-    Domain-bound (\(D\)) 
-    \\ \hline
-
-    Domain-free (\(\neg D\))
-\end{tabular}
-
-\begin{tabular}{ l | l }
-    \(\neg P \wedge \neg D\) &
-    \(P \wedge \neg D\) \\
-    \hline
-    \(\neg P \wedge D\) &
-    \(P \wedge D\)
-\end{tabular}
-
-\subsection{Foo}
-Presentational
-Procedural
-Descriptive
-Semantic-free
-Syntax-free
-
-
-\subsection{Abstraction from presentation}
-
-\begin{tabular}{ l | l | l }
-  \textbf{Category} &
-  \textbf{Examples} &
-  \textbf{Description}
-  \\ \hline
-
-  Presentational
-  & Older WYSIG word processors
-  & Embedding binary codes
-  \\
-
-
-  Procedural
-  & \LaTeX, PostScript, troff
-  & Instruction-oriented markup
-  \\
-
-
-  Descriptive
-  & XML, Word ML
-  & Conceptual descriptions rather than visual
-  \\
-\end{tabular}
-
-
-\subsection{Abstraction from domain}
-
-\begin{tabular}{ l | l | l }
-  \textbf{Category} &
-  \textbf{Examples} &
-  \textbf{Description}
-  \\ \hline
-
-  Fixed
-  & Older WYSIG word processors
-  & Embedding binary codes
-  \\
-
-
-  Free
-  & \LaTeX, PostScript, troff
-  & Instruction-oriented markup
-  \\
-
-\end{tabular}
-
-
-
-
-
-
-
-\section{A brief history of Markup Languages}
+\section{A brief history of Markup}
 
 \begin{tabular}{ l | l | l | l }
   \textbf{Year} &
@@ -294,6 +230,90 @@ Syntax-free
 \end{tabular}
 
 
+- What does it mean to annotate? What are common document annotation formats?
+
+- Examples of markup languages and showcase of some syntax examples.
+
+- A brief overview of markup languages and how they can be used for (1) Document authoring, and (2) Data transport.
+
+- The relevance of markup for fiction and non-fiction.
+
+
+
+\section{Mixed content separates documents from data}
+Markup is not just data transportation. An explanation as to why object notation is a subset of annotations. Meaning that formats like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring. \texttt{XML} for example can be used for data transport, but in this thesis we'll focus on its markup properties. Consequently also ignore formats like \texttt{JSON}, \texttt{YAML} etc.
+
+Maybe we can even use parse-tree's to symbolize the problem. To show that it is not possible to unambiguously represent mixed content. One needs to perform computation on the parse tree to derive the data.
+
+
+
+
+
+
+\section{A Taxonomy of Markup Languages}
+\begin{itemize}
+\item Presentational
+\item Procedural
+\item Descriptive
+\item Abstract
+\end{itemize}
+
+
+\subsection{Presentational}
+Outlining problems.
+
+
+\subsection{Procedural}
+Outlining problems and benefits.
+
+
+\subsection{Descriptive}
+Outlining problems and benefits.
+
+
+\subsection{Abstract}
+Outlining problems and benefits.
+
+
+
+
+\section{Situational analysis}
+Why are so many documents still procedural?
+Model information flows of contemporary publishing. Figures describing the current state in contrast to the thesis's subjective idea of the ideal state. Refer to Reid (1980).
+
+\subsection{Presentational}
+i.e. Microsoft Word etc.
+[FIG. ]
+Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+\subsection{Procedural}
+i.e. \LaTeX etc.
+[FIG. ]
+Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+\subsection{Descriptive}
+i.e. DocBook, EPUB, Markdown etc.
+[FIG. ]
+Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+\subsection{A hypothetical ideal addressing the problems}
+[FIG.]
+
+\subsubsection{Composition \& Abstraction}
+The minimal denominator.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -301,15 +321,243 @@ Syntax-free
 
 
 \section{Problem outline}
-\subsection{Still procedural}
-Why are we still writing LaTeX documents at the procedural level?
-\subsection{Verbosity and cognitive overhead}
-\subsection{Declarative at the highest level of abstraction}
-Expressing declaratively at the highest level of abstraction. At the intersection of all imaginable formats.
-\subsection{Symbiosis and packages}
-\subsection{An ideal workflow}
-Put the image here.
+\subsection{Coupling to compilers}
+\subsection{Coupling to concepts}
+\subsection{Verbosity \& cognitive overhead}
 
+\section{Suggested solutions}
+\subsection{Composition}
+Symbiosis and packages
+\subsection{Declarative at the highest level of abstraction}
+We should strive to express things: Declaratively at the highest level of abstraction. At the intersection of all imaginable formats.
+\subsection{Syntax-free languages}
+DSL's for grammars.
+
+
+
+
+
+
+
+
+
+
+\chapter{Research questions}
+Let us formulate this problem as a research question.
+
+TODO: Write about how the efforts in this thesis relates to the bigger picture discussed in the introduction. How this is merely one effort. It is almost useless without the other efforts.
+
+\firstresearchquestion
+
+Let's break down what it means to be able to work with an arbitrarily annotated document. Initially, the author would of course have to decide upon an annotation syntax. If the syntax doesn't look like any existing annotation syntax we immediately run into a problem. To be able to convert our arbitrary syntax into any other structured format (such as a \texttt{PDF} or a \texttt{HTML} document) we would need a parser that can ``read and treat'' the document as a tree\footnote{ We'll return to discuss why free text documents (regardless of annotation syntax) can be treated as a trees. }. %TODO: This is not true, think of the underline/highlight example - i.e. overlapping tags
+
+Assume we've created a parser that can ``read and treat'' an arbitrary document written in our syntax. Assume we've written this parser in any programming language of your choice. Assume the parser, written in your programming language of choice, builds up the document tree in memory. Now obviously the next problem arise. A document tree in memory does not do us any good if we cannot export this tree from memory into any other format of our wishing. This means we've only covered the first subproblem of two. We'll express this second subproblem as -- converting the tree representation of the document from memory into any given concrete format of our choosing, that in turn can be written to disk.
+
+In summary -- the first subproblem is an ``interpretation problem'', whereas the second a ``transformation problem''. Without making any assumptions about whether the tools exist or not -- let us formalize these two as requirements for tools: For an author to be able to work with an arbitrary annotation syntax one would need:
+
+\begin{enumerate}
+\item A parser (that ``reads the annotated document as a tree''),
+\item A transformation engine (that ``converts the read document into a tree'').
+\end{enumerate}
+
+In fact, the problem stated above is not actually that complicated. In fact, given a moderately skilled programmer, the problem can easily be solved today -- without introducing any new tools. Let's look at an example.
+
+Assume a document author is approaching this problem. Assume that the author in question, after designing a custom annotation syntax, constructs a set of \texttt{Regular Expressions} that utilizes captures to distinguish data from annotations. Assume then that the author would apply these regular expressions to the document (written in the custom annotation syntax)  using one of the few engines that convert \texttt{regex captures} to \texttt{XML}. Perhaps the author might even write a custom \texttt{regex} to \texttt{XML} converter -- given the lack of existence\footnote{ Search strategies are declared in the method section of the thesis.} of a of a ``de facto'' standardized conversion strategy\footnote{ The conversion is not trivial, and thus many different solutions may be considered ``correct''. Further investigation is found in the empirical sections of this thesis.}.
+
+Given that \texttt{regex} is a widely used (\#REF!), and perhaps the most common, way of searching plain-text (\#REF!), it is a fitting technique for identifying annotations in semi-structured text. Further, \texttt{XML} is a widely used (\#REF!), and perhaps the most common, way of representing documents as hierarchies of information, where annotations are easily separated from data.
+
+Further, \texttt{XML} is a suitable output format because of it being free from semantics. Put this in contrast to for example \texttt{HTML} or \texttt{LaTeX} which both have semantic properties embedded into their specifications. Consider for example the paragraph element in \texttt{HTML} (\texttt{<p>..</p>}). The element denotes semantic significance to the contents inside it. It denotes a paragraph. The same problem arise when using, previously mentioned, \texttt{LaTeX}. According to the the project documentation it is a ``typesetting system [...] for producing [...] documents'' \footnote{ http://www.techscribe.co.uk/ta/latex-introduction.pdf}. Semantically, it is tightly bound to the ``idea'' of the physical document (\#REF!). 
+
+Given that \texttt{XML} lives in an eco-system with other useful languages and tools -- such as \texttt{XSL}, \texttt{XSLT}, \texttt{XPath}, \texttt{DOM} etc. -- it has also proven to be a useful data transportation format (\#REF!). Meaning that if two given systems need to share data, \texttt{XML} can serve as a neutral intermediate format.
+
+Consequently, the idea is to use \texttt{regex}:es to parse an arbitrarily (but known) annotated document, and convert the parsed result into \texttt{XML}. For the purpose of allowing an author to turn an arbitrary annotation syntax into virtually any other structured format. Using \texttt{XML} as an intermediate format, and \texttt{regex} as a means of parsing.
+
+While this all seems reasonable, we have yet not to address the question of why this approach would need any further research. Given that the two above discussed techniques are both well documented and well used -- it might seem this technique is highly employable today.
+
+\begin{enumerate}
+\item design/use a parser (that ``reads the annotated document''),
+\item design/use a compiler (that ``converts the read document into a tree''),
+\item design/use a transformation engine.
+\end{enumerate}
+
+
+Streamlining,   argue  Consequently we come to the point where we instead ask ourselves the following question:
+
+\secondresearchquestion
+
+To explore the possibility of the above question the author has chosen to evaluate whether \texttt{Regular Expressions} can be used to define annotation rules that enables an annotated document to be converted into \texttt{XML}. As expressed by the question below:
+
+\thirdresearchquestion
+
+Given that \texttt{Regular Expressions} may cause the level of complexity to increase (which previously stated as explicitly unwanted) the author has chosen to suggest the use of a simplified subset of the language. As expressed in the question below:
+
+\fourthresearchquestion
+
+
+\section{Delimitations}
+Given that markup languages are prolifically used in areas other than document authoring (such as data transportation), it is naïve to not recognize that an effort in one may allow (or force) change in the other(s). While the author do admit this multifaceted nature of markup languages, \emph{all facets of markup languages expect document authoring are considered outside the scope of this thesis}. In the literature review these other use cases will be touched upon, only as to provide the reader with context. Any effects that may ripple out of the results and into other usage areas of markup languages will within this thesis be ignored. 
+
+
+
+
+\chapter{Method}
+Lorem ipsum.
+
+This thesis employs design research, as outlined by Oates (\#REF!), as a means of producing \emph{Constructs} and an \emph{Instantiation}. The first is the result of a literature review, whereas the second a result of artifact development. These are explained in further depth below, where the whole research process is outlined.
+
+
+\section{Phase I -- Literature review of markup languages}
+The first undertaking of the thesis is a literature review aiming to summarize and classify the larger bulk of current and previous markup languages.
+
+The outcome of this literature review is a large table that classifies and compares markup languages. Markup languages are listed on the y-axis, whereas identified aspects or properties are listed on the x-axis.
+
+To delimit the subset of markup languages to a set that seemingly have provided value to the public, the author has decided to use the crowd-sourced, online encyclopedia Wikipedia as starting point. If a certain thing have been mentioned on Wikipedia, the author argue, it must at the very least be known by a few people.
+
+From an article titled ``List of markup languages''\footnote{http://en.wikipedia.org/wiki/List\_of\_markup\_languages} (\#REF!), the author have followed links (into any number of depths) whenever the links implies articles that might introduce the author to yet another markup language.
+
+To, however, minimize the risk of accidentally looking past any splendid markup language that might (e.g.) have been more narrowly applied by researchers, the following search matrix has been constructed. The matrix served as a base for query construction when searching articles via the academically oriented search engine Google Scholar.
+
+\vspace{6pt}
+\begin{tabular}{ |l|l|l|l| }
+  \hline
+  list            & of & markup     & languages \\\hline
+  review          & ..   & annotation & languages \\\hline
+  summary         & ..   & .. & .. \\\hline
+  classification  & ..   & .. & .. \\\hline
+  comparison      & ..   & .. & .. \\\hline
+  categorization  & ..   & .. & .. \\\hline
+\end{tabular}
+\vspace{6pt}
+
+Grammatical inflections (such as the infliction listings of list) of all words were of course used, even though not explicitly mentioned in the search matrix.
+
+The total number of markup languages found and analyzed were approximately 50 (\#TODO!).
+
+
+\subsection{Data analysis}
+Whenever a new markup language was encountered, the following strategy was applied:
+
+\begin{enumerate}
+\item Add another row to the resulting table for this particular markup language.
+\item Consult more literature about this markup language, using the following questions as guidelines: (a) When was it created? (b) By whom? (c) With what intent? (d) How was it actually used? (e) What characteristics make it different from other markup languages? (f) How did it contribute to the future of markup languages?
+\item During the above mentioned literature review, when unique aspects of the markup language where found, a new column was introduced to the resulting table. Marking the presence of that aspect in the cell corresponding to the language and that aspect. Further, all the already existing markup languages were revisited and re-evaluated according to the newly introduced aspect.
+\item During the above mentioned literature review, not only answers to the questions outlined in step 2 were sought. Step 3 shows how the classification of aspects were conducted. Consequently, when reading about a given markup language, all the previous classified aspects were 
+\end{enumerate}
+
+[INSERT FLOWCHART DIAGRAM OF THE PROCESS HERE]
+
+
+\subsection{Deliverables}
+The literature review was intended to produce two deliverables. First, a classification system for markup languages. This classification system is part of the thesis's contribution in terms of what Oates (\#REF!) defines as a \emph{Construct}.
+
+The second outcome of the literature review is the table consisting of classified markup languages. The intent is to show which of the markup languages of today that are free from semantic coupling. This thesis is only concerned with languages free from semantic coupling, and with a list of markup languages that fit this criteria we consequently have something to measure the artifact (which is explained in the following section) against.
+
+
+
+\section{Phase II -- Designing a new markup language}
+During the second major phase of this thesis -- or rather -- during the empirical phase of this thesis the intent was to produce an artifact. In essence the intention (as more thoroughly described in the research questions section) was to design a new markup language, free from semantics.
+
+However, two requirements were posed upon this new language. It must be (1) \emph{equally powerful} to any existing markup language. Secondly, it must have a (2) \emph{lower syntactical complexity} than any existing markup language. This of course raises a number of questions.
+
+
+
+\begin{enumerate}
+\item How can we measure \emph{power}?
+\item How can we measure \emph{complexity}?
+\end{enumerate}
+
+\paragraph{Matching power by converting to another language}
+The first question is the easier one, as it will not actually be answered. By constructing a language that is intended to be converted into the most powerful language identified in the literature review (phase I). Consequently the effective power of the developed language (the artifact) will be equal to the language it is converted into. Of course, the real power of the artifact language will probably be much lower, as it is merely a transitional language. Measuring the level of power of the language in itself, has been considered outside the scope of this thesis.
+
+\paragraph{Measuring syntactical complexity through a quantitative formula}
+To answer the second question a complexity measure will be introduced. Complexity will be measured by applying the following formula:\\\\
+\texttt{ASSUME THAT}\\
+\texttt{\tabb C = (number of concepts needed to markup document X) }\\
+\texttt{\tabb M = (number of meta characters needed to markup document X) }\\
+\texttt{FOR A GIVEN MARKUP DOCUMENT X, }\\
+\texttt{WE EXPRESS IT'S SYNTACTICAL COMPLEXITY AS: }\\
+\texttt{\tabb complexity = C * M }
+% TODO: Needs to be converted to some nicer fig-box
+
+
+\subsection{Requirements gathering}
+Finding data sample. Books from Amazon.
+Grouping different concepts in books.
+Constructing a sample document.
+
+\subsection{Evaluation}
+Constructing the sample document in all the other semantically free languages identified in the literature review -- and then comparing complexity using the quantitative measure previously discussed.
+
+
+
+
+
+
+\chapter{Literature review}
+Lorem ipsum.
+
+
+
+
+
+
+\chapter{Empirics}
+Lorem ipsum.
+
+
+\section{SimEx -- A control structure-light subset of regex}
+...
+
+
+\section{Flexup -- A DSL for expressing markup-oriented CFG's}
+...
+
+\subsection{The annotated file (\texttt{.fup})}
+...
+
+\subsection{The annotation definitions file (\texttt{.fupd})}
+...
+
+\subsection{The binary}
+...
+
+
+
+
+
+\chapter{Analysis}
+Lorem ipsum.
+
+
+
+
+
+\chapter{Conclusion}
+Lorem ipsum.
+
+
+
+
+
+\chapter{Discussion}
+Lorem ipsum.
+
+\section{Future research}
+Lorem ipsum.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{OLD STUFF BELOW}
 
 
 \subsection{Verbosity and cognitive overhead}
@@ -536,208 +784,77 @@ A need for headings numbered according to context is expressed
 
 
 
+\section{Aspects of languages}
+\subsection{Can we see it as a matrix?}
 
+\begin{tabular}{ l | c | c | c }
+    & Presentation-bound (\(P\)) & Presentation-free (\(\neg P \))
+    \\ \hline
 
-\chapter{Research questions}
-Let us formulate this problem as a research question.
+    Domain-bound (\(D\)) 
+    \\ \hline
 
-\firstresearchquestion
-
-Let's break down what it means to be able to work with an arbitrarily annotated document. Initially, the author would of course have to decide upon an annotation syntax. If the syntax doesn't look like any existing annotation syntax we immediately run into a problem. To be able to convert our arbitrary syntax into any other structured format (such as a \texttt{PDF} or a \texttt{HTML} document) we would need a parser that can ``read and treat'' the document as a tree\footnote{ We'll return to discuss why free text documents (regardless of annotation syntax) can be treated as a trees. }. %TODO: This is not true, think of the underline/highlight example - i.e. overlapping tags
-
-Assume we've created a parser that can ``read and treat'' an arbitrary document written in our syntax. Assume we've written this parser in any programming language of your choice. Assume the parser, written in your programming language of choice, builds up the document tree in memory. Now obviously the next problem arise. A document tree in memory does not do us any good if we cannot export this tree from memory into any other format of our wishing. This means we've only covered the first subproblem of two. We'll express this second subproblem as -- converting the tree representation of the document from memory into any given concrete format of our choosing, that in turn can be written to disk.
-
-In summary -- the first subproblem is an ``interpretation problem'', whereas the second a ``transformation problem''. Without making any assumptions about whether the tools exist or not -- let us formalize these two as requirements for tools: For an author to be able to work with an arbitrary annotation syntax one would need:
-
-\begin{enumerate}
-\item A parser (that ``reads the annotated document as a tree''),
-\item A transformation engine (that ``converts the read document into a tree'').
-\end{enumerate}
-
-In fact, the problem stated above is not actually that complicated. In fact, given a moderately skilled programmer, the problem can easily be solved today -- without introducing any new tools. Let's look at an example.
-
-Assume a document author is approaching this problem. Assume that the author in question, after designing a custom annotation syntax, constructs a set of \texttt{Regular Expressions} that utilizes captures to distinguish data from annotations. Assume then that the author would apply these regular expressions to the document (written in the custom annotation syntax)  using one of the few engines that convert \texttt{regex captures} to \texttt{XML}. Perhaps the author might even write a custom \texttt{regex} to \texttt{XML} converter -- given the lack of existence\footnote{ Search strategies are declared in the method section of the thesis.} of a of a ``de facto'' standardized conversion strategy\footnote{ The conversion is not trivial, and thus many different solutions may be considered ``correct''. Further investigation is found in the empirical sections of this thesis.}.
-
-Given that \texttt{regex} is a widely used (\#REF!), and perhaps the most common, way of searching plain-text (\#REF!), it is a fitting technique for identifying annotations in semi-structured text. Further, \texttt{XML} is a widely used (\#REF!), and perhaps the most common, way of representing documents as hierarchies of information, where annotations are easily separated from data.
-
-Further, \texttt{XML} is a suitable output format because of it being free from semantics. Put this in contrast to for example \texttt{HTML} or \texttt{LaTeX} which both have semantic properties embedded into their specifications. Consider for example the paragraph element in \texttt{HTML} (\texttt{<p>..</p>}). The element denotes semantic significance to the contents inside it. It denotes a paragraph. The same problem arise when using, previously mentioned, \texttt{LaTeX}. According to the the project documentation it is a ``typesetting system [...] for producing [...] documents'' \footnote{ http://www.techscribe.co.uk/ta/latex-introduction.pdf}. Semantically, it is tightly bound to the ``idea'' of the physical document (\#REF!). 
-
-Given that \texttt{XML} lives in an eco-system with other useful languages and tools -- such as \texttt{XSL}, \texttt{XSLT}, \texttt{XPath}, \texttt{DOM} etc. -- it has also proven to be a useful data transportation format (\#REF!). Meaning that if two given systems need to share data, \texttt{XML} can serve as a neutral intermediate format.
-
-Consequently, the idea is to use \texttt{regex}:es to parse an arbitrarily (but known) annotated document, and convert the parsed result into \texttt{XML}. For the purpose of allowing an author to turn an arbitrary annotation syntax into virtually any other structured format. Using \texttt{XML} as an intermediate format, and \texttt{regex} as a means of parsing.
-
-While this all seems reasonable, we have yet not to address the question of why this approach would need any further research. Given that the two above discussed techniques are both well documented and well used -- it might seem this technique is highly employable today.
-
-\begin{enumerate}
-\item design/use a parser (that ``reads the annotated document''),
-\item design/use a compiler (that ``converts the read document into a tree''),
-\item design/use a transformation engine.
-\end{enumerate}
-
-
-Streamlining,   argue  Consequently we come to the point where we instead ask ourselves the following question:
-
-\secondresearchquestion
-
-To explore the possibility of the above question the author has chosen to evaluate whether \texttt{Regular Expressions} can be used to define annotation rules that enables an annotated document to be converted into \texttt{XML}. As expressed by the question below:
-
-\thirdresearchquestion
-
-Given that \texttt{Regular Expressions} may cause the level of complexity to increase (which previously stated as explicitly unwanted) the author has chosen to suggest the use of a simplified subset of the language. As expressed in the question below:
-
-\fourthresearchquestion
-
-
-\section{Delimitations}
-Given that markup languages are prolifically used in areas other than document authoring (such as data transportation), it is naïve to not recognize that an effort in one may allow (or force) change in the other(s). While the author do admit this multifaceted nature of markup languages, \emph{all facets of markup languages expect document authoring are considered outside the scope of this thesis}. In the literature review these other use cases will be touched upon, only as to provide the reader with context. Any effects that may ripple out of the results and into other usage areas of markup languages will within this thesis be ignored. 
-
-
-
-
-\chapter{Method}
-Lorem ipsum.
-
-This thesis employs design research, as outlined by Oates (\#REF!), as a means of producing \emph{Constructs} and an \emph{Instantiation}. The first is the result of a literature review, whereas the second a result of artifact development. These are explained in further depth below, where the whole research process is outlined.
-
-
-\section{Phase I -- Literature review of markup languages}
-The first undertaking of the thesis is a literature review aiming to summarize and classify the larger bulk of current and previous markup languages.
-
-The outcome of this literature review is a large table that classifies and compares markup languages. Markup languages are listed on the y-axis, whereas identified aspects or properties are listed on the x-axis.
-
-To delimit the subset of markup languages to a set that seemingly have provided value to the public, the author has decided to use the crowd-sourced, online encyclopedia Wikipedia as starting point. If a certain thing have been mentioned on Wikipedia, the author argue, it must at the very least be known by a few people.
-
-From an article titled ``List of markup languages''\footnote{http://en.wikipedia.org/wiki/List\_of\_markup\_languages} (\#REF!), the author have followed links (into any number of depths) whenever the links implies articles that might introduce the author to yet another markup language.
-
-To, however, minimize the risk of accidentally looking past any splendid markup language that might (e.g.) have been more narrowly applied by researchers, the following search matrix has been constructed. The matrix served as a base for query construction when searching articles via the academically oriented search engine Google Scholar.
-
-\vspace{6pt}
-\begin{tabular}{ |l|l|l|l| }
-  \hline
-  list            & of & markup     & languages \\\hline
-  review          & ..   & annotation & languages \\\hline
-  summary         & ..   & .. & .. \\\hline
-  classification  & ..   & .. & .. \\\hline
-  comparison      & ..   & .. & .. \\\hline
-  categorization  & ..   & .. & .. \\\hline
+    Domain-free (\(\neg D\))
 \end{tabular}
-\vspace{6pt}
 
-Grammatical inflections (such as the infliction listings of list) of all words were of course used, even though not explicitly mentioned in the search matrix.
-
-The total number of markup languages found and analyzed were approximately 50 (\#TODO!).
-
-
-\subsection{Data analysis}
-Whenever a new markup language was encountered, the following strategy was applied:
-
-\begin{enumerate}
-\item Add another row to the resulting table for this particular markup language.
-\item Consult more literature about this markup language, using the following questions as guidelines: (a) When was it created? (b) By whom? (c) With what intent? (d) How was it actually used? (e) What characteristics make it different from other markup languages? (f) How did it contribute to the future of markup languages?
-\item During the above mentioned literature review, when unique aspects of the markup language where found, a new column was introduced to the resulting table. Marking the presence of that aspect in the cell corresponding to the language and that aspect. Further, all the already existing markup languages were revisited and re-evaluated according to the newly introduced aspect.
-\item During the above mentioned literature review, not only answers to the questions outlined in step 2 were sought. Step 3 shows how the classification of aspects were conducted. Consequently, when reading about a given markup language, all the previous classified aspects were 
-\end{enumerate}
-
-[INSERT FLOWCHART DIAGRAM OF THE PROCESS HERE]
-
-
-\subsection{Deliverables}
-The literature review was intended to produce two deliverables. First, a classification system for markup languages. This classification system is part of the thesis's contribution in terms of what Oates (\#REF!) defines as a \emph{Construct}.
-
-The second outcome of the literature review is the table consisting of classified markup languages. The intent is to show which of the markup languages of today that are free from semantic coupling. This thesis is only concerned with languages free from semantic coupling, and with a list of markup languages that fit this criteria we consequently have something to measure the artifact (which is explained in the following section) against.
-
-
-
-\section{Phase II -- Designing a new markup language}
-During the second major phase of this thesis -- or rather -- during the empirical phase of this thesis the intent was to produce an artifact. In essence the intention (as more thoroughly described in the research questions section) was to design a new markup language, free from semantics.
-
-However, two requirements were posed upon this new language. It must be (1) \emph{equally powerful} to any existing markup language. Secondly, it must have a (2) \emph{lower syntactical complexity} than any existing markup language. This of course raises a number of questions.
-
-
-
-\begin{enumerate}
-\item How can we measure \emph{power}?
-\item How can we measure \emph{complexity}?
-\end{enumerate}
-
-\paragraph{Matching power by converting to another language}
-The first question is the easier one, as it will not actually be answered. By constructing a language that is intended to be converted into the most powerful language identified in the literature review (phase I). Consequently the effective power of the developed language (the artifact) will be equal to the language it is converted into. Of course, the real power of the artifact language will probably be much lower, as it is merely a transitional language. Measuring the level of power of the language in itself, has been considered outside the scope of this thesis.
-
-\paragraph{Measuring syntactical complexity through a quantitative formula}
-To answer the second question a complexity measure will be introduced. Complexity will be measured by applying the following formula:\\\\
-\texttt{ASSUME THAT}\\
-\texttt{\tabb C = (number of concepts needed to markup document X) }\\
-\texttt{\tabb M = (number of meta characters needed to markup document X) }\\
-\texttt{FOR A GIVEN MARKUP DOCUMENT X, }\\
-\texttt{WE EXPRESS IT'S SYNTACTICAL COMPLEXITY AS: }\\
-\texttt{\tabb complexity = C * M }
-% TODO: Needs to be converted to some nicer fig-box
-
-
-\subsection{Requirements gathering}
-Finding data sample. Books from Amazon.
-Grouping different concepts in books.
-Constructing a sample document.
-
-\subsection{Evaluation}
-Constructing the sample document in all the other semantically free languages identified in the literature review -- and then comparing complexity using the quantitative measure previously discussed.
+\begin{tabular}{ l | l }
+    \(\neg P \wedge \neg D\) &
+    \(P \wedge \neg D\) \\
+    \hline
+    \(\neg P \wedge D\) &
+    \(P \wedge D\)
+\end{tabular}
 
 
 
 
+\subsection{Abstraction from presentation}
+
+\begin{tabular}{ l | l | l }
+  \textbf{Category} &
+  \textbf{Examples} &
+  \textbf{Description}
+  \\ \hline
+
+  Presentational
+  & Older WYSIG word processors
+  & Embedding binary codes
+  \\
 
 
-\chapter{Literature review}
-Lorem ipsum.
+  Procedural
+  & \LaTeX, PostScript, troff
+  & Instruction-oriented markup
+  \\
 
 
+  Descriptive
+  & XML, Word ML
+  & Conceptual descriptions rather than visual
+  \\
+\end{tabular}
 
 
+\subsection{Abstraction from domain}
+
+\begin{tabular}{ l | l | l }
+  \textbf{Category} &
+  \textbf{Examples} &
+  \textbf{Description}
+  \\ \hline
+
+  Fixed
+  & Older WYSIG word processors
+  & Embedding binary codes
+  \\
 
 
-\chapter{Empirics}
-Lorem ipsum.
+  Free
+  & \LaTeX, PostScript, troff
+  & Instruction-oriented markup
+  \\
 
-
-\section{SimEx -- A control structure-light subset of regex}
-...
-
-
-\section{Flexup -- A DSL for expressing markup-oriented CFG's}
-...
-
-\subsection{The annotated file (\texttt{.fup})}
-...
-
-\subsection{The annotation definitions file (\texttt{.fupd})}
-...
-
-\subsection{The binary}
-...
-
-
-
-
-
-\chapter{Analysis}
-Lorem ipsum.
-
-
-
-
-
-\chapter{Conclusion}
-Lorem ipsum.
-
-
-
-
-
-\chapter{Discussion}
-Lorem ipsum.
-
-\section{Future research}
-Lorem ipsum.
+\end{tabular}
 
 
 
