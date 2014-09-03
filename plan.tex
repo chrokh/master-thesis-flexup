@@ -28,7 +28,7 @@
 }
 
 \title{ A language for expressing \\ abstract markup languages }
-\subtitle{Responding to change -- through a holistic view of contemporary authorship.}
+\subtitle{A holistic response to constant \\ change in contemporary authorship.}
 \author{ Christopher OKHRAVI \\ UPPSALA UNIVERSITY }
 
 
@@ -252,7 +252,9 @@ Since the invention of the writing on the wall, mankind has struggled with an in
 \section{Mixed content}
 When discussing markup languages -- I often find the need to make a distinction between intentions of (1) \emph{data modeling} and (2) \emph{document authoring}. One could of course argue that any imaginable document (in the document authoring sense) could be encoded in a particular data structure. That is however not the argument I am opposing here. I argue that some languages are more suited for intermingling non-marked up text with marked up text.
 
-The first official W3C working draft\footnote{The idea of mixed-content survived review and became part of the recommended specification.} of XML (1996)\footnote{http:\/\/www.w3.org/TR/1998/REC-xml-19980210\#sec-mixed-content} already contained the idea of what was referred to as ``mixed content''. Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
+% TODO: Use and refer to the terms used by H. Schöning (2001) -- Tamino a DBMS for XML.
+
+The first official W3C working draft of XML (1996)\footnote{http:\/\/www.w3.org/TR/1998/REC-xml-19980210\#sec-mixed-content} already contained the idea of what was referred to as ``mixed content''. Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
 
 \begin{lstlisting}
 element ::= EmptyElemTag | STag content ETag 
@@ -268,7 +270,7 @@ This essentially mean that the non-terminal \texttt{content} can produce either 
 
 
 \subsection{Exploring Mixed Content via example}
-I argue, that Mixed content is a fundamental, and necessary, property of markup languages. The following example is partially intended to help enforce this. Assume we have a formatted paragraph of text, as outlined in Figure \ref{fig:mixed-content-paragraph}.
+I argue, that Mixed content is a fundamental, and necessary, property of markup languages. The following example is partially intended to help enforce this. Assume we have a formatted paragraph of text\footnote{In this example we will disregard whitespace between tokens and assume that whitespace between words in a string remains, but whitespace between strings is omitted and left implicit.}, as outlined in Figure \ref{fig:mixed-content-paragraph}.
 
 
 \begin{figure}[h]
@@ -283,51 +285,26 @@ The color \underline{is \textbf{now}} \sout{red}.
 
 Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold and underline, and finally (4) strike-through.
 
-\begin{figure}[h]
-\centering
-\begin{tabular}{l | l}
-  \textbf{Token} &
-  \textbf{Type}
-  \\ \hline
 
-  "The color" &
-  plain-text
-  \\ \hline
-
-  "is" &
-  underline 
-  \\ \hline
-
-  "now" &
-  underline-and-bold
-  \\ \hline
-
-  "red" &
-  strike-through
-  \\ \hline
-
-  "." &
-  plain-text
-  \\ \hline
-
-\end{tabular}
-\caption{Identifying the tokens of Figure \ref{fig:mixed-content-paragraph}}
-\label{fig:mixed-content-table}
-\end{figure}
-
-Mignet et al. (2003) analyzed different aspects of what they referred to as ``The XML web'' (i.e. "the subset of the Web made of XML documents only"). During this study it was found that 72\% of all documents utilize mixed content. Almost three out of four documents use mixed content. Mignet et al. (2003) conclude that they invalidate the folklore which underestimate the importance of mixed content in XML. Given that XML (in contrast to HTML -- the de facto language of the web) is commonly used a data transportation format, one can reasonably assume that the number of HTML documents making use of mixed content is even higher.
+More importantly, the fact that two words are underlined, whereas one of those words are both underlined and drawn in bold. When working with markup, this situation is usually expressed through inheritance. This is visualized in Figure \ref{fig:mixed-content-tree}. Without inheritance, the number of tokens needed in our lexer would have to be the number of permutations of \texttt{n} (i.e. \texttt{n!}) where \texttt{n} is the number of unique tokens.
 
 
 
-Further, anyone who has ever authored a free-text-oriented document in a markup language of the XML-family (counting improper HTML subsets such as HTML5) I expect have some appreciation of how absurd document creation would be without mixed content.
 
-[plain, underline, bold-and-underline, strikethrough, plain]
-
-of this particular paragraph is that two  fact that two words are underlined, whereas only one 
+Assume we had a lexical analyzer (onwards referred to as ``lexer'') that could read this visual markup. Obviously this is a purely hypothetical lexer as it will be able to identify beginnings and endings of visual markup. Consider for example the human vision and mind. Or an OCR (Optical Character Recognition) engine. A sensible tokenization from this lexer's point of view might go along the following lines (where tokens prepended with \texttt{S-} represents ``starting of'' and \texttt{E-} ``ending of''),
 
 
 
-Assuming we have a markup language Let us now consider
+
+\begin{lstlisting}
+  TXT S-UNDERLINE TXT S-BOLD TXT E-BOLD S-STRIKETHROUGH TXT E-STRIKETHROUGH TXT
+\end{lstlisting}
+
+
+
+Figure \ref{fig:mixed-content-tree} visualizes a reasonable parse-tree in pre-order. In which ending of a particular property is simply denoted by not being a child of that parent. In the figure, the nesting of properties, becomes obvious.
+  
+
 
 
 \begin{figure}[h]
@@ -336,7 +313,7 @@ Assuming we have a markup language Let us now consider
     tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
     sibling distance=4cm,
   ]
-  \node{<paragraph>}
+  \node {<root>}
   child {node {"The color"}}
   child {node {<underline>}
     child {node {"is"}}
@@ -354,34 +331,69 @@ Assuming we have a markup language Let us now consider
   \end{tikzpicture}
 
   \caption{The example paragraph from \ref{fig:mixed-content-paragraph} represented as a pre-order tree.}
+  \label{fig:mixed-content-tree}
 \end{figure}
 
 
 
+Now that we have established an example input, a model tokenization and a model parse-tree, let us attempt to express this in two different languages.
 
 
+
+\subsubsection{Suitable formats for Mixed Content}
+Figure \ref{fig:mixed-content-paragraph} in XML.
+
+
+\begin{figure}[h]
 \begin{lstlisting}
-<msg>
-  The color <emph>is <keyword>red</keyword></emph> now.
-</msg>
+The color <underline>is <bold>now</bold> <strikethrough>red</strikethrough>.
 \end{lstlisting}
+\caption{Expressing Figure \ref{fig:mixed-content-paragraph} in XML.}
+\label{fig:mixed-content-xml}
+\end{figure}
 
 
 
+\subsubsection{Unsuitable formats for Mixed Content}
+Mixed content becomes utterly difficult to express in languages that lack a canonical way of expressing it. Attempting to express Figure \ref{fig:mixed-content-paragraph} in JSON, one quickly realizes there are multiple ways and that it is not obvious which was is the one to prefer. No approach I have found\footnote{I have merely conducted non-scientific experiments.} is trivial to parse without telling the parser a particular piece of information.
+
+\begin{figure}[h]
 \begin{lstlisting}
 {
-  "msg": [
+  "root": [
     "The color ",
     { "emph": ["is", { "keyword": "red" }], },
     "now."
   ]
-}
+};
 \end{lstlisting}
+\caption{Attempting to express Figure \ref{fig:mixed-content-paragraph} in JSON.}
+\label{fig:mixed-content-json}
+\end{figure}
+
+
+Consider Figure \ref{fig:mixed-content-json}. At first glance it seems like a perfectly reasonable representation of the discussed paragraph. Using Arrays to sequence, and single-key objects to name elements. However, the limitations become painfully apparent if we ask ourselves the question -- what does an object with two keys represent?
+
+One might argue that the counter example is breaking the rules. We did say ``single-key objects'' and not ``n-key objects''. This is a syntactical requirement that can easily be encoded into the parser (or probably even the lexer). This is however to misunderstand the point. The point is that the JSON specification does not actually enforce this behavior today. Meaning, there is (to my knowledge\footnote{TODO: Do I need a reference or something?}) no way of representing mixed content with labeled elements using JSON, without introducing a requirement which isn't already encoded in the lexer/parser. Meaning, all valid JSON strings, cannot (applying a certain strategy, such as e.g. Figure \ref{fig:mixed-content-json}) be considered valid strings of mixed content. Ergo, JSON is an unsuitable format for mixed content.
+
+Within this thesis, it is this line of reasoning that is referred to when discussing whether a particular format is suitable for representing mixed content or not.
+
+
+
+
+\subsection{Enforcing the importance of mixed content}
+
+Mignet et al. (2003) analyzed different aspects of what they referred to as ``The XML web'' (i.e. "the subset of the Web made of XML documents only"). During this study it was found that 72\% of all documents utilize mixed content. Almost three out of four documents use mixed content. Mignet et al. (2003) conclude that they invalidate the folklore which underestimate the importance of mixed content in XML. Given that XML (in contrast to HTML -- the de facto language of the web) is commonly used a data transportation format, one can reasonably assume that the number of HTML documents making use of mixed content is even higher.
+
+
+
+Further, anyone who has ever authored a free-text-oriented document in a markup language of the XML-family (counting improper HTML subsets such as HTML5) I expect have some appreciation of how absurd document creation would be without mixed content.
 
 
 
 
 
+\subsection{Old stuff TODO}
 Markup is not just data transportation. An explanation as to why object notation is a subset of annotations. Meaning that formats like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring. \texttt{XML} for example can be used for data transport, but in this thesis we'll focus on its markup properties. Consequently also ignore formats like \texttt{JSON}, \texttt{YAML} etc.
 
 Maybe we can even use parse-tree's to symbolize the problem. To show that it is not possible to unambiguously represent mixed content. One needs to perform computation on the parse tree to derive the data.
