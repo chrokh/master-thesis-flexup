@@ -13,6 +13,12 @@
 \usepackage[T1]{fontenc}
 \usepackage{ulem}
 
+% Info about natbib:
+% https://www.sharelatex.com/learn/Bibliography_management_with_natbib
+% http://en.wikibooks.org/wiki/LaTeX/Bibliography_Management#Natbib
+\usepackage[round]{natbib}
+\bibliographystyle{plainnat}
+
 
 
 \setkomafont{disposition}{\normalfont\bfseries}
@@ -86,6 +92,15 @@
 }
 
 
+
+
+
+
+%
+%
+% GLOSSARY
+%
+%
 
 \newglossaryentry{document authoring}{
   name={Document Authoring},
@@ -404,12 +419,11 @@ Maybe we can even use parse-tree's to symbolize the problem. To show that it is 
 
 
 \section{A Taxonomy of Markup Languages}
-\begin{itemize}
-\item Presentational
-\item Procedural
-\item Descriptive
-\item Abstract
-\end{itemize}
+In \citeyearpar{coombs} \citeauthor*{coombs} published an article dubbed \emph{Markup Systems and the Future of Scholarly Text Processing}. While the intent of the article, presumably, was to speculate on the future markup -- it also gave us a a solid taxonomy of markup languages. This thesis utilize the categorizations of ``types of markup'' identified by \citet{coombs}, under the term ``markup theory''. \citet{coombs} divide markup types into five categories. (1) Punctuational, (2) Presentational, (3) Procedural, (4) Descriptive, and (5) Abstract. We will now take a closer look at each of these.
+
+
+\subsection{Punctuational}
+Lorem ipsum.
 
 
 \subsection{Presentational}
@@ -1008,6 +1022,20 @@ A need for headings numbered according to context is expressed
   \\
 
 \end{tabular}
+
+
+
+
+
+
+
+%
+%
+% BIBLIOGRAPHY
+%
+%
+\bibliography{bibliography}
+
 
 
 
