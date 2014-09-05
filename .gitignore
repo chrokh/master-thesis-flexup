@@ -15,3 +15,8 @@
 *.glo
 *.gls
 *.ist
+
+
+% natbib
+*.bbl
+*.blg
