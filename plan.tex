@@ -421,6 +421,8 @@ Maybe we can even use parse-tree's to symbolize the problem. To show that it is 
 \section{A Taxonomy of Markup Languages}
 In \citeyearpar{coombs} \citeauthor*{coombs} published an article dubbed \textit{Markup Systems and the Future of Scholarly Text Processing}. While the intent of the article, presumably, was to speculate on the future markup -- it also provided a solid taxonomy of markup languages. This thesis utilize the categorizations of ``types of markup'' identified by \citet{coombs}, under the term ``markup theory''. \citet{coombs} divide markup types into five categories.The categories are (1) Punctuational, (2) Presentational, (3) Procedural, (4) Descriptive, and (5) Abstract. We will now take a closer look at each of these.
 
+Intermingled in these explanations are also opinions from \citeauthor{bray} (co-founder of the Open Text Corporation, and co-author of the first XML 1.0 draft specification) as expressed in a blog post \citeyearpar{bray} exploring the categorizations of \citet{coombs}. It is because of \citet{bray} I have decided to refer to the work of \citet{coombs} as a taxonomy.
+
 
 \subsection{Punctuational}
 Punctuational markup refer to the markup we pay little attention to in our everyday life. Spaces, commas, periods, words, sentences etc. As \citet{coombs} points out, punctuational markup has been studied by mankind for hundreds of years. The example \citet{coombs} use to underline that punctuational markup should, indeed, be considered markup and not merely a part of our writing system -- is the following. Consider the all the conflicting opinions on how punctuational markup should be used. You argue it ought to be a  semicolon, I argue it should be a colon. I argue space-delimited dash, you argue dash with no space. Consider the author contemplating whether a certain domain of sentences/words should be presented as \textbf{bold} or as \textit{italics}. This is the same kind of choice, as the mentioned choices between semicolon, colon and so forth. However, today, \textbf{bold} and \textit{italics} can clearly be considered markup, if you consider languages such as HTML.
@@ -431,7 +433,17 @@ Understand, that the term punctuational markup, according to \citet{coombs}, doe
 
 
 \subsection{Presentational}
-Outlining problems.
+Assume we are talking about a document written on a very old, mechanical typewriter. Presentational markup, according to \citet{coombs} refer to the practice where the author of a document (e.g.) hit the space key multiple times to center text on the page. Or hitting enter multiple times to create paragraphs, or line-breaks.
+
+Now, consider a physical paper document written with a ball pen by hand. With a little bit of effort the author can easily distinguish two parts of the text by applying the technique of writing in italics, or even in cursive. So the reader of the document would understand that author is attempting to communicate some semantic difference between the non-italic and the italic parts.
+
+To understand presentational markup, consider the two above cases -- the typewriter document and the handwritten document. In both cases the presentational elements is embedded within the language of the document. The semantics intended by the author (e.g. a paragraph break) is achieved through presentational means.
+
+\citet{bray} makes the concept of presentational markup, more clear by referring to older What You See Is What You Get (WYSIWYG) word processors. Since modern word processors work with (e.g.) descriptive markup ``under the hood'', this analogy generally no longer holds. But for the sake of the argument, imagine a really old version of e.g. Microsoft Word. But instead, consider word processors of the older model. By surrounding parts of a document with code specific to a particular word processor that particular word processor would know to (e.g.) display that piece of text centered, in bold, in italics or so forth.
+
+One immediate problem with this, the quick reader probably have noticed, can be extracted from one particular sentence -- ``a specific word processor''. Presentational markup requires standardization of what codes to use to mark things such as bold, breaks, sizes and so forth. As you can probably imagine, with the creativity of programmers this quickly gets out of scale.
+
+Another more subtle issue, not mentioned by neither \citet{coombs} nor \citet{bray}, is that of implicitness. As the presentational codes of WYSIWYG word processors are not actually visible to the user of the interface -- a mental disconnect may occur. Consider for example the concept of a paragraph break, and the concept of a hard line-break. Now, assume that, in a particular editor, a paragraph break has the same visual appearance as two consecutive hard line-breaks. Assume I type up a document, and hand it to you. How would you then possible know whether I have used paragraph breaks or hard line-breaks? Perhaps, this is the problem \citet{bray} is referring to, when arguing that What You See Is What You Get essentially is a false claim.
 
 
 \subsection{Procedural}
