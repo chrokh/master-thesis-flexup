@@ -448,6 +448,7 @@ One immediate problem with this, the quick reader probably have noticed, can be 
 Another more subtle issue, not mentioned by neither \citet{coombs} nor \citet{bray}, is that of implicitness. As the presentational codes of WYSIWYG word processors are not actually visible to the user of the interface -- there exist a mental disconnect. Consider for example the concept of a paragraph break, and the concept of a hard line-break. Now, assume that, in a particular editor, a paragraph break has the same visual appearance as two consecutive hard line-breaks. Assume I type up a document, and hand it to you. How would you then possible know whether I have used paragraph breaks or hard line-breaks? Perhaps, this is the problem \citet{bray} is referring to, when arguing that What You See Is What You Get essentially is a false claim.
 
 
+
 \subsection{Procedural}
 The notion of Procedural markup is perhaps most easily communicated through making an analogy to procedural programming languages. Procedural markup refers to the idea of embedding instruction style code directly in the document. Much like as in procedural languages, code duplication, or painful repetition, \citet{bray} argue, can be reduced through elaborate macros or subroutines.
 
@@ -501,8 +502,19 @@ Consider the simple case where a number of words are marked up such that their f
 
 
 
+
 \subsection{Descriptive}
-Outlining problems and benefits.
+Unfortunately there seems to be no unanimous line between procedural and descriptive markup. \citet{coombs} argue that languages such as \TeX{} and \LaTeX{} are descriptive languages, whereas \citet{bray} argue they are procedural. If I am to speculate, I would assume this particular difference in opinion stems from the differences in state-of-the-art practice at the time in which these two publications were authored.
+
+% In order to gain some understanding in why ambiguity might arise -- ask yourself the following question. If a language L, has a declarative syntax (meaning it cannot possibly be procedural), yet the declarative-style syntax clearly describes presentational... TODO: This is not a good example.
+
+In the time of \citet{coombs}, languages like SGML were still fresh out of the oven (the ISO standard for SGML was published in 1986\footnote{http://www.iso.org/iso/catalogue\_detail.htm?csnumber=16387}). So the mere fact that the language provided a way of expressing parts of the document through description rather than through procedure, seemingly was enough for the language to be called descriptive. In other words, I speculate that at that time it was sensible to consider a markup language to be descriptive, so long as it showed significant descriptive capabilities. Regardless of whether it also provided ways of expressing procedural markup. In the case of \LaTeX{}, consider for example language constructs such as \texttt{\textbackslash vspace} (i.e. a command that inserts vertical space) -- clearly procedural.
+
+Put this in contrast to the time of \citet{bray}, where languages like XML had succeeded SGML and provided almost purely descriptive facilities. In other words, I argue that markup languages at this point in time, could only be considered descriptive, if they \emph{only} allowed for descriptive (and never procedural) expressions.
+
+Understand, that attributing this difference of opinion to the different contexts at those points in time, is of course completely speculative from my part. Reasonably so I would argue however.
+
+Following in this thesis I will use a notion of descriptive markup, more similar to that of \citet{bray}. Following the definition both stated by \citet{coombs} as well as \citet{bray} -- that descriptive markup denotes what a given part of the document \emph{is} rather that what it \emph{does}. I.e. denoting what parts of the text belong to which class. However, realizing that the mistake I argue \citet{coombs} made, was allowing languages with both procedural and descriptive capabilities to be called descriptive. In this thesis a markup language exhibiting any kind of procedural element will be considered a procedural markup language, regardless of its descriptive capabilities.
 
 
 \subsection{Referential}
