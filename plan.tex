@@ -10,6 +10,7 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{tikz}
+\usetikzlibrary{calc}
 \usepackage[T1]{fontenc}
 \usepackage{ulem}
 \usepackage{fancyvrb}
@@ -420,6 +421,7 @@ Maybe we can even use parse-tree's to symbolize the problem. To show that it is 
 
 
 \section{A Taxonomy of Markup Languages}
+\label{sec:taxonomy}
 In \citeyearpar{coombs} \citeauthor*{coombs} published an article dubbed \textit{Markup Systems and the Future of Scholarly Text Processing}. While the intent of the article, presumably, was to speculate on the future markup -- it also provided a solid taxonomy of markup languages. This thesis utilize the categorizations of ``types of markup'' identified by \citet{coombs}, under the term ``markup theory''. \citet{coombs} divide markup types into five categories.The categories are (1) Punctuational, (2) Presentational, (3) Procedural, (4) Descriptive, and (5) Abstract. We will now take a closer look at each of these.
 
 Intermingled in these explanations are also opinions from \citeauthor{bray} (co-founder of the Open Text Corporation, and co-author of the first XML 1.0 draft specification) as expressed in a blog post \citeyearpar{bray} exploring the categorizations of \citet{coombs}. It is because of \citet{bray} I have decided to refer to the work of \citet{coombs} as a taxonomy.
@@ -534,16 +536,39 @@ From a linguistic point of view, a metamarkup language can be seen as a metalang
 
 
 \section{A hierarchy of abstraction}
+It is important to understand that \citet{coombs} employ the wording ``types of markup'' when discussing the categories explained in section \ref{sec:taxonomy}, whereas \citet{bray} discuss ``a taxonomy of markup''. While similarly sounding indeed, nuances emerge when considering the fact that \citet{bray} only discuss three of the total six categories outlined by \citet{coombs}. The three included in the, so called, taxonomy are (1) presentational, (2) procedural, and (3) descriptive.
+
+If you would, again, allow me to speculate, then I would argue this stems from the way these three categories nicely describe three different levels of abstraction given an instance of a document. Or to look at it from the other end, consider the following. Punctuational markup can very well be expressed using presentational markup, as well as procedural, as well as descriptive. Referential markup can be expressed using the two latter, and the same goes for metamarkup.
+
+In essence -- punctuational, referential and metamarkup are essentially concepts that \emph{can be expressed}. Whereas presentational, procedural and descriptive markup are \emph{ways to express} these concepts (amongst others).
+
+Allow me to stress again, that this is my subjective interpretation of the situation. But consider it for a moment and I assume you also will find it reasonable. Consider for example how machine code can be abstracted into procedural code, and how procedural code can be abstracted into declarative. Then consider how this analogy conveniently align with the types of markup.
+
+
+\begin{figure}[h]
+\centering
+
+  \begin{tikzpicture}
+  \coordinate (Descriptive) at (-5,0) {};
+  \coordinate (Procedural) at ( 5,0) {};
+  \coordinate (Presentational) at ( 0,4.5) {};
+  \draw (Descriptive) -- (Presentational);
+  \draw (Procedural) -- (Presentational);
+  \foreach \y/\Descriptive in {0/Presentational, 1/Procedural, 2/Descriptive} {
+      \draw ($(Descriptive)!\y/3!(Presentational)$) -- ($(Procedural)!\y/3!(Presentational)$) node[midway,above] {\Descriptive};
+  }
+  \end{tikzpicture}
+
+\caption{A hierarchy of markup language abstraction.}
+\label{fig:markup-types-hierarchy}
+\end{figure}
+
+
+
+Consequently I argue that these three ``categories'' of the taxonomy can be viewed as paradigms of markup abstraction. Much like we have invented facilities to abstract away machine level instructions, we have invented facilities to abstract low level instructions for document content transformation. This hierarchy is visualized in Figure \ref{fig:markup-types-hierarchy}.  
+
+
 % We are talking about _instances_ of documents, which is why we are not regarding abstract markup languages.
-
-[PYRAMID]
-
-[Descriptive]
-
-[Procedural]
-
-[Presentational]
-
 
 
 
