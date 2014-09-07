@@ -48,7 +48,7 @@ i.e. LaTeX to pdf converter.
 
   \begin{tikzpicture}[node distance=3cm]
   \node (trans)  [startstop, right of=input, align=center, xshift=2cm] {
-    Unique per transformation \\\\
+    Specialized \\\\
 
     \begin{tikzpicture}
       \node (input)  [io] {Input};
@@ -79,7 +79,7 @@ E.g. XML combined with XSLT. TODO.
 
   \begin{tikzpicture}[node distance=3cm]
   \node (trans)  [startstop, right of=input, align=center, xshift=2cm] {
-    Unique per transformation \\\\
+    Specialized \\\\
 
     \begin{tikzpicture}
       \node (input)  [io] {Input};
@@ -114,7 +114,7 @@ This is an interesting set of transformation programs that, in theory, can take 
   \begin{tikzpicture}[node distance=3cm]
     \node (input)  [io, left of=trans] {Input};
     \node (trans)  [startstop, right of=input, align=center, xshift=3cm] {
-    Unique per transformation \\\\
+    Specialized \\\\
 
     \begin{tikzpicture}
       \node (engine) [process, right of=input, xshift=2cm] {Transformation engine};
@@ -147,7 +147,7 @@ These are transformation engines that are prepared for taking general input, and
   \node (input)  [io] {Input doc};
   \node (engine) [process, right of=input, xshift=1cm] {Transformer};
   \node (trans)  [startstop, above of=engine, align=center] {
-    Unique per transformation \\\\
+    Specialized \\\\
 
     \begin{tikzpicture}
       \node (conf) [io]{Conf};
