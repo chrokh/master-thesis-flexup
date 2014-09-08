@@ -12,7 +12,7 @@
 \tikzstyle{decision} = [diamond,   minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow}    = [thick,->,>=stealth]
 
-
+\newcommand*{\prim}{\ensuremath{\prime}}
 
 \begin{document}
 
@@ -36,6 +36,106 @@
   &
   D
 \end{tabular}
+
+
+
+
+
+
+
+\paragraph{Input, output}
+
+\begin{tabular}{r | c | c }
+  &
+  \textbf{Input} &
+  \textbf{Output}
+  \\ \hline
+
+  Type A &
+  s &
+  s \\ \hline
+
+  Type B &
+  G &
+  s \\ \hline
+
+
+  Type C &
+  s &
+  G \\ \hline
+
+  Type D &
+  G &
+  G \\ \hline
+
+\end{tabular}
+
+
+
+
+
+
+
+
+
+
+\paragraph{Input, output, config}
+
+\begin{tabular}{l | c | c | c}
+  &
+  \textbf{Input} &
+  \textbf{Output} &
+  \textbf{Config}
+  \\ \hline
+
+  Type A\prim &
+  s &
+  s &
+  s \\ \hline
+
+  Type A\prim\prim &
+  s &
+  s &
+  G \\ \hline
+
+
+
+  Type B\prim &
+  G &
+  s &
+  s \\ \hline
+
+  Type B\prim\prim &
+  G &
+  s &
+  G \\ \hline
+
+
+
+  Type C\prim &
+  s &
+  G &
+  s \\ \hline
+
+  Type C\prim\prim &
+  s &
+  G &
+  G \\ \hline
+
+
+
+  Type D\prim &
+  G &
+  G &
+  s \\ \hline
+
+  Type D\prim\prim &
+  G &
+  G &
+  G \\ \hline
+
+\end{tabular}
+
 
 
 
