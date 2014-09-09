@@ -10,7 +10,7 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{tikz}
-\usetikzlibrary{calc}
+\usetikzlibrary{calc, shapes.geometric, arrows}
 \usepackage[T1]{fontenc}
 \usepackage{ulem}
 \usepackage{fancyvrb}
@@ -97,6 +97,22 @@
 
 
 
+%
+%
+%
+% FANCY CHARACTERS
+%
+%
+%
+\newcommand*{\prim}{\ensuremath{\prime}} % Prime
+
+
+
+
+
+
+
+
 
 %
 %
@@ -113,6 +129,31 @@
   description={Extended Backus-Naur Form}
 }
 \makeglossaries
+
+
+
+
+
+
+
+%
+%
+%
+% TiKZ Figures
+%
+%
+%
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{io}       = [trapezium, trapezium left angle=75, trapezium right angle=105, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process}  = [rectangle, minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{decision} = [diamond,   minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow}    = [thick,->,>=stealth]
+
+
+
+
+
+
 
 
 
@@ -586,9 +627,61 @@ Consequently I argue that these three ``categories'' of the taxonomy can be view
 
 
 \section{Workflows}
-In the spirit of \citet{reid} -- author of the paper that introduced Scribe, one of the earlier document preparation systems (markup languages) that separated form from content -- we will now take a look at some popular workflows of document authoring. Further I will suggest an ideal alternative, targeting some of the apparent deficiencies with the current ones.
+In the spirit of \citet{reid} -- author of the paper that introduced Scribe, one of the earlier document preparation systems that argued for the ``separation of form from content'' -- we will now take a look at some popular workflows of document authoring. Further I will suggest an ideal alternative, targeting some of the apparent deficiencies with the current ones.
 
-[TODO]
+The process that we are going to analyze is that of file format transformation. The idea of transforming a file expressed in some format F into some other format F\prim.
+
+Given the creativity of humans, I would argue that, the number of workflows used in the real world today is likely equivalent or higher than the number of people employing a workflow. Thus, in order to be able to discuss workflows, we need some way to generalize the concepts that are present in all. Thus, Figure \ref{fig:workflows-framework} suggests a micro-framework I will use as a basis for this discussion. Given it's high level of abstraction I strongly believe you will agree on it being representative for the whole set of potential workflows.
+
+Think about it, to perform the process described as transforming from \texttt{F} to \texttt{F\prim}, we obviously need to be able to distinguish the two formats from each other. In Figure \ref{fig:workflows-framework} \texttt{F} is referred to as ``Input file'' and \texttt{F\prim} as ``Output file''. Further, we know that \texttt{F}, representing a static file format, never will transform itself into a the other static file format \texttt{F\prim}. Consequently we need some process in-between, in Figure \ref{fig:workflows-framework} we refer to this process as the ``Transformation program''. The figure then, I argue is general enough to encompass every reasonable and imaginable transformation workflow.
+
+You might argue that some workflows actually encompass multiple steps of transformation, and I would of course agree. If you however consider how Figure \ref{fig:workflows-framework} actually depict a function, then it becomes obvious how we could use the output of one function as input to another function. Consequently, the model implies that you may apply it any number of times.
+
+
+\subsection{Generality of the transformation program}
+Unfortunately, the model depicted in Figure \ref{fig:workflows-framework} model is not sufficiently exact for our purposes. With it, we will not be able to illustrate the kind of distinctions we want to depict. Assume that we instead of having the two formats \texttt{F} and \texttt{F\prim}, have the four formats F. 
+
+
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {Input file};
+    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
+    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+
+    % arrows
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+  \end{tikzpicture}
+
+  \caption{A naive interpretation of the problem of file transformation.}
+  \label{fig:workflows-framework}
+\end{figure}
+
+
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {Input file};
+    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
+    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+    \node (conf)   [io,      above of=engine]{Configuration};
+
+    % arrows
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+    \draw [arrow] (conf)   -- (engine);
+  \end{tikzpicture}
+
+  \caption{A micro-framework for discussing generality in document transformation. }
+  \label{fig:workflows-framework}
+\end{figure}
 
 
 
