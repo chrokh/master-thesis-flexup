@@ -225,11 +225,87 @@ Instead, I argue that the one sensible approach is to employ a constant rewritin
 
 But the big problem is of course that this is an utterly massive undertaking. So massive that it is obviously absurd to assume this process should be carried out by humans. But not yet so massive that it would be absurd to ask computers to carry it out. This thesis suggests taking a holistic approach to the current body of markup languages, identifying the common intersection, and suggesting a structured way in which any of these languages can be transformed into any of these other languages. With less human effort required than today. And with more preparation for potentially new languages of the future.
 
-
-
 \paragraph{TODO}
 - A brief history of writing from pens, to the printing press, to computers and word processors, to markup languages.
  
+
+
+
+
+\section{Problem outline}
+\paragraph{n to n conversions}
+Many formats to many formats. Write once, publish everywhere. Must be accessible to non-programmers/semi-programmers. Formal grammars are not known by everyone.
+\paragraph{Existing solutions}
+  \begin{itemize}
+  \item No proper pipeline for reusing common things, such as the creation of a table of contents.
+  \item Could be solved using e.g XSLT but too verbose. No standard way of sharing libs.
+  \item Pandoc is too difficult to configure. Syntax. Haskell/Python. Lacks an approach to share libs. 
+  \end{itemize}
+
+
+\subsection{Requirements}
+\paragraph{Any output format but reasonable input format}
+\paragraph{Code reuse through package friendliness}
+\paragraph{Control and configurability without programming}
+\paragraph{Flexible input language}
+
+
+
+\section{Suggested approach}
+\paragraph{Composition}
+Symbiosis and packages
+\paragraph{Declarative at the highest level of abstraction}
+We should strive to express things: Declaratively at the highest level of abstraction. At the intersection of all imaginable formats.
+\paragraph{Syntax-free languages}
+DSL's for grammars.
+
+
+
+
+\section{Thesis outline}
+TODO.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % 
+%
+%
+%
+%     Theory
+%
+%
+%
+% % % % % % % % % % % % % % % % % % % % % %
+
+
+\chapter{Background}
+Lorem ipsum. TODO.
+
+
 
 
 \section{A brief history of Markup}
@@ -736,26 +812,74 @@ The minimal denominator.
 
 
 
-\section{Problem outline}
-\subsection{Coupling to compilers}
-\subsection{Coupling to concepts}
-\subsection{Verbosity \& cognitive overhead}
 
-\section{Suggested solutions}
-\subsection{Composition}
-Symbiosis and packages
-\subsection{Declarative at the highest level of abstraction}
-We should strive to express things: Declaratively at the highest level of abstraction. At the intersection of all imaginable formats.
-\subsection{Syntax-free languages}
-DSL's for grammars.
+
+
+\chapter{Literature review}
+Lorem ipsum.
 
 
 
 
 
 
+\chapter{Empirics}
+Lorem ipsum.
 
 
+\section{SimEx -- A control structure-light subset of regex}
+...
+
+
+\section{Flexup -- A DSL for expressing markup-oriented CFG's}
+...
+
+\subsection{The annotated file (\texttt{.fup})}
+...
+
+\subsection{The annotation definitions file (\texttt{.fupd})}
+...
+
+\subsection{The binary}
+...
+
+
+
+
+
+\chapter{Analysis}
+Lorem ipsum.
+
+
+
+
+
+\chapter{Conclusion}
+Lorem ipsum.
+
+
+
+
+
+\chapter{Discussion}
+Lorem ipsum.
+
+\section{Future research}
+Lorem ipsum.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\chapter{OLD STUFF BELOW}
 
 
 \chapter{Research questions}
@@ -907,73 +1031,6 @@ Constructing the sample document in all the other semantically free languages id
 
 
 
-
-
-\chapter{Literature review}
-Lorem ipsum.
-
-
-
-
-
-
-\chapter{Empirics}
-Lorem ipsum.
-
-
-\section{SimEx -- A control structure-light subset of regex}
-...
-
-
-\section{Flexup -- A DSL for expressing markup-oriented CFG's}
-...
-
-\subsection{The annotated file (\texttt{.fup})}
-...
-
-\subsection{The annotation definitions file (\texttt{.fupd})}
-...
-
-\subsection{The binary}
-...
-
-
-
-
-
-\chapter{Analysis}
-Lorem ipsum.
-
-
-
-
-
-\chapter{Conclusion}
-Lorem ipsum.
-
-
-
-
-
-\chapter{Discussion}
-Lorem ipsum.
-
-\section{Future research}
-Lorem ipsum.
-
-
-
-
-
-
-
-
-
-
-
-
-
-\chapter{OLD STUFF BELOW}
 
 
 \subsection{Verbosity and cognitive overhead}
@@ -1200,7 +1257,7 @@ A need for headings numbered according to context is expressed
 
 
 
-\section{Aspects of languages}
+\chapter{Aspects of languages}
 \subsection{Can we see it as a matrix?}
 
 \begin{tabular}{ l | c | c | c }
