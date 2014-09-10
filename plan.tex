@@ -1035,28 +1035,35 @@ We will not introduce any more details now, but instead look at what common work
 
 
 
+
 \begin{figure}[h]
   \centering
 
-  \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {Input file};
-    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
-    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
-    \node (conf)   [io,      above of=engine]{Configuration};
+  \begin{tikzpicture}[node distance=.5cm]
+    \node (in)  [io]                                 {\(In\)};
+    \node (P1)  [process, right of=in, xshift=2.5cm] {\(P1\)};
+    \node (P2)  [process, right of=P1, xshift=2.5cm] {\(P2\)};
+    \node (P3)  [process, right of=P2, xshift=2.5cm] {\(P3\)};
+    \node (out) [io,      right of=P3, xshift=2.5cm] {\(Out\)};
+    \node (C1)  [io,      above of=P1, yshift=2cm] {\(C1_n\)}; % {Semantics};
+    \node (C2)  [io,      above of=P2, yshift=2cm] {\(C2_n\)}; % {Derivations};
+    \node (C3)  [io,      above of=P3, yshift=2cm] {\(C3_n\)}; % {Presentation};
 
-    % arrows
-    \draw [arrow] (input)  -- (engine);
-    \draw [arrow] (engine) -- (output);
-    \draw [arrow] (conf)   -- (engine);
 
-
-    \begin{pgfonlayer}{background}
-      \node [draw, dotted, rectangle, rounded corners, fit={(input) (engine) (output)}] { };
-    \end{pgfonlayer}
-
+    \draw [arrow] (in) -- (P1);
+    \draw [arrow] (P1) -- (P2);
+    \draw [arrow] (P2) -- (P3);
+    \draw [arrow] (P3) -- (out);
+    \draw [arrow] (C1) -- (P1);
+    \draw [arrow] (C2) -- (P2);
+    \draw [arrow] (C3) -- (P3);
+    \draw [arrow] (P1) edge[loop below]();
+    \draw [arrow] (P2) edge[loop below]();
+    \draw [arrow] (P3) edge[loop below]();
   \end{tikzpicture}
 
-  \caption{The dotted line depict coupling, such that if any of the components within the area change, the transformation program must significantly change.}
+  \caption{Suggested ideal refinement of a Quadrant A program.}
+  \label{fig:workflows-framework-gen-in-gen-out}
 \end{figure}
 
 
@@ -1068,27 +1075,8 @@ We will not introduce any more details now, but instead look at what common work
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\chapter{Literature review}
-Lorem ipsum.
+\chapter{Separating Semantics}
+TODO.
 
 
 

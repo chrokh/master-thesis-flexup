@@ -1,7 +1,10 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc} % åäö
 \usepackage{tikz}
-\usetikzlibrary{calc, shapes.geometric, arrows}
+\usetikzlibrary{calc, fit, shapes.geometric, arrows, decorations.pathmorphing, positioning, fit, matrix, backgrounds}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
 \usepackage[T1]{fontenc}
 
 
@@ -10,7 +13,8 @@
 \tikzstyle{io}       = [trapezium, trapezium left angle=75, trapezium right angle=105, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
 \tikzstyle{process}  = [rectangle, minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{decision} = [diamond,   minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=green!30]
-\tikzstyle{arrow}    = [thick,->,>=stealth]
+\tikzstyle{arrow}    = [-open triangle 45]
+\tikzstyle{dotbox}   = [draw, dotted, rectangle, rounded corners]
 
 \newcommand*{\prim}{\ensuremath{\prime}}
 
@@ -334,6 +338,53 @@ Specialized config
 \item \textbf{Coupling to input format} Since the transformation engine is written with the intent of transforming content written in format F to XML, if another person need a transformer that transforms from format F' to XML, well then tant pis, we need to write another transformer engine.
 \end{itemize}
 
+
+
+
+
+
+
+\section{fooo}
+
+\begin{figure}[p]
+  \centering
+
+  \begin{tikzpicture}[node distance=.5cm]
+    \node (in)  [io]                                 {\(In\)};
+    \node (P1)  [process, right of=in, xshift=2.5cm] {\(P1\)};
+    \node (P2)  [process, right of=P1, xshift=2.5cm] {\(P2\)};
+    \node (P3)  [process, right of=P2, xshift=2.5cm] {\(P3\)};
+    \node (out) [io,      right of=P3, xshift=2.5cm] {\(Out\)};
+    \node (C1)  [io,      above of=P1, yshift=2cm] {\(C1_n\)}; % {Semantics};
+    \node (C2)  [io,      above of=P2, yshift=2cm] {\(C2_n\)}; % {Derivations};
+    \node (C3)  [io,      above of=P3, yshift=2cm] {\(C3_n\)}; % {Presentation};
+
+
+
+
+    \draw [arrow] (in) -- (P1);
+    \draw [arrow] (P1) -- (P2);
+    \draw [arrow] (P2) -- (P3);
+    \draw [arrow] (P3) -- (out);
+    \draw [arrow] (C1) -- (P1);
+    \draw [arrow] (C2) -- (P2);
+    \draw [arrow] (C3) -- (P3);
+    \draw [arrow] (P1) edge[loop below]();
+    \draw [arrow] (P2) edge[loop below]();
+    \draw [arrow] (P3) edge[loop below]();
+    %\path [line]  (P3) edge[P3 right];
+
+
+
+    % \begin{pgfonlayer}{background}
+    %   \node [dotbox, fit={(conf) (input)}]{};
+    % \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{Suggested ideal refinement of a Quadrant A program.}
+  \label{fig:workflows-framework-gen-in-gen-out}
+\end{figure}
 
 
 
