@@ -780,7 +780,14 @@ Consequently I argue that these three ``categories'' of the taxonomy can be view
 
 
 
-\section{Workflows}
+
+
+
+
+
+
+
+\chapter{Workflows}
 \label{sec:microframework}
 In the spirit of \citet{reid} -- author of the paper that introduced Scribe, one of the earlier document preparation systems that argued for the ``separation of form from content'' -- we will now take a look at some popular workflows of document authoring. Further I will suggest an ideal alternative, targeting some of the apparent deficiencies with the current ones.
 
@@ -819,7 +826,7 @@ You might argue that some workflows actually encompass multiple steps of transfo
 
 
 
-\subsection{Generality of a transformation program}
+\paragraph{Generality of a transformation program.}
 Unfortunately, the model depicted in Figure \ref{fig:workflows-framework} model is not sufficiently exact for our purposes. With it, we will not be able to illustrate the kind of distinctions we want to depict. Assume that we instead of having the two formats \(F\) and \(F\prime\), have the four formats \(I\), \(I\prime\), \(O\), and \(O\prime\). The two I-based formats are expected to be used as input-formats, and the two O-formats are output formats. Given that the input file in Figure \ref{fig:workflows-framework} represents a single file format, and the same for the output format, then this model cannot possibly encompass this four-format-program.
 
 In order to change the model such that it can depict, what previously in the thesis was referred to as, n-to-n conversions, we will introduce the notion of coupling. In Figure \ref{fig:workflows-framework-spec-in-spec-out} we've introduced a dotted line. This dotted line represents coupling. If any of the components within the area delimited by the dotted line change, the change will ripple through all of the other components. Assume for example that the input file and the transformation program are both within the dotted area. This would mean that to handle a new input we need a new transformation program. Which is of course unwanted.
@@ -831,7 +838,7 @@ In order to change the model such that it can depict, what previously in the the
 
 
 \section{Common workflows}
-We will soon look at some common workflows, and how they can be expressed using the simple micro-framwork described in Section \ref{sec:microframework}. But before we do, let us discuss all the possibilities of coupling in the framework through a quadrant diagram -- depicted in Figure \ref{fig:microframework-quadrant}. Instead of the term coupling we will in the quadrant use the terms ``generalized'' and ``specialized''. To oversimplify -- the first should be considered good and the second bad. The idea is in essence the same as with the previously discussed coupling. If some part of the program is generalized then it would mean that the transformation engine is agnostic to changes in that particular part. If however a particular part is specialized then the transformation program will inevitably have to be rewritten upon changes in the particular part. 
+We will soon look at some common workflows, and how they can be expressed using the simple micro-framwork described in the previous section. But before we do, let us discuss all the possibilities of coupling in the framework through a quadrant diagram -- depicted in Figure \ref{fig:microframework-quadrant}. Instead of the term coupling we will in the quadrant use the terms ``generalized'' and ``specialized''. To oversimplify -- the first should be considered good and the second bad. The idea is in essence the same as with the previously discussed coupling. If some part of the program is generalized then it would mean that the transformation engine is agnostic to changes in that particular part. If however a particular part is specialized then the transformation program will inevitably have to be rewritten upon changes in the particular part. 
 
 
 \begin{figure}[h]
@@ -985,6 +992,37 @@ Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent t
 
 
 
+\section{Situational analysis}
+In this section we will criticize some of the common workflows through employing the quadrant approach already introduced and depicted by Figure \ref{fig:microframework-quadrant}. \emph{(TODO) I will probably remove this section, because I assume the reader has already appreciated the costs of working outside of the A quadrant.}
+% Why are so many documents still procedural?
+% Model information flows of contemporary publishing. Figures describing the current state in contrast to the thesis's subjective idea of the ideal state. Refer to Reid (1980).
+
+% \subsection{Presentational}
+% i.e. Microsoft Word etc.
+% [FIG. ]
+% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+% \subsection{Procedural}
+% i.e. \LaTeX etc.
+% [FIG. ]
+% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+% \subsection{Descriptive}
+% i.e. DocBook, EPUB, Markdown etc.
+% [FIG. ]
+% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+% \subsection{A hypothetical ideal addressing the problems}
+% [FIG.]
+
+% \subsubsection{Composition \& Abstraction}
+% The minimal denominator.
+
+
+
+
+
+
 
 
 
@@ -1027,33 +1065,6 @@ We will not introduce any more details now, but instead look at what common work
 
 
 
-
-
-
-\section{Situational analysis}
-Why are so many documents still procedural?
-Model information flows of contemporary publishing. Figures describing the current state in contrast to the thesis's subjective idea of the ideal state. Refer to Reid (1980).
-
-\subsection{Presentational}
-i.e. Microsoft Word etc.
-[FIG. ]
-Explicit outline of the problems so that we can attack them in the hypothetical ideal.
-
-\subsection{Procedural}
-i.e. \LaTeX etc.
-[FIG. ]
-Explicit outline of the problems so that we can attack them in the hypothetical ideal.
-
-\subsection{Descriptive}
-i.e. DocBook, EPUB, Markdown etc.
-[FIG. ]
-Explicit outline of the problems so that we can attack them in the hypothetical ideal.
-
-\subsection{A hypothetical ideal addressing the problems}
-[FIG.]
-
-\subsubsection{Composition \& Abstraction}
-The minimal denominator.
 
 
 
