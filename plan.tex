@@ -157,6 +157,8 @@
 \tikzstyle{process}  = [rectangle, minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{decision} = [diamond,   minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow}    = [thick,->,>=stealth]
+\tikzstyle{dotbox}   = [draw, dotted, rectangle, rounded corners]
+
 
 
 
@@ -779,6 +781,7 @@ Consequently I argue that these three ``categories'' of the taxonomy can be view
 
 
 \section{Workflows}
+\label{sec:microframework}
 In the spirit of \citet{reid} -- author of the paper that introduced Scribe, one of the earlier document preparation systems that argued for the ``separation of form from content'' -- we will now take a look at some popular workflows of document authoring. Further I will suggest an ideal alternative, targeting some of the apparent deficiencies with the current ones.
 
 The process that we are going to analyze is that of file format transformation. The idea of transforming a file expressed in some format F into some other format F\prim.
@@ -786,9 +789,6 @@ The process that we are going to analyze is that of file format transformation. 
 Given the creativity of humans, I would argue that, the number of workflows used in the real world today is likely equivalent or higher than the number of people employing a workflow. Thus, in order to be able to discuss workflows, we need some way to generalize the concepts that are present in all. Thus, Figure \ref{fig:workflows-framework} suggests a micro-framework I will use as a basis for this discussion. Given it's high level of abstraction I strongly believe you will agree on it being representative for the whole set of potential workflows.
 
 Think about it, to perform the process described as transforming from \(F\) to \(F\prime\), we obviously need to be able to distinguish the two formats from each other. In Figure \ref{fig:workflows-framework} \(F\) is referred to as ``Input file'' and \(F\prime\) as ``Output file''. Further, we know that \(F\), representing a static file format, never will transform itself into a the other static file format \(F\prime\). Consequently we need some process in-between, in Figure \ref{fig:workflows-framework} we refer to this process as the ``Transformation program''. The figure then, I argue is general enough to encompass every reasonable and imaginable transformation workflow.
-
-You might argue that some workflows actually encompass multiple steps of transformation, and I would of course agree. If you however consider how Figure \ref{fig:workflows-framework} actually depict a function, then it becomes obvious how we could use the output of one function as input to another function. Consequently, it is in the model implicit that you may apply it any number of times.
-
 
 
 \begin{figure}[h]
@@ -814,24 +814,51 @@ You might argue that some workflows actually encompass multiple steps of transfo
 \end{figure}
 
 
+You might argue that some workflows actually encompass multiple steps of transformation, and I would of course agree. If you however consider how Figure \ref{fig:workflows-framework} actually depict a function, then it becomes obvious how we could use the output of one function as input to another function. Consequently, it is in the model implicit that you may apply it any number of times.
 
 
 
-\subsection{Generality of the transformation program}
+
+\subsection{Generality of a transformation program}
 Unfortunately, the model depicted in Figure \ref{fig:workflows-framework} model is not sufficiently exact for our purposes. With it, we will not be able to illustrate the kind of distinctions we want to depict. Assume that we instead of having the two formats \(F\) and \(F\prime\), have the four formats \(I\), \(I\prime\), \(O\), and \(O\prime\). The two I-based formats are expected to be used as input-formats, and the two O-formats are output formats. Given that the input file in Figure \ref{fig:workflows-framework} represents a single file format, and the same for the output format, then this model cannot possibly encompass this four-format-program.
 
-In order to change the model such that it can depict, what previously in the thesis was referred to as, n-to-n conversions, we will introduce the notion of coupling. In Figure \ref{fig:workflows-framework-area} we've introduced a dotted line. This dotted line represents coupling. If any of the components within the area delimited by the dotted line change, the change will ripple through all of the other components. Assume for example that the input file and the transformation program are both within the dotted area. This would mean that to handle a new input we need a new transformation program. Which is of course unwanted.
+In order to change the model such that it can depict, what previously in the thesis was referred to as, n-to-n conversions, we will introduce the notion of coupling. In Figure \ref{fig:workflows-framework-spec-in-spec-out} we've introduced a dotted line. This dotted line represents coupling. If any of the components within the area delimited by the dotted line change, the change will ripple through all of the other components. Assume for example that the input file and the transformation program are both within the dotted area. This would mean that to handle a new input we need a new transformation program. Which is of course unwanted.
 
-\subsection{Modeling configurability}
-In order for the model to also encompass the idea of configurability we will extract one piece of the transformation program and thus describe it in further detail. What we will extract is a configuration file (see Figure \ref{fig:workflows-framework-area}). Essentially the model of the program can now be seen as a function that takes two arguments and produces one result. An input file, a configuration file that give the end-user some level of control over the transformation process.
 
-We will not introduce any more details now, but instead look at what common workflows we can describe using this model.
 
 
 
 
 
 \section{Common workflows}
+We will soon look at some common workflows, and how they can be expressed using the simple micro-framwork described in Section \ref{sec:microframework}. But before we do, let us discuss all the possibilities of coupling in the framework through a quadrant diagram -- depicted in Figure \ref{fig:microframework-quadrant}. Instead of the term coupling we will in the quadrant use the terms ``generalized'' and ``specialized''. To oversimplify -- the first should be considered good and the second bad. The idea is in essence the same as with the previously discussed coupling. If some part of the program is generalized then it would mean that the transformation engine is agnostic to changes in that particular part. If however a particular part is specialized then the transformation program will inevitably have to be rewritten upon changes in the particular part. 
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tabular}{r | c | c}
+    & \textbf{Generalized output} & \textbf{Specialized output} \\ \hline
+
+    \textbf{Generalized input} &
+    A
+    &
+    B 
+
+    \\ \hline
+
+    \textbf{Specialized input} &
+    C
+    &
+    D
+  \end{tabular}
+
+  \caption{All combinations of coupling that can occur in Figure \ref{fig:workflows-framework} expressed in a quadrant diagram}
+  \label{fig:microframework-quadrant}
+\end{figure}
+
+
+As you might already have guessed, this thesis is concerned with understanding the eco-system of Quadrant A. Namely the general case. Where input is arbitrary and output is arbitrary. But to really understand what kind of programs fit into this category, and perhaps more importantly -- which ones doesn't -- we will still run through all of the quadrants below, while providing explanations and examples for each.
 
 
 
@@ -840,6 +867,133 @@ We will not introduce any more details now, but instead look at what common work
 
 
 
+
+
+
+
+
+
+
+
+
+\subsection{Specialized in, Specialized out (Quadrant D)}
+Programs in Quadrant D (of Figure \ref{fig:microframework-quadrant}) represent the category of really specialized transformers. Programs that convert from one specific input format to some specific output format. The fact that the transformation program is coupled to both the input and the output format essentially means that if want to change input or output format we simply need a new (i.e. another) program.  Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-spec-in-spec-out}. Such a program could for example be a \LaTeX{} to PDF converter. 
+
+\begin{figure}[p]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {Input file};
+    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
+    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(input) (engine) (output)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{The dotted line depict coupling, such that if any of the components within the area change, the transformation program must significantly change.}
+  \label{fig:workflows-framework-spec-in-spec-out}
+\end{figure}
+
+
+
+\subsection{Specialized in, Generalized out (Quadrant C)}
+Programs in Quadrant C (of Figure \ref{fig:microframework-quadrant}), represent a (to many) very familiar toolset. Namely XML combined with XSLT. The strategy could go something along the following lines. An author express a document in some arbitrary XML format and then use XSLT as a means of outputting multiple different other formats. One could argue that there is a need for one separate XSLT file per output format, or input format. But assuming that the transformation program can be invoked with flags, and that it is written in such a fashion that it supports a wide range of formats, then I would argue it is indeed not coupled. Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-spec-in-gen-out}.
+
+\begin{figure}[p]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {Input file};
+    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
+    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(input) (engine)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{This Quadrant C program is coupled only to the input format.}
+  \label{fig:workflows-framework-spec-in-gen-out}
+\end{figure}
+
+
+
+\subsection{Generalized in, Specialized out (Quadrant B)}
+Programs in Quadrant B (of Figure \ref{fig:microframework-quadrant}) represent a set of very interesting transformation programs. Namely programs that, in theory, take any input, but always convert the output to a fixed kind of output. If an author need a different output format, then he or she simply need to find another program. To be honest I am struggling to find sensible real-world examples for this kind of program. Nevertheless, they are not only interesting, but also highly realizable. Perhaps such a program could be used to convert some set of non-conforming documents to some unified format. For example converting all flavors of miswritten HTML5 into standards-compliant HTML5. Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-gen-in-spec-out}.
+
+\begin{figure}[p]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {Input file};
+    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
+    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(engine) (output)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{This Quadrant B program is coupled only to the output format.}
+  \label{fig:workflows-framework-gen-in-spec-out}
+\end{figure}
+
+
+
+
+\subsection{Generalized in, Generalized out (Quadrant A)}
+Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent the most general kind of programs. They take arbitrary\footnote{As you might have already understood, we are of course not talking about completely arbitrary, but simply multiple unrelated formats.} input formats and generate arbitrary output formats. These are transformation engines that are prepared for taking general input, and providing facilities to give general output. An example program that exhibits this behavior is the widely used software Pandoc.  Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-gen-in-gen-out}.
+
+\begin{figure}[p]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {Input file};
+    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
+    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(engine)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{This Quadrant A program is not coupled to neither input nor output format.}
+  \label{fig:workflows-framework-gen-in-gen-out}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Refining Quadrant A programs}
+In order for the model to also encompass the idea of configurability we will extract one piece of the transformation program and thus describe it in further detail. What we will extract is a configuration file (see Figure \ref{fig:workflows-framework-spec-in-spec-out}). Essentially the model of the program can now be seen as a function that takes two arguments and produces one result. An input file, a configuration file that give the end-user some level of control over the transformation process.
+
+We will not introduce any more details now, but instead look at what common workflows we can describe using this model.
 
 
 
@@ -864,11 +1018,8 @@ We will not introduce any more details now, but instead look at what common work
 
   \end{tikzpicture}
 
-  \caption{The dotted line depict coupling, such that if any of the components within the area change, changes will have to be carried out in all the other components within the area.}
-  \label{fig:workflows-framework-area}
+  \caption{The dotted line depict coupling, such that if any of the components within the area change, the transformation program must significantly change.}
 \end{figure}
-
-
 
 
 
