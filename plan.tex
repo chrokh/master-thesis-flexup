@@ -454,7 +454,7 @@ content ::= (element | CharData)*
 
 In essence -- any non-terminal \texttt{element} can either produce an \texttt{EmptyElemTag} (i.e. self-closing tag), or the set of a \texttt{STag} (i.e. opening tag) followed by \texttt{content}, followed by an \texttt{ETag} (i.e. closing tag). The non-terminals \texttt{start} (e.g. \texttt{<foo>}) and \texttt{end} (e.g. \texttt{</foo>}) will terminate without any risk of indirect recursion back to the non-terminal \texttt{element}. The non-terminal \texttt{content} is the one interesting to this example.
 
-In the XML 1.0 (1998) specification the following is true\footnote{This is of course merely a partial extraction of the syntax used in the specification.} for the EBNF syntax. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
+The XML 1.0 (1998) specification use the following flavored syntax\footnote{This is of course merely a partial extraction of the syntax used in the specification.} of EBNF. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
 
 This essentially mean that the non-terminal \texttt{content} can produce either a new \texttt{element} (causing indirect recursion) or \texttt{CharData} (i.e. a string), any number of times. Subsequently allowing for any combination of any length of the two.
 
@@ -477,12 +477,12 @@ The color \underline{is \textbf{now}} \sout{red}.
 Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold and underline, and finally (4) strike-through.
 
 
-More importantly, the fact that two words are underlined, whereas one of those words are both underlined and drawn in bold. When working with markup, this situation is usually expressed through inheritance. This is visualized in Figure \ref{fig:mixed-content-tree}. Without inheritance, the number of tokens needed in our lexer would have to be the number of permutations of \texttt{n} (i.e. \texttt{n!}) where \texttt{n} is the number of unique tokens.
+More importantly, the fact that two words are underlined, whereas one of those words are both underlined and drawn in bold. When working with markup, this situation is usually expressed through inheritance. This is visualized in Figure \ref{fig:mixed-content-tree}. Without inheritance, the number of tokens needed in our lexer would have to be the number of permutations of \texttt{n} (i.e. \(n!\)) where \texttt{n} is the number of unique tokens before combining.
 
 
 
 
-Assume we had a lexical analyzer (onwards referred to as ``lexer'') that could read this visual markup. Obviously this is a purely hypothetical lexer as it will be able to identify beginnings and endings of visual markup. Consider for example the human vision and mind. Or an OCR (Optical Character Recognition) engine. A sensible tokenization from this lexer's point of view might go along the following lines (where tokens prepended with \texttt{S-} represents ``starting of'' and \texttt{E-} ``ending of''),
+Assume we had a lexical analyzer (onwards referred to as ``lexer'') that could read this visual markup expressed in Figure \ref{fig:mixed-content-paragraph}. Obviously this is a purely hypothetical lexer as it will be able to identify beginnings and endings of visual markup. Consider for example the human vision and mind. Or an OCR (Optical Character Recognition) engine. A sensible tokenization from this lexer's point of view might go along the following lines (where tokens prepended with \texttt{S-} represents ``starting of'' and \texttt{E-} ``ending of'').
 
 
 
@@ -565,7 +565,7 @@ Mixed content becomes utterly difficult to express in languages that lack a cano
 
 Consider Figure \ref{fig:mixed-content-json}. At first glance it seems like a perfectly reasonable representation of the discussed paragraph. Using Arrays to sequence, and single-key objects to name elements. However, the limitations become painfully apparent if we ask ourselves the question -- what does an object with two keys represent?
 
-One might argue that the counter example is breaking the rules. We did say ``single-key objects'' and not ``n-key objects''. This is a syntactical requirement that can easily be encoded into the parser (or probably even the lexer). This is however to misunderstand the point. The point is that the JSON specification does not actually enforce this behavior today. Meaning, there is (to my knowledge\footnote{TODO: Do I need a reference or something?}) no way of representing mixed content with labeled elements using JSON, without introducing a requirement which isn't already encoded in the lexer/parser. Meaning, all valid JSON strings, cannot (applying a certain strategy, such as e.g. Figure \ref{fig:mixed-content-json}) be considered valid strings of mixed content. Ergo, JSON is an unsuitable format for mixed content.
+One might argue that the counter example is breaking the rules. We did say ``single-key objects'' and not ``n-key objects''. This is a syntactical requirement that can easily be encoded into the parser (or probably even the lexer). This is however to misunderstand the point. The point is that the JSON specification does not actually enforce this behavior today. Meaning, there is (to my knowledge\footnote{TODO: Do I need a reference or something?}) no way of representing mixed content with labeled elements using JSON, without introducing a requirement that isn't already encoded in the lexer/parser. Meaning, all valid JSON strings, cannot (applying a certain strategy, such as e.g. Figure \ref{fig:mixed-content-json}) be considered valid strings of mixed content. Ergo, JSON is an unsuitable format for mixed content.
 
 Within this thesis, it is this line of reasoning that is referred to when discussing whether a particular format is suitable for representing mixed content or not.
 
