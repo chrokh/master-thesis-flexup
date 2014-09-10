@@ -10,7 +10,10 @@
 \usepackage{xcolor}
 \usepackage{listings}
 \usepackage{tikz}
-\usetikzlibrary{calc, shapes.geometric, arrows}
+\usetikzlibrary{calc, fit, shapes.geometric, arrows}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
 \usepackage[T1]{fontenc}
 \usepackage{ulem}
 \usepackage{fancyvrb}
@@ -777,6 +780,11 @@ Unfortunately, the model depicted in Figure \ref{fig:workflows-framework} model 
     % arrows
     \draw [arrow] (input)  -- (engine);
     \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      % \node [draw, fill=cyan!25, rectangle, rounded corners, fit={(input) (engine) (output)}] { Foobar };
+    \end{pgfonlayer}
+
   \end{tikzpicture}
 
   \caption{A naive interpretation of the problem of file transformation.}
