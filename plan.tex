@@ -292,31 +292,18 @@ In this thesis I will argue that there is a difference between converting a docu
 
 
 
-\subsection{Requirements}
+\section{Requirements}
 Given the holistic problem outlined in Section \ref{sec:problems}, we will discuss a holistic response, in form of an eco-system of tools. In order to guide the development of the tool-chain, the following requirements have been extracted from the problems outlined in Section \ref{sec:problems}.
 
 \paragraph{Any output format but reasonable input format}
 As an author I must be able to author my document once, in a ``reasonable'' format. However, as an author, I must be able to publish to multiple platforms -- without \emph{any} rewriting. However, minor configuration must be allowed in order to ensure flexibility in output.
 
-\paragraph{Code reuse through package friendliness}
-Code reuse must be a top priority. Not merely within an author's workflow of a single document, but also between authors and documents. Consequently, as much as possible must be able to be distributed as packages.
+\paragraph{Composable} or Code reuse through package friendliness. Code reuse must be a top priority. Not merely within an author's workflow of a single document, but also between authors and documents. Consequently, as much as possible must be able to be distributed as packages. \footnote{TODO -- call it composability or modularity?}
 
-\paragraph{Control and configurability without programming}
-As not all authors are programmers, the ability to ``script'' the tool-chain should not be regarded a strength. Consequently, configuration should be valued over code.
+\paragraph{Extendable} refers to the idea that it must be natural to introduce new packages that intercept the process at any point in time. This requirement encompass the idea that authors must be offered control over the production of the final output.
 
-\paragraph{Simplest possible input and configuration languages}
-All these issues could of course be solved by allowing authors to type up their documents in sophisticated languages. However, the intent is to enable authors with even only minor programming skills to be productive. Thus all languages that the author come in contact with, must be utterly simple. Reasonably declarative.
-
-
-
-
-\section{Suggested approach}
-\paragraph{Composition}
-Symbiosis and packages
-\paragraph{Declarative at the highest level of abstraction}
-We should strive to express things: Declaratively at the highest level of abstraction. At the intersection of all imaginable formats.
-\paragraph{Syntax-free languages}
-DSL's for grammars.
+\paragraph{Declarative}
+All code that an eco-system user would touch must be declarative. Also packages must be expressed declaratively. This encompass the idea of using templating rather than processing.
 
 
 
