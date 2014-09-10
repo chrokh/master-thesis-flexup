@@ -15,6 +15,7 @@
 \usepackage{ulem}
 \usepackage{fancyvrb}
 \usepackage{shorttoc}
+\usepackage{epigraph}
 
 
 \renewcommand*\contentsname{Contents (detailed)}
@@ -239,21 +240,54 @@ But the big problem is of course that this is an utterly massive undertaking. So
 
 
 \section{Problem outline}
+\label{sec:problems}
+The problem area of this thesis is probably best be summarized by a quote raised in a paper by \cite*{krijnen} on a different approach to a problem similar to the problem raised in this thesis.
+
+\begin{quote}
+The nice thing about standards is that there are so many to choose from.\\
+\textit{-- Andy Tanenbaum}
+\end{quote}
+
+Because we have so many different formats, for various good reasons, the need to convert between these formats, for various good reasons, is apparent. Let us begin with some examples. A reason for why we have different input formats may be that we as individuals appreciate different approaches and ways of thinking and thus syntaxes. Another might be that some formats simply cannot express concepts that another format can express. A reason for why we would like to convert between formats could be that of publishing. Given the multitude of devices and programs that can consume our documents it should be in our interest to supply appropriate formats for these devices and programs. 
+
+\paragraph{An existing solution} to this ``n to n'' conversion problem, and perhaps the most obvious one is Pandoc\footnote{http://johnmacfarlane.net/pandoc/} -- dubbed ``a universal document converter''. The problem I see with Pandoc however is it's lacking facilities for customization of the conversion process. Assume for example that we are converting a document expressed in Markdown to HTML. None of the formats natively support the concept of a Table Of Contents (TOC). Wanting to do this, we would have to ``intercept'' the program after it has parsed the input, and use Haskell or Python to transform the JSON representation of the Abstract Syntax Tree (AST).
+
+\paragraph{Another existing solution} to the problem of expressing our documents in a single format but converting into any imaginable format is to use the XML-family of languages. More specifically -- to express a document in an arbitrary XML-format, and then use XSLT and XPath to convert our document form this arbitrary format into any other output format. Some problems with this approach is (1) the verbosity of the XML languages\footnote{http://www.ibm.com/developerworks/xml/library/x-sbxml/index.html} \footnote{http://blog.codinghorror.com/xml-the-angle-bracket-tax/} \footnote{http://blog.codinghorror.com/revisiting-the-xml-angle-bracket-tax/}, and (2) the fact that because of the lack of any kind of centralization or standardization of format or process, reuse of common transformations become difficult. Would you really appreciate having to write a XML to PDF transformer from scratch?
+
+\paragraph{Of course there are XML subsets like DocBook} that can automatically be converted to a bunch of other formats such as e.g.g PDF. However, then we are back to the problem of Pandoc. What will the author do when the output file does not match the specification and want to intercept the conversion process somehow. 
+
+\paragraph{The aim} of this thesis, is to suggest a software eco-system\footnote{TODO -- need to define term?} in which a document author can ``write once, [and] publish everywhere''. But of course, that is an oversimplification. More specifically this thesis suggest a way in which we could write our (1) actual document contents once, (2) the transformation process in which we create, what \citet{reid} refers to as, ``derived text'' once, and finally (3) the mapping onto an output format once (per format of course). Note that the two second parts are generalized, and could be published as packages and reused. Also this is an oversimplification as we're going to need some ``glue'' as well, but this will be discussed further on in the thesis.
+
+
+
 \paragraph{n to n conversions}
 Many formats to many formats. Write once, publish everywhere. Must be accessible to non-programmers/semi-programmers. Formal grammars are not known by everyone.
-\paragraph{Existing solutions}
-  \begin{itemize}
-  \item No proper pipeline for reusing common things, such as the creation of a table of contents.
-  \item Could be solved using e.g XSLT but too verbose. No standard way of sharing libs.
-  \item Pandoc is too difficult to configure. Syntax. Haskell/Python. Lacks an approach to share libs. 
-  \end{itemize}
+
+% TODO: Use or remove?
+%\paragraph{Existing solutions}
+%\begin{itemize}
+%\item No proper pipeline for reusing common things, such as the creation of a table of contents.
+%\item Could be solved using e.g XSLT but too verbose. No standard way of sharing libs.
+%\item Pandoc is too difficult to configure. Syntax. Haskell/Python. Lacks an approach to share libs. 
+%\end{itemize}
+
 
 
 \subsection{Requirements}
+Given the holistic problem outlined in Section \ref{sec:problems}, we will discuss a holistic response, in form of an eco-system of tools. In order to guide the development of the tool-chain, the following requirements have been extracted from the problems outlined in Section \ref{sec:problems}.
+
 \paragraph{Any output format but reasonable input format}
+As an author I must be able to author my document once, in a ``reasonable'' format. However, as an author, I must be able to publish to multiple platforms -- without \emph{any} rewriting. However, minor configuration must be allowed in order to ensure flexibility in output.
+
 \paragraph{Code reuse through package friendliness}
+Code reuse must be a top priority. Not merely within an author's workflow of a single document, but also between authors and documents. Consequently, as much as possible must be able to be distributed as packages.
+
 \paragraph{Control and configurability without programming}
-\paragraph{Flexible input language}
+As not all authors are programmers, the ability to ``script'' the tool-chain should not be regarded a strength. Consequently, configuration should be valued over code.
+
+\paragraph{Simplest possible input and configuration languages}
+All these issues could of course be solved by allowing authors to type up their documents in sophisticated languages. However, the intent is to enable authors with even only minor programming skills to be productive. Thus all languages that the author come in contact with, must be utterly simple. Reasonably declarative.
+
 
 
 
