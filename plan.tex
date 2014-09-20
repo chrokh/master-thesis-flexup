@@ -412,16 +412,105 @@ More importantly, the fact that two words are underlined, whereas one of the wor
 
 In other words, to capture all the semantically distinct tokens of Figure \ref{fig:mixed-content-paragraph} at the lexical level, one would need four terminal patterns. Namely the four previously mentioned. If one instead chose to only consider all tokens in isolation and then write a tokenizer that allows the parser to identify nesting and thus create new, semantically distinct tokens through the nesting of the base ones. In this latter case, the tokenizer would merely need three (instead of four) terminal patterns.
 
-Now, consider the fact that the four types of terminal patterns in the example above, only corresponds to the four semantically different patterns expressed in the example. Assuming the three base terminals plain-text, underline, bold, and strike-through. In fact, if one were to write a proper lexer covering all of the legal strings in the language, the number of terminal patterns would actually have to be \(n!\) -- i.e. the number of permutations of the number of base tokens. This is expressed more clearly in Figure \ref{fig:mixed-content-paragraph-complex}.
+Now, consider the fact that the four types of terminal patterns in the example above, only correspond to the four patterns actually present in the example string. However, assuming the three base terminals -- plain-text, underline, bold, and strike-through -- if one were to write a proper lexical grammar covering all of the legal strings in the language, the number of terminal patterns would actually have to be \(n!\) -- i.e. the number of permutations of the number of base tokens. The permutations are expressed in Figure \ref{fig:permutations-of-tokens} and an example string encompassing all of these permutations are expressed in Figure \ref{fig:mixed-content-paragraph-complex}.
+
+Following this line of thinking some interesting questions may arise. Why permutations and not combinations? Indeed there is a subtle distinction between an italicized bold string and a bolded italic string. Recognizing this difference, result in the need for a number of terminal tokens that are not the number of permutations of the uncombined terminals, but rather the combinations of the unconmbined. I.e. \(n!\). \textbf{TODO: Actually I've flipped combinations and permutations!!}
+
+% TODO: Call these ``derived'' tokens
+
+ a number of tokens that is not calculated as The effects of recognizing the difference mean the ``derived'' unique tokens are significantly more (as visible in Figure \ref{fig:combinations-of-tokens}).
+
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+& bold & underl. & strike
+
+\\ \hline bold &
+\textbf{B} &
+\textbf{\underline{BU}} &
+\textbf{\underline{\sout{BUS}}}
+
+
+\\ \hline underl. &
+&
+\underline{U} &
+\underline{\sout{US}}
+
+
+\\ \hline strike &
+&
+&
+\sout{S}
+
+\\ \hline
+\end{tabular}
+\caption{Permutations of three markup tokens}
+\label{fig:permutations-of-tokens}
+\end{figure}
+
+
+
+
 
 \begin{figure}[h]
 \centering
 \fbox{
 Lexing \underline{without \textbf{\sout{parsing} often}} make \textbf{life \sout{oh so} \underline{cumbersome}}.
 }
-\caption{An example paragraph where some words are marked up in multiple ways}
+\caption{An example paragraph exhibiting all of the combined tokens found in Figure \ref{fig:combinations-of-tokens}.}
 \label{fig:mixed-content-paragraph-complex}
 \end{figure}
+
+
+
+
+
+\begin{figure}[h]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+& bold & underl. & strike
+
+\\ \hline bold &
+\textbf{B} &
+\textbf{\underline{BU}} &
+\textbf{\underline{\sout{BUS}}}
+
+
+\\ \hline underl. &
+\underline{\textbf{UB}} &
+\underline{U} &
+\underline{\sout{US}}
+
+
+\\ \hline strike &
+\sout{\textbf{SB}} &
+\sout{\underline{SU}} &
+\sout{S}
+
+\\ \hline
+\end{tabular}
+\caption{Combinations of three markup tokens}
+\label{fig:combinations-of-tokens}
+\end{figure}
+
+
+
+
+
+\begin{figure}[h]
+\centering
+\fbox{
+Consider (the (infinite (nesting) of (parentheses))).
+}
+\caption{An example paragraph where some words are marked up in multiple ways}
+\label{fig:mixed-content-nesting}
+\end{figure}
+
+
+
 
 
 
