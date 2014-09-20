@@ -386,35 +386,7 @@ Even today, hierarchical document structures enjoy the most widespread use. Cons
 It is important to understand that this thesis employ and endorse the hierarchical model of nesting for delimitational and pragmatic reasons. The necessary property, I argue, is nesting -- not necessarily hierarchical nesting. However, since there is disagreement in the community (as previously mentioned) on how to approach non-hierarchical nesting, it shall be left as a request for further research.
 
 \subsection{Arguing the case of nesting}
-I argue that nested markup is a fundamental, and necessary property of any pragmatically useful markup language. 
-
-
-
-
-
-
-\section{Mixed content}
-When discussing markup languages -- it is important to identify the sometimes subtle distinction between languages suitable for (1) \emph{data modeling} and languages suitable for (2) \emph{document authoring}. The prior is concerned with structured data, whereas the second is concerned with structured data that fit within the metaphor  of a document. As the first can be described as referring to datastructures -- one could of course argue that any imaginable document (in the document authoring sense) could be encoded in a particular data structure. Thus that there consequently could not exist any clear distinction between data oriented formats, and document oriented formats. That is however not the argument being opposed here. In order to make unambigious use of these terms in the thesis, below an explenation of one separation is explained. Essentially it encompass the idea that some languages are more suited for intermingling non-marked up text with marked up text.
-
-% TODO: Use and refer to the terms used by H. Schöning (2001) -- Tamino a DBMS for XML.
-
-The first official W3C working draft of XML (1996)\footnote{http:\/\/www.w3.org/TR/1998/REC-xml-19980210\#sec-mixed-content} already contained the idea of what was referred to as ``mixed content''. Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
-
-\begin{lstlisting}
-element ::= EmptyElemTag | STag content ETag 
-content ::= (element | CharData)*
-\end{lstlisting}
-
-In essence -- any non-terminal \texttt{element} can either produce an \texttt{EmptyElemTag} (i.e. self-closing tag), or the set of a \texttt{STag} (i.e. opening tag) followed by \texttt{content}, followed by an \texttt{ETag} (i.e. closing tag). The non-terminals \texttt{start} (e.g. \texttt{<foo>}) and \texttt{end} (e.g. \texttt{</foo>}) will terminate without any risk of indirect recursion back to the non-terminal \texttt{element}. The non-terminal \texttt{content} is the one interesting to this example.
-
-The XML 1.0 (1998) specification use the following flavored syntax\footnote{This is of course merely a partial extraction of the syntax used in the specification.} of EBNF. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
-
-This essentially mean that the non-terminal \texttt{content} can produce either a new \texttt{element} (causing indirect recursion) or \texttt{CharData} (i.e. a string), any number of times. Subsequently allowing for any combination of any length of the two.
-
-
-
-\subsection{Arguing the case of mixed content}
-I argue, that Mixed content is a fundamental, and necessary, property of markup languages. The following example is partially intended to help enforce this. Assume we have a formatted paragraph of text\footnote{In this example we will disregard whitespace between tokens and assume that whitespace between words in a string remains, but whitespace between strings is omitted and left implicit.}, as outlined in Figure \ref{fig:mixed-content-paragraph}.
+I argue that nested markup is a fundamental, and necessary property of any pragmatically useful markup language. The following example is  intended to help enforce this. Assume we have a formatted paragraph of text\footnote{In this example we will disregard whitespace between tokens and assume that whitespace between words in a string remains, but whitespace between strings is omitted and left implicit.}, as outlined in Figure \ref{fig:mixed-content-paragraph}.
 
 
 \begin{figure}[h]
@@ -427,10 +399,10 @@ The color \underline{is \textbf{now}} \sout{red}.
 \end{figure}
 
 
-Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold and underline, and finally (4) strike-through.
+Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold-and-underline, and finally (4) strike-through.
 
 
-More importantly, the fact that two words are underlined, whereas one of the words that are underlined are both underlined and drawn in bold. When working with markup, this situation is usually expressed through inheritance (visualized in Figure \ref{fig:mixed-content-tree}) Without inheritance, the number of tokens needed in our lexer would have to be the number of permutations of \texttt{n} (i.e. \(n!\)) where \(n\) is the number of unique, uncombined tokens.
+More importantly, the fact that two words are underlined, whereas one of the words that are underlined is actually both underlined and bold. This is an example of a sitaution where nesting help us express this significantly easier.  Consider for example how the string is represented as a tree (i.e. a hierarchical structure) in Figure \ref{fig:mixed-content-tree}). Without nesting, the number of tokens needed in our lexer would have to be the number of permutations of \texttt{n} (i.e. \(n!\)) where \(n\) is the number of unique, uncombined tokens.
 
 In other words, to capture all the semantically distinct tokens of Figure \ref{fig:mixed-content-paragraph} at the lexical level, one would need four terminal patterns. Namely the four previously mentioned. If one instead chose to only consider all tokens in isolation and then write a tokenizer that allows the parser to identify nesting and thus create new, semantically distinct tokens through the nesting of the base ones. In this latter case, the tokenizer would merely need three (instead of four) terminal patterns.
 
@@ -582,6 +554,42 @@ Figure \ref{fig:mixed-content-tree} visualizes a reasonable parse-tree in pre-or
 
 
 Now that we have established an example input, a model tokenization and a model parse-tree, let us attempt to express this in two different languages.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Mixed content}
+When discussing markup languages -- it is important to identify the sometimes subtle distinction between languages suitable for (1) \emph{data modeling} and languages suitable for (2) \emph{document authoring}. The prior is concerned with structured data, whereas the second is concerned with structured data that fit within the metaphor  of a document. As the first can be described as referring to datastructures -- one could of course argue that any imaginable document (in the document authoring sense) could be encoded in a particular data structure. Thus that there consequently could not exist any clear distinction between data oriented formats, and document oriented formats. That is however not the argument being opposed here. In order to make unambigious use of these terms in the thesis, below an explenation of one separation is explained. Essentially it encompass the idea that some languages are more suited for intermingling non-marked up text with marked up text.
+
+% TODO: Use and refer to the terms used by H. Schöning (2001) -- Tamino a DBMS for XML.
+
+The first official W3C working draft of XML (1996)\footnote{http:\/\/www.w3.org/TR/1998/REC-xml-19980210\#sec-mixed-content} already contained the idea of what was referred to as ``mixed content''. Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
+
+\begin{lstlisting}
+element ::= EmptyElemTag | STag content ETag 
+content ::= (element | CharData)*
+\end{lstlisting}
+
+In essence -- any non-terminal \texttt{element} can either produce an \texttt{EmptyElemTag} (i.e. self-closing tag), or the set of a \texttt{STag} (i.e. opening tag) followed by \texttt{content}, followed by an \texttt{ETag} (i.e. closing tag). The non-terminals \texttt{start} (e.g. \texttt{<foo>}) and \texttt{end} (e.g. \texttt{</foo>}) will terminate without any risk of indirect recursion back to the non-terminal \texttt{element}. The non-terminal \texttt{content} is the one interesting to this example.
+
+The XML 1.0 (1998) specification use the following flavored syntax\footnote{This is of course merely a partial extraction of the syntax used in the specification.} of EBNF. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
+
+This essentially mean that the non-terminal \texttt{content} can produce either a new \texttt{element} (causing indirect recursion) or \texttt{CharData} (i.e. a string), any number of times. Subsequently allowing for any combination of any length of the two.
+
+
+
+\subsection{Arguing the case of mixed content}
+TODO: CONTENT MOVED TO NESTING
+
 
 
 
