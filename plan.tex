@@ -19,6 +19,7 @@
 \usepackage{fancyvrb}
 \usepackage{shorttoc}
 \usepackage{epigraph}
+\usepackage{amsmath}
 \usepackage{relsize}
 
 
@@ -436,16 +437,16 @@ Assume two unique terminal tokens -- \(A\) and \(B\). Assume a language where a 
 
 Now, understand that the above example only require the introduction of one more token, because the starting point consist of a set of (merely) two unique terminal tokens. You may have realized, that introducing single token, is not sufficient if the starting point is a set of three unique terminal tokens. Subsequently far from sufficient if the starting point is a set of 100 unique terminal tokens.
 
-Mathematically, the total number of terminals in a grammar that allow combinations of unique terminal tokens, correspond to the number of k-combinations for all k, of \(n\), where \(n\) is the number of unique terminal tokens before combining. In other words: the total number of tokens is the number of possible subsets of the set of unique terminal tokens. Expressed in Equation \ref{eq:all-subsets}.
+Mathematically, the total number of terminals in a grammar that allow combinations of unique terminal tokens, correspond to the number of k-combinations for all k, of \(n\), where \(n\) is the number of unique terminal tokens before combining. In other words: the total number of tokens is the number of possible subsets of the set of unique terminal tokens. Expressed in Equation \ref{eq:formula-all-subsets}.
 
 \begin{equation}
 \sum_{0\leq{k}\leq{n}} {n \choose k} = 2^n
-\label{eq:all-subsets}
+\label{eq:formula-all-subsets}
 \end{equation}
 
-Since the Equation \ref{eq:all-subsets} also include the empty set we would need to modify the formula such that it subtracts one. However, remember that what we are trying to calculate, is the number of terminal tokens needed to express some grammar of a language where the initial terminal tokens can be combined arbitrarily. Consider the fact that one terminal token of markup languages is plain-text. Consider also the fact that depending on the philosophical orientation of the reader, plain-text can either be considered to be combined with all combinations or none of them. It does not make sense to distinguish between a token that is plain-text-and-bold, from a token that is merely bold. They are essentially the same. In the example, plain-text will be the token that represent the unsuitability of all other tokens -- in other words: if no token match, then the token must be plain-text. Consequently, there will only ever be one combination including the plain-text token regardless of the size of \(n\) and \(k\). Thus, the empty set, in the formula above, will represent the plain-text, and thus there will be no need to subtract one.
+Since the Equation \ref{eq:formula-all-subsets} also include the empty set we would need to modify the formula such that it subtracts one. However, remember that what we are trying to calculate, is the number of terminal tokens needed to express some grammar of a language where the initial terminal tokens can be combined arbitrarily. Consider the fact that one terminal token of markup languages is plain-text. Consider also the fact that depending on the philosophical orientation of the reader, plain-text can either be considered to be combined with all combinations or none of them. It does not make sense to distinguish between a token that is plain-text-and-bold, from a token that is merely bold. They are essentially the same. In the example, plain-text will be the token that represent the unsuitability of all other tokens -- in other words: if no token match, then the token must be plain-text. Consequently, there will only ever be one combination including the plain-text token regardless of the size of \(n\) and \(k\). Thus, the empty set, in the formula above, will represent the plain-text, and thus there will be no need to subtract one.
 
-Applying this formula to Figure \ref{fig:mixed-content-paragraph} would yield the set of subsets depicted in Formula \ref{eq:all-subsets-of-example}. The set used as a starting-point is depicted in Formula \ref{eq:tokens-as-subset}.
+Applying this formula to Figure \ref{fig:mixed-content-paragraph} would yield the same number of subsets as depicted in Formula \ref{eq:all-subsets-of-example}. The set used as a starting-point is depicted in Formula \ref{eq:tokens-as-subset}.
 
 
 \begin{equation}
@@ -454,17 +455,69 @@ Applying this formula to Figure \ref{fig:mixed-content-paragraph} would yield th
 \end{equation}
 
 \begin{equation}
-\{\{\};\{B\};\{U\};\{S\};\{BU\};\{BS\};\{US\};\{BUS\}\}
+|\{\{\};\{B\};\{U\};\{S\};\{BU\};\{BS\};\{US\};\{BUS\}\}|
 \label{eq:all-subsets-of-example}
 \end{equation}
 
 
-Following this line of thinking some interesting questions may arise. Why permutations and not combinations? Indeed there is a subtle distinction between an italicized bold string and a bolded italic string. Recognizing this difference, result in the need for a number of terminal tokens that are not the number of permutations of the uncombined terminals, but rather the combinations of the unconmbined. I.e. \(n!\). \textbf{TODO: Actually I've flipped combinations and permutations!!}
+Following this line of thinking an interesting question may be posed. Why merely combinations and not permutations? In other words: many markup languages allow authors to permute the base tokens and not merely combine them. To emphasize the difference consider the subtle distinction between an \textit{\textbf{italicized bold}} string and a \textit{\textbf{bolded italic}} string.
 
-% TODO: Call these ``derived'' tokens
+Whether such a distinction would matter in a language is of course dependent on that particular language, and might even vary on a per-token-basis within that particular language. While the distinction might be irrelevant in the example above (combining bold and italics), consider instead the semantic distinction between a \emph{paragraph in a figure} and a \emph{figure in a paragraph}.
 
- a number of tokens that is not calculated as The effects of recognizing the difference mean the ``derived'' unique tokens are significantly more (as visible in Figure \ref{fig:combinations-of-tokens}).
+Assuming a language where all tokens may be permuted and not simply combined, the total number of tokens required in the grammar would be significantly higher than in the combinatorial case. In mathematical terms, the number corresponds to the number of k-permutations of n, for all k, where n is the number of unique terminal tokens before combining (as depicted in Formula \ref{eq:formula-permutations}).
 
+
+\begin{equation}
+\sum_{0\leq{k}\leq{n}} P(n,k) = 
+\sum_{0\leq{k}\leq{n}} \frac{n!}{(n-k)!}
+\label{eq:formula-permutations}
+\end{equation}
+
+Assuming that the language of the previously discussed paragraph (Figure \ref{fig:mixed-content-paragraph}) allow permutation of tokens. Treating the language as the set of tokens depicted in Equation \ref{eq:tokens-as-subset}, and applying the formula to that set (as depicted in Equation \ref{eq:all-tuples-calculation}), yield 16 tuples, where the tuples in question are depicted in Equation \ref{eq:all-tuples}.
+
+
+
+\begin{equation}
+\begin{split}
+\frac{3!}{(3-3)!} + \frac{3!}{(3-2)!} + \frac{3!}{(3-1)!} + \frac{3!}{(3-0)!} = 
+16
+\label{eq:all-tuples-calculation}
+\end{split}
+\end{equation}
+
+
+
+Consequently, if one has a language consisting of three original terminal tokens, and wish to construct a language where each possible k-permutation of the three tokens correspond to unique token, then the language must actually contain 16 tokens. In a language that starts with four terminal tokens, the number of actually required terminal tokens is 65. Obviously this is absurd. And thus, this is a reason as to why nesting is such an important corner stone of markup languages. Because it allow languages to omit the explicit use of terminals in favor of implicit hierarchies.
+
+
+
+
+\begin{equation}
+\begin{split}
+\{
+(); \\
+(B);
+(U);
+(S); \\
+(B,U);
+(B,S);
+(U,B);
+(U,S);
+(S,B);
+(S,U); \\
+(B,U,S);
+(B,S,U);
+(U,B,S);
+(U,S,B);
+(S,U,B);
+(S,B,U)
+\}
+\label{eq:all-tuples}
+\end{split}
+\end{equation}
+
+
+% TODO: Call these ``derived'' tokens????
 
 
 
