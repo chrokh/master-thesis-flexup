@@ -437,6 +437,19 @@ Assume two unique terminal tokens -- \(A\) and \(B\). Assume a language where a 
 
 Now, understand that the above example only require the introduction of one more token, because the starting point consist of a set of (merely) two unique terminal tokens. You may have realized, that introducing single token, is not sufficient if the starting point is a set of three unique terminal tokens. Subsequently far from sufficient if the starting point is a set of 100 unique terminal tokens.
 
+Analyzing the paragraph outlined in Figure \ref{fig:mixed-content-paragraph}, one may suspect that the underlying language can be described by a grammar consisting of the three tokens outlined in Equation \ref{eq:tokens-as-subset} where plain-text is disregarded. Mixing and matching these tokens, one can trivially create a string such as Figure \ref{fig:mixed-content-paragraph-complex} that indeed exhibit the need of more than merely one more terminal token.
+
+
+\begin{figure}[h]
+\centering
+\fbox{
+Lexing \underline{without \textbf{\sout{parsing} often}} \sout{make} \textbf{life \sout{oh so} \underline{cumbersome}}.
+}
+\caption{Exhibiting all combinations of \{bold, underline, strikethrough\}.}
+\label{fig:mixed-content-paragraph-complex}
+\end{figure}
+
+
 Mathematically, the total number of terminals in a grammar that allow combinations of unique terminal tokens, correspond to the number of k-combinations for all k, of \(n\), where \(n\) is the number of unique terminal tokens before combining. In other words: the total number of tokens is the number of possible subsets of the set of unique terminal tokens. Expressed in Equation \ref{eq:formula-all-subsets}.
 
 \begin{equation}
@@ -525,17 +538,6 @@ Consequently, if one has a language consisting of three original terminal tokens
 \paragraph{(4) Nesting enable infinite semantics.}
 Foobar.
 
-
-
-
-\begin{figure}[h]
-\centering
-\fbox{
-Lexing \underline{without \textbf{\sout{parsing} often}} make \textbf{life \sout{oh so} \underline{cumbersome}}.
-}
-\caption{An example paragraph exhibiting all of the combined tokens found in Figure \ref{fig:combinations-of-tokens}.}
-\label{fig:mixed-content-paragraph-complex}
-\end{figure}
 
 
 
