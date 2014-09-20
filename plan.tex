@@ -437,8 +437,6 @@ Assume two unique terminal tokens -- \(A\) and \(B\). Assume a language where a 
 
 Now, understand that the above example only require the introduction of one more token, because the starting point consist of a set of (merely) two unique terminal tokens. You may have realized, that introducing single token, is not sufficient if the starting point is a set of three unique terminal tokens. Subsequently far from sufficient if the starting point is a set of 100 unique terminal tokens.
 
-Analyzing the paragraph outlined in Figure \ref{fig:mixed-content-paragraph}, one may suspect that the underlying language can be described by a grammar consisting of the three tokens outlined in Equation \ref{eq:tokens-as-subset} where plain-text is disregarded. Mixing and matching these tokens, one can trivially create a string such as Figure \ref{fig:mixed-content-paragraph-complex} that indeed exhibit the need of more than merely one more terminal token.
-
 
 \begin{figure}[h]
 \centering
@@ -448,6 +446,17 @@ Lexing \underline{without \textbf{\sout{parsing} often}} \sout{make} \textbf{lif
 \caption{Exhibiting all combinations of \{bold, underline, strikethrough\}.}
 \label{fig:mixed-content-paragraph-complex}
 \end{figure}
+
+
+Analyzing the paragraph outlined in Figure \ref{fig:mixed-content-paragraph}, one may suspect that the underlying language can be described by a grammar consisting of the three tokens outlined in Equation \ref{eq:tokens-as-subset} where plain-text is disregarded. Mixing and matching these tokens, one can trivially create a string, such as Figure \ref{fig:mixed-content-paragraph-complex}, that indeed exhibit the need of more than merely one more terminal token.
+
+
+
+\begin{equation}
+\{B, U, S\} = \{bold, underline, strikethrough\}
+\label{eq:tokens-as-subset}
+\end{equation}
+
 
 
 Mathematically, the total number of terminals in a grammar that allow combinations of unique terminal tokens, correspond to the number of k-combinations for all k, of \(n\), where \(n\) is the number of unique terminal tokens before combining. In other words: the total number of tokens is the number of possible subsets of the set of unique terminal tokens. Expressed in Equation \ref{eq:formula-all-subsets}.
@@ -460,12 +469,6 @@ Mathematically, the total number of terminals in a grammar that allow combinatio
 Since the Equation \ref{eq:formula-all-subsets} also include the empty set we would need to modify the formula such that it subtracts one. However, remember that what we are trying to calculate, is the number of terminal tokens needed to express some grammar of a language where the initial terminal tokens can be combined arbitrarily. Consider the fact that one terminal token of markup languages is plain-text. Consider also the fact that depending on the philosophical orientation of the reader, plain-text can either be considered to be combined with all combinations or none of them. It does not make sense to distinguish between a token that is plain-text-and-bold, from a token that is merely bold. They are essentially the same. In the example, plain-text will be the token that represent the unsuitability of all other tokens -- in other words: if no token match, then the token must be plain-text. Consequently, there will only ever be one combination including the plain-text token regardless of the size of \(n\) and \(k\). Thus, the empty set, in the formula above, will represent the plain-text, and thus there will be no need to subtract one.
 
 Applying this formula to Figure \ref{fig:mixed-content-paragraph} would yield the same number of subsets as depicted in Formula \ref{eq:all-subsets-of-example}. The set used as a starting-point is depicted in Formula \ref{eq:tokens-as-subset}.
-
-
-\begin{equation}
-\{B, U, S\} = \{bold, underline, strikethrough\}
-\label{eq:tokens-as-subset}
-\end{equation}
 
 \begin{equation}
 |\{\{\};\{B\};\{U\};\{S\};\{BU\};\{BS\};\{US\};\{BUS\}\}|
