@@ -402,7 +402,36 @@ The color \underline{is \textbf{now}} \sout{red}.
 Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold-and-underline, and finally (4) strike-through.
 
 
-More importantly, the fact that two words are underlined, whereas one of the words that are underlined is actually both underlined and bold. This is an example of a sitaution where nesting help us express this significantly easier.  Consider for example how the string is represented as a tree (i.e. a hierarchical structure) in Figure \ref{fig:mixed-content-tree}). Without nesting, the number of tokens needed in our lexer would have to be the number of permutations of \texttt{n} (i.e. \(n!\)) where \(n\) is the number of unique, uncombined tokens.
+More importantly, the fact that two words are underlined, whereas one of the words that are underlined is actually both underlined and bold. This is an example of a sitaution where nesting help us express this significantly easier.  Consider for example how the string is represented as a tree (i.e. a hierarchical structure) in Figure \ref{fig:mixed-content-tree}). To understand why nesting is a sensible approach to such situations consider the lexing step of a compiler that read the paragraph in question. Without nesting, the number of terminal tokens needed in the lexer would have to be the number of combinations of terminal tokens before combining.
+
+I will make four arguments in order to support the use of nesting. First I will argue that (1) there is no semantic difference between an element implied by the use of nesting rather than it's explicit counterpart. Secondly, I argue that (2) no significantly complex cognitive leap is required for humans in order to be able to think and discuss nesting. The two remaining arguments enforce the power of nesting. (3) Nesting can reduce the number of required terminal tokens in a markup compiler exponentially. Finally, (4) nesting allow languages to contain an infinite set of semantic tokens while expressing only a finite set of tokens in the compiler.
+
+The arguments will be explored in some detail below.
+
+
+
+\paragraph{(1) There is no semantic difference between an element implied by the use of nesting rather than it's explicit counterpart.}
+Other than explicitness, whether a particular string (s) belong to a particular semantic domain (D) is of course constant regardless of what syntax is used to express its belonging. Consider the classic saying ``syntax is not semantics''. Nesting is simply a form of context-sensitive syntax. A form of implicit syntax rather than explicit.
+
+Consider for example chapters and subchapters. One explicit way of distinguishing between the two would be to introduce one syntactic keword denoting a chapter, and another denoting a subchapter. This is an explicit approach. An implicit approach however would be to argue that any chapter ``inside'' of another chapter should be considered a subchapter. In this latter case, only the syntactic keywords for denoting a chapter are required.
+
+One may of course argue that there is a subtle difference between a chapter in a chapter, and a subchapter. That would however be to misinterpret the point. Think not in terms of defining a one, true, global language that encompass all envisionable semantics. Think instead in terms of one author defining her own syntax denoting some semantics envisioned by her. If the author claim the implicit syntax is the same as the explicit syntax then there is no point in arguing differences in specific cases. The author has only claimed that the implicit syntax and the explicit syntax are the same in her particular case.
+
+Thus, I argue, that there is no reason write off nesting with arguments of subtle semantic differences. Simply because the author of a language have all the right to couple any kind of semantic to any kind of syntactic construct. Regardless of whether the syntactic construct is context-free or context-sensitive.
+
+
+
+
+\paragraph{(2) No significantly complex cognitive leap is required for humans in order to be able to think and discuss nesting.}
+Foobar.
+
+\paragraph{(3) Nesting can reduce the number of required terminal tokens in a markup compiler exponentially.}
+Foobar.
+
+\paragraph{(4) nesting allow languages to contain an infinite set of semantic tokens while expressing only a finite set of tokens in the compiler.}
+Foobar.
+
+In other words, assume two unique terminals -- A and B. If one is to allow a string to at any time be described as belonging to the class of A, or the class B, or to the class of both A and B simultaneously. Without nesting this requires a third token -- C. However, since humans seems to require no absurd cognitive gymnastics in order to think of a piece of string as belonging to two classes rather than a new joint class one might as well choose to encode this as a nested for humanto be cognitively natural for humans to think needed in our lexer would have to be the number of permutations of \texttt{n} (i.e. \(n!\)) where \(n\) is the number of unique, uncombined tokens.
 
 In other words, to capture all the semantically distinct tokens of Figure \ref{fig:mixed-content-paragraph} at the lexical level, one would need four terminal patterns. Namely the four previously mentioned. If one instead chose to only consider all tokens in isolation and then write a tokenizer that allows the parser to identify nesting and thus create new, semantically distinct tokens through the nesting of the base ones. In this latter case, the tokenizer would merely need three (instead of four) terminal patterns.
 
