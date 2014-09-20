@@ -1,0 +1,447 @@
+The network effect
+
+
+# TERMINOLOGY
+[A linguistic note about the use of third person](http://oai.dtic.mil/oai/oai?verb=getRecord&metadataPrefix=html&identifier=ADA125287)
+
+# VERBOSITY ANNOYANCE
+[A meta language for latex](http://tex.stackexchange.com/questions/152713/a-meta-language-for-latex)
+
+# TERMINOLOGY
+[Text formatter / Word processor](http://en.wikipedia.org/wiki/Text_formatter)
+[Tag](http://en.wikipedia.org/wiki/Tag_(metadata))
+[General-purpose markup language](http://en.wikipedia.org/wiki/General-purpose_markup_language)
+
+# DATA STRUCTURES
+S-expressions
+
+# SEMANTICS AND MARKUP
+[Semantics and markup](http://www.tbray.org/ongoing/When/200x/2003/04/09/SemanticMarkup#p-1)
+
+# META
+[What is a meta language?](http://english.answers.com/grammar/talking-about-words-using-metalanguage)
+[Meta language](http://en.wikipedia.org/wiki/Metalanguage)
+[Meta programming](http://en.wikipedia.org/wiki/Metaprogramming)
+[XML is a 'metalanguage'](http://www.mulberrytech.com/papers/WhatIsXML/slide029.html)
+[Is it really? - google search](https://www.google.se/search?q=is+regex+a+metalanguage&oq=is+regex+a+metalanguage&aqs=chrome..69i57.3905j0j1&sourceid=chrome&es_sm=91&ie=UTF-8)
+
+# META LANGUAGES AND CLASSIFICATION
+[Meta language](http://en.wikipedia.org/wiki/Metalanguage)
+[Biological classification](http://en.wikipedia.org/wiki/Scientific_classification)
+[Noncomunicative logic](http://en.wikipedia.org/wiki/Ordered_logic)
+
+# Markup History
+ROFF => TROFF => RUNOFF => GROFF
+[History of typesetting](http://en.wikipedia.org/wiki/Typesetting)
+[Brief history of markup languages](http://taxodiary.com/2012/12/a-brief-history-of-markup-languages/)
+[A brief history of markup](http://alistapart.com/article/a-brief-history-of-markup)
+[A brief history of mobile markup languages - LYNDA](http://www.lynda.com/HTML-tutorials/Reviewing-mobile-markup-languages/76334/87296-4.html?vid=6&fatoc=1)
+[Markup languages - lecture](http://www.cs.cornell.edu/courses/cs431/2008sp/Lectures/public/lecture_2_11_08.pdf)
+[Charles Goldfarb (one) creator of SGML](http://en.wikipedia.org/wiki/Charles_Goldfarb)
+[Video series about TeX](http://www.webofstories.com/play/donald.knuth/51;jsessionid=828DD40ADABF279619D666011DB33569)
+
+# Pieces with origin I can't remember
+[TEI - Text coding initiative] http://www.tei-c.org/Guidelines/
+[TeX and LaTeX](http://www.ams.org/notices/200211/comm-downes.pdf)
+[Waterloo SCRIPT](http://csg.uwaterloo.ca/sdtp/watscr.html)
+[Book extract on Meta markup languages](http://books.google.se/books?id=kcqaqDGpj1MC&pg=PA5&lpg=PA5&dq=sgml+metamarkup&source=bl&ots=z5bLjAAV4N&sig=Rdivo7PZa2fgWtau8rjYjLdeDpk&hl=en&sa=X&ei=EeAAVJSzE8rOygPNyICoBg&ved=0CDwQ6AEwAw#v=onepage&q=sgml%20metamarkup&f=false)
+
+
+# Printing history
+[Printing press](http://en.wikipedia.org/wiki/Printing_press)
+
+# MARKUP LANGUAGES
+[Scribe](http://en.wikipedia.org/wiki/Scribe_(markup_language))
+[IBM GML](http://en.wikipedia.org/wiki/IBM_Generalized_Markup_Language)
+[SGML](http://en.wikipedia.org/wiki/SGML)
+XSL-FO
+[DocBook](http://en.wikipedia.org/wiki/DocBook) and eq. [ASCIIDoc](http://en.wikipedia.org/wiki/AsciiDoc)
+[reStructuredText](http://docutils.sourceforge.net/docs/user/rst/quickref.html)
+[Setext](http://docutils.sourceforge.net/mirror/setext.html)
+[SCRIPT](http://en.wikipedia.org/wiki/SCRIPT_(markup))
+[Candle object notation](http://www.candlescript.org/doc/candle-markup-examples.htm#hd2)
+[ConTeXt](http://en.wikipedia.org/wiki/ConTeXt#Comparison_between_ConTeXt_and_LaTeX)
+
+# LIGHTWEIGHT MARKUP LANGUAGES
+[Lightweight markup languages](http://en.wikipedia.org/wiki/Lightweight_markup_language) (List and comparison)
+
+# MARKUP COMPARISONS
+[Comparison of lightweight markup language syntax](http://en.wikipedia.org/wiki/Lightweight_markup_language#Comparison_of_lightweight_markup_language_syntax)
+[Comparison of markup languages](http://en.wikipedia.org/wiki/Comparison_of_document_markup_languages)
+
+# OVERLAPPING XML ELEMENTS
+[XSLT with overlapping elements?](http://stackoverflow.com/questions/3495447/xslt-with-overlapping-elements)
+
+# DOCUMENT FORMATS
+PDF
+PostScript
+
+# XML profilering
+["lingua franca"](http://alistapart.com/article/a-brief-history-of-markup)
+
+
+# MATH
+[Number theory](http://en.wikipedia.org/wiki/Number_theory)
+
+
+# COMPUTER SCIENCE
+[Chomsky hierarchy](http://en.wikipedia.org/wiki/Chomsky_hierarchy)
+[Lexers vs. parsers](http://stackoverflow.com/questions/2842809/lexers-vs-parsers) Comments in the second answer is superb.
+[Why is it not possible to parse XML with regex in laymans terms](http://stackoverflow.com/questions/6751105/why-its-not-possible-to-use-regex-to-parse-html-xml-a-formal-explanation-in-la)
+[Lexical analysis](http://en.wikipedia.org/wiki/Lexical_analysis)
+
+
+======
+(The) history of markup (languages)
+[Important publications in computer science](http://en.wikipedia.org/wiki/List_of_important_publications_in_computer_science#History_of_computation)
+
+
+
+
+
+
+======== INTRODUCTION TO THEORETICAL COMPUTING ======
+HEAD:  http://www.youtube.com/watch?v=2Fw9xr0SMM0&list=PL601FC994BDD963E4&index=73
+Extra: http://www.youtube.com/watch?v=U7bBPZgiM-w
+       http://www.youtube.com/watch?v=eUdpAADz89c
+
+
+Consider whether you mean lexing or parsing in your thesis.
+
+[Backus Normal Form](http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form)
+[LR Parsers](http://en.wikipedia.org/wiki/LR_parser)
+[Epsilon](http://en.wikipedia.org/wiki/Epsilon)
+[Closure](http://en.wikipedia.org/wiki/Closure_(mathematics))
+
+
+
+======== EFTER FILMEN OM TEORI =======
+# Formal language
+[http://en.wikipedia.org/wiki/Formal_language_theory](Formal language)
+
+# HTML & CONTEXT-FREE
+[Is HTML a context free lang?](http://stackoverflow.com/questions/5175840/is-html-a-context-free-language)
+
+# XML & CONTEXT-FREE
+[The grammar of XML](http://forums.xkcd.com/viewtopic.php?f=17&t=23666) (Good verbalization: XML requires FILO tags)
+
+# PROGRAMMING & CONTEXT-FREE
+[Java, Python, Haskell are not context-free](http://trevorjim.com/is-java-context-free/) (blog posts)
+[Parsing is not a solved problem](http://trevorjim.com/parsing-not-solved/)
+
+# ANTLR & dyl.
+[ANTLR docs + video](https://theantlrguy.atlassian.net/wiki/display/ANTLR4/ANTLR+4+Documentation)
+[ANTLR](http://www.antlr.org/about.html)
+[Simple example of ANTLR](http://stackoverflow.com/questions/1931307/antlr-is-there-a-simple-example)
+[YACC](http://en.wikipedia.org/wiki/Yacc)
+
+# PUMPING LEMMA
+[Pumping lemma](http://en.wikipedia.org/wiki/Pumping_lemma)
+[Pumping lemma for context free languages](http://en.wikipedia.org/wiki/Pumping_lemma_for_context-free_languages)
+
+
+# CHOMSKY HIERARCHY
+[Pushdown automata](http://en.wikipedia.org/wiki/Pushdown_automata) (i.e. FST with stack)
+
+
+
+======= OM OLIKA TYPER AV MARKUP/DATA ANNOTATION =====
+[Why JSON is superior to XML](http://www.udemy.com/blog/json-vs-xml/)
+
+Argumentera för att din definition om Mixed Content är det som skiljer data-orienterade format ifrån dokument-orienterade format. Jag har inte hittat någonting formellt, 
+
+
+
+======= IN SEARCH FOR CONFLICT =====
+[Google - context free markup](https://www.google.se/search?q=semantic+free+markup&oq=semantic+free+markup&aqs=chrome..69i57.3100j0j1&sourceid=chrome&es_sm=91&ie=UTF-8#q=context+free+markup)
+
+# ANNE
+[A context-free markup language for semi-structured text - ANNE](http://dl.acm.org/citation.cfm?id=1806622)
+[Samma](https://www.cs.princeton.edu/~dpw/papers/anne-pldi10.pdf)
+
+# PADS ML
+[Google](https://www.google.se/search?q=pads+ml&oq=pads+ml&aqs=chrome..69i57.1597j0j1&sourceid=chrome&es_sm=91&ie=UTF-8)
+[PADS ML](http://www.padsproj.org/ml-distrib.html)
+
+
+
+====== PARSE TOOLS ====
+PEG.js
+ANTLR
+JISON
+
+
+============= MOTIVATIONER TILL SYNTAX-FREE
+Det är viktigt att inte bli stoppad av teknik. Idag behövs quasi-programmerings-skills. Getting words on paper quickly.
+"Since the introduction of inexpensive and powerful personal computers [...]"
+http://xml.coverpages.org/coombs.html
+
+
+===== PROBLEMFORMULERING =====
+Bilderna i början av Scribe-pappret av Reid (1980), är _inte_ en tillräcklig beskrivning av problemet.
+Idealscenariot är inte tillräckligt tydligt. Istället behöver vi introducera konceptet av tredje parter och en delad kunskapsbank emellan alla inblandade parter. Med andra ord -- han pratar om att en dator ska utföra dessa aktiviteter tidigare utförda av människor - detta är jag med på. Men dock så finns det många, många olika val som kan göras och således kan inte allt automatiseras på ett ultimat sätt (vilket är ett problem med t.ex. LaTeX, och kanske också varför vi fortfarande använder det?). Vi behöver hitta sätt att "pipe:a" dokument ifrån den arbiträra syntaxen igen dessa nämnda steg.
+
+Pandoc, t.ex. konverterar dokument ifrån fel nivå. (Se nedan diskussion om olika nivåer).
+Pandoc konverterar procedurella dokument till andra dokument. Procedurella dokument är mycket svårare att konvertera.
+Jag tror att Coombs pratar om hur detta är svårt. Sök på "alternative" och på "OCR" i pappret.
+
+Kan man kalla MSFT Word för det som Reid (1980) kallar för "idiot text systems"? Eftersom man måste korrigera de misstag som uppståt genom WYSIWYG-editorn?
+
+The Secretary metaphor by Reid (1980) (pdf-p. 19)
+
+Inspireras gärna av Reid (1980's) mål när du skriver din egen problemformulering!
+
+# Vad är "typdokumentet" som ämnas skapas?
+"Imitation of the ideal" Reid (1980).
+"The design goal for Scribe was to produce the best output for each kind of printing device, rather than to imitate the ideal."
+Detta gäller här också. Eller snarare. Flexup-dokumentet behöver innehålla "the intersection of all imaginable destination formats".
+
+# Postponing stylistic negotiations
+"so the authors will be free to focus on the content and postpone stylistic negotiations until the end" (Coombs)
+
+# Declarative on the highest imaginable level of abstraction
+Eller något sådant. Ta ställning till Reid's uttalande om Nonprocedurality (2.1.2, p.22).
+
+"Page layout" eller egentligen "design" (d.v.s. det procedurella steget i hierarkin?) is utterly non-trivial to solve computationally (eller för en person). Which is clearly examplified by glancing over the number of rules that Reid redogör för (p. 42). Detta kan antagligen förlängas till att resonera om presentation på olika plattformar. Brygga även gärna med Coombs argument om "coping" med change. Kommer inte ihåg i vilka termer han diskuterade det.
+
+# Verbosity & cognitive overhead
+Informal blog argumentation between Jeff Atwood and Norman Walsh, ang. bl.a. overhead med XML.
+http://blog.codinghorror.com/xml-the-angle-bracket-tax/
+http://norman.walsh.name/2008/05/13/thetax
+http://blog.codinghorror.com/revisiting-the-xml-angle-bracket-tax/
+Walsh kallar syntaxen för en "smaksak" och Atwood menar att det finns en massiv kollektiv energiförlust. Detta tolklar jag som cognitive demands/overhead.
+(Parantes: [[Martin Fowler hates XSLT too](http://blog.codinghorror.com/martin-fowler-hates-xslt-too/)
+])
+
+I första officiella XML-spec:en står det explicit att
+"terseness is of minimal importance"
+http://www.w3.org/TR/1998/REC-xml-19980210
+
+
+
+==== OUTLINE ===
+Utgå ifrån Reid's (1980) rubriker såsom t.ex. typografi, teckenkodning, greek letters, derived text, document management etc. och visa vart de passar in i denna nya modell av markup. Kanske kan papper om XML eller LaTeX också passa? Slå ihop punkterna till samma.
+
+
+===== KRAV ====
+Escaping characters
+
+
+
+===== ATTRIBUTES ====
+Flexup is delibirately weak because it's purpose is only to do one thing. It does not handle "shadow/pseudo elements". It does not handle attributes. Why? Because the point is that it gives you one construct -- the tree. And the tree should be enough. These other things are ideas specific to other languages. Your document however - is a tree. Converting in attributes and other stuff of the likes, are not a concern of flexup. It is indeed a problem that needs to be solved, but it is closer to the XSLT part of the problem domain.
+
+
+====== OLIKA NIVÅER AV MARKUP =====
+Sammanfattning här:
+http://xml.coverpages.org/coombs.html
+Som kommer ifrån:
+http://www.cs.cmu.edu/~aist/www_paper/markup.html
+Men jag hittade allt här:
+http://www.tbray.org/ongoing/When/200x/2003/04/09/SemanticMarkup#p-1
+Och en slarvig förklaring finns här:
+http://tei.oucs.ox.ac.uk/GettingStarted/html/dm.html
+
+Även Punctuational markup är intressant eftersom de belyser det i sån detalj. Visar att det faktiskt finns ambiguitet.
+
+Scribe är nog procedurellt (p.58 Reid).
+
+On the notion of style sheets in i.e. MSFT Word
+"The Scribe approach has been widely[...]"
+
+Referential markup syftar inte bara till externa filer.
+
+" Others have attempted to eliminate the need for metamarkup by providing complete referential and descriptive vocabularies, but such efforts are contrary to the spirit of human creativity."
+
+Is it the DTD that makes XML/SGML meta and not ?
+
+"Exposed, Disguised, Concealed, and Displayed Markup"
+
+"localization" of a program's "rule base".
+
+Jag behöver föreslå en till nivå av abstraktion, eller en delning av den sista. Vad sägs om "Domain semantics".
+
+
+---- Alternativ till behovet av portabilitet ----
+Går Coombs punkt 1 att relatera till dagens scenario. Alltså att XML inte längre är fritt, utan att vi egentligen borde behöva arbeta med ett arbiträrt XML-dokument och sedan XSLT:a det?
+Under rubriken: "Alternatives to Portability"
+Punkt två blir också intressant i detta ljus. "Domain semantics"
+Alla punkterna är intressanta förresten!
+
+
+----- Declarative -> Procedural -----
+[TexML](http://en.wikipedia.org/wiki/TeXML)
+[TexML](http://getfo.org/texml/)
+
+
+
+====== FÖRDELAR MED ARBITRÄR SYNTAX ====
+Komplexa strukturer såsom t.ex. tabeller eller matematiska formler.
+
+Delaying the decision. Är det ett kapitel eller ett subkapitel. Är det en hint- eller info- eller tips-box?
+<- "distraction" är även något som Coombs pratar om i relation till syntax.
+
+"Derived text" (sök i Reid, han pratar om det tidigare men även på p. 78).
+You need variables -- just make them up! You need for-each-loops? Just make them up!
+
+Reid p.112 (9.3). The evolution of the Manuscript Language.
+Han pekar på att de gjort många tester med användare och när användarna inte förstod skillnaden emellan två olika "constructs", så slogs de samman till en. I denna kontext menar vi alltså på att användaren borde få definera dessa själva. Så slipper vi denna iteration.
+
+
+
+==== VAD VISA OCH VAD INTE VISA ====
+Ur vilken aspekt ska ett dokument visas och ur vilken aspekt är det tydligast?
+Även Coombs pratar om detta under rubriken "Content Orientation". XML-vyn (alltså den semantiskt signifikanta trädvyn kan faktiskt vara behjälplig i flexup-fallet).
+
+Revisiting the idea of the importance (or rather: benefit) of multiple views, and it's current underutilization.
+http://xml.coverpages.org/coombs.html#Note21
+
+
+
+===== PACKAGE CHANNELS AND DEPENDENCY MANAGEMENT ====
+
+Hur ska saker dependencies som XML hanteras?
+- Borde man egentligen ha ett helt eget språk? Eftersom vi inte ens använder syntaxen för XML? Som endast hanterar element? Ett proper subset.
+- Eller snarare är väl XSLT problemet i det långa loppet? Behöver man XSLT binaries? Hur får man tag på dem?
+
+Reid p.118 (10.1.2) pratar om hur folk utvecklade egna templates som inte uppfyllde standarden eller inte var kompatibla med varandra.
+Min approach bör alltså vara att uppmuntra diversitet istället för att försöka standardisera och "tvinga". Better to encourage diversity than to suffer from home grown hack-solutions.
+
+
+====== PROBLEMS ======
+
+- Validity? DTD's etc. Kan man åtminstone visa var ett sådant initiativ skulle passa in i min graf? Perhaps there are multiple appropriate "levels"/places? Like i.e. at every transformation.
+
+- Kom ihåg att nämna att jag inte har tittat någonting på character encodings men att det är ett mycket viktigt område som behöver undersökas närmare.
+
+- Syntax highlighting.
+
+- Copy paste between documents of different syntax.
+Kravet/fördelen nämns i Ex. p. 42 i Reid.
+Kan man t.ex. lösa det genom att tillåta att man kompilerar tillbaka?
+
+- Att automatisera auktioner. Såsom t.ex. "delete this footnote".
+Nämns i Coombs nära: "This kind of maneuver is an instance of a superior style of editing made possible by descriptive markup".
+
+
+# The problem of diversity
+Creator of SGML states that SGML is a tailored suit and that the masses will use XML, while there will still be more documents in SGML. I argue the masses could use something like SGML if support would exist to allow the documents to be easily synced.
+http://www.drdobbs.com/web-development/beyond-html-an-interview-with-the-creato/228701478
+
+# THE PROBLEM OF CONTEXT SENSITIVITY
+- Behövs context sensitivity?
+- Nu kan vi inte definiera element som hanteras olika vid olika nästningsnivåer. Behövs det?
+- Hur skapar man t.ex. ett TOC? Eller variabler?
++ Är det UNIX-filosofin som gäller med att endast göra en enda sak? Eller är det så att alla problem som kräver context är problem som anses tillhöra en lägre nivå av abstraktion? 
++ Kan man i termer av uppsatsen argumentera för att vi behöver lösa experimentera med de andra ändarna av problemet också, för att skapa större förståelse för huruvida mer "styrka" behövs på denna abstraktionsnivå? :)
++ Man kan också argumentera för rädslan att folk ska börja använda språket som ett presentationsnivåspråk. Eller börja använda det som XSLT och lägga in specifika saker. Såsom t.ex. ul över li.
+
+
+=== FILE MANAGEMENT ===
+Outside of scope. Men understryk hur det är jätteenkelt att slå ihop filer med hjälp av t.ex. `cat file1 file2 file3 [...]`. Understryk även varför det inte är en del av artefakten. Läs dock 7.3.2 i Reid, igen för att upptäcka problem som kan uppstå med file management. Hur ska t.ex. beroenden emellan filer hanteras när man endast vill kompilera en enda fil? Tänk på html-hunden scenariot med TOC:en. "partial compilation"
+
+
+
+====== MOTIVATION TO WHY DESCRIPTIVE MARKUP IS SUPERIOR ====
+Exemplifiera användandet av olika microformat och/eller större format som instanser av XML etc. genom att visa hur samma text kan behöva användas på flera olika ställen, men hur formaten skiljer sig. Ex. WikiML, DocBook, Wordpress etc.
+
+Användande av "wrappers" (domain significant semantics) t.ex. <ul> är överflödigt, och ökar "cognitive demands". Vilket verkar diskuteras i en fotnot:
+http://xml.coverpages.org/coombs.html#Note17
+Fotnoten riktades ifrån: "Minimization of Cognitive Demands"
+
+Roligt citat :)
+"Equipped with the basic concepts from the general theory of markup systems, however, authors quickly recognized the superiority of descriptive markup"
+
+
+
+==== ALTERNATIVA SYNTAXER ====
+[Rethinking XSLT](http://www.wilmott.ca/rxslt/rxslt.html) (blog post!!!)
+
+
+
+
+==== OTHER ABSTRACT MARKUP LANGUAGES ====
+[Candle Markup](http://www.candlescript.org/doc/candle-markup-reference.htm#hd9.7)
+
+[Candle Markup](CAN-LINK)
+[Candle Markup]***
+
+
+"link": ["[%](%)", "title", "url"]
+
+*[CAN-LINK](http://www.candlescript.org/doc/candle-markup-reference.htm#hd9.7)
+*(http://www.candlescript.org/doc/candle-markup-reference.htm#hd9.7)
+
+[Abstract Markup Language](http://docs.oracle.com/cd/E19773-01/820-1049/afhch/index.html)  !!!!!
+
+[ASN - Abstract syntax Notation 1](http://en.wikipedia.org/wiki/Abstract_Syntax_Notation_One)
+
+[Parameter Value Language](http://public.ccsds.org/publications/archive/641x0b2.pdf)
+
+# Other interesting smaller projects
+[PicoML](http://www.artima.com/forums/flat.jsp?forum=106&thread=135003&start=15&msRange=15) also links to the next:
+[Trees and Labelled S-Expressions](http://www.artima.com/weblogs/viewpost.jsp?thread=135216) and [another link](http://www.artima.com/weblogs/viewpost.jsp?thread=135216)
+[XML--](http://www.artima.com/weblogs/viewpost.jsp?thread=135693)
+[XML Tiny](http://www.grinninglizard.com/tinyxmldocs/index.html)
+[StackOverflow thread on the topic](http://stackoverflow.com/questions/11521064/are-there-specifications-for-simplified-subsets-of-xml)
+
+
+==== FRAMEWORK VIEWS =====
+[Software Ecosystem](http://en.wikipedia.org/wiki/Software_ecosystem)
+
+
+==== NODES & TREES ====
+Olika traversal orders orskar olika träd, så när vi pratar om "olika träd" är det viktigt att understryka vilken ordning vi pratar om!
+
+
+
+
+==== WHY? ====
+[OnceAndOnlyOnce / DRY]http://c2.com/cgi/wiki?OnceAndOnlyOnce
+
+
+==== FUTURE WORK ====
+- There is probably a need for a new taxonomy since Coombs and Bray do not agree on what is descriptive markup.
+
+
+==== LANGUAGE FEATURES ====
+- Match all before
+- Match all after
+- Match all before and after (i.e. <hr>)
+- Match all between
+Are the before's actually possible?
+
+
+.fup
+.fupd
+FupTree
+
+
+We can "intercept" with a non-package (i.e. self-written) XSLT at any point to "reorganize the parts of a document".
+
+
+==== DIFFERENTIATION FROM Extended Pandoc ====
+- EPan is procedural
+
+
+==== GRAMMARS ===
+Attribute grammar. The right-most part in JISON is the part that makes it an attribute-grammar. I.e. the semantics connected to a production.
+
+"Source-to-source-compiler"
+So, flexup as a whole is a compiler, because it compiles from a higher level to a lower level, but some parts, i.e. the packages, are source-to-source-compilers.
+
+
+
+=== SMALL GOLDEN NUGGETS :) ===
+"The nice thing about standards is that there are so many to choose from." (Expand: Towards an Extensible Pandoc System)
+Dyck languages
+
+"The price the user pays for this simplic- ity, though, is that he must enter explicit markup for the end of every explicit element. This price is totally unacceptable in practice."
+Goldfardb, on close-tags
+
+Goldfarb also alows authors to write their own grammars!! (Rigorous-kapitlet)
+
+
+=== PREVIOUS WORK ===
+XSLT kan ta arbiträra format in genom regex-faciliteterna. Men det är en absurd approach p.g.a. att man måste bygga en egen lexer/parser genom regex och xslt isf.
+

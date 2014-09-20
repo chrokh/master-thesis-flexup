@@ -1,0 +1,114 @@
+
+S -> pSp
+S -> pS
+S -> Sp
+
+
+
+S -> 0S1 | SS | e
+
+
+* * * *
+S -> SS | 0S1 | e
+http://www.youtube.com/watch?v=nlWCOMvDIZ4&index=41&list=PL601FC994BDD963E4
+Problemet med ambiguity i parse-trädet
+
+
+
+
+<stmt> -> 
+
+
+scanner - tokenizing (the tool lex) -> can be done with FSM
+parsing 
+
+
+
+- - - - - - - - - - -
+
+
+/
+  foo /a/
+  this text is /bold/
+/
+
+
+
+
+1 chapter
+2 bold
+
+
+
+- - - - - - - -
+
+
+We're avoiding the Lexer Hack
+http://en.wikipedia.org/wiki/The_lexer_hack
+and instead using the approach of Clang etc.
+
+
+
+ - - - - - - - - - -
+ 0^n 1^n 0^n
+ kan inte genereras av context-free
+ Lecture 5 - Context Free Languages (Part 6/8)
+ 5.00
+
+Syntax för att uttrycka ovan:
+https://www.youtube.com/watch?v=ABv7wjaSduA&index=17&list=PLkHsKoi6eZnyEj2pz3R_ER7izlenSxP-I
+
+En artikel om det relaterat till prolog
+http://cs.union.edu/~striegnk/learn-prolog-now/html/node68.html
+
+
+MER OM DET NEDAN:
+
+ ------
+
+ **SSSSS--SSSSS**SSSS**--**
+
+0 0 0 0
+( ( ) )
+( ) ( )
+
+0 0 0 0 0 0
+( ( ( ) ) )
+( ( ) ( ) )
+( ) ( ) ( )
+
+
+0 1 0 0 1 0
+[ ( [ ] ) ]
+
+
+0 0 0 0 0 0
+[ ] ( ) { }   Always close
+[ ( { } ) ]   Always open    <--- Not context-free???
+[ ( ) ( ) ]   Every other??
+
+Always-open
+Always-close
+Open-if-parent-is-different else close
+
+
+
+- - - -- - - -- - - - - -- 
+Separating syntax and semantics
+https://www.youtube.com/watch?v=X5G_k3pma3M&list=PLkHsKoi6eZnyEj2pz3R_ER7izlenSxP-I#t=471
+The Roman numerals vs Arabic example
+
+
+- - - - - - -- - - 
+Algorithm to create CFG from any regex
+
+http://stackoverflow.com/questions/13139821/algorithm-to-generate-context-free-grammar-from-any-regex
+
+
+
+- - - - - - - - - -
+Remember to handle the cases where we want to use the same tag as closing for multiple patterns. That should not be ambig.
+E.g:
+\textbf{%}
+\emph{%}
+
