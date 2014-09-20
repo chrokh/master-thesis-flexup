@@ -539,7 +539,9 @@ Consequently, if one has a language consisting of three original terminal tokens
 
 
 \paragraph{(4) Nesting enable infinite semantics.}
-Foobar.
+This last argument can easily be understood by contemplating the language of infinitely nestable chapter tokens. In other words, a markup language in which every chapter nested inside of another chapter denotes a subchapter of the chapter level of the previous chapter. In other words the first time a chapter appears, it is a top-level chapter. When a chapter appears within that other chapter it is a sub-chapter. When a chapter appears within that sub-chapter, it denotes a sub-sub-chapter. And so forth into infinity.
+
+Such a language can be described by allowing elements to nest, and decide upon the semantic rule, that any chapter within a chapter is a sub-chapter of that chapter. This is obviously a powerful feature, it is obviously very common in markup languages, and obviously not (trivially) expressible without nesting, in a finite grammar.
 
 
 
