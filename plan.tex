@@ -628,26 +628,6 @@ Consider (the (infinite (nesting) of (parentheses))).
 
 
 
-Assume we had a lexical analyzer (onwards referred to as ``lexer'') that could read this visual markup expressed in Figure \ref{fig:mixed-content-paragraph}. Obviously this is a purely hypothetical lexer as it will be able to identify beginnings and endings of visual markup. Consider for example the human vision and mind. Or an OCR (Optical Character Recognition) engine. A sensible tokenization from this lexer's point of view might go along the following lines (where tokens prepended with \texttt{S-} represents ``starting of'' and \texttt{E-} ``ending of'').
-
-
-
-
-\begin{lstlisting}
-  TXT S-UNDERLINE TXT S-BOLD TXT E-BOLD S-STRIKETHROUGH TXT E-STRIKETHROUGH TXT
-\end{lstlisting}
-
-
-
-Figure \ref{fig:mixed-content-tree} visualizes a reasonable parse-tree in pre-order. In which ending of a particular property is simply denoted by not being a child of that parent. In the figure, the nesting of properties, becomes obvious.
-  
-
-
-Now that we have established an example input, a model tokenization and a model parse-tree, let us attempt to express this in two different languages.
-
-
-
-
 
 \subsection{Non-hierarchical nesting}
 It is important to understand that this thesis employ and endorse the hierarchical model of nesting for delimitational and pragmatic reasons. The necessary property, I argue, is nesting -- not necessarily hierarchical nesting. However, since there is disagreement in the community (as previously mentioned) on how to approach non-hierarchical nesting, it shall be left as a request for further research.
