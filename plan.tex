@@ -379,16 +379,11 @@ TODO.
 
 
 \section{Nested markup}
-A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressable than with merely the isolated elements themselves. In most descriptive markup languages, this is implemented as the ability to nest elements in order to create hierarchies. As \citet*{durand} point out, describing documents as ordered hierarchical structures, is the view that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical documents. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the subject matter\footnote{http://xml.coverpages.org/hierarchies.html}.
-
-Even today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML.
+A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressable than with merely the isolated elements themselves. In most descriptive markup languages, this is implemented as the ability to nest elements in order to create hierarchies. As \citet*{durand} point out, describing documents as ordered hierarchical structures, is the view that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical documents. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the subject matter\footnote{http://xml.coverpages.org/hierarchies.html}. Even today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML.
 
 
-\subsection{Non-hierarchical nesting}
-It is important to understand that this thesis employ and endorse the hierarchical model of nesting for delimitational and pragmatic reasons. The necessary property, I argue, is nesting -- not necessarily hierarchical nesting. However, since there is disagreement in the community (as previously mentioned) on how to approach non-hierarchical nesting, it shall be left as a request for further research.
 
-\subsection{Arguing the case of nesting}
-I argue that nested markup is a fundamental, and necessary property of any pragmatically useful markup language. The following example is  intended to help enforce this. Assume we have a formatted paragraph of text\footnote{In this example we will disregard whitespace between tokens and assume that whitespace between words in a string remains, but whitespace between strings is omitted and left implicit.}, as outlined in Figure \ref{fig:mixed-content-paragraph}.
+To enforce the difference between nesting and not, consider the following example. Assume we have a formatted paragraph of text\footnote{In this example we will disregard whitespace between tokens and assume that whitespace between words in a string remains, but whitespace between strings is omitted and left implicit.}, as outlined in Figure \ref{fig:mixed-content-paragraph}.
 
 
 \begin{figure}[h]
@@ -401,12 +396,82 @@ The color \underline{is \textbf{now}} \sout{red}.
 \end{figure}
 
 
-Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold-and-underline, and finally (4) strike-through.
+Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold-underline, and finally (4) strikethrough.
 
 
-More importantly, the fact that two words are underlined, whereas one of the words that are underlined is actually both underlined and bold. This is an example of a sitaution where nesting help us express this significantly easier.  Consider for example how the string is represented as a tree (i.e. a hierarchical structure) in Figure \ref{fig:mixed-content-tree}). To understand why nesting is a sensible approach to such situations consider the lexing step of a compiler that read the paragraph in question. Without nesting, the number of terminal tokens needed in the lexer would have to be the number of combinations of terminal tokens before combining.
 
-I will make four arguments in order to support the use of nesting. First I will argue that (1) there is no semantic difference between an element implied by the use of nesting rather than it's explicit counterpart. Secondly, I argue that (2) no significantly complex cognitive leap is required for humans in order to be able to think and discuss nesting. The two remaining arguments enforce the power of nesting. (3) Nesting can reduce the number of required terminal tokens in a markup compiler exponentially. Finally, (4) nesting allow languages to contain an infinite set of semantic tokens while expressing only a finite set of tokens in the compiler.
+
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+    sibling distance=3.5cm,
+  ]
+  \node {<root>}
+  child {node {"The color"}}
+  child {node {<underline>}
+    child {node {"is"}}
+  }
+  child {node {<bold-underline>}
+    child {node {"now"}}
+  }
+  child {
+    node {<strikethrough>}{
+      child {node {"red"}}
+    }
+  }
+  child {node {"."}}
+  ;
+  \end{tikzpicture}
+
+  \caption{Pre-order tree representation of Fig. \ref{fig:mixed-content-paragraph}.}
+  \label{fig:mixed-content-flat-tree}
+\end{figure}
+
+
+
+More importantly, the fact that two words are underlined, whereas one of the words that are underlined is actually both underlined and bold. This is an example of a situation where nesting may help us express a string more efficiently. Consider the difference between the non-nested tree representation in Figure \ref{fig:mixed-content-flat-tree} and the nested tree representation in Figure \ref{fig:mixed-content-tree}. In the example that employ nesting, we are actually re-using the semantics of one string to partially describe another.
+
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+    sibling distance=3cm,
+  ]
+  \node {<root>}
+  child {node {"The color"}}
+  child {node {<underline>}
+    child {node {"is"}}
+    child {node {<bold>}
+      child {node {"now"}}
+    }
+  }
+  child {
+    node {<strikethrough>}{
+      child {node {"red"}}
+    }
+  }
+  child {node {"."}}
+  ;
+  \end{tikzpicture}
+
+  \caption{Pre-order tree representation of Fig. \ref{fig:mixed-content-paragraph} employing nesting.}
+  \label{fig:mixed-content-tree}
+\end{figure}
+
+
+
+To understand why nesting is a sensible approach to such situations consider the lexing step of a compiler that read the paragraph in question. Without nesting, the number of terminal tokens needed in the lexer would have to be a number that exponentially increase with every introduced new terminal token, because tokens can be combined with tokens.
+
+
+
+
+
+
+\subsection{Arguing the case of nesting}
+I argue that nested markup is a fundamental, and necessary property of any pragmatically useful markup language. I will make four arguments in order to support the use of nesting. First I will argue that (1) there is no semantic difference between an element implied by the use of nesting rather than it's explicit counterpart. Secondly, I argue that (2) no significantly complex cognitive leap is required for humans in order to be able to think and discuss nesting. The two remaining arguments enforce the power of nesting. (3) Nesting can reduce the number of required terminal tokens in a markup compiler exponentially. Finally, (4) nesting allow languages to contain an infinite set of semantic tokens while expressing only a finite set of tokens in the compiler.
 
 The arguments will be explored in some detail below.
 
@@ -578,39 +643,14 @@ Figure \ref{fig:mixed-content-tree} visualizes a reasonable parse-tree in pre-or
   
 
 
-
-\begin{figure}[h]
-  \centering
-  \begin{tikzpicture}[
-    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
-    sibling distance=4cm,
-  ]
-  \node {<root>}
-  child {node {"The color"}}
-  child {node {<underline>}
-    child {node {"is"}}
-    child {node {<bold>}
-      child {node {"now"}}
-    }
-  }
-  child {
-    node {<strikethrough>}{
-      child {node {"red"}}
-    }
-  }
-  child {node {"."}}
-  ;
-  \end{tikzpicture}
-
-  \caption{The example paragraph from \ref{fig:mixed-content-paragraph} represented as a pre-order tree.}
-  \label{fig:mixed-content-tree}
-\end{figure}
-
-
-
 Now that we have established an example input, a model tokenization and a model parse-tree, let us attempt to express this in two different languages.
 
 
+
+
+
+\subsection{Non-hierarchical nesting}
+It is important to understand that this thesis employ and endorse the hierarchical model of nesting for delimitational and pragmatic reasons. The necessary property, I argue, is nesting -- not necessarily hierarchical nesting. However, since there is disagreement in the community (as previously mentioned) on how to approach non-hierarchical nesting, it shall be left as a request for further research.
 
 
 
