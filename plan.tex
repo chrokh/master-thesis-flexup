@@ -3,6 +3,8 @@
 % http://tex.stackexchange.com/questions/5948/subtitle-doesnt-work-in-article-document-class
 
 \usepackage{fullpage}
+\usepackage{caption}
+\usepackage[margin=1cm]{subcaption}
 \usepackage[utf8]{inputenc} % åäö
 \usepackage{hyperref}
 \usepackage{enumitem}
@@ -707,48 +709,38 @@ Within this thesis, it is this line of reasoning that is referred to when discus
 
 
 
-
-\begin{figure}[h]
+\begin{figure}
 \centering
+\begin{subfigure}{.4\textwidth}
+  \centering
 
   \begin{tikzpicture}[fill=gray]
-  \draw (-.75,0) circle (1.25) (1,0)  node [text=black] {$V$}
-        ( .75,0) circle (1.25) (-1,0)  node [text=black] {$M$}
-        (-2.5,-2.5) rectangle (2.5,2.5) node [text=black] {$$};
-
+    \draw (-.75,0) circle (1.25) (1,0)  node [text=black] {$V$}
+          ( .75,0) circle (1.25) (-1,0)  node [text=black] {$M$}
+          (-2.5,-2.5) rectangle (2.5,2.5) node [text=black] {};
   \end{tikzpicture}
-
   \caption{Not all valid JSON ($V$) is valid mixed content ($M$).}
   \label{fig:mixed-content-venn-json}
-\end{figure}
-%TODO: I should really, really, really call M L instead.
-
-
-
-
-\begin{figure}[h]
-\centering
-
-  \begin{tikzpicture}[fill=gray]
-
-  % outline
-  %\draw (-2,-2) rectangle (2,2) node [text=black,below,left,yshift=-.3cm] {$V, M$};
-
-  % \draw (-.5,0) circle (1) (0,1)  node [text=black,yshift=-1cm,xshift=-.7cm] {$V$}
-  %       ( .5,0) circle (1) (0,1)  node [text=black,yshift=-1cm,xshift=.7cm] {$M$}
-  %       (-3,-3) rectangle (3,3) node [text=black  ,yshift=-.3cm] {$$};  
-
-  \draw (0,0) circle (2) (0,1.5)  node [text=black] {$M$}
-        (0,0) circle (1) (0,0)     node [text=black] {$V$}
-        (-2.5,-2.5) rectangle (2.5,2.5) node [text=black] {$$};
-
   
+\end{subfigure}%
+\begin{subfigure}{.4\textwidth}
+  \centering
 
+   \begin{tikzpicture}[fill=gray]
+    \draw (0,0) circle (2) (0,1.5)  node [text=black] {$M$}
+          (0,0) circle (1) (0,0)     node [text=black] {$V$}
+          (-2.5,-2.5) rectangle (2.5,2.5) node [text=black] {};
   \end{tikzpicture}
-
   \caption{All valid XML ($V$) is valid mixed content ($M$).}
-  \label{fig:mixed-content-venn-xml}
+  \label{fig:mixed-content-venn-json}
+  
+\end{subfigure}
+\caption{The relationship between valid strings in a language and valid mixed content strings.}
+\label{fig:mixed-content-venn}
 \end{figure}
+
+
+
 
 
 
