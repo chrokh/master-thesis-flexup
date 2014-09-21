@@ -22,6 +22,7 @@
 \usepackage{shorttoc}
 \usepackage{epigraph}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{relsize}
 \usepackage{fixfoot}
 
@@ -1052,7 +1053,7 @@ Given the creativity of humans, I would argue that, the number of workflows used
 \paragraph{The micro-framework stem from the following argument: } To perform the process, previously described as transforming from $F$ to $F\prime$, one can trivially distinguish the three parts of the statement. The pre-state ($F$), the post-state ($F\prime$), and the program ($P$). This is illustrated in Equation \ref{eq:microframework}.
 
 \begin{equation}
-  P(F) \mapsto F\prime
+  P : F \rightarrow F\prime
   \label{eq:microframework}
 \end{equation}
 
@@ -1082,14 +1083,30 @@ Further on, a more visual representation will be needed, so Figure \ref{fig:work
 \end{figure}
 
 
-Obviously the transformation program in Figure \ref{fig:workflows-framework} need to be refined (i.e. broken down into further detail) in order to accurately represent most actual transformation programs. This refinement will be carried out further on.
+Obviously the transformation program in Figure \ref{fig:workflows-framework} need to be refined (i.e. broken down into further detail) in order to accurately represent most actual transformation programs. This refinement will be carried out further on, and this is how the ideal model will be derived.
 
 
 
-\paragraph{Generality of a transformation program.}
-Unfortunately, the model depicted in Figure \ref{fig:workflows-framework} model is not sufficiently exact for our purposes. With it, we will not be able to illustrate the kind of distinctions we want to depict. Assume that we instead of having the two formats \(F\) and \(F\prime\), have the four formats \(I\), \(I\prime\), \(O\), and \(O\prime\). The two I-based formats are expected to be used as input-formats, and the two O-formats are output formats. Given that the input file in Figure \ref{fig:workflows-framework} represents a single file format, and the same for the output format, then this model cannot possibly encompass this four-format-program.
+\section{Determining generality of a transformation program.}
+Previously the model, depicted in Figure \ref{fig:workflows-framework}, has merely been applied to the set of sets, where the input-set encompass all possible input formats, and the output-format encompass all possible output-formats. With this set of sets, the program function obviously define the set of all possible markup language transformation programs.
 
-In order to change the model such that it can depict, what previously in the thesis was referred to as, n-to-n conversions, we will introduce the notion of coupling. In Figure \ref{fig:workflows-framework-spec-in-spec-out} we've introduced a dotted line. This dotted line represents coupling. If any of the components within the area delimited by the dotted line change, the change will ripple through all of the other components. Assume for example that the input file and the transformation program are both within the dotted area. This would mean that to handle a new input we need a new transformation program. Which is of course unwanted.
+Consider, however instead the set $\{P, \mathbb{I}, \mathbb{O}\}$ and the Equation \ref{eq:transformation-generality-example}. Then the Equation \ref{eq:transformation-generality-example} describe a transformation program such that all outputs may be treated as inputs. Thus, if the set cover all possible strings, then $P$ must be a very general transformation program that can transform any format to any format.
+
+\begin{equation}
+  \bigg( P : \mathbb{I} \rightarrow \mathbb{O} \bigg)
+  \wedge
+  \bigg( P : \mathbb{O} \rightarrow \mathbb{I} \bigg)
+  \label{eq:transformation-generality-example}
+\end{equation}
+
+
+In other words, any program that can be described by Formula \ref{eq:transformation-generality-example} solves the previously mentioned ``n-to-n'' problem.
+
+
+\subsection{A visual notation}
+In order to reason about the level of generality of different transformation programs a more visual notation will be introduced. Figure \ref{fig:workflows-framework-spec-in-spec-out} introduces  a dotted line. This dotted line represents specialization (as an opposite to generalization). If a component is depicted inside the dotted area, it suggests that the component cannot possibly be the same as any other component in the figure. In other words, if the input component is depicted inside the dotted line, this means there is no other component in the figure that can be the same as the input component.
+
+This visual syntax become useful when expressing the generality of transformation programs. For example, the most specialized form of program, Equation \ref{eq:microframework} can be depicted as in Figure \ref{fig:workflows-framework-spec-in-spec-out}. Whereas the program in the ``opposite end of the generality spectra'', Equation \ref{eq:transformation-generality-example} can be depicted Figure \ref{fig:workflows-framework-gen-in-gen-out}.
 
 
 
