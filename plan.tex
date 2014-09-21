@@ -977,9 +977,15 @@ Obviously, both are important for, as \citet{goldfarb} puts it, rigor.
 \chapter{Theory part II -- Document processing}
 \label{sec:theory-of-document-processing}
 
-\citeauthor*{goldfarb}, one of the authors of IBM Generalized Markup Language (GML), proposed (in \citeyear{goldfarb}) a three-step model for understanding document processing. The term document processing here refer to the idea of taking some document containing Generic Identifier's (GI's) as input, applying some set of processing instructions, to produce some other document as output.
+\citet{goldfarb} shed some light onto the issue that descriptive markup is less trivial to parse than procedural. Informally put, to process a procedural document, one simply need to parse the document and carry out each instruction accordingly. But in the case of descriptive markup there is a disconnect between a particular marked up string and its correspondingly appropriate processing instructions.
 
-The term Generic Identifier \citet{goldfarb} refer
+To formalize this disconnect, \citet{goldfarb} suggest a three-step model for document processing. The term document processing here refer to the idea of taking some document containing Generic Identifier's (GI's) as input, applying some set of processing instructions, to produce some other document as output. The three steps of \citet{goldfarb} are (1) recognition, (2) mapping, and (3) processing. These will be explained in closer detail below.
+
+\paragraph{Recognition} refer to the idea of recognizing that some piece of the document string should be considered an element that is marked up. While not explicitly expressed by \citet{goldfarb} it seems reasonable to informally consider this step to be the step of lexing (tokenization) and parsing, where its output would to be the parse tree. \citet{goldfarb} gives the example of an element with the generic identifier ``footnote''.
+
+\paragraph{Mapping} refer to the idea of pairing up the correct set of processing instructions with the correct document elements (or to follow the analogy of the last paragraph -- nodes in the parse tree). \citet{goldfarb} continue on the previous footnote example by saying that the element now perhaps would be paired up with a processing function that collects the content of the footnote, only to print it later at the bottom of the page.
+
+\paragraph{Processing} trivially refer to the task of executing the processes on their respectively mapped elements.
 
 
 
