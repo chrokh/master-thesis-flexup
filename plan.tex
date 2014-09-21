@@ -1088,23 +1088,7 @@ Obviously the transformation program in Figure \ref{fig:workflows-framework} and
 
 
 \section{Determining generality of a transformation program.}
-Previously the model, depicted in Figure \ref{fig:workflows-framework}, has merely been applied to the set of sets, where the input-set encompass all possible input formats, and the output-format encompass all possible output-formats. With this set of sets, the program function obviously define the set of all possible markup language transformation programs.
-
-Consider, however instead the set $\{P, \mathbb{I}, \mathbb{O}\}$ and the Equation \ref{eq:transformation-generality-example}. Then the Equation \ref{eq:transformation-generality-example} describe a transformation program such that all outputs may be treated as inputs. Thus, if the set cover all possible strings, then $P$ must be a very general transformation program that can transform any format to any format.
-
-\begin{equation}
-  \bigg( P : \mathbb{I} \rightarrow \mathbb{O} \bigg)
-  \wedge
-  \bigg( P : \mathbb{O} \rightarrow \mathbb{I} \bigg)
-  \label{eq:transformation-generality-example}
-\end{equation}
-
-
-In other words, any program that can be described by Formula \ref{eq:transformation-generality-example} solves the previously mentioned ``n-to-n'' problem.
-
-
-\subsection{A visual notation}
-In order to reason about the level of generality of different transformation programs a more visual notation will be introduced. Figure \ref{fig:workflows-framework-spec-in-spec-out} introduces  a dotted line. This dotted line represents specialization (as an opposite to generalization). If a component is depicted inside the dotted area, it suggests that the component cannot possibly be the same as any other component in the figure. In other words, if the input component is depicted inside the dotted line, this means there is no other component in the figure that can be the same as the input component.
+In order to reason about the level of generality of different transformation programs a more visual notation will be introduced. Figure \ref{fig:workflows-framework-spec-in-spec-out} introduces  a dotted line. This dotted line represents specialization (as an opposite to generalization). If a component is depicted inside the dotted area, it suggests that there exist a language within the domain of the component that cannot possibly be present in any other domain of any other component in the figure. In other words, if the input component is depicted inside the dotted line, this means there exist an input language that cannot be produced as output. In less formal terms, this mean that the transformation program is ``coupled''\footnote{Informal usage of the term} to the formats in the domain of the component within the dotted line. The program will always be depicted within the dotted line to indicate that there exist other programs outside the dotted lines. More concrete examples will be given when discussing possible workflows next.
 
 
 
@@ -1128,10 +1112,6 @@ In order to reason about the level of generality of different transformation pro
   \caption{A transformation program that takes specific input formats and produce specific output formats.}
   \label{fig:workflows-framework-spec-in-spec-out}
 \end{figure}
-
-
-This visual syntax become useful when expressing the generality of transformation programs. For example, the most specialized form of program, Equation \ref{eq:microframework} can be depicted as in Figure \ref{fig:workflows-framework-spec-in-spec-out}. Whereas the program in the ``opposite end of the generality spectra'', Equation \ref{eq:transformation-generality-example} can be depicted as Figure \ref{fig:workflows-framework-gen-in-gen-out}.
-
 
 
 
