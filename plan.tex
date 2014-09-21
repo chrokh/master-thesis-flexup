@@ -301,6 +301,7 @@ In this thesis I will argue that there is a difference between converting a docu
 
 
 \section{Requirements}
+\label{sec:requirements-initial}
 Given the holistic problem outlined in Section \ref{sec:problems}, we will discuss a holistic response, in form of an eco-system of tools. In order to guide the development of the tool-chain, the following requirements have been extracted from the problems outlined in Section \ref{sec:problems}.
 
 \paragraph{Any output format but reasonable input format}
@@ -308,10 +309,7 @@ As an author I must be able to author my document once, in a ``reasonable'' form
 
 \paragraph{Composable} or code reuse through package friendliness. Code reuse must be a top priority. Not merely within an author's workflow of a single document, but also between authors and documents. Consequently, as much as possible must be able to be distributed as packages. \footnote{TODO -- call it composability or modularity?}
 
-\paragraph{Extendable} refers to the idea that it must be natural to introduce new packages that intercept the process at any point in time. This requirement encompass the idea that authors must be offered control over the production of the final output.
-
-\paragraph{Declarative}
-All code that an eco-system user would touch must be declarative. Also packages must be expressed declaratively. This encompass the idea of using template transformations rather than imperative processing.
+\paragraph{Extendable} refer to the idea that it must be natural to introduce new packages that intercept the process at any point in time. This requirement encompass the idea that authors must be offered control over the production of the final output.
 
 
 
@@ -357,6 +355,7 @@ TODO.
 
 
 \chapter{Theory}
+\label{sec:theory}
 TODO.
 
 
@@ -379,6 +378,7 @@ TODO.
 
 
 \section{Nested markup}
+\label{sec:nesting}
 A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressable than with merely the isolated elements themselves. In most descriptive markup languages, this is implemented as the ability to nest elements in order to create hierarchies. As \citet*{durand} point out, describing documents as ordered hierarchical structures, is the view that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical documents. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the subject matter\footnote{http://xml.coverpages.org/hierarchies.html}. Even today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML.
 
 
@@ -627,6 +627,7 @@ Consider (the (infinite (nesting) of (parentheses))).
 
 
 \subsection{Non-hierarchical nesting}
+\label{sec:non-hierarchical-nesting}
 It is important to understand that this thesis employ and endorse the hierarchical model of nesting for delimitational and pragmatic reasons. The necessary property, I argue, is nesting -- not necessarily hierarchical nesting. However, since there is disagreement in the community (as discussed previously), a number of conflicting papers\footnote{http://xml.coverpages.org/hierarchies.html}, with no consensus, on how to approach non-hierarchical nesting, it shall be left as a request for further research.
 
 
@@ -640,6 +641,7 @@ It is important to understand that this thesis employ and endorse the hierarchic
 
 
 \section{Mixed content}
+\label{sec:mixed-content}
 When discussing markup languages -- it is important to identify the sometimes subtle distinction between languages suitable for (1) \emph{data modeling} and languages suitable for (2) \emph{document authoring}. The prior is concerned with structured data, whereas the second is concerned with structured data that fit within the metaphor  of a document. As the first can be described as referring to datastructures -- one could of course argue that any imaginable document (in the document authoring sense) could be encoded in a particular data structure. Thus that there consequently could not exist any clear distinction between data oriented formats, and document oriented formats. That is however not the argument being opposed here. In order to make unambigious use of these terms in the thesis, below an explenation of one separation is explained. Essentially it encompass the idea that some languages are more suited for intermingling non-marked up text with marked up text.
 
 % TODO: Use and refer to the terms used by H. Schöning (2001) -- Tamino a DBMS for XML.
@@ -871,6 +873,7 @@ From a linguistic point of view, a metamarkup language can be seen as a metalang
 
 
 \section{A hierarchy of abstraction}
+\label{sec:abstraction-hierarchy}
 It is important to understand that \citet{coombs} employ the wording ``types of markup'' when discussing the categories explained in section \ref{sec:taxonomy}, whereas \citet{bray} discuss ``a taxonomy of markup''. While similarly sounding indeed, nuances emerge when considering the fact that \citet{bray} only discuss three of the total six categories outlined by \citet{coombs}. The three included in the, so called, taxonomy are (1) presentational, (2) procedural, and (3) descriptive. In fact, also \citeauthor{coombs} specifically highlight these three, and say that they are ``in direct competition''.
 
 If you would allow me to speculate, then I would argue this stems from the way these three categories nicely describe three different levels of abstraction given an instance of a document. Or to look at it from the other end, consider the following. Punctuational markup can very well be expressed using presentational markup, as well as procedural, as well as descriptive. Referential markup can be expressed using the two latter, and the same goes for metamarkup.
@@ -908,8 +911,29 @@ Consequently I argue that these three ``categories'' of the taxonomy can be view
 
 
 
+\chapter{Requirements derived form theory}
+In Section \ref{sec:requirements-initial} some initial requirements were set out for this project. In this section, new statements are added to that body of requirements. The requirements introduced by this chapter maps one-to-one, to the concepts, regarded as important, in Section \ref{sec:theory}.
 
 
+
+\paragraph{Nestable}
+As accounted for in Section \ref{sec:nesting}, the ability to nest elements within elements is a fundamental feature of markup languages, and increase the level of pragmatic usability drastically. By reducing the number of base tokens needed to be designed by the language designer.
+
+Due to the lack of consensus in the community (as described in Section \ref{sec:non-hierarchical-nesting}) on sensible approaches, no attempt is made in this thesis to breach the borders of hierarchical document descriptions into the land of more general nesting. However, as nesting, as shown, is a pragmatically very useful feature of a language, the requirement for the eco-system of tools produced in this thesis is then that the input language of the eco-system be hierarchical\footnote{I encourage future research to breach this painstaking border, but also to appreciate that the measures suggested in this thesis, likely not only still apply beyond the breaching of the hierarchical border, but also are equally significant.}.
+
+
+
+\paragraph{Mixed content}
+As accounted for in Section \ref{sec:mixed-content}, the idea of Mixed Content, is not merely a stylistic variation that might be exhibited in some documents, but missing in others. Mixed Content is a fundamental and necessary feature of language, for that language to enable marking up of documents.
+
+The requirement is thus, that the input language of this eco-system of tools, must support mixed content.
+
+
+
+\paragraph{Descriptive}
+The hierarchy of abstraction, outlined in Section \ref{sec:abstraction-hierarchy}, shows that it is desirable (for manual work) to author documents in the ``top of the pyramid''. I.e. in descriptive languages. Thus, the requirement derived will be that all languages (assuming there might be more than one) an author ``comes in contact'' with must be descriptive.
+
+Understand that all humans using end-tools in the eco-system should be deemed authors. In Section \ref{sec:requirements-initial} the idea of packages to enable reuse is discussed. Also package authors must be considered authors. Thus also packages must be expressed descriptively. Subsequently this indicate the need for a template transformation approach rather than imperative processing.
 
 
 
