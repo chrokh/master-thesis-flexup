@@ -1356,30 +1356,43 @@ TODO.
 \begin{figure}[h]
   \centering
 
-  \begin{tikzpicture}[node distance=.5cm]
+  \begin{tikzpicture}[node distance=.15cm]
     \node (in)  [io]                                 {\(In\)};
     \node (P1)  [process, right of=in, xshift=2.5cm] {\(P1\)};
     \node (P2)  [process, right of=P1, xshift=2.5cm] {\(P2\)};
     \node (P3)  [process, right of=P2, xshift=2.5cm] {\(P3\)};
-    \node (out) [io,      right of=P3, xshift=2.5cm] {\(Out\)};
+    \node (P4)  [process, right of=P3, xshift=2.5cm] {\(P4\)};
+    \node (out) [io,      right of=P4, xshift=2.5cm] {\(Out\)};
+    \node (T2)  [process, above of=P2, yshift=2cm] {\(T2\)};
     \node (C1)  [io,      above of=P1, yshift=2cm] {\(C1_n\)}; % {Semantics};
-    \node (C2)  [io,      above of=P2, yshift=2cm] {\(C2_n\)}; % {Derivations};
-    \node (C3)  [io,      above of=P3, yshift=2cm] {\(C3_n\)}; % {Presentation};
+
+    \node (C2)  [io,      above of=T2, yshift=2cm, xshift=-1cm] {\(C2_n\)}; % {Validations};
+    \node (F2)  [io,      above of=T2, yshift=2cm, xshift=1cm] {\(F2_n\)}; % {Validations};
+
+    \node (C3)  [io,      above of=P3, yshift=2cm] {\(C3_n\)}; % {Derivations};
+    \node (C4)  [io,      above of=P4, yshift=2cm] {\(C3_n\)}; % {Presentation};
+
 
 
     \draw [arrow] (in) -- (P1);
     \draw [arrow] (P1) -- (P2);
     \draw [arrow] (P2) -- (P3);
-    \draw [arrow] (P3) -- (out);
+    \draw [arrow] (P3) -- (P4);
+    \draw [arrow] (P4) -- (out);
     \draw [arrow] (C1) -- (P1);
-    \draw [arrow] (C2) -- (P2);
     \draw [arrow] (C3) -- (P3);
+    \draw [arrow] (C4) -- (P4);
     \draw [arrow] (P1) edge[loop below]();
-    \draw [arrow] (P2) edge[loop below]();
     \draw [arrow] (P3) edge[loop below]();
+    \draw [arrow] (P4) edge[loop below]();
+
+    \draw [arrow] (P2) to[out=-225,in=225] (T2);
+    \draw [arrow] (T2) to[out=-45,in=45] (P2);
+    \draw [arrow] (C2) to (T2);
+    \draw [arrow] (F2) to (T2);
   \end{tikzpicture}
 
-  \caption{Suggested ideal refinement of a Quadrant A program.}
+  \caption{Suggested ideal refinement of a Quadrant B program.}
   \label{fig:workflows-framework-gen-in-gen-out}
 \end{figure}
 
