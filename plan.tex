@@ -976,6 +976,46 @@ Obviously, both are important for, as \citet{goldfarb} puts it, rigor.
 
 
 
+
+
+
+
+\chapter{Deriving markup language requirements}
+In Section \ref{sec:requirements-initial} requirements for a transformation program were set out. In this section, requirements for the languages supported by such a transformation program will be outlined. The requirements introduced by this chapter are strictly derived from important realizations in Section \ref{sec:theory}.
+
+
+\paragraph{Nestable}
+As accounted for in Section \ref{sec:nesting}, the ability to nest elements within elements is a fundamental feature of markup languages, and increase the level of pragmatic usability drastically. By reducing the number of base tokens needed to be designed by the language designer.
+
+Due to the lack of consensus in the community (as described in Section \ref{sec:non-hierarchical-nesting}) on sensible approaches, no attempt is made in this thesis to breach the borders of hierarchical document descriptions into the land of more general nesting. However, as nesting, as shown, is a pragmatically very useful feature of a language, the requirement for the eco-system of tools produced in this thesis is then that the input language of the eco-system be hierarchical\footnote{I encourage future research to breach this painstaking border, but also to appreciate that the measures suggested in this thesis, likely not only still apply beyond the breaching of the hierarchical border, but also are equally significant.}.
+
+
+\paragraph{Mixed content}
+As accounted for in Section \ref{sec:mixed-content}, the idea of Mixed Content, is not merely a stylistic variation that might be exhibited in some documents, but missing in others. Mixed Content is a fundamental and necessary feature of language, for that language to enable marking up of documents.
+
+The requirement is thus, that the input language of this eco-system of tools, must support mixed content.
+
+
+\paragraph{Descriptive}
+The hierarchy of abstraction, outlined in Section \ref{sec:abstraction-hierarchy}, shows that it is desirable (for manual work) to author documents in the ``top of the pyramid''. I.e. in descriptive languages. Thus, the requirement derived will be that all languages (assuming there might be more than one) an author ``comes in contact'' with must be descriptive.
+
+Understand that all humans using end-tools in the eco-system should be deemed authors. In Section \ref{sec:requirements-initial} the idea of packages to enable reuse is discussed. Also package authors must be considered authors. Thus also packages must be expressed descriptively. Subsequently this indicate the need for a template transformation approach rather than imperative processing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \chapter{Theory part II -- Document processing}
 \label{sec:theory-of-document-processing}
 
@@ -1004,32 +1044,14 @@ Finally it is important to understand that while this three-step model indeed is
 
 
 
+\chapter{Deriving transformation intents}
+TODO.
+
+\section{Semantics}
+\section{Derivations}
+\section{Presentation}
 
 
-
-\chapter{Deriving markup language requirements}
-In Section \ref{sec:requirements-initial} requirements for a transformation program were set out. In this section, requirements for the languages supported by such a transformation program will be outlined. The requirements introduced by this chapter are strictly derived from important realizations in Section \ref{sec:theory}.
-
-
-
-\paragraph{Nestable}
-As accounted for in Section \ref{sec:nesting}, the ability to nest elements within elements is a fundamental feature of markup languages, and increase the level of pragmatic usability drastically. By reducing the number of base tokens needed to be designed by the language designer.
-
-Due to the lack of consensus in the community (as described in Section \ref{sec:non-hierarchical-nesting}) on sensible approaches, no attempt is made in this thesis to breach the borders of hierarchical document descriptions into the land of more general nesting. However, as nesting, as shown, is a pragmatically very useful feature of a language, the requirement for the eco-system of tools produced in this thesis is then that the input language of the eco-system be hierarchical\footnote{I encourage future research to breach this painstaking border, but also to appreciate that the measures suggested in this thesis, likely not only still apply beyond the breaching of the hierarchical border, but also are equally significant.}.
-
-
-
-\paragraph{Mixed content}
-As accounted for in Section \ref{sec:mixed-content}, the idea of Mixed Content, is not merely a stylistic variation that might be exhibited in some documents, but missing in others. Mixed Content is a fundamental and necessary feature of language, for that language to enable marking up of documents.
-
-The requirement is thus, that the input language of this eco-system of tools, must support mixed content.
-
-
-
-\paragraph{Descriptive}
-The hierarchy of abstraction, outlined in Section \ref{sec:abstraction-hierarchy}, shows that it is desirable (for manual work) to author documents in the ``top of the pyramid''. I.e. in descriptive languages. Thus, the requirement derived will be that all languages (assuming there might be more than one) an author ``comes in contact'' with must be descriptive.
-
-Understand that all humans using end-tools in the eco-system should be deemed authors. In Section \ref{sec:requirements-initial} the idea of packages to enable reuse is discussed. Also package authors must be considered authors. Thus also packages must be expressed descriptively. Subsequently this indicate the need for a template transformation approach rather than imperative processing.
 
 
 
@@ -1355,17 +1377,6 @@ TODO.
 
 
 
-
-
-
-
-
-\chapter{Separating transformation intents}
-TODO.
-
-\section{Semantics}
-\section{Derivations}
-\section{Presentation}
 
 
 
