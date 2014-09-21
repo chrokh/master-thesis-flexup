@@ -1130,29 +1130,7 @@ In order to reason about the level of generality of different transformation pro
 \end{figure}
 
 
-This visual syntax become useful when expressing the generality of transformation programs. For example, the most specialized form of program, Equation \ref{eq:microframework} can be depicted as in Figure \ref{fig:workflows-framework-spec-in-spec-out}. Whereas the program in the ``opposite end of the generality spectra'', Equation \ref{eq:transformation-generality-example} can be depicted Figure \ref{fig:workflows-framework-gen-in-gen-out}.
-
-
-\begin{figure}[h]
-  \centering
-
-  \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {In};
-    \node (engine) [process, right of=input] {P};
-    \node (output) [io,      right of=engine] {Out};
-
-    \draw [arrow] (input)  -- (engine);
-    \draw [arrow] (engine) -- (output);
-
-    \begin{pgfonlayer}{background}
-      \node [dotbox, fit={(engine)}]{};
-    \end{pgfonlayer}
-
-  \end{tikzpicture}
-
-  \caption{This Quadrant A program takes any input format and produce any output format.}
-  \label{fig:workflows-framework-gen-in-gen-out}
-\end{figure}
+This visual syntax become useful when expressing the generality of transformation programs. For example, the most specialized form of program, Equation \ref{eq:microframework} can be depicted as in Figure \ref{fig:workflows-framework-spec-in-spec-out}. Whereas the program in the ``opposite end of the generality spectra'', Equation \ref{eq:transformation-generality-example} can be depicted as Figure \ref{fig:workflows-framework-gen-in-gen-out}.
 
 
 
@@ -1268,6 +1246,28 @@ Programs in Quadrant B (of Figure \ref{fig:microframework-quadrant}) represent a
 
 \subsection{Generalized in, Generalized out (Quadrant A)}
 Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent the most general kind of programs. They take arbitrary\footnote{As you might have already understood, we are of course not talking about completely arbitrary, but simply multiple unrelated formats.} input formats and generate arbitrary output formats. These are transformation engines that are prepared for taking general input, and providing facilities to give general output. An example program that exhibits this behavior is the widely used software Pandoc.  Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-gen-in-gen-out}.
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {In};
+    \node (engine) [process, right of=input] {P};
+    \node (output) [io,      right of=engine] {Out};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(engine)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{This Quadrant A program takes any input format and produce any output format.}
+  \label{fig:workflows-framework-gen-in-gen-out}
+\end{figure}
+
 
 
 
