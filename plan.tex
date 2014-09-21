@@ -1136,27 +1136,28 @@ Remember that the terms ``generalized'' and ``specialized'' are used to denote t
     \textbf{Generalized in} &
     \cellcolor[HTML]{33FF99} A
     &
-    \cellcolor[HTML]{FFFF99} B 
+    \cellcolor[HTML]{FFFFCC} C
 
     \\ \hline
 
     \textbf{Specialized in} &
-    \cellcolor[HTML]{FFFF99} C
+    \cellcolor[HTML]{CCFF99} B
     &
-    \cellcolor[HTML]{FFFFCC} D
+    \cellcolor[HTML]{FFFFFF} D
 
     \\ \hline
   \end{tabular}
 
-  \caption{All combinations of coupling that can occur in Figure \ref{fig:workflows-framework} expressed in a quadrant diagram}
+  \caption{All possible combinations of specialization/generalization possible in the micro-framework depicted by Figure \ref{fig:workflows-framework}}
   \label{fig:microframework-quadrant}
 \end{figure}
 
 
-As you might already have guessed, this thesis is concerned with understanding the eco-system of Quadrant A. Namely the general case. Where input is arbitrary and output is arbitrary. But to really understand what kind of programs fit into this category, and perhaps more importantly -- which ones doesn't -- we will still run through all of the quadrants below, while providing explanations and examples for each.
+In a perfect world, transformation programs would painlessly transform any format to any format and thus exist in  Quadrant A. However, as implied in the beginning of this thesis -- writing a Quadrant A program that is both pragmatically useful and yet flexible is all but trivial \footnote{Since Quadrant A is an interesting quadrant I do of course hope exploration of it will continue.}
 
+Instead, this thesis focus on Quadrant B programs. However, reaching for the highest level of flexibility within the quadrant. With the intent of minimizing the risk of coupling the program to a language on the brink of becoming obsolete.
 
-
+Before exploring Quadrant B further, examples and explanations of each quadrant will be given below, so as to facilitate a deeper understanding of their meanings. The Quadrants will be discussed in reverse order, for the irrelevant sake of increased suspense.
 
 
 
@@ -1172,13 +1173,46 @@ As you might already have guessed, this thesis is concerned with understanding t
 
 
 \subsection{Specialized in, Specialized out (Quadrant D)}
-Programs in Quadrant D (of Figure \ref{fig:microframework-quadrant}) represent the category of really specialized transformers. Programs that convert from one specific input format to some specific output format. The fact that the transformation program is coupled to both the input and the output format essentially means that if want to change input or output format we simply need a new (i.e. another) program.  Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-spec-in-spec-out}. Such a program could for example be a \LaTeX{} to PDF converter. 
+Programs in Quadrant D (of Figure \ref{fig:microframework-quadrant}) represent the category of really specialized transformation programs. They convert formats from one specific domain, to formats from another specific domain. Whether or not these domains are the same is irrelevant. In practice, this essentially mean that if one need to facilitate some format from a different domain, the program need to be rewritten. Visually, these programs are described by Figure \ref{fig:workflows-framework-spec-in-spec-out}. Examples of such a program may for example be a \LaTeX{}-to-PDF converter, or a Markdown-to-HTML converter. 
 
 
 
-\subsection{Specialized in, Generalized out (Quadrant C)}
-Programs in Quadrant C (of Figure \ref{fig:microframework-quadrant}), represent a (to many) very familiar toolset. Namely XML combined with XSLT. The strategy could go something along the following lines. An author express a document in some arbitrary XML format and then use XSLT as a means of outputting multiple different other formats. One could argue that there is a need for one separate XSLT file per output format, or input format. But assuming that the transformation program can be invoked with flags, and that it is written in such a fashion that it supports a wide range of formats, then I would argue it is indeed not coupled. Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-spec-in-gen-out}.
 
+\subsection{Generalized in, Specialized out (Quadrant C)}
+Programs in Quadrant C (of Figure \ref{fig:microframework-quadrant}) represent a, quite odd, set of transformation programs. Namely programs that, in theory, take input from any domain, but always output formats of a specific domain. If one would need to output a format from a different domain, then the program need to be rewritten.
+
+Due to the quite odd nature of these programs, it is difficult to find pramatically useful real-world examples. Perhaps this is because this Quadrant represent a set of programs very different from the intent of this thesis. Very different from the idea of ``writing once and publishing everywhere''.
+
+Nevertheless, such a program might for example be an anything-to-XML converter, that simply slaps a root tag onto whatever string it receives and escape any XML-like syntax from the input string in order to avoid syntax errors. Consequently the program would be able to receive any format, and yet always be able to output valid XML. Pointless, but valid XML. Visually, these programs are described by Figure \ref{fig:workflows-framework-gen-in-spec-out}.
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {$I$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$O$};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(engine) (output)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{Quadrant C programs only suffer from specialized output.}
+  \label{fig:workflows-framework-gen-in-spec-out}
+\end{figure}
+
+
+
+
+
+
+\subsection{Specialized in, Generalized out (Quadrant B)}
+Programs in Quadrant B (of Figure \ref{fig:microframework-quadrant}), can be explained through a (to many) very familiar set of tools. Namely XML combined with XSLT. One express a document in some arbitrary XML format and then use XSLT as a means of outputting multiple different other output formats. Visually, these programs are described by Figure \ref{fig:workflows-framework-spec-in-gen-out}.
 
 
 \begin{figure}[h]
@@ -1198,48 +1232,22 @@ Programs in Quadrant C (of Figure \ref{fig:microframework-quadrant}), represent 
 
   \end{tikzpicture}
 
-  \caption{This Quadrant C program is coupled only to the input format.}
+  \caption{Quadrant B programs only suffer form specialized input.}
   \label{fig:workflows-framework-spec-in-gen-out}
 \end{figure}
 
 
-\subsection{Generalized in, Specialized out (Quadrant B)}
-Programs in Quadrant B (of Figure \ref{fig:microframework-quadrant}) represent a set of very interesting transformation programs. Namely programs that, in theory, take any input, but always convert the output to a fixed kind of output. If an author need a different output format, then he or she simply need to find another program. To be honest I am struggling to find sensible real-world examples for this kind of program. Nevertheless, they are not only interesting, but also highly realizable. Perhaps such a program could be used to convert some set of non-conforming documents to some unified format. For example converting all flavors of miswritten HTML5 into standards-compliant HTML5. Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-gen-in-spec-out}.
-
-\begin{figure}[h]
-  \centering
-
-  \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {$I$};
-    \node (engine) [process, right of=input] {$P$};
-    \node (output) [io,      right of=engine] {$O$};
-
-    \draw [arrow] (input)  -- (engine);
-    \draw [arrow] (engine) -- (output);
-
-    \begin{pgfonlayer}{background}
-      \node [dotbox, fit={(engine) (output)}]{};
-    \end{pgfonlayer}
-
-  \end{tikzpicture}
-
-  \caption{This Quadrant B program is coupled only to the output format.}
-  \label{fig:workflows-framework-gen-in-spec-out}
-\end{figure}
-
-
-
 
 \subsection{Generalized in, Generalized out (Quadrant A)}
-Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent the most general kind of programs. They take arbitrary\footnote{As you might have already understood, we are of course not talking about completely arbitrary, but simply multiple unrelated formats.} input formats and generate arbitrary output formats. These are transformation engines that are prepared for taking general input, and providing facilities to give general output. An example program that exhibits this behavior is the widely used software Pandoc.  Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-gen-in-gen-out}.
+Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent the most general kind of markup transformation programs. They take formats from the arbitrary\footnote{As you might have already understood, we are of course not talking about completely arbitrary, but rather the ability to through configuration accept (almost) arbitrary formats.} domain, and generate outputs within any domain. An example program that exhibits this behavior is the widely used software Pandoc. Visually, these programs are described by Figure \ref{fig:workflows-framework-gen-in-gen-out}.
 
 \begin{figure}[h]
   \centering
 
   \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {In};
-    \node (engine) [process, right of=input] {P};
-    \node (output) [io,      right of=engine] {Out};
+    \node (input)  [io]                       {$In$};
+    \node (engine) [process, right of=input]  {$P$};
+    \node (output) [io,      right of=engine] {$Out$};
 
     \draw [arrow] (input)  -- (engine);
     \draw [arrow] (engine) -- (output);
@@ -1250,7 +1258,7 @@ Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent t
 
   \end{tikzpicture}
 
-  \caption{This Quadrant A program takes any input format and produce any output format.}
+  \caption{Quadrant A programs take general input and produce general output.}
   \label{fig:workflows-framework-gen-in-gen-out}
 \end{figure}
 
