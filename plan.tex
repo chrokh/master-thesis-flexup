@@ -159,11 +159,11 @@
 %
 %
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
-\tikzstyle{io}       = [trapezium, trapezium left angle=75, trapezium right angle=105, minimum width=2cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
-\tikzstyle{process}  = [rectangle, minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=orange!30]
+\tikzstyle{io}       = [trapezium, trapezium left angle=75, trapezium right angle=105, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{process}  = [circle, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{decision} = [diamond,   minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow}    = [thick,->,>=stealth]
-\tikzstyle{dotbox}   = [draw, dotted, rectangle, rounded corners]
+\tikzstyle{dotbox}   = [draw, dotted, rectangle, rounded corners, draw=black]
 
 
 
@@ -1064,9 +1064,9 @@ Further on, a more visual representation will be needed, so Figure \ref{fig:work
   \centering
 
   \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {Input file};
-    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
-    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+    \node (input)  [io] {$In$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$Out$};
 
     % arrows
     \draw [arrow] (input)  -- (engine);
@@ -1112,9 +1112,9 @@ In order to reason about the level of generality of different transformation pro
   \centering
 
   \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {Input file};
-    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
-    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+    \node (input)  [io] {$In$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$Out$};
 
     \draw [arrow] (input)  -- (engine);
     \draw [arrow] (engine) -- (output);
@@ -1137,9 +1137,9 @@ This visual syntax become useful when expressing the generality of transformatio
   \centering
 
   \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {Input file};
-    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
-    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+    \node (input)  [io] {In};
+    \node (engine) [process, right of=input] {P};
+    \node (output) [io,      right of=engine] {Out};
 
     \draw [arrow] (input)  -- (engine);
     \draw [arrow] (engine) -- (output);
@@ -1221,9 +1221,9 @@ Programs in Quadrant C (of Figure \ref{fig:microframework-quadrant}), represent 
   \centering
 
   \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {Input file};
-    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
-    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+    \node (input)  [io] {$I$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$O$};
 
     \draw [arrow] (input)  -- (engine);
     \draw [arrow] (engine) -- (output);
@@ -1242,13 +1242,13 @@ Programs in Quadrant C (of Figure \ref{fig:microframework-quadrant}), represent 
 \subsection{Generalized in, Specialized out (Quadrant B)}
 Programs in Quadrant B (of Figure \ref{fig:microframework-quadrant}) represent a set of very interesting transformation programs. Namely programs that, in theory, take any input, but always convert the output to a fixed kind of output. If an author need a different output format, then he or she simply need to find another program. To be honest I am struggling to find sensible real-world examples for this kind of program. Nevertheless, they are not only interesting, but also highly realizable. Perhaps such a program could be used to convert some set of non-conforming documents to some unified format. For example converting all flavors of miswritten HTML5 into standards-compliant HTML5. Programs in this quadrant can be depicted using the micro-framework as in \ref{fig:workflows-framework-gen-in-spec-out}.
 
-\begin{figure}[p]
+\begin{figure}[h]
   \centering
 
   \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {Input file};
-    \node (engine) [process, right of=input, xshift=2.5cm] {Transformation program};
-    \node (output) [io,      right of=engine, xshift=2.5cm] {Output file};
+    \node (input)  [io] {$I$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$O$};
 
     \draw [arrow] (input)  -- (engine);
     \draw [arrow] (engine) -- (output);
