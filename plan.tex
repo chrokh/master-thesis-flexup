@@ -712,19 +712,42 @@ Within this thesis, it is this line of reasoning that is referred to when discus
 \centering
 
   \begin{tikzpicture}[fill=gray]
-  % left hand
-  \scope
-  \clip (-2,-2) rectangle (2,2)
-        (1,0) circle (1);
-  \endscope
+  \draw (-.75,0) circle (1.25) (1,0)  node [text=black] {$V$}
+        ( .75,0) circle (1.25) (-1,0)  node [text=black] {$M$}
+        (-2.5,-2.5) rectangle (2.5,2.5) node [text=black] {$$};
 
-  % outline
-  \draw (0,0) circle (1) (0,1)  node [text=black,below,yshift=-.7cm] {$M$}
-        (-2,-2) rectangle (2,2) node [text=black,below,left,yshift=-.3cm] {$V$};
   \end{tikzpicture}
 
-  \caption{Venn diagram, where \(V\) is all valid JSON strings and \(M\) is all valid JSON strings that are also valid mixed content strings. }
+  \caption{Not all valid JSON ($V$) is valid mixed content ($M$).}
   \label{fig:mixed-content-venn-json}
+\end{figure}
+%TODO: I should really, really, really call M L instead.
+
+
+
+
+\begin{figure}[h]
+\centering
+
+  \begin{tikzpicture}[fill=gray]
+
+  % outline
+  %\draw (-2,-2) rectangle (2,2) node [text=black,below,left,yshift=-.3cm] {$V, M$};
+
+  % \draw (-.5,0) circle (1) (0,1)  node [text=black,yshift=-1cm,xshift=-.7cm] {$V$}
+  %       ( .5,0) circle (1) (0,1)  node [text=black,yshift=-1cm,xshift=.7cm] {$M$}
+  %       (-3,-3) rectangle (3,3) node [text=black  ,yshift=-.3cm] {$$};  
+
+  \draw (0,0) circle (2) (0,1.5)  node [text=black] {$M$}
+        (0,0) circle (1) (0,0)     node [text=black] {$V$}
+        (-2.5,-2.5) rectangle (2.5,2.5) node [text=black] {$$};
+
+  
+
+  \end{tikzpicture}
+
+  \caption{All valid XML ($V$) is valid mixed content ($M$).}
+  \label{fig:mixed-content-venn-xml}
 \end{figure}
 
 
