@@ -1049,7 +1049,14 @@ The process that we are going to analyze is that of file format transformation. 
 Given the creativity of humans, I would argue that, the number of workflows used in the real world today is likely to be equivalent to, or higher, than the number of people actually employing a workflow. Thus, in order to be able to discuss workflows, we need some way to generalize these workflows, such that most workflows are captured. Thus, Figure \ref{fig:workflows-framework} suggests a micro-framework that will be used as a basis for this argument. Given its utterly high level of abstraction and simplicity there is little reason to argue its representativity.
 
 
-\paragraph{The micro-framework stem from the following argument: } To perform the process, previously described as transforming from $F$ to $F\prime$, one can trivially distinguish the three parts of the statement. The pre-state ($F$), the post-state ($F\prime$), and the $program$. In Figure \ref{fig:workflows-framework} this is depicted in that \(F\) is referred to as ``Input file'' and \(F\prime\) as ``Output file'', and the program as the ``Transformation program''. Again, as this model simply depicts the transformation as a single joint function there is really no need for arguing its validity. The model simply depicts a function where the domain of all possible inputs is given as input, and the domain of all possible outputs is produced as output. Since the very nature of a markup transformation program is to take a string of some language and produce a string in perhaps another language, then of course all markup transformation programs fall under this model.
+\paragraph{The micro-framework stem from the following argument: } To perform the process, previously described as transforming from $F$ to $F\prime$, one can trivially distinguish the three parts of the statement. The pre-state ($F$), the post-state ($F\prime$), and the program ($P$). This is illustrated in Equation \ref{eq:microframework}.
+
+\begin{equation}
+  P(F) \mapsto F\prime
+  \label{eq:microframework}
+\end{equation}
+
+Further on, a more visual representation will be needed, so Figure \ref{fig:workflows-framework} should be considered equivalent to Equation \ref{eq:microframework}. Again, as this model simply depicts the transformation as a single joint function there is really no need for arguing its validity. The model simply depicts a function where the domain of all possible inputs is given as input, and the domain of all possible outputs is produced as output. Since the very nature of a markup transformation program is to take a string of some language and produce a string in perhaps another language, then of course all markup transformation programs can be described in this model.
 
 
 \begin{figure}[h]
@@ -1075,8 +1082,7 @@ Given the creativity of humans, I would argue that, the number of workflows used
 \end{figure}
 
 
-You might argue that some workflows actually encompass multiple steps of transformation, and I would of course agree. If you however consider how Figure \ref{fig:workflows-framework} actually depict a function, then it becomes obvious how we could use the output of one function as input to another function. Consequently, it is in the model implicit that you may apply it any number of times.
-
+Obviously the transformation program in Figure \ref{fig:workflows-framework} need to be refined (i.e. broken down into further detail) in order to accurately represent most actual transformation programs. This refinement will be carried out further on.
 
 
 
