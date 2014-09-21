@@ -9,7 +9,7 @@
 \usepackage{hyperref}
 \usepackage{enumitem}
 \usepackage[toc]{glossaries}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \usepackage{listings}
 \usepackage{tikz}
 \usetikzlibrary{calc, fit, shapes.geometric, arrows}
@@ -1119,27 +1119,33 @@ In order to reason about the level of generality of different transformation pro
 
 
 
-\section{Common workflows}
-We will soon look at some common workflows, and how they can be expressed using the simple micro-framwork described in the previous section. But before we do, let us discuss all the possibilities of coupling in the framework through a quadrant diagram -- depicted in Figure \ref{fig:microframework-quadrant}. Instead of the term coupling we will in the quadrant use the terms ``generalized'' and ``specialized''. To oversimplify -- the first should be considered good and the second bad. The idea is in essence the same as with the previously discussed coupling. If some part of the program is generalized then it would mean that the transformation engine is agnostic to changes in that particular part. If however a particular part is specialized then the transformation program will inevitably have to be rewritten upon changes in the particular part. 
+\section{Possible workflows}
+The intent of this section is to depict all workflows that can be expressed using the simple micro-framework outlined in Section \ref{sec:microframework}. In order to ensure coverage of all possibilities, consider the quadrant diagram depicted in Figure \ref{fig:microframework-quadrant}.
 
+Remember that the terms ``generalized'' and ``specialized'' are used to denote the lack of, or existence (in that order) of items not present in any other domain. To oversimplify -- generalization is considered good and specialization bad. To concretize -- generalization in one end mean that any format can be used in that end. Whereas specialization in one end mean that only one particular set of formats can be used in that end. In the case of the latter, the consequence is that the program $P$ must be rewritten if one desires to make use of a format outside of that set in the specialized end. Consequently this is considered a bad feature because one must write more programs.
 
 \begin{figure}[h]
   \centering
 
-  \begin{tabular}{r | c | c}
-    & \textbf{Generalized output} & \textbf{Specialized output} \\ \hline
+  \def\arraystretch{2.5}
+  \begin{tabular}{|r|c|c|}
+    \hline
 
-    \textbf{Generalized input} &
-    A
+    & \textbf{Generalized out} & \textbf{Specialized out} \\ \hline
+
+    \textbf{Generalized in} &
+    \cellcolor[HTML]{33FF99} A
     &
-    B 
+    \cellcolor[HTML]{FFFF99} B 
 
     \\ \hline
 
-    \textbf{Specialized input} &
-    C
+    \textbf{Specialized in} &
+    \cellcolor[HTML]{FFFF99} C
     &
-    D
+    \cellcolor[HTML]{FFFFCC} D
+
+    \\ \hline
   \end{tabular}
 
   \caption{All combinations of coupling that can occur in Figure \ref{fig:workflows-framework} expressed in a quadrant diagram}
