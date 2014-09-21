@@ -935,7 +935,7 @@ Consequently I argue that these three ``categories'' of the taxonomy can be view
 
 In XML, the author of a document is given the freedom to mark up her document with whatever combination of element names the author see fit\refXMLspec. As XML is a subset of SGML\refXMLspec, and SGML ascended from XML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that this concept of arbitrary element names was already present in the earlier language GML. In GML, this concept was actually referred to as Generic Identifiers (GI's) \citet{goldfarb}.
 
-According to \citet{goldfarb}, GML was designed upon two ``novel postulates''. Firstly that (1) markup should describe a document's structure rather than processing instructions. A document once expressed descriptively should suffice for all future processing. Secondly that (2) markup should be rigorous. So that programs can be used for processing documents.
+According to \citet{goldfarb}, GML was designed upon two ``novel postulates''. Firstly that (1) markup should describe a document's structure rather than the processing to be performed. A document once expressed descriptively should suffice for all future processing. Secondly that (2) markup should be rigorous. So that programs can be used for processing documents.
 
 The ingenious move of GML was to only let the markup language cover the first point of the two above \citet{goldfarb}. In other words, GML allow an author describe a document's structure in any way she see fit, using the mnemonic tag -- i.e. a GI.
 
@@ -979,13 +979,13 @@ Obviously, both are important for, as \citet{goldfarb} puts it, rigor.
 \chapter{Theory part II -- Document processing}
 \label{sec:theory-of-document-processing}
 
-\citet{goldfarb} shed some light onto the issue that descriptive markup is less trivial to parse than procedural. Informally put, to process a procedural document, one simply need to parse the document and carry out each instruction accordingly. But in the case of descriptive markup there is a disconnect between a particular marked up string and its correspondingly appropriate processing instructions.
+\citet{goldfarb} shed some light onto the issue that descriptive markup is less trivial to parse than procedural. Informally put, to process a procedural document, one simply need to parse the document and carry out each instruction accordingly. But in the case of descriptive markup there is a disconnect between a particular marked up string and its correspondingly appropriate processing functions.
 
-To formalize this disconnect, \citet{goldfarb} suggest a three-step model for document processing. The term document processing here refer to the idea of taking some document containing Generic Identifier's (GI's) as input, applying some set of processing instructions, to produce some other document as output. The three steps of \citet{goldfarb} are (1) recognition, (2) mapping, and (3) processing. These will be explained in closer detail below.
+To formalize this disconnect, \citet{goldfarb} suggest a three-step model for document processing. The term document processing here refer to the idea of taking some document containing Generic Identifier's (GI's) as input, applying some set of processing functions, to produce some other document as output. The three steps of \citet{goldfarb} are (1) recognition, (2) mapping, and (3) processing. These will be explained in closer detail below.
 
 \paragraph{Recognition} refer to the idea of recognizing that some piece of the document string should be considered an element that is marked up. While not explicitly expressed by \citet{goldfarb} it seems reasonable to informally consider this step to be the step of lexing (tokenization) and parsing, where its output would to be the parse tree. \citet{goldfarb} gives the example of an element with the generic identifier ``footnote''.
 
-\paragraph{Mapping} refer to the idea of pairing up the correct set of processing instructions with the correct document elements (or to follow the analogy of the last paragraph -- nodes in the parse tree). \citet{goldfarb} continue on the previous footnote example by saying that the element now perhaps would be paired up with a processing function that collects the content of the footnote, only to print it later at the bottom of the page.
+\paragraph{Mapping} refer to the idea of pairing up the correct set of processing functions with the correct document elements (or to follow the analogy of the last paragraph -- nodes in the parse tree). \citet{goldfarb} continue on the previous footnote example by saying that the element now perhaps would be paired up with a processing function that collects the content of the footnote, only to print it later at the bottom of the page.
 
 \paragraph{Processing} trivially refer to the task of executing the processes on their respectively mapped elements.
 
