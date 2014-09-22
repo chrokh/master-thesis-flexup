@@ -1497,26 +1497,72 @@ As mentioned earlier in this chapter, the quadrant view is an oversimplification
 
 
 
-\section{Applying the three-step model }
+\section{Applying the three-step model}
 The first step will be to refine the model as depicted in Figure \ref{fig:quad-b-with-three-step-process} because of the arguments proposed in the transformation requirements Section \ref{sec:applying-three-step-model-to-quad-b}. The model will now allow a greater level of package re-use.
 
 
+\section{Splitting processing according to intent}
+The next step will be to refine the model according to the different intents of transformations identified in Section \ref{chpt:derived-transformation-requirements}. This refinement is depicted in Figure \ref{fig:ideal-only-different-intents}.
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=.15cm]
+    \node (in)  [io]                                 {\(In\)};
+    \node (P1)  [process, right of=in, xshift=2.5cm] {\(P1\)};
+    \node (P2)  [process, right of=P1, xshift=2.5cm] {\(P2\)};
+    \node (P3)  [process, right of=P2, xshift=2.5cm] {\(P3\)};
+    \node (P4)  [process, right of=P3, xshift=2.5cm] {\(P4\)};
+    \node (out) [io,      right of=P4, xshift=2.5cm] {\(Out\)};
+
+    \draw [arrow] (in) -- (P1);
+    \draw [arrow] (P1) -- (P2);
+    \draw [arrow] (P2) -- (P3);
+    \draw [arrow] (P3) -- (P4);
+    \draw [arrow] (P4) -- (out);
+    \draw [arrow] (P1) edge[loop below]();
+    \draw [arrow] (P2) edge[loop below]();
+    \draw [arrow] (P3) edge[loop below]();
+    \draw [arrow] (P4) edge[loop below]();
+  \end{tikzpicture}
+
+  \caption{Suggested refinement where each type of transformation intent is modeled as a separate process.}
+  \label{fig:ideal-only-different-intents}
+\end{figure}
+
+Understand, that in \ref{fig:ideal-only-different-intents}, the previously all-encompassing program $P$, has now been refined into its subparts $P1$ to $P4$. Where table in Figure \ref{tbl:ideal-only-different-intents-legend} explain the mapping of intents of the subprograms.
+
+
+\begin{figure}[h]
+\begin{tabular}{l l l}
+Process & Intent & Description
+\\ \hline
+
+$P1$ & Syntax & Lexing and parsing of the document to create the AST.
+\\
+
+$P2$ & Validations & Validates the semantics of the document.
+\\
+
+$P3$ & Derivations & Packages that enable the document to utilize derived text.
+\\
+
+$P4$ & Presentations & Converts the document into a presentation oriented format
+\\
+\end{tabular}
+\caption{Legend of the subprograms with different intents depicted in Figure \ref{fig:ideal-only-different-intents}}
+\label{tbl:ideal-only-different-intents-legend}
+\end{figure}
 
 
 
 
 
-\hrulefill
-
-In order for the model to also encompass the idea of configurability we will extract one piece of the transformation program and thus describe it in further detail. What we will extract is a configuration file (see Figure \ref{fig:workflows-framework-spec-in-spec-out}). Essentially the model of the program can now be seen as a function that takes two arguments and produces one result. An input file, a configuration file that give the end-user some level of control over the transformation process.
-
-We will not introduce any more details now, but instead look at what common workflows we can describe using this model.
 
 
 
-\section{An ideal workflow}
-TODO.
 
+\section{A model of an ideal workflow}
 \begin{figure}[h]
   \centering
 
@@ -1559,6 +1605,16 @@ TODO.
   \caption{Suggested ideal refinement of a Quadrant B program.}
   \label{fig:workflows-framework-ideal}
 \end{figure}
+
+
+
+
+\hrulefill
+
+In order for the model to also encompass the idea of configurability we will extract one piece of the transformation program and thus describe it in further detail. What we will extract is a configuration file (see Figure \ref{fig:workflows-framework-spec-in-spec-out}). Essentially the model of the program can now be seen as a function that takes two arguments and produces one result. An input file, a configuration file that give the end-user some level of control over the transformation process.
+
+We will not introduce any more details now, but instead look at what common workflows we can describe using this model.
+
 
 
 
