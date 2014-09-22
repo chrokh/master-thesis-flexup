@@ -1530,7 +1530,7 @@ The next step will be to refine the model according to the different intents of 
   \label{fig:ideal-only-different-intents}
 \end{figure}
 
-Understand, that in \ref{fig:ideal-only-different-intents}, the previously all-encompassing program $P$, has now been refined into its subparts $P1$ to $P4$. Where table in Figure \ref{tbl:ideal-only-different-intents-legend} explain the mapping of intents of the subprograms.
+Understand, that in Figure \ref{fig:ideal-only-different-intents}, the previously all-encompassing program $P$, has now been refined into its subparts $P1$ to $P4$. Where table in Figure \ref{tbl:ideal-only-different-intents-legend} explain the mapping of intents of the subprograms.
 
 
 \begin{figure}[h]
@@ -1555,8 +1555,68 @@ $P4$ & Presentations & Converts the document into a presentation oriented format
 \end{figure}
 
 
+\subsection{Looping the intent-delimited subprograms}
+\label{sec:ideal-looping-subprograms}
+Notice, that each sub-program in Figure \ref{fig:ideal-only-different-intents} has two choices of ``moving forward''. Either it can re-apply itself again, or it can move on to the next intent. This simple feature exist in order to further satisfy the second high-level goal -- composability. Since transformation at a particular level of intent can be applied any number of times, this means any number of packages can be applied to the document before moving on to the next intent. Naturally this stems from the fact that one might, e.g., not only want to inject the derived text for a table of contents, but also perhaps for a bibliography and a figure list. Since any number of intent-delimited transformations may be run, an author can decide to run any number of transformations before moving on to the next intent.
 
 
+
+\section{Re-applying the three-step model to each step}
+The observant reader may have noticed that the configuration file and the processing functions (PF) file that were depicted in Figure \ref{fig:quad-b-with-three-step-process} went missing when moving to Figure \ref{fig:ideal-only-different-intents}. This was a deliberate move, so that the decisions on how to refine the PF's would be obvious.
+
+The question is of course whether the Configuration file and PF that previously was applied to the whole single program $P$ now should be applied to one, some or all of the sub-programs. The author of this paper argue all, and the motivation is simple. Because of the looping of intent-delimited sub-programs (as suggested in the previous Section \ref{sec:ideal-looping-subprograms}) the previously discussed (in Section \ref{sec:applying-three-step-model-to-quad-b}) problems of blindly applying packages (sub-programs) to the document, would re-appear if the document author would not have the chance to specify a mapping file. I.e. mapping in the sense of the three-step-model by \citet{goldfarb} explained in detail in Sections \ref{sec:three-step-model} and \ref{sec:applying-three-step-model-to-quad-b}. The document author that initiates the transformation must be allowed to specify a mapping file for each transformation package that will run on the document.
+
+This refinement is depicted in Figure \ref{fig:ideal-different-intents-with-configs}. Where all of the $C$-based data stores represent mapping-files that allow the externalized processing functions (Illustrated as $F$-based data stores) to be ``mapped'' onto the current document.
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=.15cm]
+    \node (in)  [io]                                 {$In$};
+    \node (P1)  [process, right of=in, xshift=2.5cm] {$P1$};
+    \node (P2)  [process, right of=P1, xshift=2.5cm] {$P2$};
+    \node (P3)  [process, right of=P2, xshift=2.5cm] {$P3$};
+    \node (P4)  [process, right of=P3, xshift=2.5cm] {$P4$};
+    \node (out) [io,      right of=P4, xshift=2.5cm] {$Out$};
+
+    \node (C1)  [ds,      above of=P1, yshift=2cm, xshift=-.6cm] {$C1$};
+    \node (F1)  [ds,      above of=P1, yshift=2cm, xshift= .6cm] {$F1$};
+
+    \node (C2)  [ds,      above of=P2, yshift=2cm, xshift=-.6cm] {$C2$};
+    \node (F2)  [ds,      above of=P2, yshift=2cm, xshift= .6cm] {$F2$};
+
+    \node (C3)  [ds,      above of=P3, yshift=2cm, xshift=-.6cm] {$C3$};
+    \node (F3)  [ds,      above of=P3, yshift=2cm, xshift= .6cm] {$F2$};
+
+    \node (C4)  [ds,      above of=P4, yshift=2cm, xshift=-.6cm] {$C4$};
+    \node (F4)  [ds,      above of=P4, yshift=2cm, xshift= .6cm] {$F2$};
+
+    \draw [arrow] (in) -- (P1);
+    \draw [arrow] (P1) -- (P2);
+    \draw [arrow] (P2) -- (P3);
+    \draw [arrow] (P3) -- (P4);
+    \draw [arrow] (P4) -- (out);
+
+    \draw [arrow] (P1) edge[loop below]();
+    \draw [arrow] (P2) edge[loop below]();
+    \draw [arrow] (P3) edge[loop below]();
+    \draw [arrow] (P4) edge[loop below]();
+
+    \draw [arrow] (C1) -- (P1);
+    \draw [arrow] (C2) -- (P2);
+    \draw [arrow] (C3) -- (P3);
+    \draw [arrow] (C4) -- (P4);
+
+    \draw [arrow] (F1) -- (P1);
+    \draw [arrow] (F2) -- (P2);
+    \draw [arrow] (F3) -- (P3);
+    \draw [arrow] (F4) -- (P4);
+
+  \end{tikzpicture}
+
+  \caption{Suggested refinement where the processing functions of each intent-delimited transformation is externalized to another file (e.g. a package) and it's mapping on to the document may be controlled using a mapping file.}
+  \label{fig:ideal-different-intents-with-configs}
+\end{figure}
 
 
 
