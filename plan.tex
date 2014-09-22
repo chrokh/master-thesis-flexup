@@ -1373,10 +1373,18 @@ While it of course is nifty that a markup language (and it's compiler) have a bu
 In Section \ref{sec:goals-for-the-transformation-program} requirements for a transformation program were set out. In this section, requirements for the languages supported by such a transformation program will be outlined. The requirements introduced by this chapter are strictly derived from important realizations in Section \ref{sec:theory}.
 
 
+\section{Descriptive}
+The hierarchy of abstraction, outlined in Section \ref{sec:abstraction-hierarchy}, shows that it is desirable (for manual work) to author documents in the ``top of the pyramid''. I.e. in descriptive languages. Thus, the requirement derived will be that all languages (assuming there might be more than one) an author ``comes in contact'' with must be descriptive.
+
+Understand that all humans using end-tools in the eco-system should be deemed authors. In Section \ref{sec:goals-for-the-transformation-program} the idea of packages to enable reuse is discussed. Also package authors must be considered authors. Thus also packages must be expressed descriptively. Subsequently this indicate the need for a template transformation approach rather than imperative processing.
+
+
+
 \section{Nestable}
 As accounted for in Section \ref{sec:nesting}, the ability to nest elements within elements is a fundamental feature of markup languages, and increase the level of pragmatic usability drastically. By reducing the number of base tokens needed to be designed by the language designer.
 
 Due to the lack of consensus in the community (as described in Section \ref{sec:non-hierarchical-nesting}) on sensible approaches, no attempt is made in this thesis to breach the borders of hierarchical document descriptions into the land of more general nesting. However, as nesting, as shown, is a pragmatically very useful feature of a language, the requirement for the eco-system of tools produced in this thesis is then that the input language of the eco-system be hierarchical\footnote{I encourage future research to breach this painstaking border, but also to appreciate that the measures suggested in this thesis, likely not only still apply beyond the breaching of the hierarchical border, but also are equally significant.}.
+
 
 
 \section{Mixed content}
@@ -1384,11 +1392,6 @@ As accounted for in Section \ref{sec:mixed-content}, the idea of Mixed Content, 
 
 The requirement is thus, that the input language of this eco-system of tools, must support mixed content.
 
-
-\section{Descriptive}
-The hierarchy of abstraction, outlined in Section \ref{sec:abstraction-hierarchy}, shows that it is desirable (for manual work) to author documents in the ``top of the pyramid''. I.e. in descriptive languages. Thus, the requirement derived will be that all languages (assuming there might be more than one) an author ``comes in contact'' with must be descriptive.
-
-Understand that all humans using end-tools in the eco-system should be deemed authors. In Section \ref{sec:goals-for-the-transformation-program} the idea of packages to enable reuse is discussed. Also package authors must be considered authors. Thus also packages must be expressed descriptively. Subsequently this indicate the need for a template transformation approach rather than imperative processing.
 
 
 \section{Generic Identifiers}
@@ -1522,6 +1525,84 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 
 
 
+
+
+
+
+
+
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % 
+%
+%
+%
+%   PROPOSING AN IDEAL ABSTRACT LANGUAGE
+%
+%
+%
+% % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+
+\chapter{Proposing a minimal abstract language}
+\label{chpt:proposal-language}
+This section will propose a minimal markup language that is intended to be used as input to the second deliverable of this thesis -- the transformation workflow model depicted further on in Section \ref{chpt:proposal-transformation-workflow}. The language is intended to be as minimalistic as possible, while fulfilling the requirements identified in Section \ref{chpt:derived-language-requirements}.
+
+Any useful complexity discussed in the theory parts of this thesis will be shifted off into the transformation program, or be argued to belong in shared packages for the transformation program. Below, the requirements from Section \ref{chpt:derived-language-requirements} are repeated and explained.
+
+
+\paragraph{Descriptive.} The proposed markup language(s) must be descriptive and descriptive only. Following the definition of descriptive as defined in Sections \ref{sec:taxonomy} and \ref{sec:abstraction-hierarchy}.
+
+
+\paragraph{Nestable.} The proposed language(s) must support hierarchical nesting into arbitrary depth.
+
+
+\paragraph{Mixed Content.} The proposed language(s) must support and be suitable for Mixed Content. Following the formal definition of suitability defined in Section \ref{sec:mixed-content}.
+
+
+\paragraph{Generic Identifiers.} The proposed language(s) must support the use of generic syntax and contain no forced syntactical keywords. In the case of multiple languages being suggested, only the language used as input to the transformation program must exhibit this property.
+
+
+
+
+\section{Proposing a DSL for generating markup-oriented EBNF}
+
+
+
+\subsection{A proper, markup-oriented subset of Regular Expressions}
+
+
+\subsection{A DSL for generating markup-oriented EBNF}
+
+
+\subsubsection{Example of a generated EBNF}
+
+\subsubsection{Example of usage}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 % % % % % % % % % % % % % % % % % % % % % % % % % % 
 %
 %
@@ -1536,6 +1617,7 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 
 
 \chapter{Proposing an ideal workflow}
+\label{chpt:proposal-transformation-workflow}
 As mentioned earlier in this chapter, the quadrant view is an oversimplification and of course there are many interesting nuances within one quadrant. This section will refine Quadrant B, using the requirements gathered in Sections \ref{chpt:derived-language-requirements} and \ref{chpt:derived-transformation-requirements}, as guidelines, and through the collected requirements reach a supported proposal for an ideal workflow.
 
 \paragraph{The model of Quadrant B} (Figure \ref{fig:workflows-framework-spec-in-gen-out}) will be used as a starting point due to the arguments given in Section \ref{chpt:derived-transformation-requirements}. In summary, it is the one of the four quadrant models that fit the initial high-level goals outlined in Section \ref{sec:goals-for-the-transformation-program}.
@@ -1823,46 +1905,6 @@ While the author of this paper would suggest it sensible to initially build one 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-% % % % % % % % % % % % % % % % % % % % % % % % % % 
-%
-%
-%
-%   PROPOSING AN IDEAL ABSTRACT LANGUAGE
-%
-%
-%
-% % % % % % % % % % % % % % % % % % % % % % % % % % 
-
-
-\chapter{Proposing a minimal abstract language}
-%TODO.
-
-
-\section{A proper subset of Regular Expressions}
-
-
-\section{A DSL for markup-oriented EBNF}
 
 
 
