@@ -2006,57 +2006,6 @@ While the author of this paper would suggest it sensible to initially build one 
 
 
 
-
-
-
-
-
-% % % % % % % % % % % % % 
-%
-%
-%
-%   ANALYSIS
-%
-%
-%
-% % % % % % % % % % % % % 
-
-\chapter{Analysis}
-%TODO.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 % % % % % % % % % % % % % 
 %
 %
@@ -2068,7 +2017,28 @@ While the author of this paper would suggest it sensible to initially build one 
 % % % % % % % % % % % % % 
 
 \chapter{Conclusion}
-%TODO.
+This thesis set out with the intent of reaching two deliverables. Both of which have been produced.
+
+\begin{enumerate}
+\item A suggestion for a minimal markup language with no default syntax,
+\item A model depicting an ideal workflow for markup transformations.
+\end{enumerate}
+
+\paragraph{Regarding the first deliverable,} it is indeed not a full specification for a language, but some strategic extracts depicting the lexing, parsing and usage of such a language family. The extracts underline the actual realizability of such a language. Even though much is left before such a language can be considered sound, it is apparent there exist no obvious barriers to as why such a language should not be able to be constructed.
+
+\paragraph{Regarding the second deliverable,} the model is considered to be close to complete. The model has strong roots in the theory outlined in this thesis, and considering how significant the papers, the standards, the languages and the people explored in this thesis have been to the world of markup languages, it is safe to say that the model is based on some well-grounded knowledge.
+
+
+\paragraph{The intent of the thesis}
+was to show that the idea of ``n-to-n'' document conversion is so utterly complicated that it is more pragmatic to consider alternative ways of approaching the problem from an ``1-to-n'' perspective.
+
+This intent has been met through discussing the fallacies of approaches such as Pandoc, and allowing the ideal workflow suggested in this thesis to contrast. In retrospect one could argue this thesis shows tendencies towards that ``1-to-n'' document conversions actually may be a significantly more satisfying approach to the notion of ``write once, publish everywhere''.
+
+
+\paragraph{The intent of the thesis}
+was to show that it is significantly easier to convert a document format with utterly few constructs to any other markup language, rather than having to ``make sense'' out of complex constructs that exist in a source language but have no really sensible counterpart in a different destination language.
+
+Also this intent has been satisfied through showing how the transformation process easily can be cut into highly composable pieces as long as the starting point is the most abstract possible representation of a document. Again, there are tendencies pointing towards that ``1-to-n'' might not just be a more realistic approach, but actually a significantly more powerful.
 
 
 
