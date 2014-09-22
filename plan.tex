@@ -1566,22 +1566,68 @@ Any useful complexity discussed in the theory parts of this thesis will be shift
 
 
 
-\section{Proposing a DSL for generating markup-oriented EBNF}
-In order to fulfill the requirement of Generic Syntax, the author of this thesis propose that document authors use Formal Grammars to express a language specific for her particular domain. A language in which the end content then can be marked up.
+\section{Proposing a DSL for generating markup-oriented PEG}
+In order to fulfill the requirement of Generic Syntax, the author of this thesis propose that document authors use Formal Grammars  to express a language specific for her particular domain. A language in which the end content then can be marked up.
 
-Asking semi-technicals (whom authors very well may be) to define languages using Formal Grammars such as EBNF is however of course not only absurd, but also time-consuming and error prone. Thus the suggestion is to create a small DSL and a conversion program that converts this simpler language to actual EBNF.
+Asking semi-technicals (whom authors very well may be) to define languages using Formal Grammars such as a Parsing Expression Grammar (PEG) is however of course not only absurd, but also time-consuming and error prone. Thus the suggestion is to create a small DSL and a conversion program that converts this simpler language to actual PEG.
 
-This smaller language will of course limit the number of expressible languages in EBNF such that all valid inputs in the language will when run through the program produce an EBNF that conform the set of requirements outlined in this chapter, and is thus suitable as a markup format.
-
-
-
-\subsection{A proper, markup-oriented subset of Regular Expressions}
+This smaller language will of course limit the number of expressible languages in PEG such that all valid inputs in the language will when run through the program produce an PEG that conform the set of requirements outlined in this chapter, and is thus suitable as a markup format.
 
 
-\subsection{A DSL for generating markup-oriented EBNF}
+
+\subsection{A DSL for generating markup-oriented PEG}
+
+\begin{lstlisting}
+start     = (rule line?)+
+rule      = name spaces ":" spaces pattern
+pattern   = symbol+ "%" symbol+
+name      = CHAR+
+symbol    = SYMBOL / CHAR
+line      = "\n" / "\r\n" / "\r"
+spaces    = [ ]*
+
+CHAR      = [A-Za-z]
+SYMBOL    = [/*_\[\]]    /* and so forth... */
+\end{lstlisting}
 
 
-\subsubsection{Example of a generated EBNF}
+Example usage..
+\begin{lstlisting}
+bold   :  **%**
+quote  :  [q]%[/q]
+\end{lstlisting}
+
+
+
+
+\subsubsection{Example of a generated PEG}
+
+\begin{lstlisting}
+/*
+ *   static
+ */
+
+TEXT     = [A-Za-z]
+
+start    = (expr)*;
+expr     = text / element / simple
+explicit = explicit_quote
+implicit = implicit_bold
+
+
+/*
+ *   generated
+ */
+
+T_BOLD   = "**"
+S_QUOTE  = "[q]"
+E_QUOTE  = "[/q]"
+
+explicit_quote = SQUOTE (expr)* E_QUOTE
+implicit_bold  = TBOLD  (expr)* T_BOLD
+\end{lstlisting}
+
+
 
 \subsubsection{Example of usage}
 
