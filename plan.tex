@@ -952,6 +952,7 @@ Consequently I argue that these three ``categories'' of the taxonomy can be view
 
 
 \section{Generic Identifiers and Validity}
+\label{sec:theory:generic-identifiers-and-validity}
 \DeclareFixedFootnote{\refXMLspec}{http://www.w3.org/TR/WD-xml-961114}
 
 In XML, the author of a document is given the freedom to mark up her document with whatever combination of element names the author see fit\refXMLspec. As XML is a subset of SGML\refXMLspec, and SGML ascended from XML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that this concept of arbitrary element names was already present in the earlier language GML. In GML, this concept was actually referred to as Generic Identifiers (GI's) \citet{goldfarb}.
@@ -990,6 +991,15 @@ Informally put, the difference between tag-validity and type-validity can be exp
 Obviously, both are important for, as \citet{goldfarb} puts it, rigor.
 
 
+\subsection{Arguing the case of Generic Identifiers}
+No extensive argumentation for the case of Generic Identifiers (GI's) will be conducted. Except for referencing the statement by \citet{goldfarb} claiming that the classic markup language Scribe (by \citet{reid}) manages to avoid procedural markup completely, much because of the effectivity of Generic Identifiers.
+
+Further, it has already been established in Section \ref{sec:abstraction-hierarchy}, that in the hierarchy of Markup types, it is desirable to reach a state where all manually authored markup is descriptive. Consider however, how descriptive markup can be of two subtypes\footnote{And any combination in between the extremes of course.}. One is the type of Generic Identifiers. Where element names may be made up on the fly, by the document author. The other type is that without Generic Identifiers. In other words a language with a fixed number of elements.
+
+The author of this thesis argue for the superiority of the first rather than the latter. For the simple reason that Generic Identifiers enable document authors to express their documents at the highest possible level of abstraction. Meaning that Generic Identifiers combined with transformation facilities enable authors to express things in arbitrary syntax suitable for the cognitive mindset of those particular authors. Compare this to the situation where a user has to dig through a hefty manual in order to locate the name of some element the author assume exist but don't actually know.
+
+The author of this thesis does not argue that Generic Identifiers is neither a fundamental property of markup languages, nor that it would be undoubtedly necessary. However, the argument is that, in any domain of uncertainty, or any domain undergoing change Generic Identifiers provide a facility to mark up information in a way that is significantly more ready for change. Whether or not programmers need to always be ready for change, is left as en exercise for the reader. Thus, again, the argument is not that GI's are absolutely necessary, however that they provide such a significantly stronger foundation for documents expressed in the language that GI's should be considered an obviously integral feature of markup languages.
+%TODO: Is this reeeally the argument I want to make :/
 
 
 
@@ -1359,6 +1369,10 @@ The requirement is thus, that the input language of this eco-system of tools, mu
 The hierarchy of abstraction, outlined in Section \ref{sec:abstraction-hierarchy}, shows that it is desirable (for manual work) to author documents in the ``top of the pyramid''. I.e. in descriptive languages. Thus, the requirement derived will be that all languages (assuming there might be more than one) an author ``comes in contact'' with must be descriptive.
 
 Understand that all humans using end-tools in the eco-system should be deemed authors. In Section \ref{sec:goals-for-the-transformation-program} the idea of packages to enable reuse is discussed. Also package authors must be considered authors. Thus also packages must be expressed descriptively. Subsequently this indicate the need for a template transformation approach rather than imperative processing.
+
+
+\section{Generic Identifiers}
+As accounted for in Section \ref{sec:theory:generic-identifiers-and-validity}
 
 
 
