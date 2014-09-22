@@ -1439,10 +1439,15 @@ Consequently, another distinct intent is the transformation from some format to 
 \chapter{Proposing an ideal workflow}
 As mentioned earlier in this chapter, the quadrant view is an oversimplification and of course there are many interesting nuances within one quadrant. This section will refine Quadrant B, using the requirements gathered in Sections \ref{chpt:derived-language-requirements} and \ref{chpt:derived-transformation-requirements}, as guidelines, and through the collected requirements reach a supported proposal for an ideal workflow.
 
+\paragraph{The model of Quadrant B} (\ref{fig:workflows-framework-spec-in-gen-out}) will be used as a starting point due to the arguments given in \ref{chpt:derived-transformation-requirements}. In summary, it is the one of the four quadrant models that fit the initial high-level goals outlined in Section \ref{sec:requirements-initial}.
+
+
+\section{Applying the three-step model Quadrant B}
+As the three-step model of \citet{goldfarb}, discussed in Section \ref{sec:three-step-model}, is (as mentioned) quite versatile, it will in this section be applied to the Quadrant B model of the micro-framework discussed in Section \ref{sec:microframework}.
 
 
 
-
+\hrulefill
 
 In order for the model to also encompass the idea of configurability we will extract one piece of the transformation program and thus describe it in further detail. What we will extract is a configuration file (see Figure \ref{fig:workflows-framework-spec-in-spec-out}). Essentially the model of the program can now be seen as a function that takes two arguments and produces one result. An input file, a configuration file that give the end-user some level of control over the transformation process.
 
