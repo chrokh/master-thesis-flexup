@@ -1547,7 +1547,7 @@ $P2$ & Validations & Validates the semantics of the document.
 $P3$ & Derivations & Packages that enable the document to utilize derived text.
 \\
 
-$P4$ & Presentations & Converts the document into a presentation oriented format
+$P4$ & Presentations & Converts the document into presentation oriented formats.
 \\
 \end{tabular}
 \caption{Legend of the subprograms with different intents depicted in Figure \ref{fig:ideal-only-different-intents}}
@@ -1621,50 +1621,163 @@ This refinement is depicted in Figure \ref{fig:ideal-different-intents-with-conf
 
 
 
+\section{An orchestrator file}
+Given the current refinements of the ideal model (last version depicted in Figure \ref{fig:ideal-different-intents-with-configs}), one must realize that an execution of this model may be significantly complex. A potential ``run'' through this model might for example be explained as follows:
 
-\section{A model of an ideal workflow}
+$$
+In \to
+P1\prime \to
+C1\prime \to
+F1\prime \to
+P1\prime\prime \to
+C1\prime\prime \to
+F1\prime\prime \to
+P1\prime\prime\prime \to
+P2\prime \to
+..... \to Out
+$$
+
+Thus, the document author initiating the transformation would essentially need some way of orchestrating this run. While it is of course possible to orchestrate such a thing from (e.g.) a command line using flags, the author of this paper would argue the need for an orchestration file expressed in descriptive markup.
+
+
+
 \begin{figure}[h]
   \centering
 
   \begin{tikzpicture}[node distance=.15cm]
-    \node (in)  [io]                                 {\(In\)};
-    \node (P1)  [process, right of=in, xshift=2.5cm] {\(P1\)};
-    \node (P2)  [process, right of=P1, xshift=2.5cm] {\(P2\)};
-    \node (P3)  [process, right of=P2, xshift=2.5cm] {\(P3\)};
-    \node (P4)  [process, right of=P3, xshift=2.5cm] {\(P4\)};
-    \node (out) [io,      right of=P4, xshift=2.5cm] {\(Out\)};
-    \node (T2)  [process, above of=P2, yshift=2cm] {\(T2\)};
-    \node (C1)  [io,      above of=P1, yshift=2cm] {\(C1_n\)}; % {Semantics};
+    \node (P0)  [process]                            {$P0$};
 
-    \node (C2)  [io,      above of=T2, yshift=2cm, xshift=-1cm] {\(C2_n\)}; % {Validations};
-    \node (F2)  [io,      above of=T2, yshift=2cm, xshift=1cm] {\(F2_n\)}; % {Validations};
+    \node (in)  [io, below of=in, yshift=-1.5cm]     {$In$};
 
-    \node (C3)  [io,      above of=P3, yshift=2cm] {\(C3_n\)}; % {Derivations};
-    \node (C4)  [io,      above of=P4, yshift=2cm] {\(C3_n\)}; % {Presentation};
+    \node (P1)  [process, right of=P0, xshift=2.5cm] {$P1$};
+    \node (P2)  [process, right of=P1, xshift=2.5cm] {$P2$};
+    \node (P3)  [process, right of=P2, xshift=2.5cm] {$P3$};
+    \node (P4)  [process, right of=P3, xshift=2.5cm] {$P4$};
+    \node (out) [io,      right of=P4, xshift=2.5cm] {$Out$};
 
+    \node (C0)  [ds,      above of=P0, yshift=2cm] {$C0$};
 
+    \node (C1)  [ds,      above of=P1, yshift=2cm, xshift=-.6cm] {$C1$};
+    \node (F1)  [ds,      above of=P1, yshift=2cm, xshift= .6cm] {$F1$};
 
-    \draw [arrow] (in) -- (P1);
+    \node (C2)  [ds,      above of=P2, yshift=2cm, xshift=-.6cm] {$C2$};
+    \node (F2)  [ds,      above of=P2, yshift=2cm, xshift= .6cm] {$F2$};
+
+    \node (C3)  [ds,      above of=P3, yshift=2cm, xshift=-.6cm] {$C3$};
+    \node (F3)  [ds,      above of=P3, yshift=2cm, xshift= .6cm] {$F2$};
+
+    \node (C4)  [ds,      above of=P4, yshift=2cm, xshift=-.6cm] {$C4$};
+    \node (F4)  [ds,      above of=P4, yshift=2cm, xshift= .6cm] {$F2$};
+
+    \draw [arrow] (in) -- (P0);
+
+    \draw [arrow] (P0) -- (P1);
     \draw [arrow] (P1) -- (P2);
     \draw [arrow] (P2) -- (P3);
     \draw [arrow] (P3) -- (P4);
     \draw [arrow] (P4) -- (out);
-    \draw [arrow] (C1) -- (P1);
-    \draw [arrow] (C3) -- (P3);
-    \draw [arrow] (C4) -- (P4);
+
     \draw [arrow] (P1) edge[loop below]();
+    \draw [arrow] (P2) edge[loop below]();
     \draw [arrow] (P3) edge[loop below]();
     \draw [arrow] (P4) edge[loop below]();
 
-    \draw [arrow] (P2) to[out=-225,in=225] (T2);
-    \draw [arrow] (T2) to[out=-45,in=45] (P2);
-    \draw [arrow] (C2) to (T2);
-    \draw [arrow] (F2) to (T2);
+    \draw [arrow] (C0) -- (P0);
+    \draw [arrow] (C1) -- (P1);
+    \draw [arrow] (C2) -- (P2);
+    \draw [arrow] (C3) -- (P3);
+    \draw [arrow] (C4) -- (P4);
+
+    \draw [arrow] (F1) -- (P1);
+    \draw [arrow] (F2) -- (P2);
+    \draw [arrow] (F3) -- (P3);
+    \draw [arrow] (F4) -- (P4);
+
   \end{tikzpicture}
 
-  \caption{Suggested ideal refinement of a Quadrant B program.}
-  \label{fig:workflows-framework-ideal}
+  \caption{Suggested refinement where C0 is an orchestrating configuration file that determine the path through the rest of the model. In other words defining the full transformation.}
+  \label{fig:ideal-with-config}
 \end{figure}
+
+
+
+
+
+\section{An ideal workflow}
+Having performed all of the refinements outlined in this chapter, ending up with the model represented by Figure \ref{fig:ideal-different-intents-with-configs}, now satisfy all of the requirements derived from theory (as outlined in Section \ref{chpt:derived-transformation-requirements}). However, the intent was of course also for the model to adhere to all of the high-level goals outlined as proposed form the start -- outlined in Section \ref{sec:requirements-initial}. The author of this paper would argue that they are all fulfilled but in order to really achieve extendability there is one more strategy one may apply. This strategy stem from the realization that because of the high level of composability, there isn't really any need for the same program (the previously referred $P$) to run all of these sub-programs.
+
+Instead, each sub-program could delegate to a completely different sub-program that could very well be written in a different language, and that could very well accept mapping-files and processing functions in a different language. The only really ``coupled'' parts are the inputs, outputs, and the format of the intermediate string passed between each sub-program.
+
+While the author of this paper would suggest it sensible to initially build one eco-system of tools that share the same language, the possibility is important from a perspective of being future-proof. If all of the sub-programs may delegate, then a very high level of extendability is achieved, and the root program becomes not much more than an orchestrator of pipes through other programs.
+
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=.1cm]
+    \node (P0)  [process] {$P0$};
+    \node (in)  [io,      above of=P0, yshift=2cm, xshift=-1.25cm]                                 {$In$};
+    \node (P1)  [process, right of=P0, xshift=2.5cm] {$P1$};
+    \node (P2)  [process, right of=P1, xshift=2.5cm] {$P2$};
+    \node (P3)  [process, right of=P2, xshift=2.5cm] {$P3$};
+    \node (P4)  [process, right of=P3, xshift=2.5cm] {$P4$};
+    \node (out) [io,      right of=P4, xshift=2.5cm] {$Out$};
+
+    \node (T1)  [process, above of=P1, yshift=2cm] {$T1$};
+    \node (T2)  [process, above of=P2, yshift=2cm] {$T2$};
+    \node (T3)  [process, above of=P3, yshift=2cm] {$T3$};
+    \node (T4)  [process, above of=P4, yshift=2cm] {$T4$};
+
+    \node (C0)  [ds,      above of=P0, yshift=2cm, xshift= .5cm] {$C0$};
+    \node (C1)  [ds,      above of=T1, yshift=2cm, xshift=-.6cm] {$C1$};
+    \node (C2)  [ds,      above of=T2, yshift=2cm, xshift=-.6cm] {$C2$};
+    \node (C3)  [ds,      above of=T3, yshift=2cm, xshift=-.6cm] {$C3$};
+    \node (C4)  [ds,      above of=T4, yshift=2cm, xshift=-.6cm] {$C4$};
+
+    \node (F1)  [ds,      above of=T1, yshift=2cm, xshift= .6cm] {$F1$};
+    \node (F2)  [ds,      above of=T2, yshift=2cm, xshift= .6cm] {$F2$};
+    \node (F3)  [ds,      above of=T3, yshift=2cm, xshift= .6cm] {$F2$};
+    \node (F4)  [ds,      above of=T4, yshift=2cm, xshift= .6cm] {$F2$};
+
+    \draw [arrow] (in) -- (P0);
+    \draw [arrow] (P0) -- (P1);
+    \draw [arrow] (P1) -- (P2);
+    \draw [arrow] (P2) -- (P3);
+    \draw [arrow] (P3) -- (P4);
+    \draw [arrow] (P4) -- (out);
+
+    \draw [arrow] (C0) -- (P0);
+    \draw [arrow] (C1) -- (T1);
+    \draw [arrow] (C2) -- (T2);
+    \draw [arrow] (C3) -- (T3);
+    \draw [arrow] (C4) -- (T4);
+
+    \draw [arrow] (F1) -- (T1);
+    \draw [arrow] (F2) -- (T2);
+    \draw [arrow] (F3) -- (T3);
+    \draw [arrow] (F4) -- (T4);
+
+    \draw [arrow] (P1) to[out=-225,in=225] (T1);
+    \draw [arrow] (P2) to[out=-225,in=225] (T2);
+    \draw [arrow] (P3) to[out=-225,in=225] (T3);
+    \draw [arrow] (P4) to[out=-225,in=225] (T4);
+
+    \draw [arrow] (T1) to[out=-45, in=45]  (P1);
+    \draw [arrow] (T2) to[out=-45, in=45]  (P2);
+    \draw [arrow] (T3) to[out=-45, in=45]  (P3);
+    \draw [arrow] (T4) to[out=-45, in=45]  (P4);
+  \end{tikzpicture}
+
+  \caption{Suggested ideal model of markup language transformations based on all theory gathered from the bottom up in this thesis.}
+  \label{fig:ideal-final}
+\end{figure}
+
+
+
+
+
+
 
 
 
