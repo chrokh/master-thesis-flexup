@@ -149,6 +149,17 @@
 
 
 
+%
+%
+% FIXED FOOTNOTES
+%
+%
+\DeclareFixedFootnote{\footnotePandoc}{http://johnmacfarlane.net/pandoc/README.html}
+
+
+
+
+
 
 
 %
@@ -275,7 +286,7 @@ The problem area of this thesis is probably best be summarized by a quote raised
 
 Because we have so many different formats, for various good reasons, the need to convert between these formats, for various good reasons, is apparent. Let us begin with some examples. A reason for why we have different input formats may be that we as individuals appreciate different approaches and ways of thinking and thus syntaxes. Another might be that some formats simply cannot express concepts that another format can express. A reason for why we would like to convert between formats could be that of publishing. Given the multitude of devices and programs that can consume our documents it should be in our interest to supply appropriate formats for these devices and programs. 
 
-\paragraph{Call this the ``n-to-n conversion problem''} (or simply ``n-to-n''). An existing approach to this ``n-to-n'' conversion problem, and perhaps the most obvious one, is Pandoc\footnote{http://johnmacfarlane.net/pandoc/} -- dubbed ``a universal document converter''. The problem I see with Pandoc however is it's lacking facilities for customization of the conversion process. Assume for example that we are converting a document expressed in Markdown to HTML. None of the formats natively support the concept of a Table Of Contents (TOC). Wanting to do this, we would have to ``intercept'' the program after it has parsed the input, and use Haskell or Python to transform the JSON representation of the Abstract Syntax Tree (AST). This interception possibility is not a ``hack'' but built in to the Pandoc system and referred to as Scripting\footnote{http://johnmacfarlane.net/pandoc/scripting.html}.
+\paragraph{Call this the ``n-to-n conversion problem''} (or simply ``n-to-n''). An existing approach to this ``n-to-n'' conversion problem, and perhaps the most obvious one, is Pandoc\footnotePandoc -- dubbed ``a universal document converter''. The problem I see with Pandoc however is it's lacking facilities for customization of the conversion process. Assume for example that we are converting a document expressed in Markdown to HTML. None of the formats natively support the concept of a Table Of Contents (TOC). Wanting to do this, we would have to ``intercept'' the program after it has parsed the input, and use Haskell or Python to transform the JSON representation of the Abstract Syntax Tree (AST). This interception possibility is not a ``hack'' but built in to the Pandoc system and referred to as Scripting\footnotePandoc
 
 Thus, the issues related to Pandoc are two-faceted. On one hand (P1) it may be difficult for semi-programmers to significantly modify the structure of a output document, but on the other -- even (P2) assuming programmers would collectively build an extensive library of transformation scripts for Pandoc, these ``packages'' operate on AST's that represent already complex formats. This facility and it's drawbacks is made clear in the research of \citet{krijnen}, who propose a solution for essentially the same problem as this thesis. The main difference between the approach of this thesis and that of \citet{krijnen} is that they operate on a ``lower level''. Seemingly \citet{krijnen} operate with intents of compilation efficiency through the use of lazy-evaluation, and criticize the Pandoc scripting system for requiring multiple (thus costly) runs over the AST. While the work of \citet{krijnen} is splendid, I unfortunately argue that formal grammars are too complex for such a tool to be used by laymen, or semi-programmers.
 %TODO: Make the P's and their problems more clear. Why are they never referred to?
@@ -1311,7 +1322,7 @@ Dealing with derived text of course become technically trivial in procedural (in
 \subsection{Derived text beyond a document format}
 While it of course is nifty that a markup language (and it's compiler) have a built in mechanism for deriving text, it is not all positive. As highlighted in a much more recent paper by \citet{krijnen}, it becomes very hard to share derivation strategies between multiple formats. Consider for example the table of contents (TOC), apart from formatting, the underlying idea of generating a TOC is essentially the same, regardless of the markup language in question. While there may of course be variations from format to format, the general intent is very much the same.
 
-\citet{krijnen} extend the commonly used universal document converter Pandoc\footnote{http://johnmacfarlane.net/pandoc/}, partially with the intent of making derived text\footnote{\citet{krijnen} does not refer to the concept as derived text, but refer to the same concept at heart.} sharable between readers and writers in the Pandoc system. Pandoc (as previously mentioned) is an ``n-to-n'' document converter that utilizes readers to read documents, and writers to write documents. In between these lie the universal Pandoc format. Anyone can contribute with readers or writers to the Pandoc system. \citet{krijnen} propose a solution where one writes small Haskell (the same language as Pandoc is written in) modules in order to derive text and create (e.g.) numbered headings, TOC's etc. These modules can then be reused in other writers.
+\citet{krijnen} extend the commonly used universal document converter Pandoc\footnotePandoc, partially with the intent of making derived text\footnote{\citet{krijnen} does not refer to the concept as derived text, but refer to the same concept at heart.} sharable between readers and writers in the Pandoc system. Pandoc (as previously mentioned) is an ``n-to-n'' document converter that utilizes readers to read documents, and writers to write documents. In between these lie the universal Pandoc format. Anyone can contribute with readers or writers to the Pandoc system. \citet{krijnen} propose a solution where one writes small Haskell (the same language as Pandoc is written in) modules in order to derive text and create (e.g.) numbered headings, TOC's etc. These modules can then be reused in other writers.
 
 
 
@@ -1354,7 +1365,7 @@ As made clear in Section \ref{sec:tag-validity-type-validity}, there exist a dis
 
 Thus, one intent of transformation is the first mentioned -- syntactical correctness. In terms of a compiler: lexing and parsing.
 
-\subsection{Semantic validations}
+\subsection{Validations}
 Building upon the ideas just mentioned in the previous section -- that syntactic validity and semantic validity, are not the same. If syntactic validity is to be considered a separate intent, then of course, the second intent of markup transformation would be semantic validity.
 
 \subsection{Derivations}
@@ -1365,7 +1376,9 @@ The fact that derived text is a very natural part of markup languages, and have 
 Consequently, derivations are important and necessary, but must be implemented at the right level of abstraction. Subsequently, it is reasonable to assume that derivations should be considered a separate intent.
 
 \subsection{Presentations}
-TODO: Draw ideas from Pandoc, and also build upon the Krijnen discussion from the last section.
+The perhaps most obviously distinct intent of markup transformation is that of presentation. In Section \ref{sec:taxonomy} it was declared that even in the early days of Scribe, by \citet{reid}, it was conceived that presentation ought to be separated from content. The taxonomy introduced by \citet{coombs} clearly suggest that presentation can be separated from content. The very nature of XSLT\footnote{http://www.w3.org/TR/xslt} cries out that documents can be transformed into other documents with the intent of describing the document contents rather than its presentation. Pandoc is a case in point on how the information contained in a document can exist between the boundries of two presentational formats.
+
+Consequently, another distinct intent is the transformation from some format to a presentational format.
 
 
 
