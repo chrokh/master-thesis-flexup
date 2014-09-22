@@ -1276,7 +1276,7 @@ Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent t
 
 
 \section{A three-step model}
-
+\label{sec:three-step-model}
 \citet{goldfarb} shed some light onto the issue that descriptive markup is less trivial to parse than procedural. Informally put, to process a procedural document, one simply need to parse the document and carry out each instruction accordingly. But in the case of descriptive markup there is a disconnect between a particular marked up string and its correspondingly appropriate processing functions.
 
 To formalize this disconnect, \citet{goldfarb} suggest a three-step model for document processing. The term document processing here refer to the idea of taking some document containing Generic Identifier's (GI's) as input, applying some set of processing functions, to produce some other document as output. The three steps of \citet{goldfarb} are (1) recognition, (2) mapping, and (3) processing. These will be explained in closer detail below.
@@ -1294,6 +1294,32 @@ While it is splendid that \citet{goldfarb} chose to make this model explicit, it
 Considering tools such as XSLT it is easy to see how this model fits. XSLT is basically a language where these three steps become utterly explicit. In XSLT one uses XPath to perform step one. Then define some sort of XSLT transformation function that will be the function performed upon recognizing the defined XPath. Then finally one actually execute these processing functions, presumably via some common implementation of the standard\footnote{http://en.wikipedia.org/wiki/XSLT\#Processor\_implementations} such as Saxon XSLT\footnote{http://en.wikipedia.org/wiki/Saxon\_XSLT}.
 
 Finally it is important to understand that while this three-step model indeed is simplistic, it is also a fundamental description of descriptive markup languages. This three-step process is part of what allows authors to express documents completely descriptively.
+
+
+
+
+
+\section{Derived text}
+What \citet{goldfarb} refers to as Mapping (discussed in previous Section \ref{sec:three-step-model}) can be likened to the concept of Derived Text, that \citet{reid} discuss in the paper introducing the document processing language Scribe. \citet{reid} exhibit an understanding of the fact that much content in authored documents actually can be considered to be derivations of other parts of the same document. \citet{reid} give examples such as tables of contents, indexes, and glossaries.
+
+Scribe actually provided a facility for dealing with derived text. \citet{reid} explain the mechanism by pointing out that any part of the text can be ``saved'' during the processing of a manuscript only to later be processed itself as regular manuscript text at certain ``collection points''.
+
+Dealing with derived text of course become technically trivial in procedural (in terms of procedurality described in Section \ref{sec:taxonomy}) languages that exhibit language features such as variables.
+
+
+\subsection{Derived text beyond a document format}
+While it of course is nifty that a markup language (and it's compiler) have a built in mechanism for deriving text, it is not all positive. As highlighted in a much more recent paper by \citet{krijnen}, it becomes very hard to share derivation strategies between multiple formats. Consider for example the table of contents (TOC), apart from formatting, the underlying idea of generating a TOC is essentially the same, regardless of the markup language in question. While there may of course be variations from format to format, the general intent is very much the same.
+
+\citet{krijnen} extend the commonly used universal document converter Pandoc\footnote{http://johnmacfarlane.net/pandoc/}, partially with the intent of making derived text\footnote{\citet{krijnen} does not refer to the concept as derived text, but refer to the same concept at heart.} sharable between readers and writers in the Pandoc system. Pandoc (as previously mentioned) is an ``n-to-n'' document converter that utilizes readers to read documents, and writers to write documents. In between these lie the universal Pandoc format. Anyone can contribute with readers or writers to the Pandoc system. \citet{krijnen} propose a solution where one writes small Haskell (the same language as Pandoc is written in) modules in order to derive text and create (e.g.) numbered headings, TOC's etc. These modules can then be reused in other writers.
+
+
+
+
+
+
+
+
+
 
 
 
