@@ -1567,44 +1567,70 @@ Any useful complexity discussed in the theory parts of this thesis will be shift
 
 
 \section{Proposing a DSL for generating markup-oriented PEG}
-In order to fulfill the requirement of Generic Syntax, the author of this thesis propose that document authors use Formal Grammars  to express a language specific for her particular domain. A language in which the end content then can be marked up.
-
-Asking semi-technicals (whom authors very well may be) to define languages using Formal Grammars such as a Parsing Expression Grammar (PEG) is however of course not only absurd, but also time-consuming and error prone. Thus the suggestion is to create a small DSL and a conversion program that converts this simpler language to actual PEG.
-
-This smaller language will of course limit the number of expressible languages in PEG such that all valid inputs in the language will when run through the program produce an PEG that conform the set of requirements outlined in this chapter, and is thus suitable as a markup format.
+In order to fulfill the requirement of Generic Syntax, this thesis propose the usage of Formal Grammars to express languages specific for the particular document of the moment. Asking semi-technicals (whom authors very well may be) to define languages using Formal Grammars such as a Parsing Expression Grammar (PEG) or an Extended Backus-Naur Form (EBNF) is however of course not only absurd, but also time-consuming and error prone. This thesis argue the need for significantly simpler languages that can be used to express descriptive markup languages.
 
 
+Thus, the suggestion is to create a tiny DSL, and a tiny conversion program that converts this tiny language into actual PEG syntax. Of course, the idea is that the actual PEG should be abstracted away from the user. Thus, the ignorant user would not know there is a Parsing Expression Grammar being generated in the background. To achieve this, the minor conversion program will be included in the transformation workflow described further on in Section \ref{chpt:proposal-transformation-workflow}. 
 
-\subsection{A DSL for generating markup-oriented PEG}
+The intent of this smaller language is of course to limit the number of expressible languages in PEG such that all valid inputs in the language will when run through the program produce a PEG that parses suitable markup formats. Formats that also adhere to the language requirements outlined previously in this chapter.
 
+While there exist many solutions that would satisfy the above description, one will partially be supplied. This is merely in order to illustrate how the undertaking is indeed realistic.
+
+Figure \ref{code:fupd-peg} illustrate the syntax of a very simple implementation of a DSL aimed towards producing new Parsing Expression Grammars, as discussed above.
+
+The Parsing Expression Grammar outlined in Figure \ref{code:fupd-peg} would produce a language with a syntax in which Figure \ref{code:fupd-example-usage-syntax} would express valid code.
+
+
+\begin{figure}[h]
 \begin{lstlisting}
 start     = (rule line?)+
 rule      = name spaces ":" spaces pattern
 pattern   = symbol+ "%" symbol+
 name      = CHAR+
 symbol    = SYMBOL / CHAR
+
 line      = "\n" / "\r\n" / "\r"
 spaces    = [ ]*
 
 CHAR      = [A-Za-z]
 SYMBOL    = [/*_\[\]]    /* and so forth... */
 \end{lstlisting}
+\caption{A PEG for a program intended to produce new PEG's.}
+\label{code:fupd-peg}
+\end{figure}
 
 
-Example usage..
+\begin{figure}[h]
 \begin{lstlisting}
 bold   :  **%**
 quote  :  [q]%[/q]
 \end{lstlisting}
+\caption{Example of an author defining her own syntax, where this syntax is valid according to the grammar in Figure \ref{code:fupd-peg}}
+\label{code:fupd-example-usage-syntax}
+\end{figure}
+
+
+Assuming that a document author would author a syntax definition as the definition depicted in Figure \ref{code:fupd-example-usage-syntax}, the actually generated Parsing Expression Grammar that would be used to parse the actual documents would look something like the PEG illustrated in Figure \ref{code:fupd-example-generated-peg}.
+
+
+Assume that an author interacting with the program in question, had successfully generated the Parsing Expression Grammar depicted in Figure \ref{code:fupd-example-generated-peg}, simply by giving the code in Figure \ref{code:fupd-example-usage-syntax} as input. Then the author would have this newly generated syntax available for use. In this particular example, the syntax expressed would allow the document depicted in FIG to be a valid document. For the sake of easing readability, consider the XML interpretation of the same document depicted in FIG.
+
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+He rose and spoke. [q] The only way left is **up**. [/q]
+}}
+\caption{Utilizing the generated grammar depicted in Figure \ref{code:fupd-example-generated-peg}}
+\label{code:fup-example-markup}
+\end{figure}
 
 
 
-
-\subsubsection{Example of a generated PEG}
-
+\begin{figure}[h]
 \begin{lstlisting}
 /*
- *   static
+ *   static, same for all input files
  */
 
 TEXT     = [A-Za-z]
@@ -1616,7 +1642,7 @@ implicit = implicit_bold
 
 
 /*
- *   generated
+ *   generated, on an input per input basis
  */
 
 T_BOLD   = "**"
@@ -1626,20 +1652,15 @@ E_QUOTE  = "[/q]"
 explicit_quote = SQUOTE (expr)* E_QUOTE
 implicit_bold  = TBOLD  (expr)* T_BOLD
 \end{lstlisting}
+\caption{A Parsing Expression Grammar automatically generated by providing the code of Figure \ref{code:fupd-example-usage-syntax} to a program defined by the grammar depicted in \ref{code:fupd-peg}. The actual program code is omitted.}
+\label{code:fupd-example-generated-peg}
+\end{figure}
 
 
 
-\subsubsection{Example of usage}
+While this section contained a lot of code it is important to understand that the only two files that would be manually authored by a human are the two shortest ones. The first step of the two would be for the author to write her syntax definition. This code is depicted in Figure \ref{code:fupd-example-usage-syntax}. Concise, readable and declarative.
 
-
-
-
-
-
-
-
-
-
+The second step would be for the author to actually type out the document in which she wants to use this syntax. This step is depicted in Figure \ref{code:fup-example-markup}. Again, concise, readable and declarative. However, since this syntax was actually defined by the author self, it will in reality be just as verbose or compact as the author wish.
 
 
 
