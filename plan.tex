@@ -335,8 +335,12 @@ In this thesis I will argue that there is a difference between converting a docu
 
 
 
-\section{Transformation program requirements}
-\label{sec:requirements-initial}
+
+
+
+
+\section{Goals for the transformation program}
+\label{sec:goals-for-the-transformation-program}
 Given the holistic problem outlined in Section \ref{sec:problems}, we will discuss a holistic response, in form of an eco-system of tools. In order to guide the development of the tool-chain, the following requirements have been extracted from the problems outlined in Section \ref{sec:problems}.
 
 \paragraph{Any output format but reasonable input format}
@@ -1336,7 +1340,7 @@ While it of course is nifty that a markup language (and it's compiler) have a bu
 
 \chapter{Deriving markup language requirements}
 \label{chpt:derived-language-requirements}
-In Section \ref{sec:requirements-initial} requirements for a transformation program were set out. In this section, requirements for the languages supported by such a transformation program will be outlined. The requirements introduced by this chapter are strictly derived from important realizations in Section \ref{sec:theory}.
+In Section \ref{sec:goals-for-the-transformation-program} requirements for a transformation program were set out. In this section, requirements for the languages supported by such a transformation program will be outlined. The requirements introduced by this chapter are strictly derived from important realizations in Section \ref{sec:theory}.
 
 
 \section{Nestable}
@@ -1354,7 +1358,7 @@ The requirement is thus, that the input language of this eco-system of tools, mu
 \section{Descriptive}
 The hierarchy of abstraction, outlined in Section \ref{sec:abstraction-hierarchy}, shows that it is desirable (for manual work) to author documents in the ``top of the pyramid''. I.e. in descriptive languages. Thus, the requirement derived will be that all languages (assuming there might be more than one) an author ``comes in contact'' with must be descriptive.
 
-Understand that all humans using end-tools in the eco-system should be deemed authors. In Section \ref{sec:requirements-initial} the idea of packages to enable reuse is discussed. Also package authors must be considered authors. Thus also packages must be expressed descriptively. Subsequently this indicate the need for a template transformation approach rather than imperative processing.
+Understand that all humans using end-tools in the eco-system should be deemed authors. In Section \ref{sec:goals-for-the-transformation-program} the idea of packages to enable reuse is discussed. Also package authors must be considered authors. Thus also packages must be expressed descriptively. Subsequently this indicate the need for a template transformation approach rather than imperative processing.
 
 
 
@@ -1391,7 +1395,7 @@ Understand that all humans using end-tools in the eco-system should be deemed au
 
 \chapter{Deriving markup transformation requirements}
 \label{chpt:derived-transformation-requirements}
-In Section \ref{sec:requirements-initial} a number of high-level goals for ideal markup language transformation programs were outlined. This section will build upon the theory outlined in both Section \ref{sec:theory} as well as \ref{sec:theory-of-document-processing}. Using this body of knowledge as stepping stone, this chapter will formulate a set of requirements for an ideal markup transformation program. The high-level goals outlined in Section \ref{sec:requirements-initial} will now be discussed one by one.
+In Section \ref{sec:goals-for-the-transformation-program} a number of high-level goals for ideal markup language transformation programs were outlined. This section will build upon the theory outlined in both Section \ref{sec:theory} as well as \ref{sec:theory-of-document-processing}. Using this body of knowledge as stepping stone, this chapter will formulate a set of requirements for an ideal markup transformation program. The high-level goals outlined in Section \ref{sec:goals-for-the-transformation-program} will now be discussed one by one.
 
 \paragraph{The ability to produce any output format from any reasonable input format.} While it was never explicitly stated what a reasonable input format is, the wording makes it clear that it does not reference the domain of all possible input formats. Consequently, Section \ref{sec:microframework} determines that it is pragmatic to attempt to build Quadrant B programs rather than Quadrant A programs. According to the constructed micro-framework, Quadrant B programs fit perfectly with this high-level goal. Quadrant A programs are deemed too complex to be pragmatically useful\footnote{At least for now.}, and Quadrant C and D programs are deemed to be too useless for markup transformation.
 
@@ -1402,7 +1406,7 @@ In Section \ref{sec:requirements-initial} a number of high-level goals for ideal
 
 
 \section{Separating intents}
-The high-level goals outlined in \ref{sec:requirements-initial} have been used as a guide when navigating the theory from Sections \ref{sec:theory} and \ref{sec:theory-of-document-processing}. The argument is, that if composability is to be achieved, one must identify all steps of the transformation process that can be isolated into components. Below follows such a suggestion of an ideal separation of transformation intents.
+The high-level goals outlined in \ref{sec:goals-for-the-transformation-program} have been used as a guide when navigating the theory from Sections \ref{sec:theory} and \ref{sec:theory-of-document-processing}. The argument is, that if composability is to be achieved, one must identify all steps of the transformation process that can be isolated into components. Below follows such a suggestion of an ideal separation of transformation intents.
 
 
 \subsection{Syntax}
@@ -1498,7 +1502,7 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 \chapter{Proposing an ideal workflow}
 As mentioned earlier in this chapter, the quadrant view is an oversimplification and of course there are many interesting nuances within one quadrant. This section will refine Quadrant B, using the requirements gathered in Sections \ref{chpt:derived-language-requirements} and \ref{chpt:derived-transformation-requirements}, as guidelines, and through the collected requirements reach a supported proposal for an ideal workflow.
 
-\paragraph{The model of Quadrant B} (Figure \ref{fig:workflows-framework-spec-in-gen-out}) will be used as a starting point due to the arguments given in Section \ref{chpt:derived-transformation-requirements}. In summary, it is the one of the four quadrant models that fit the initial high-level goals outlined in Section \ref{sec:requirements-initial}.
+\paragraph{The model of Quadrant B} (Figure \ref{fig:workflows-framework-spec-in-gen-out}) will be used as a starting point due to the arguments given in Section \ref{chpt:derived-transformation-requirements}. In summary, it is the one of the four quadrant models that fit the initial high-level goals outlined in Section \ref{sec:goals-for-the-transformation-program}.
 
 
 
@@ -1709,7 +1713,7 @@ Thus, the document author initiating the transformation would essentially need s
 
 
 \section{An ideal workflow}
-Having performed all of the refinements outlined in this chapter, ending up with the model represented by Figure \ref{fig:ideal-different-intents-with-configs}, now satisfy all of the requirements derived from theory (as outlined in Section \ref{chpt:derived-transformation-requirements}). However, the intent was of course also for the model to adhere to all of the high-level goals outlined as proposed form the start -- outlined in Section \ref{sec:requirements-initial}. The author of this paper would argue that they are all fulfilled but in order to really achieve extendability there is one more strategy one may apply. This strategy stem from the realization that because of the high level of composability, there isn't really any need for the same program (the previously referred $P$) to run all of these sub-programs.
+Having performed all of the refinements outlined in this chapter, ending up with the model represented by Figure \ref{fig:ideal-different-intents-with-configs}, now satisfy all of the requirements derived from theory (as outlined in Section \ref{chpt:derived-transformation-requirements}). However, the intent was of course also for the model to adhere to all of the high-level goals outlined as proposed form the start -- outlined in Section \ref{sec:goals-for-the-transformation-program}. The author of this paper would argue that they are all fulfilled but in order to really achieve extendability there is one more strategy one may apply. This strategy stem from the realization that because of the high level of composability, there isn't really any need for the same program (the previously referred $P$) to run all of these sub-programs.
 
 Instead, each sub-program could delegate to a completely different sub-program that could very well be written in a different language, and that could very well accept mapping-files and processing functions in a different language. The only really ``coupled'' parts are the inputs, outputs, and the format of the intermediate string passed between each sub-program.
 
