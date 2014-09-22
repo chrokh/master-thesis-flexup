@@ -1422,7 +1422,9 @@ Consequently, another distinct intent is the transformation from some format to 
 
 
 
+
 \section{Using configurations to map processing functions}
+\label{sec:applying-three-step-model-to-quad-b}
 In order to truly adhere to the second and third high-level goals (composability, and extendability), one sensible, and obvious, approach would be to allow transformations to be configured. Consider XSLT as en example. Assume one were to construct a package system (such as the package system of \LaTeX) or (perhaps even) a public package channel\footnote{A ``package channel'' refer here to the idea of a unified publicly accessible package system, such as e.g. \texttt{apt-get}, \texttt{RubyGems} or \texttt{npm}}. Consider now that authors are free to choose element names freely in XML. This mean it would either be utterly difficult for a package creator to assume the right names for some set of elements when constructing the package, or it would spawn a situation where document authors would have to constantly adapt to the names used in packages. This of course violates the second high-level goal as it makes the package-eco-system significantly less composable.
 
 One sensible alternative would be to apply the three-step approach to document conversion, proposed by \citet{goldfarb}. Applying this three-step process allow different intents to be left to different parts of the eco-system. Step one and two (recognition and mapping) would be carried out by the individual that aim to \emph{use} the package. Where the second step would allow the user to map the names of her elements onto the names of the elements in the ``processing function'' (PF) (i.e. the package). The package creator would thus create, only the PF. It is important of course that the PF would have to be created in a way such that it allows arguments to be passed, and thus mapped onto the variable element names within the PF.  Step three would be carried out by the transformation program itself.
@@ -1430,8 +1432,6 @@ One sensible alternative would be to apply the three-step approach to document c
 For the sake of standardization it would of course, and again, proper composability, it would of course make sense to standardize the way that a PF exposes its arguments.
 
 Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refined with the property of this three-step process.
-
-
 
 \begin{figure}[h]
   \centering
@@ -1468,14 +1468,41 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 
 
 
+
+
+
+
+
+
+
+
+
+% % % % % % % % % % % % % % % % % % % % % % 
+%
+%
+%
+%   PROPOSING AN IDEAL WORKFLOW
+%
+%
+%
+% % % % % % % % % % % % % % % % % % % % % %
+
+
+
+
 \chapter{Proposing an ideal workflow}
 As mentioned earlier in this chapter, the quadrant view is an oversimplification and of course there are many interesting nuances within one quadrant. This section will refine Quadrant B, using the requirements gathered in Sections \ref{chpt:derived-language-requirements} and \ref{chpt:derived-transformation-requirements}, as guidelines, and through the collected requirements reach a supported proposal for an ideal workflow.
 
-\paragraph{The model of Quadrant B} (\ref{fig:workflows-framework-spec-in-gen-out}) will be used as a starting point due to the arguments given in \ref{chpt:derived-transformation-requirements}. In summary, it is the one of the four quadrant models that fit the initial high-level goals outlined in Section \ref{sec:requirements-initial}.
+\paragraph{The model of Quadrant B} (Figure \ref{fig:workflows-framework-spec-in-gen-out}) will be used as a starting point due to the arguments given in Section \ref{chpt:derived-transformation-requirements}. In summary, it is the one of the four quadrant models that fit the initial high-level goals outlined in Section \ref{sec:requirements-initial}.
 
 
-\section{Applying the three-step model Quadrant B}
-As the three-step model of \citet{goldfarb}, discussed in Section \ref{sec:three-step-model}, is (as mentioned) quite versatile, it will in this section be applied to the Quadrant B model of the micro-framework discussed in Section \ref{sec:microframework}.
+
+\section{Applying the three-step model }
+The first step will be to refine the model as depicted in Figure \ref{fig:quad-b-with-three-step-process} because of the arguments proposed in the transformation requirements Section \ref{sec:applying-three-step-model-to-quad-b}. The model will now allow a greater level of package re-use.
+
+
+
+
 
 
 
