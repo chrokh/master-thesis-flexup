@@ -1397,22 +1397,22 @@ In Section \ref{sec:requirements-initial} a number of high-level goals for ideal
 The high-level goals outlined in \ref{sec:requirements-initial} have been used as a guide when navigating the theory from Sections \ref{sec:theory} and \ref{sec:theory-of-document-processing}. The argument is, that if composability is to be achieved, one must identify all steps of the transformation process that can be isolated into components. Below follows such a suggestion of an ideal separation of transformation intents.
 
 
-\subsection{Syntax}
+\section{Syntax}
 As made clear in Section \ref{sec:tag-validity-type-validity}, there exist a distinction in intent between validating the syntactical correctness and the semantic correctness of a document. A compiler that lex and parse a particular input is concerned with syntactical correctness, whereas checking whether a document conforms to a (e.g.) DTD, is a concern of semantic correctness.
 
 Thus, one intent of transformation is the first mentioned -- syntactical correctness. In terms of a compiler: lexing and parsing.
 
-\subsection{Validations}
+\section{Validations}
 Building upon the ideas just mentioned in the previous section -- that syntactic validity and semantic validity, are not the same. If syntactic validity is to be considered a separate intent, then of course, the second intent of markup transformation would be semantic validity.
 
-\subsection{Derivations}
+\section{Derivations}
 As exhibited in Section \ref{sec:theory:derived-text}, derived text is not only a powerful part of a markup language compiler, but it is also a dangerous one. Dangerous in the sense that it may lessen re-usability if implemented at the wrong level of abstraction. This is made especially clear in the areas of critique that \citet{krijnen} deliver towards Pandoc.
 
 The fact that derived text is a very natural part of markup languages, and have been around for a long time, is clearly exhibited by the implementation of it by \citet{reid} in the language Scribe.
 
 Consequently, derivations are important and necessary, but must be implemented at the right level of abstraction. Subsequently, it is reasonable to assume that derivations should be considered a separate intent.
 
-\subsection{Presentations}
+\section{Presentations}
 The perhaps most obviously distinct intent of markup transformation is that of presentation. In Section \ref{sec:taxonomy} it was declared that even in the early days of Scribe, by \citet{reid}, it was conceived that presentation ought to be separated from content. The taxonomy introduced by \citet{coombs} clearly suggest that presentation can be separated from content. The very nature of XSLT\footnote{http://www.w3.org/TR/xslt} cries out that documents can be transformed into other documents with the intent of describing the document contents rather than its presentation. Pandoc is a case in point on how the information contained in a document can exist between the boundries of two presentational formats.
 
 Consequently, another distinct intent is the transformation from some format to a presentational format.
