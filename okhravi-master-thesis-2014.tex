@@ -2084,10 +2084,28 @@ Also this intent has been satisfied through showing how the transformation proce
 
 
 \chapter{Discussion}
-%TODO.
+The greatest flaw of this paper is the fact that no complete production code was produced. Fragments have been produced to ensure that all snippets in this paper are correct and functional. For example, one discussion that has been avoided is that of the need for some kind of controlled intermediate format that would be used when sending the file from one subprogram to another.
+
+The author is currently working on an open-sourced implementation of the ideal model of markup transformation. Contacts are welcome.
+
+
+
+
+
+
 
 \section{Future research}
-%TODO.
+For future research the author of this paper would be very interesting to see any of the below come to life.
+
+\begin{itemize}
+\item An actual implementation of the programs and languages described in this paper.
+\item Approaches to handle non-hierarchical markup.
+\item A deeper analysis of the different kind of syntaxes that would be possible to express through a simple Formal Grammar DSL such as the one outlined in this thesis. Consider for example the many different ways of marking up content using SGML (through e.g. omitting tags).
+\item Alternative models of ideal transformation workflows.
+\item Approaches on how to write the configuration files depicted in the transformation models.
+\item Attempts to harmonize the use of many different programming languages within this transformation model.
+\item Attempts to carry out the modeled transformation processes without compiling in each step. It seems reasonable to assume that it could be done through constant remapping, and thus only compiled in the very end.
+\end{itemize}
 
 
 
