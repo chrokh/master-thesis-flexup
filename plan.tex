@@ -1300,6 +1300,7 @@ Finally it is important to understand that while this three-step model indeed is
 
 
 \section{Derived text}
+\label{sec:theory:derived-text}
 What \citet{goldfarb} refers to as Mapping (discussed in previous Section \ref{sec:three-step-model}) can be likened to the concept of Derived Text, that \citet{reid} discuss in the paper introducing the document processing language Scribe. \citet{reid} exhibit an understanding of the fact that much content in authored documents actually can be considered to be derivations of other parts of the same document. \citet{reid} give examples such as tables of contents, indexes, and glossaries.
 
 Scribe actually provided a facility for dealing with derived text. \citet{reid} explain the mechanism by pointing out that any part of the text can be ``saved'' during the processing of a manuscript only to later be processed itself as regular manuscript text at certain ``collection points''.
@@ -1357,9 +1358,11 @@ Thus, one intent of transformation is the first mentioned -- syntactical correct
 Building upon the ideas just mentioned in the previous section -- that syntactic validity and semantic validity, are not the same. If syntactic validity is to be considered a separate intent, then of course, the second intent of markup transformation would be semantic validity.
 
 \subsection{Derivations}
-TODO: Build upon the ideas of Scribe, chap. 7.1 Derived Text (p. 78).
+As exhibited in Section \ref{sec:theory:derived-text}, derived text is not only a powerful part of a markup language compiler, but it is also a dangerous one. Dangerous in the sense that it may lessen re-usability if implemented at the wrong level of abstraction. This is made especially clear in the areas of critique that \citet{krijnen} deliver towards Pandoc.
 
-Also Krijnen exhibit these ideas in the suggestion to extend Pandoc. They also consider the case of packages. And the idea that packages should be shared before deciding on an output format.
+The fact that derived text is a very natural part of markup languages, and have been around for a long time, is clearly exhibited by the implementation of it by \citet{reid} in the language Scribe.
+
+Consequently, derivations are important and necessary, but must be implemented at the right level of abstraction. Subsequently, it is reasonable to assume that derivations should be considered a separate intent.
 
 \subsection{Presentations}
 TODO: Draw ideas from Pandoc, and also build upon the Krijnen discussion from the last section.
