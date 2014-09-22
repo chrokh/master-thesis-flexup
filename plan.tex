@@ -1644,10 +1644,10 @@ Thus, the document author initiating the transformation would essentially need s
 \begin{figure}[h]
   \centering
 
-  \begin{tikzpicture}[node distance=.15cm]
+  \begin{tikzpicture}[node distance=.1cm]
     \node (P0)  [process]                            {$P0$};
 
-    \node (in)  [io, below of=in, yshift=-1.5cm]     {$In$};
+    \node (in)  [io, above of=in, yshift=2cm, xshift=-1cm]     {$In$};
 
     \node (P1)  [process, right of=P0, xshift=2.5cm] {$P1$};
     \node (P2)  [process, right of=P1, xshift=2.5cm] {$P2$};
@@ -1655,7 +1655,7 @@ Thus, the document author initiating the transformation would essentially need s
     \node (P4)  [process, right of=P3, xshift=2.5cm] {$P4$};
     \node (out) [io,      right of=P4, xshift=2.5cm] {$Out$};
 
-    \node (C0)  [ds,      above of=P0, yshift=2cm] {$C0$};
+    \node (C0)  [ds,      above of=P0, yshift=2cm, xshift=.6cm] {$C0$};
 
     \node (C1)  [ds,      above of=P1, yshift=2cm, xshift=-.6cm] {$C1$};
     \node (F1)  [ds,      above of=P1, yshift=2cm, xshift= .6cm] {$F1$};
@@ -1695,7 +1695,7 @@ Thus, the document author initiating the transformation would essentially need s
 
   \end{tikzpicture}
 
-  \caption{Suggested refinement where C0 is an orchestrating configuration file that determine the path through the rest of the model. In other words defining the full transformation.}
+  \caption{Suggested refinement where C0 is an orchestrating configuration file that declare all the transformations to be performed, and thus the ``path through'' the rest of the model.}
   \label{fig:ideal-with-config}
 \end{figure}
 
