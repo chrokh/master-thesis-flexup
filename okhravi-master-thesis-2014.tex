@@ -280,7 +280,7 @@ Because we have so many different formats, for various good reasons, the need to
 Thus, the issues related to Pandoc are two-faceted. On one hand (P1) it may be difficult for semi-programmers to significantly modify the structure of a output document, but on the other -- even (P2) assuming programmers would collectively build an extensive library of transformation scripts for Pandoc, these ``packages'' operate on AST's that represent already complex formats. This facility and it's drawbacks is made clear in the research of \citet{krijnen}, who propose a solution for essentially the same problem as this thesis. The main difference between the approach of this thesis and that of \citet{krijnen} is that they operate on a ``lower level''. Seemingly \citet{krijnen} operate with intents of compilation efficiency through the use of lazy-evaluation, and criticize the Pandoc scripting system for requiring multiple (thus costly) runs over the AST. While the work of \citet{krijnen} is splendid, I unfortunately argue that formal grammars are too complex for such a tool to be used by laymen, or semi-programmers.
 %TODO: Make the P's and their problems more clear. Why are they never referred to?
 
-To put this thesis in relation to Pandoc's Scripting facilities, the argument goes along the lines of readability for the masses. I am not arguing that the current approach of Pandoc is absurd -- in fact, argue the approach of \citet{krijnen} is beautiful from a composition point of view, and I argue that the approach of Pandoc is effective in getting around to solve the problem without too much fuss. In this thesis, we will however look at an approach I argue is even more fuss-free than that of Pandoc Scripting. This is why we talk about a holistic approach to markup languages. Subjectively I would argue that both Pandoc and the work of \citet{krijnen} are \emph{reactive} instead of \emph{proactive}. In this thesis we look at the intents of markup languages from a more abstract point-of-view, revisit the actual intents and needs and not simply argue that the problem is the need to convert all formats to all formats. That undertaking, I argue, is too huge to provide significant value -- yet (TODO -- unclear).
+To put this thesis in relation to Pandoc's Scripting facilities, the argument goes along the lines of readability for the masses. I am not arguing that the current approach of Pandoc is absurd -- in fact, argue the approach of \citet{krijnen} is beautiful from a composition point of view, and I argue that the approach of Pandoc is effective in getting around to solve the problem without too much fuss. In this thesis, we will however look at an approach I argue is even more fuss-free than that of Pandoc Scripting. This is why we talk about a holistic approach to markup languages. Subjectively I would argue that both Pandoc and the work of \citet{krijnen} are \emph{reactive} instead of \emph{proactive}. In this thesis we look at the intents of markup languages from a more abstract point-of-view, revisit the actual intents and needs and not simply argue that the problem is the need to convert all formats to all formats. Since the naive approach of converting all formats to all formats, I argue, is a too massive undertaking to provide significant value\footnote{Which of course may change in the future, so I do not intend to be discouraging towards anyone within that field.}.
 
 \begin{quote}
 ``If I had asked people what they wanted, they would have said faster horses.''
@@ -295,13 +295,14 @@ To put this thesis in relation to Pandoc's Scripting facilities, the argument go
 
 An author can express her document in an arbitrary XML-format (perhaps imagined ``on the fly''), and then use a combination of XSLT and XPath to convert this document into any other imaginable format. Some problems with this approach is (1) the verbosity of the XML languages\footnote{http://www.ibm.com/developerworks/xml/library/x-sbxml/index.html} \footnote{http://blog.codinghorror.com/xml-the-angle-bracket-tax/} \footnote{http://blog.codinghorror.com/revisiting-the-xml-angle-bracket-tax/}, and (2) the fact that because of the lack of any kind of centralization or standardization of format or process, reuse of common transformations become difficult. The composition problem becomes apparent again. Wouldn't you rather use an XML to PDF transformer that the community had curated rather than rewriting one from scratch? Rhetorical question. The problem is again that since XML allows for an infinite number of syntaxes it is non-trivial to encompass all these syntaxes in the transformer.
 
-\paragraph{Of course there are XML subsets like DocBook} that are more commonly accepted than others. Thus, community curated packages exist that can convert between the commonly used format and some other common presentational format e.g. PDF\footnote{http://docbook.sourceforge.net/}. This makes the XML situation look very much like the Pandoc situation (TODO -- not entirely) but instead of considering completely different syntaxes as input, one considers the XML-based languages. The main problem with this approach is that the input format is fixed. If (e.g.) the Docbook format is not sufficiently rich to express some concept that the author want to express then the community curated converter will be of limited use. Thus, that is a problem with diverging input. In the other end, we can look at diverging output. If working with standards, it is reasonable to assume that there is a standardized (or set of standardized options) for output. What if the author wishes to diverge from the standard output style? How much is flexible and configurable?
+%TODO: Does it really look like the Pandoc situation?
+\paragraph{Of course there are XML subsets like DocBook} that are more commonly accepted than others. Thus, community curated packages exist that can convert between the commonly used format and some other common presentational format e.g. PDF\footnote{http://docbook.sourceforge.net/}. This makes the XML situation look very much like the Pandoc situation but instead of considering completely different syntaxes as input, one considers the XML-based languages. The main problem with this approach is that the input format is fixed. If (e.g.) the Docbook format is not sufficiently rich to express some concept that the author want to express then the community curated converter will be of limited use. Thus, that is a problem with diverging input. In the other end, we can look at diverging output. If working with standards, it is reasonable to assume that there is a standardized (or set of standardized options) for output. What if the author wishes to diverge from the standard output style? How much is flexible and configurable?
 
-\paragraph{Instead} this thesis suggest to employ a view of \texttt{M-to-N}, where \(number\_of\_languages\_in(M) < number\_of\_languages\_in(N)\). Where \(M\) is the body of  languages imagined by authors, declaratively expressed at the highest level of abstraction possible for the given domain, and \(N\) is the set of all potential languages the author might want to convert the input into. Where all languages in \(M\) must lie in the intersection of all the languages in \(N\). In other words \texttt{\(M \subset (N_1 \cup N_n) \)}. 
+\paragraph{Instead} this thesis suggest to employ a view of \texttt{M-to-N}, where $|M| < |N|$. Where $M$ is the body of  languages imagined by authors, declaratively expressed at the highest level of abstraction possible for the given domain, and \(N\) is the set of all potential languages the author might want to convert the input into. Where all languages in \(M\) must lie in the intersection of all the languages in \(N\). In other words \texttt{\(M \subset (N_1 \cup N_n) \)}. 
 
 In this thesis I will argue that there is a difference between converting a document when the language is within M, from M to N, or within N. I will also argue that employing this division will spawn much more pragmatic solutions than many-to-many-document conversions.
 
-\paragraph{The aim} of this thesis, is to suggest a software eco-system\footnote{TODO -- need to define term?} in which a document author can ``write once, [and] publish everywhere''. But of course, that is an oversimplification. More specifically this thesis suggest a way in which we could write our (1) actual document contents once, (2) the transformation process in which we create, what \citet{reid} refers to as, ``derived text'' once, and finally (3) the mapping onto an output format once (per format of course). Note that the two second parts are generalized, and could be published as packages and reused. Note also that the manually authored files at each step are merely configuration files. Between each above step lives a compiler, and these compilers are \emph{not rewritten} on a per-conversion-basis. What also is not obvious in the above explanation is that this thesis suggest an approach that can be likened by a pipeline of templates (similar to a UNIX pipe\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}) and through this achieve a high level of composability. Instead of a one-pass-transform, transformations are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
+\paragraph{The aim} of this thesis, is to suggest a software eco-system in which a document author can ``write once, [and] publish everywhere''. But of course, that is an oversimplification. More specifically this thesis suggest a way in which we could write our (1) actual document contents once, (2) the transformation process in which we create, what \citet{reid} refers to as, ``derived text'' once, and finally (3) the mapping onto an output format once (per format of course). Note that the two second parts are generalized, and could be published as packages and reused. Note also that the manually authored files at each step are merely configuration files. Between each above step lives a compiler, and these compilers are \emph{not rewritten} on a per-conversion-basis. What also is not obvious in the above explanation is that this thesis suggest an approach that can be likened by a pipeline of templates (similar to a UNIX pipe\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}) and through this achieve a high level of composability. Instead of a one-pass-transform, transformations are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
 
 
 
@@ -504,14 +505,14 @@ Thus, I argue, that there is no reason write off nesting with arguments of subtl
 
 
 
-\paragraph{(2) No significantly complex cognitive leap.}
-TODO: This is actually a really poor argument. It's probably the other way around. Put this as critique instead. Think of the 32-nested stars-example.
+%\paragraph{(2) No significantly complex cognitive leap.}
+%TODO: This is actually a really poor argument. It's probably the other way around. Put this as %critique instead. Think of the 32-nested stars-example.
 
 
 
 
 
-\paragraph{(3) Nesting reduce the number of terminal tokens.}
+\paragraph{(2) Nesting reduce the number of terminal tokens.}
 
 Assume two unique terminal tokens -- \(A\) and \(B\). Assume a language where a string can belong to either the class A, or the class B, or simultaneously to the class of both A and B. Without the power of nesting, this requires the introduction of a third explicit token -- call it \(C\). Understand that we started out with two initial unique tokens, and that through allowing these tokens to be combined, we were forced to introduce yet another token in order to be able to encode this ``combined'' token.
 
@@ -618,7 +619,7 @@ Consequently, if one has a language consisting of three original terminal tokens
 
 
 
-\paragraph{(4) Nesting enable infinite semantics.}
+\paragraph{(3) Nesting enable infinite semantics.}
 This last argument can easily be understood by contemplating the language of infinitely nestable chapter tokens. In other words, a markup language in which every chapter nested inside of another chapter denotes a subchapter of the chapter level of the previous chapter. In other words the first time a chapter appears, it is a top-level chapter. When a chapter appears within that other chapter it is a sub-chapter. When a chapter appears within that sub-chapter, it denotes a sub-sub-chapter. And so forth into infinity.
 
 Such a language can be described by allowing elements to nest, and decide upon the semantic rule, that any chapter within a chapter is a sub-chapter of that chapter. This is obviously a powerful feature, it is obviously very common in markup languages, and obviously not (trivially) expressible without nesting, in a finite grammar.
@@ -676,27 +677,7 @@ This essentially mean that the non-terminal \texttt{content} can produce either 
 
 
 
-\subsection{Arguing the case of mixed content}
-TODO: CONTENT MOVED TO NESTING
-
-
-
-
-\subsubsection{Suitable formats for Mixed Content}
-Figure \ref{fig:mixed-content-paragraph} in XML.
-
-
-\begin{figure}[h]
-\begin{lstlisting}
-The color <underline>is <bold>now</bold> <strikethrough>red</strikethrough>.
-\end{lstlisting}
-\caption{Expressing Figure \ref{fig:mixed-content-paragraph} in XML.}
-\label{fig:mixed-content-xml}
-\end{figure}
-
-
-
-\subsubsection{Unsuitable formats for Mixed Content}
+\subsection{Unsuitable formats for Mixed Content}
 Mixed content becomes utterly difficult to express in languages that lack a canonical way of expressing it. Attempting to express Figure \ref{fig:mixed-content-paragraph} in JSON, one quickly realizes there are multiple ways and that it is not obvious which was is the one to prefer. No approach I have found\footnote{I have merely conducted non-scientific experiments.} is trivial to parse without telling the parser a particular piece of information.
 
 \begin{figure}[h]
@@ -716,7 +697,7 @@ Mixed content becomes utterly difficult to express in languages that lack a cano
 
 Consider Figure \ref{fig:mixed-content-json}. At first glance it seems like a perfectly reasonable representation of the discussed paragraph. Using Arrays to sequence, and single-key objects to name elements. However, the limitations become painfully apparent if we ask ourselves the question -- what does an object with two keys represent?
 
-One might argue that the counter example is breaking the rules. We did say ``single-key objects'' and not ``n-key objects''. This is a syntactical requirement that can easily be encoded into the parser (or probably even the lexer). This is however to misunderstand the point. The point is that the JSON specification does not actually enforce this behavior today. Meaning, there is (to my knowledge\footnote{TODO: Do I need a reference or something?}) no way of representing mixed content with labeled elements using JSON, without introducing a requirement that isn't already encoded in the lexer/parser. Meaning, all valid JSON strings, cannot (applying a certain strategy, such as e.g. Figure \ref{fig:mixed-content-json}) be considered valid strings of mixed content. This is visualized in Figure \ref{fig:mixed-content-venn-json}. Ergo, JSON is an unsuitable format for mixed content.
+One might argue that the counter example is breaking the rules. We did say ``single-key objects'' and not ``n-key objects''. This is a syntactical requirement that can easily be encoded into the parser (or probably even the lexer). This is however to misunderstand the point. The point is that the JSON specification does not actually enforce this behavior today. Meaning, there is (to my knowledge) no way of representing mixed content with labeled elements using JSON, without introducing a requirement that isn't already encoded in the lexer/parser. Meaning, all valid JSON strings, cannot (applying a certain strategy, such as e.g. Figure \ref{fig:mixed-content-json}) be considered valid strings of mixed content. This is visualized in Figure \ref{fig:mixed-content-venn-json}. Ergo, JSON is an unsuitable format for mixed content.
 
 Within this thesis, it is this line of reasoning that is referred to when discussing whether a particular format is suitable for representing mixed content or not.
 
@@ -757,13 +738,12 @@ Within this thesis, it is this line of reasoning that is referred to when discus
 
 
 
-\paragraph{Ambiguity in JSON mixed content}
-TODO: Show examples of how lexing and parsing JSON mixed content may create different parse trees. Ambiguity.
+%\paragraph{Ambiguity in JSON mixed content}
+%TODO: Show examples of how lexing and parsing JSON mixed content may create different parse trees. %Ambiguity.
 
 
 
-\subsection{Enforcing the importance of mixed content}
-
+\subsection{Arguing the case of mixed content}
 \citet*{mignet} analyzed different aspects of what they referred to as ``The XML web'' (i.e. "the subset of the Web made of XML documents only"). During this study it was found that 72\% of all documents utilize mixed content. Almost three out of four documents use mixed content. \citet{mignet} conclude that they've invalidated the folklore of underestimating the importance of mixed content in XML. Given that XML (in contrast to HTML -- the de facto language of the web) is commonly used as a data transportation format, one can reasonably assume that the number of HTML documents making use of mixed content is even higher.
 
 
@@ -812,7 +792,8 @@ To understand presentational markup, consider the two above cases -- the typewri
 One immediate problem with this, the quick reader probably have noticed, can be extracted from one particular sentence -- ``a specific word processor''. Presentational markup requires standardization of what codes to use to mark things such as bold, breaks, sizes and so forth. As you can probably imagine, with the creativity of programmers this quickly gets out of scale.
 
 \subsubsection{Implicitness}
-Another more subtle issue, not mentioned by neither \citet{coombs} nor \citet{bray}, is that of implicitness. As the presentational codes of WYSIWYG word processors are not actually visible to the user of the interface -- there exist a mental disconnect. Consider for example the concept of a paragraph break, and the concept of a hard line-break. Now, assume that, in a particular editor, a paragraph break has the same visual appearance as two consecutive hard line-breaks. Assume I type up a document, and hand it to you. How would you then possible know whether I have used paragraph breaks or hard line-breaks? Perhaps, this is the problem \citet{bray} is referring to, when arguing that What You See Is What You Get essentially is a false claim.\footnote{TODO--I have actually misunderstood this and it needs to be rethought.}
+Another more subtle issue, not mentioned by neither \citet{coombs} nor \citet{bray}, is that of implicitness. As the presentational codes of WYSIWYG word processors are not actually visible to the user of the interface -- there exist a mental disconnect. Consider for example the concept of a paragraph break, and the concept of a hard line-break. Now, assume that, in a particular editor, a paragraph break has the same visual appearance as two consecutive hard line-breaks. Assume I type up a document, and hand it to you. How would you then possible know whether I have used paragraph breaks or hard line-breaks? Perhaps, this is the problem \citet{bray} is referring to, when arguing that What You See Is What You Get essentially is a false claim.
+%TODO: This claim seems to be false! I have misunderstood and this need to be rethought.
 
 
 
@@ -860,7 +841,7 @@ We will discuss syntax in greater length further on. However, please consider th
 
 
 \subsubsection{Mutation}
-An interesting problem that reasonably may cause mental overhead for a document author working with procedural markup, is one of side-effects. Arguably, the notion of ``mutation'' or ``side-effects''\footnote{I use the terms ``mutation'' and ``side-effects'' interchangeably. TODO: Is that reasonable?} is a great source of power in programming, but also a great source of frustration. Programs that frequently mutate are generally tricky to debug\footnote{TODO Reference? Is it really true?}.
+An interesting problem that reasonably may cause mental overhead for a document author working with procedural markup, is one of side-effects. Arguably, the notion of ``mutation'' or ``side-effects'' is a great source of power in programming, but also a great source of frustration. Programs that frequently mutate are generally tricky to debug.
 
 The same is true for procedural markup. With the syntax of Figure \ref{fig:procedural-markup-red-sentence} the text that differs from the ``default'' (i.e. the red text) is enclosed between two language constructs that mark its beginning and end. Admittedly, the behavior of the particular code snippet would be reasonably easy to predict, probably even for a semi-technical author. In the case of Figure \ref{fig:procedural-markup-coombs} however, the language construct is an instruction that mutate the state of the current document from that point and onwards. In a 200 page document with this syntax, it would suddenly be non-trivial to tell whether a particular instruction have cascaded down to a particular point or not.
 %TODO: Should I rather use the term control statement
@@ -894,7 +875,9 @@ Returning to the previously mentioned example with the character entity \texttt{
 
 
 \subsection{Metamarkup}
-Metamarkup is the term \citet{coombs} use to refer to markup languages that specify, extend, and/or constraint markup languages. While not explicitly mentioned by \cite{coombs} (as they were invented later\footnote{TODO is it true? refs?}), languages such as DTD (Document Type Definition), XML Schema, and RelaxNG are all metamarkup languages.
+Metamarkup is the term \citet{coombs} use to refer to markup languages that specify, extend, and/or constraint markup languages. While not explicitly mentioned by \cite{coombs}, languages such as DTD (Document Type Definition), XML Schema, and RelaxNG are all metamarkup languages.
+
+%TODO: Maybe not mentioned because they were invented later?
 
 From a linguistic point of view, a metamarkup language can be seen as a metalanguage\footnote{http://en.wikipedia.org/wiki/Metalanguage} used to formally discuss an object language. Where in a concrete example the first could be RelaxNG and the second XML.
 
@@ -2061,9 +2044,9 @@ Also this intent has been satisfied through showing how the transformation proce
 
 
 \chapter{Analysis}
-The most important realization in regards to this project, is that it seem almost trivial to divide the transformation process into composable parts when employing an ``M-to-N'' approach rather than the ``N-to-N''. That producing composable package channels never proved to be cumbersome, as long as the correct packages are used at the correct level in the abstraction chain. As long as each transformation moves the document in the ``right'' way through the abstraction chain. In other words, when each transformation moves the document from a higher level of abstraction to a lower, or of course stays at the same, then packaging and composability seems not to be a major issue. It is likely that many issues in sharing transformation packages may stem from transforming documents in the ``wrong'' way through the abstraction chain. In other words from less abstract to more abstract. Consider scaling a bitmap image. Scaling down works perfectly fine, but scaling up pose highly problematic.
+The most important realization in regards to this project, is that it seem almost trivial to divide the transformation process into composable parts when employing an ``M-to-N'' approach rather than the ``N-to-N''. That producing composable package channels never proved to be cumbersome, as long as the correct packages are used at the correct level in the abstraction chain. As long as each transformation moves the document in the ``right'' way through the abstraction chain. In other words, when each transformation moves the document from a higher level of abstraction to a lower, or of course stays at the same, then packaging and composability seem not to be a major issue. It is likely that many issues in sharing transformation packages may stem from transforming documents in the ``wrong'' way through the abstraction chain. In other words from less abstract to more abstract. Consider scaling a bitmap image. Scaling down works perfectly fine, but scaling up pose highly problematic.
  
-\paragraph{Attempting ``M-to-N'' instead of ``N-to-N''} seem to be another way to look at this ``walking in the right direction'' in the abstraction chain. If one starts ($M$) at the intersection of all possible languages (all $N$) one may want to output to, then it is only reasonable to assume that the level of abstraction will be utterly high from the beginning. Subsequently then decrease as transformations move it closer and closer to concrete formats.
+\paragraph{Attempting ``M-to-N'' instead of ``N-to-N''} seem to be another way to look at this ``walking in the right direction'' of the abstraction chain. If one starts ($M$) at the intersection of all possible languages (all $N$) one may want to output to, then it is only reasonable to assume that the level of abstraction will be utterly high from the beginning. Subsequently then decrease as transformations move it closer and closer to concrete formats.
 
 
 
