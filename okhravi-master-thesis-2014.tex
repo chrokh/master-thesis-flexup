@@ -2056,6 +2056,25 @@ Also this intent has been satisfied through showing how the transformation proce
 
 
 
+% % % % % % % % % % % % % 
+%
+%
+%
+%   ANALYSIS
+%
+%
+%
+% % % % % % % % % % % % % 
+
+
+\chapter{Analysis}
+The most important realization in regards to this project, is that it seem almost trivial to divide the transformation process into composable parts when employing an ``M-to-N'' approach rather than the ``N-to-N''. That producing composable package channels never proved to be cumbersome, as long as the correct packages are used at the correct level in the abstraction chain. As long as each transformation moves the document in the ``right'' way through the abstraction chain. In other words, when each transformation moves the document from a higher level of abstraction to a lower, or of course stays at the same, then packaging and composability seems not to be a major issue. It is likely that many issues in sharing transformation packages may stem from transforming documents in the ``wrong'' way through the abstraction chain. In other words from less abstract to more abstract. Consider scaling a bitmap image. Scaling down works perfectly fine, but scaling up pose highly problematic.
+ 
+\paragraph{Attempting ``M-to-N'' instead of ``N-to-N''} seem to be another way to look at this ``walking in the right direction'' in the abstraction chain. If one starts ($M$) at the intersection of all possible languages (all $N$) one may want to output to, then it is only reasonable to assume that the level of abstraction will be utterly high from the beginning. Subsequently then decrease as transformations move it closer and closer to concrete formats.
+
+
+
+
 
 
 
