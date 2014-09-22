@@ -958,6 +958,7 @@ In order to achieve the second goal, \citet{goldfarb} explained that GML documen
 
 \subsection{Tag-validity and type-validity}
 %TODO: Remember to use this piece of information!!
+\label{sec:tag-validity-type-validity}
 \DeclareFixedFootnote{\refSGMLspec}{http://xml.coverpages.org/wg8-n1929-g.html}
 The observant reader may have noticed that a parallel was drawn between GML Models and DTD's in combination with Document Type Declarations (commonly referred to as DocTypes). In SGML an explicit distinction was made between, what was called, tag-validity and type-validity\refSGMLspec. GML Models made no such distinction and both concepts were thus instead encompassed into the idea of GML Models.
 
@@ -1321,11 +1322,13 @@ In Section \ref{sec:requirements-initial} a number of high-level goals for ideal
 The high-level goals outlined in \ref{sec:requirements-initial} have been used as a guide when navigating the theory from Sections \ref{sec:theory} and \ref{sec:theory-of-document-processing}. The argument is, that if composability is to be achieved, one must identify all steps of the transformation process that can be isolated into components. Below follows such a suggestion of an ideal separation of transformation intents.
 
 
-\subsection{Semantics}
-TODO: Derive ideas from the GML to SGML transformation where it is realized that DTD's and DocTypes are not the same thing. Tag-validity, and type-validity.
+\subsection{Syntax}
+As made clear in Section \ref{sec:tag-validity-type-validity}, there exist a distinction in intent between validating the syntactical correctness and the semantic correctness of a document. A compiler that lex and parse a particular input is concerned with syntactical correctness, whereas checking whether a document conforms to a (e.g.) DTD, is a concern of semantic correctness.
 
-\subsection{Validations}
-TODO: Build upon ideas from the latter, and the concepts of the DTD.
+Thus, one intent of transformation is the first mentioned -- syntactical correctness. In terms of a compiler: lexing and parsing.
+
+\subsection{Semantic validations}
+Building upon the ideas just mentioned in the previous section -- that syntactic validity and semantic validity, are not the same. If syntactic validity is to be considered a separate intent, then of course, the second intent of markup transformation would be semantic validity.
 
 \subsection{Derivations}
 TODO: Build upon the ideas of Scribe, chap. 7.1 Derived Text (p. 78).
