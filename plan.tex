@@ -171,6 +171,7 @@
 %
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 \tikzstyle{io}       = [trapezium, trapezium left angle=75, trapezium right angle=105, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{ds}       = [rectangle, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=black!15]
 \tikzstyle{process}  = [circle, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=orange!30]
 \tikzstyle{decision} = [diamond,   minimum width=2cm, minimum height=2cm, text centered, draw=black, fill=green!30]
 \tikzstyle{arrow}    = [thick,->,>=stealth]
@@ -1399,28 +1400,59 @@ In Section \ref{sec:requirements-initial} a number of high-level goals for ideal
 The high-level goals outlined in \ref{sec:requirements-initial} have been used as a guide when navigating the theory from Sections \ref{sec:theory} and \ref{sec:theory-of-document-processing}. The argument is, that if composability is to be achieved, one must identify all steps of the transformation process that can be isolated into components. Below follows such a suggestion of an ideal separation of transformation intents.
 
 
-\section{Syntax}
+\subsection{Syntax}
 As made clear in Section \ref{sec:tag-validity-type-validity}, there exist a distinction in intent between validating the syntactical correctness and the semantic correctness of a document. A compiler that lex and parse a particular input is concerned with syntactical correctness, whereas checking whether a document conforms to a (e.g.) DTD, is a concern of semantic correctness.
 
 Thus, one intent of transformation is the first mentioned -- syntactical correctness. In terms of a compiler: lexing and parsing.
 
-\section{Validations}
+\subsection{Validations}
 Building upon the ideas just mentioned in the previous section -- that syntactic validity and semantic validity, are not the same. If syntactic validity is to be considered a separate intent, then of course, the second intent of markup transformation would be semantic validity.
 
-\section{Derivations}
+\subsection{Derivations}
 As exhibited in Section \ref{sec:theory:derived-text}, derived text is not only a powerful part of a markup language compiler, but it is also a dangerous one. Dangerous in the sense that it may lessen re-usability if implemented at the wrong level of abstraction. This is made especially clear in the areas of critique that \citet{krijnen} deliver towards Pandoc.
 
 The fact that derived text is a very natural part of markup languages, and have been around for a long time, is clearly exhibited by the implementation of it by \citet{reid} in the language Scribe.
 
 Consequently, derivations are important and necessary, but must be implemented at the right level of abstraction. Subsequently, it is reasonable to assume that derivations should be considered a separate intent.
 
-\section{Presentations}
+\subsection{Presentations}
 The perhaps most obviously distinct intent of markup transformation is that of presentation. In Section \ref{sec:taxonomy} it was declared that even in the early days of Scribe, by \citet{reid}, it was conceived that presentation ought to be separated from content. The taxonomy introduced by \citet{coombs} clearly suggest that presentation can be separated from content. The very nature of XSLT\footnote{http://www.w3.org/TR/xslt} cries out that documents can be transformed into other documents with the intent of describing the document contents rather than its presentation. Pandoc is a case in point on how the information contained in a document can exist between the boundries of two presentational formats.
 
 Consequently, another distinct intent is the transformation from some format to a presentational format.
 
 
 
+\section{Using configurations to map processing functions}
+In order to truly adhere to the second and third high-level goals (composability, and extendability), one sensible, and obvious, approach would be to allow transformations to be configured. Consider XSLT as en example. Assume one were to construct a package system (such as the package system of \LaTeX) or (perhaps even) a public package channel\footnote{A ``package channel'' refer here to the idea of a unified publicly accessible package system, such as e.g. \texttt{apt-get}, \texttt{RubyGems} or \texttt{npm}}. Consider now that authors are free to choose element names freely in XML. This mean it would either be utterly difficult for a package creator to assume the right names for some set of elements when constructing the package, or it would spawn a situation where document authors would have to constantly adapt to the names used in packages. This of course violates the second high-level goal as it makes the package-eco-system significantly less composable.
+
+One sensible alternative would be to apply the three-step approach to document conversion, proposed by \citet{goldfarb}. Applying this three-step process allow different intents to be left to different parts of the eco-system. Step one and two (recognition and mapping) would be carried out by the individual that aim to \emph{use} the package. Where the second step would allow the user to map the names of her elements onto the names of the elements in the ``processing function'' (PF) (i.e. the package). The package creator would thus create, only the PF. It is important of course that the PF would have to be created in a way such that it allows arguments to be passed, and thus mapped onto the variable element names within the PF.  Step three would be carried out by the transformation program itself.
+
+For the sake of standardization it would of course, and again, proper composability, it would of course make sense to standardize the way that a PF exposes its arguments.
+
+Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refined with the property of this three-step process.
+
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {$I$};
+    \node (P)      [process, right of=input] {$P$};
+    \node (output) [io,      right of=P] {$O$};
+
+    \node (C)  [ds,      above of=P, xshift=-1cm, yshift=-1cm] {\(C\)};  % {Configuration};
+    \node (F)  [ds,      above of=P, xshift=1cm,  yshift=-1cm] {\(PF\)}; % {Functions};
+
+    \draw [arrow] (input)  -- (P);
+    \draw [arrow] (P) -- (output);
+    \draw [arrow] (C) -- (P);
+    \draw [arrow] (F) -- (P);
+  \end{tikzpicture}
+
+  \caption{Quadrant B model refined with properties of the three-step model for document processing, by \citet{goldfarb}.}
+  \label{fig:quad-b-with-three-step-process}
+\end{figure}
 
 
 
