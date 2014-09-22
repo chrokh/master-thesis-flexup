@@ -1561,12 +1561,17 @@ Any useful complexity discussed in the theory parts of this thesis will be shift
 \paragraph{Mixed Content.} The proposed language(s) must support and be suitable for Mixed Content. Following the formal definition of suitability defined in Section \ref{sec:mixed-content}.
 
 
-\paragraph{Generic Identifiers.} The proposed language(s) must support the use of generic syntax and contain no forced syntactical keywords. In the case of multiple languages being suggested, only the language used as input to the transformation program must exhibit this property.
+\paragraph{Generic Syntax.} The proposed language(s) must support the use of generic syntax and contain no forced syntactical keywords. In the case of multiple languages being suggested, only the language used as input to the transformation program must exhibit this property.
 
 
 
 
 \section{Proposing a DSL for generating markup-oriented EBNF}
+In order to fulfill the requirement of Generic Syntax, the author of this thesis propose that document authors use Formal Grammars to express a language specific for her particular domain. A language in which the end content then can be marked up.
+
+Asking semi-technicals (whom authors very well may be) to define languages using Formal Grammars such as EBNF is however of course not only absurd, but also time-consuming and error prone. Thus the suggestion is to create a small DSL and a conversion program that converts this simpler language to actual EBNF.
+
+This smaller language will of course limit the number of expressible languages in EBNF such that all valid inputs in the language will when run through the program produce an EBNF that conform the set of requirements outlined in this chapter, and is thus suitable as a markup format.
 
 
 
