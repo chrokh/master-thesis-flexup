@@ -992,6 +992,7 @@ Obviously, both are important for, as \citet{goldfarb} puts it, rigor.
 
 
 \subsection{Arguing the case of Generic Identifiers}
+\label{sec:arguing-the-case-of-generic-identifiers}
 No extensive argumentation for the case of Generic Identifiers (GI's) will be conducted. Except for referencing the statement by \citet{goldfarb} claiming that the classic markup language Scribe (by \citet{reid}) manages to avoid procedural markup completely, much because of the effectivity of Generic Identifiers.
 
 Further, it has already been established in Section \ref{sec:abstraction-hierarchy}, that in the hierarchy of Markup types, it is desirable to reach a state where all manually authored markup is descriptive. Consider however, how descriptive markup can be of two subtypes\footnote{And any combination in between the extremes of course.}. One is the type of Generic Identifiers. Where element names may be made up on the fly, by the document author. The other type is that without Generic Identifiers. In other words a language with a fixed number of elements.
@@ -999,7 +1000,7 @@ Further, it has already been established in Section \ref{sec:abstraction-hierarc
 The author of this thesis argue for the superiority of the first rather than the latter. For the simple reason that Generic Identifiers enable document authors to express their documents at the highest possible level of abstraction. Meaning that Generic Identifiers combined with transformation facilities enable authors to express things in arbitrary syntax suitable for the cognitive mindset of those particular authors. Compare this to the situation where a user has to dig through a hefty manual in order to locate the name of some element the author assume exist but don't actually know.
 
 The author of this thesis does not argue that Generic Identifiers is neither a fundamental property of markup languages, nor that it would be undoubtedly necessary. However, the argument is that, in any domain of uncertainty, or any domain undergoing change Generic Identifiers provide a facility to mark up information in a way that is significantly more ready for change. Whether or not programmers need to always be ready for change, is left as en exercise for the reader. Thus, again, the argument is not that GI's are absolutely necessary, however that they provide such a significantly stronger foundation for documents expressed in the language that GI's should be considered an obviously integral feature of markup languages.
-%TODO: Is this reeeally the argument I want to make :/
+%TODO: Is this reeeally the argument I want to make :/  
 
 
 
@@ -1372,7 +1373,21 @@ Understand that all humans using end-tools in the eco-system should be deemed au
 
 
 \section{Generic Identifiers}
-As accounted for in Section \ref{sec:theory:generic-identifiers-and-validity}
+As accounted for in Section \ref{sec:arguing-the-case-of-generic-identifiers}, Generic Identifiers, are desirable for multiple reasons. For ``future-proofing'' a document, and a language, as well as allowing authors to think and express their content freely. As the author consider GI's to not only be such a powerful feature, but also such an likely integral part of the future of markup that this thesis will take one step further. Instead of making Generic Identifiers a requirement for the language proposed by this thesis, the requirement will be Generic Syntax.
+
+In the XML specification\footnote{http://www.w3.org/TR/REC-xml/\#sec-logical-struct} Generic Identifiers are defined using EBNF notation as follows\footnote{Some parts of the EBNF example snippet are omitted (such as element attributes), and some altered (such as the letter range) to favor readability.}:
+
+\begin{lstlisting}
+element  ::=  EmptyElemTag | STag content ETag
+STag     ::=  "<" Name ">"
+ETag     ::=  "</" Name ">"
+NameChar ::=  NameStartChar | "-" | "." | [0-9] | [A-Za-z] | ...
+Name     ::=  NameStartChar (NameChar)*
+\end{lstlisting}
+
+The EBNF snippet can informally be described as follows. An element can either produce an empty element tag, or the set of a start tag some content and then an ending tag. A start tag must produce a set of balanced chevrons (i.e. $<>$) in which between a name must be produced. A name can produce a non-whitespace-containing string where some characters are not allowed as the first character.
+
+While the GI's of XML are indeed very powerful. The author of this paper suggest that Generic Identifiers could be even more generic. If the document author is given some facility for defining her GI's then there is really no need for the mandatory chevrons. Or to put it more generally, a markup language should be able to provide the facility for defining GI's without forcing the GI's to contain any particular syntactical tokens. Call this phenomena \emph{Generic Syntax}.
 
 
 
