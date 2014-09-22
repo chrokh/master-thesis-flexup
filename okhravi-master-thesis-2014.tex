@@ -1566,11 +1566,11 @@ Any useful complexity discussed in the theory parts of this thesis will be shift
 
 
 
-\section{Proposing a DSL for generating markup-oriented PEG}
+\section{A DSL for generating markup-oriented PEG}
 In order to fulfill the requirement of Generic Syntax, this thesis propose the usage of Formal Grammars to express languages specific for the particular document of the moment. Asking semi-technicals (whom authors very well may be) to define languages using Formal Grammars such as a Parsing Expression Grammar (PEG) or an Extended Backus-Naur Form (EBNF) is however of course not only absurd, but also time-consuming and error prone. This thesis argue the need for significantly simpler languages that can be used to express descriptive markup languages.
 
 
-Thus, the suggestion is to create a tiny DSL, and a tiny conversion program that converts this tiny language into actual PEG syntax. Of course, the idea is that the actual PEG should be abstracted away from the user. Thus, the ignorant user would not know there is a Parsing Expression Grammar being generated in the background. To achieve this, the minor conversion program will be included in the transformation workflow described further on in Section \ref{chpt:proposal-transformation-workflow}. 
+Thus, the suggestion is to create a tiny Domain-Specific Language (DSL), and a tiny conversion program that converts this tiny language into actual PEG syntax. Of course, the idea is that the actual PEG should be abstracted away from the user. Thus, the ignorant user would not know there is a Parsing Expression Grammar being generated in the background. To achieve this, the minor conversion program will be included in the transformation workflow described further on in Section \ref{chpt:proposal-transformation-workflow}. 
 
 The intent of this smaller language is of course to limit the number of expressible languages in PEG such that all valid inputs in the language will when run through the program produce a PEG that parses suitable markup formats. Formats that also adhere to the language requirements outlined previously in this chapter.
 
