@@ -1329,6 +1329,7 @@ While it of course is nifty that a markup language (and it's compiler) have a bu
 
 
 \chapter{Deriving markup language requirements}
+\label{chpt:derived-language-requirements}
 In Section \ref{sec:requirements-initial} requirements for a transformation program were set out. In this section, requirements for the languages supported by such a transformation program will be outlined. The requirements introduced by this chapter are strictly derived from important realizations in Section \ref{sec:theory}.
 
 
@@ -1383,6 +1384,7 @@ Understand that all humans using end-tools in the eco-system should be deemed au
 
 
 \chapter{Deriving markup transformation requirements}
+\label{chpt:derived-transformation-requirements}
 In Section \ref{sec:requirements-initial} a number of high-level goals for ideal markup language transformation programs were outlined. This section will build upon the theory outlined in both Section \ref{sec:theory} as well as \ref{sec:theory-of-document-processing}. Using this body of knowledge as stepping stone, this chapter will formulate a set of requirements for an ideal markup transformation program. The high-level goals outlined in Section \ref{sec:requirements-initial} will now be discussed one by one.
 
 \paragraph{The ability to produce any output format from any reasonable input format.} While it was never explicitly stated what a reasonable input format is, the wording makes it clear that it does not reference the domain of all possible input formats. Consequently, Section \ref{sec:microframework} determines that it is pragmatic to attempt to build Quadrant B programs rather than Quadrant A programs. According to the constructed micro-framework, Quadrant B programs fit perfectly with this high-level goal. Quadrant A programs are deemed too complex to be pragmatically useful\footnote{At least for now.}, and Quadrant C and D programs are deemed to be too useless for markup transformation.
@@ -1434,8 +1436,11 @@ Consequently, another distinct intent is the transformation from some format to 
 
 
 
-\chapter{Refining Quadrant B programs}
-As mentioned earlier in this chapter, the quadrant view is an oversimplification and of course there are many interesting nuances within one quadrant. This section will refine Quadrant B programs using the initially proposed requirements for a transformation program (outlined in Section \ref{sec:requirements-initial}).
+\chapter{Proposing an ideal workflow}
+As mentioned earlier in this chapter, the quadrant view is an oversimplification and of course there are many interesting nuances within one quadrant. This section will refine Quadrant B, using the requirements gathered in Sections \ref{chpt:derived-language-requirements} and \ref{chpt:derived-transformation-requirements}, as guidelines, and through the collected requirements reach a supported proposal for an ideal workflow.
+
+
+
 
 
 
