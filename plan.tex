@@ -1010,6 +1010,19 @@ The author of this thesis argue that languages with GI features are, in the ways
 
 
 
+\paragraph{}In the XML specification\footnote{http://www.w3.org/TR/REC-xml/\#sec-logical-struct} Generic Identifiers are defined using EBNF notation as follows\footnote{Some parts of the EBNF example snippet are omitted (such as element attributes), and some altered (such as the letter range) to favor readability.}:
+
+\begin{lstlisting}
+element  ::=  EmptyElemTag | STag content ETag
+STag     ::=  "<" Name ">"
+ETag     ::=  "</" Name ">"
+NameChar ::=  NameStartChar | "-" | "." | [0-9] | [A-Za-z] | ...
+Name     ::=  NameStartChar (NameChar)*
+\end{lstlisting}
+
+The EBNF snippet can informally be described as follows. An element can either produce an empty element tag, or the set of a start tag some content and then an ending tag. A start tag must produce a set of balanced chevrons (i.e. $<>$) in which between a name must be produced. A name can produce a non-whitespace-containing string where some characters are not allowed as the first character. And so forth for the closing of the element.
+
+
 
 
 
@@ -1379,21 +1392,9 @@ Understand that all humans using end-tools in the eco-system should be deemed au
 
 
 \section{Generic Identifiers}
-As accounted for in Section \ref{sec:arguing-the-case-of-generic-identifiers}, Generic Identifiers, are desirable for multiple reasons. For ``future-proofing'' a document, and a language, as well as allowing authors to think and express their content freely. As the author consider GI's to not only be such a powerful feature, but also such an likely integral part of the future of markup that this thesis will take one step further. Instead of making Generic Identifiers a requirement for the language proposed by this thesis, the requirement will be Generic Syntax.
+As accounted for in Section \ref{sec:arguing-the-case-of-generic-identifiers}, Generic Identifiers, are desirable for multiple reasons. For ``future-proofing'' a document, and a language, as well as allowing authors to think and express their content freely, without concerns of formatting or exact semantics. With GI's the author need simply to identify whether two elements are different or alike, and then make decisions on semantics and formatting later on.
 
-In the XML specification\footnote{http://www.w3.org/TR/REC-xml/\#sec-logical-struct} Generic Identifiers are defined using EBNF notation as follows\footnote{Some parts of the EBNF example snippet are omitted (such as element attributes), and some altered (such as the letter range) to favor readability.}:
-
-\begin{lstlisting}
-element  ::=  EmptyElemTag | STag content ETag
-STag     ::=  "<" Name ">"
-ETag     ::=  "</" Name ">"
-NameChar ::=  NameStartChar | "-" | "." | [0-9] | [A-Za-z] | ...
-Name     ::=  NameStartChar (NameChar)*
-\end{lstlisting}
-
-The EBNF snippet can informally be described as follows. An element can either produce an empty element tag, or the set of a start tag some content and then an ending tag. A start tag must produce a set of balanced chevrons (i.e. $<>$) in which between a name must be produced. A name can produce a non-whitespace-containing string where some characters are not allowed as the first character.
-
-While the GI's of XML are indeed very powerful. The author of this paper suggest that Generic Identifiers could be even more generic. If the document author is given some facility for defining her GI's then there is really no need for the mandatory chevrons. Or to put it more generally, a markup language should be able to provide the facility for defining GI's without forcing the GI's to contain any particular syntactical tokens. Call this phenomena \emph{Generic Syntax}.
+While the GI's of (e.g.) XML are indeed very powerful. The author of this paper suggest that Generic Identifiers could be even more generic. If the document author is given some facility for defining her GI's then there is really no need for the mandatory chevrons. Or to put it more generally, a markup language should be able to provide the facility for defining GI's without forcing the GI's to contain any particular syntactical tokens. Call this property of a language \emph{Generic Syntax}. That is the requirement for the language in this thesis.
 
 
 
