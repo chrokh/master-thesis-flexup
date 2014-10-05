@@ -299,6 +299,63 @@ While it would be all but trivial to construct such a hierarchy of all the langu
 
 
 
+
+\begin{figure}[h]
+\centering
+
+  \begin{subfigure}{.33\textwidth}
+    \centering
+
+    \begin{tikzpicture}[
+      tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=2.5cm,
+    ]
+    \node {$L$}
+    child {node {$L1$}}
+    child {node {$L2$}}
+    ;
+    \end{tikzpicture}
+
+    \caption{Ref. names.}
+    \label{fig:fictive-specialization-tree-example-ref}
+  \end{subfigure}%
+  \begin{subfigure}{.33\textwidth}
+    \centering
+    \begin{tikzpicture}[
+      tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=2.5cm,
+    ]
+    \node {$1^n0^n$}
+    child {node {$1^{2n}0^{2n}$}}
+    child {node {$1^{n-1}0^{n-1}$}}
+    ;
+    \end{tikzpicture}
+
+    \caption{Languages.}
+    \label{fig:fictive-specialization-tree-example-languages}
+
+  \end{subfigure}%
+  \begin{subfigure}{.33\textwidth}
+    \centering
+
+    \begin{tikzpicture}[
+      tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=2.5cm,
+    ]
+    \node {$1100$}
+    child {node {$11110000$}}
+    child {node {$10$}}
+    ;
+    \end{tikzpicture}
+
+    \caption{Strings.}
+    \label{fig:fictive-specialization-tree-example-run}
+  \end{subfigure}
+
+  \caption{Concrete example of specialization of some set of languages over the characters $0$ and $1$. TODO: This is probably the best way to illustrate the problem. By discussing the conflicts when converting from node L1 to L2. Even the question of what it \emph{means} to convert from L1 to L2 is hard to answer.}
+  \label{fig:fictive-specialization-tree-example}
+\end{figure}
+
 Consider for example the Chomsky Hierarchy\footnote{TODO: REFERENCE}. A regular language can be expressed in with context-free grammar, but a context-free language cannot necessarily be expressed with a regular grammar. In other words, a language of a simpler grammar can be expressed using a more complex grammar, but a language expressed in a more complex grammar cannot necessarily be expressed in the simpler grammar.
 
 The argument in this thesis is thus, that when performing document conversion, if complexity is always introduced and never removed one moves from simpler languages to more complex languages. While this example discuss conversion between two different levels of the Chomsky Hierarchy, the same reasoning apply to languages within one level.
