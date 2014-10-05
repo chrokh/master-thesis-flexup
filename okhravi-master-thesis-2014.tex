@@ -236,39 +236,88 @@ and my significant other (for being awesome).
 % % % % % % % % % % % % % % % % % % % % % %
 
 \chapter{Background}
-
-Since the invention of the writing on the wall, mankind has struggled with an interesting problem of change. Be it change in medium or means (e.g. the process of production or the means of storage). Every generation bear the burden of passing the collective body of knowledge on to the next. Every generation that cause medium or means of the written word to significantly change --  face a somewhat trivial dilemma. To somehow transcend (transform) all existing written content to fit the new ways of today, or leave the currently collected body of human knowledge to slowly perish with time.
-
-The writing in stone cannot possibly accommodate all of the existing human knowledge. This problem of space can for example be solved by moving content to books. Paper, however, is a biological material that deteriorate with time. Consequently we have a problem of degradation. Digital representations is utterly superior in that it can be almost instantly copied and duplicated. Consequently, a process of duplication may be sufficiently cheap so as to answer to the problem of material deterioration. Because of course, even hard drives, and flash disks deteriorate with time. In the digital world however, we face a problem of interoperability. New file formats are invented every day. Employing a naive process of constant duplication will leave our future selves in a position where some formats may be as costly to interpret as the ancient writing on the wall is to us today. As the native speakers of a language die, so does the knowledge uniquely encoded in that language.
-
-Instead, I argue that the one sensible approach is to employ a constant rewriting of the complete body of written human knowledge. To ensure that no authored work is lost in the translation of time.
-
-But the big problem is of course that this is an utterly massive undertaking. So massive that it is obviously absurd to assume this process should be carried out by humans. But not yet so massive that it would be absurd to ask computers to carry it out. This thesis suggests taking a holistic approach to the current body of markup languages, identifying a common intersection, and suggesting a structured way in which all languages within this intersection can be transformed into any of these other languages.
-
-With preparations for the future. In the sense of extendability and composability in terms of package sharing across langauge boundries.
-
- 
-
-
-
-\section{A brief history of Markup}
-Robin Cover state on XML Cover Pages\footnote{http://xml.coverpages.org/general.html\#hist} that he once were to undertake a research project in search for the history of Generalized Markup. Whereas in this project he quickly realized that this history is not as uniformly viewed by everyone as one might think, and many conflicting opinions of what really happened exist. Thus, this thesis will not attempt to give you some chronologically organized brief history of markup. Instead you, dear reader, must believe that you are safe, and that you will become familiar with many aspects of the history of markup when fragments of information puzzle together amongst the arguments of something else. Thus, fret not. The history of markup will make enough sense in the end. Unless you are already an expert of course.
-
-
-
-
-\section{Problem outline}
-\label{sec:problems}
-The problem area of this thesis is probably best be summarized by a quote raised in a paper by \cite*{krijnen} on a different approach to a problem similar to the problem raised in this thesis.
+The problem approached in this thesis, is perhaps best summarized by the quote raised in a paper by \citet{krijnen}. That paper, however, approach the problem from a different angle than this thesis. That paper employ the $n-to-n$ approach, whereas this thesis explore an $m-to-n$ approach.
 
 \begin{quote}
 ``The nice thing about standards is that there are so many to choose from.''\\
-\textit{-- Andy Tanenbaum}
+\textit{-- Andy Tanenbaum, as quoted by \citet{krijnen}}
 \end{quote}
 
-Because we have so many different formats, for various good reasons, the need to convert between these formats, for various good reasons, is apparent. Let us begin with some examples. A reason for why we have different input formats may be that we as individuals appreciate different approaches and ways of thinking and thus syntaxes. Another might be that some formats simply cannot express concepts that another format can express. A reason for why we would like to convert between formats could be that of publishing. Given the multitude of devices and programs that can consume our documents it should be in our interest to supply appropriate formats for these devices and programs. 
+For many good reasons, different formats exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. Languages offer different levels of control. At different levels of abstraction.
 
-\paragraph{Call this the ``n-to-n conversion problem''} (or simply ``n-to-n''). An existing approach to this ``n-to-n'' conversion problem, and perhaps the most obvious one, is Pandoc\footnotePandoc -- dubbed ``a universal document converter''. The problem I see with Pandoc however is it's lacking facilities for customization of the conversion process. Assume for example that we are converting a document expressed in Markdown to HTML. None of the formats natively support the concept of a Table Of Contents (TOC). Wanting to do this, we would have to ``intercept'' the program after it has parsed the input, and use Haskell or Python to transform the JSON representation of the Abstract Syntax Tree (AST). This interception possibility is not a ``hack'' but built in to the Pandoc system and referred to as Scripting\footnotePandoc
+One can informally categorize document formats into three groups on the basis of design intentions. A language may have been designed with the intention of enabling document authors to somewhat trivially, express documents in the language manually. On the other end of the spectra a format may have been designed without this intent, perhaps because it is aiming for very high precision. The second factor to consider is whether a format was designed to directly produce some visual output. With these two aspects the following four categorizations emerge.
+
+\begin{enumerate}
+\item Languages intended to support manual document authoring, but not intended to directly produce visual output (e.g. XML).
+\item Languages intended to support manual document authoring, and also intended to directly produce visual output (e.g. HTML).
+\item Languages not intended to support manual document authoring, but intended to directly produce visual output (e.g. PDF).
+\item Languages neither intended to support manual document authoring, nor directly produce visual output (i.e. transportation formats).
+\end{enumerate}
+
+Considering the above four different format categories, the need for format conversion programs become apparent. One may for example want to express a document in XML but publish it in PDF. Or express and publish a document in HTML, while however also converting it to some proprietary format of the fourth category in order to feed it as input to some other system.
+
+Disregarding all categorizations of document annotation formats, this transformation becomes an $n-to-n$ problem. An existing approach to this ``n-to-n'' conversion problem, and perhaps the most obvious one, is Pandoc\footnotePandoc -- dubbed ``a universal document converter''.
+
+
+\paragraph{The starting point of this thesis} is the idea that some formats are significantly easier to convert from, and some are significantly easier to convert to. The hypothesis is that there exist a hierarchy of abstraction, in which conversions are trivial in one direction but significantly more complex in the other. 
+
+Using the example of the four categories above, one may for example argue that the idea of presentation is a specialization, whereas the description of something outside its domain of presentation is an abstraction. This would mean, that formats concerned with presentation are less abstract (i.e. more specialized) than those not concerned with presentation.
+
+\paragraph{Converting from a non-presentational format to a presentational format} would then (following the hypothesis of this thesis), in general, be a significantly easier task, than converting between two different presentational formats. Or even from a presentational format to a non-presentational format.
+
+In the specific case of presentation-oriented formats, the argument is strengthened by the well-accepted idea of ``separating presentation from content''. However the hypothesis of this thesis is not only that presentation and content are different. But also that all languages exhibit properties, and that all of these properties can be ordered hierarchically according to their level of abstraction.
+
+While it would be all but trivial to construct such a hierarchy of all the languages and all their properties, an example that convey the idea is depicted in Figure \ref{fig:fictive-specialization-tree}. Let $L$ be a trivial language, such as e.g. the language of equal 0's and 1's (i.e. $0^n1^n$). Let then $L1$ be the language of equal number of 0's and 1's with an extra 0 in the middle (i.e. $0^n0^11^n$). Let $L2$ be the language of any number of repetitions of equal numbers of 0's and 1's (i.e. ($0^n1^n)^*$). The languages $L2$ and $L1$ both exhibit the property of $L$ -- the property of containing a balanced set of 0's and 1's. However either with some addition, or with some variation. Meaning, that if one would remove the specialization from $L1$ one would get $L$.
+
+
+
+
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+    sibling distance=4cm,
+  ]
+  \node {L}
+  child {node {L1}
+    child {node {L1.1}
+      child {node {...}}
+    }
+    child {node {...}}
+  }
+  child {node {L2}
+    child {node {...}}
+  }
+  child {node {...}}
+  ;
+  \end{tikzpicture}
+
+  \caption{Fictive example of specialization}
+  \label{fig:fictive-specialization-tree}
+\end{figure}
+
+
+
+Consider for example the Chomsky Hierarchy\footnote{TODO: REFERENCE}. A regular language can be expressed in with context-free grammar, but a context-free language cannot necessarily be expressed with a regular grammar. In other words, a language of a simpler grammar can be expressed using a more complex grammar, but a language expressed in a more complex grammar cannot necessarily be expressed in the simpler grammar.
+
+The argument in this thesis is thus, that when performing document conversion, if complexity is always introduced and never removed one moves from simpler languages to more complex languages. While this example discuss conversion between two different levels of the Chomsky Hierarchy, the same reasoning apply to languages within one level.
+
+Consider two grammars, $G1$ and $G2$. Let $G1$ be the language of strings matching $(0^n 1^n)$. Let $G2$ be the language of all strings matching $(0^n 1^n)*$. Consequently, $G1$ describes the simpler language of equal number of 0's and 1's (such as $01$ or $00001111$). Whereas the second, more complex, grammar denote the language of any repetition of equal number of 0's and 1's (such as $0101$ or $000111000111$). What's interesting about these two grammars is that $G1$ is contained within $G2$. In other words that all strings of the language defined by $G1$ can also be expressed in the language $G2$.
+
+It is this property of inclusion that this thesis refer to as level of abstraction. Given all this information one might spontaneously approach the problem of markup format conversion with the idea that the ideal would be to have a grammar with such a high level of complexity that it can express any other language. In other words this would mean converting up in the abstraction chain. Considering Figure \ref{fig:fictive-specialization-tree}, a problem with such an approach can be viewed as such. Consider $L$ to be the most specialized language. The language in which all other languages are expressible. As soon as one manages to imagine something that is not expressible in $L$, $L$ need to be rewritten. The severity of the change in the language $L$ will likely depend on how ``deep down'' in the abstraction chain the diversion was discovered. If discovered at a more shallow level the changes will likely be more significant (because the change might have ``ripple effects'' down the chain).
+
+% TODO: Abstraction chain concept still not clear
+
+This thesis however take the opposite approach and suggest that documents should be expressed in the simplest possible language, in an attempt to avoid these unfortunate discoveries of languages outside of the set. Thus the suggestion is that complexity should be layered on top of the simpler language. In other words, if one wants to express a string in the language defined by the grammar $G2$, this thesis suggest that one should express a reasonable simplification in the language defined by $G1$, and then define a process for converting that simpler string into the more complex. Using these two concrete grammars, the transformation would amount to repeating the string some number of times.
+
+
+
+
+
+
+
+\paragraph{TODO -- Old stuff about Pandoc}
 
 Thus, the issues related to Pandoc are two-faceted. On one hand (P1) it may be difficult for semi-programmers to significantly modify the structure of a output document, but on the other -- even (P2) assuming programmers would collectively build an extensive library of transformation scripts for Pandoc, these ``packages'' operate on AST's that represent already complex formats. This facility and it's drawbacks is made clear in the research of \citet{krijnen}, who propose a solution for essentially the same problem as this thesis. The main difference between the approach of this thesis and that of \citet{krijnen} is that they operate on a ``lower level''. Seemingly \citet{krijnen} operate with intents of compilation efficiency through the use of lazy-evaluation, and criticize the Pandoc scripting system for requiring multiple (thus costly) runs over the AST. While the work of \citet{krijnen} is splendid, I unfortunately argue that formal grammars are too complex for such a tool to be used by laymen, or semi-programmers.
 %TODO: Make the P's and their problems more clear. Why are they never referred to?
