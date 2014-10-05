@@ -294,6 +294,9 @@ An author can express her document in an arbitrary XML-format (perhaps imagined 
 
 \paragraph{Instead, consider the following idea.} Let $N$ be all the languages an author may want to convert to. Let all the concrete languages of $N$ be represented by $n_1, n_2, .., n_n$. Let $M$ be some subset of the languages in $N$ (i.e. $M \subseteq N$). Such that the languages of $M$ exhibit only language properties also exhibited by all languages of $N$. In other words, any string in $M$ must be expressible in any of the languages $n_1, n_2, .., n_n$. In other words, $M$ is a subset of the intersection of all languages in $N$, i.e: $M \subseteq (n_1 \cap n_2 \cap .. \cap n_n)$.
 
+% TODO:
+% However, we are only informally talking about sets and subsets here. Since most languages that we want to convert to (e.g. XML, LaTeX) are definitely not regular they are thus at least context-free. In the Chomsky Hierarchy. And since context-free grammars are not closed under language inclusion, this mean we cannot actually certainly say that some language actually is a subset of another language.
+
 \paragraph{In layman terms} the above formulas encapsulate the idea of only allow string conversions from simpler languages to more complex languages, but never the other way around. Assume the two languages $I$ and $O$. If $O$ is more complex than $I$. Expressing a string from $I$ in language $O$ is likely trivial. However, expressing a string from $O$ in language $I$ is not always trivial, and many times not even possible. Since the language $O$ allow constructs that are not expressible in $I$ information must inevitably be lost in the conversion.
 
 \paragraph{In this thesis I argue} that there is a difference between converting a document when the language is within M, from M to N, or within N. I will also argue that employing this division will spawn much more pragmatic solutions than many-to-many-document conversions.
