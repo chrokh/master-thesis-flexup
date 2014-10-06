@@ -100,6 +100,7 @@
 
 
 % TiKZ Figures
+\tikzstyle{dot}       = [rectangle, minimum width=.2cm, minimum height=.2cm,text centered, draw=black, fill=white]
 \tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
 \tikzstyle{io}        = [trapezium, trapezium left angle=75, trapezium right angle=105, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
 \tikzstyle{ds}        = [rectangle, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=black!15]
@@ -236,16 +237,16 @@ and my significant other (for being awesome).
 % % % % % % % % % % % % % % % % % % % % % %
 
 \chapter{Background}
-The problem approached in this thesis, is perhaps best summarized by the quote raised in a paper by \citet{krijnen}. That paper, however, approach the problem from a different angle than this thesis. That paper employ the $n-to-n$ approach, whereas this thesis explore an $m-to-n$ approach.
+The problem approached in this thesis, is perhaps best summarized by the quote raised in a paper by \citet{krijnen}. That paper, however, approach the problem from a different angle than this thesis. That paper employ an $n-to-n$ approach, whereas this thesis explore an $m-to-n$ approach. The meaning of these terms will be further explored in this thesis.
 
 \begin{quote}
 ``The nice thing about standards is that there are so many to choose from.''\\
 \textit{-- Andy Tanenbaum, as quoted by \citet{krijnen}}
 \end{quote}
 
-For many good reasons, different formats exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. Languages offer different levels of control. At different levels of abstraction.
+For many good reasons, different formats exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. On more complex notes, languages offer different levels of control, and operate at different levels of abstraction. These concepts will be further explored in this thesis.
 
-One can informally categorize document formats into three groups on the basis of design intentions. A language may have been designed with the intention of enabling document authors to somewhat trivially, express documents in the language manually. On the other end of the spectra a format may have been designed without this intent, perhaps because it is aiming for very high precision. The second factor to consider is whether a format was designed to directly produce some visual output. With these two aspects the following four categorizations emerge.
+\paragraph{Language design intentions} vary from language to language. One may have been designed with the intention of enabling document authors to (more easily) manually author documents. Another may have been designed with intents of compactness and high precision, at the expense of giving up manual authoring. Another factor one can consider is whether a format is presentation oriented. Whether it is designed to directly produce visual output. Combining these two aspects the following four categorizations emerge.
 
 \begin{enumerate}
 \item Languages intended to support manual document authoring, but not intended to directly produce visual output (e.g. XML).
@@ -256,7 +257,96 @@ One can informally categorize document formats into three groups on the basis of
 
 Considering the above four different format categories, the need for format conversion programs become apparent. One may for example want to express a document in XML but publish it in PDF. Or express and publish a document in HTML, while however also converting it to some proprietary format of the fourth category in order to feed it as input to some other system.
 
-Disregarding all categorizations of document annotation formats, this transformation becomes an $n-to-n$ problem. An existing approach to this ``n-to-n'' conversion problem, and perhaps the most obvious one, is Pandoc\footnotePandoc -- dubbed ``a universal document converter''.
+Design intentions are of course merely one way of categorizing languages. While this thesis will not attempt to exhaustively identify all possible categorizations, it will attempt to identify some of the, to markup languages, arguably, more significant ones.
+
+\paragraph{Converting between formats while disregarding categorizations} is what this thesis refer to as the $n-to-n$ approach. Conversions of this kind require all formats to be convertible to all formats. If no intermediate format is used then the number of conversion strategies will be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages require 90 unique and full-feathered conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}. A simplified scenario is visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
+
+\begin{equation}
+\frac{n!}{(n-k)!} = \frac{10!}{(10-2)!} = 90
+\label{eq:permutations-between-10-languages}
+\end{equation}
+
+Using an intermediate, format this massive number of conversions could be lessened down to simply $2n$. Thus 10 formats would require 20 conversion strategies. A simplified scenario is visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
+
+
+
+\begin{figure}[h]
+
+  \begin{subfigure}{.5\textwidth}
+    \centering
+
+    \begin{tikzpicture}[node distance=1cm]
+      \node (0A)  [dot]              {A};
+      \node (0B)  [dot, below of=0A] {B};
+      \node (0C)  [dot, below of=0B] {..};
+      \node (0D)  [dot, below of=0C] {N};
+
+      \node (1A)  [dot, right of=0A, xshift=1cm] {A};
+      \node (1B)  [dot, right of=0B, xshift=1cm] {B};
+      \node (1C)  [dot, right of=0C, xshift=1cm] {..};
+      \node (1D)  [dot, right of=0D, xshift=1cm] {N};
+
+      \draw [arrow] (0A) -- (1A);
+      \draw [arrow] (0A) -- (1B);
+      \draw [arrow] (0A) -- (1C);
+      \draw [arrow] (0A) -- (1D);
+
+      \draw [arrow] (0B) -- (1A);
+      \draw [arrow] (0B) -- (1B);
+      \draw [arrow] (0B) -- (1C);
+      \draw [arrow] (0B) -- (1D);
+
+      \draw [arrow] (0C) -- (1A);
+      \draw [arrow] (0C) -- (1B);
+      \draw [arrow] (0C) -- (1C);
+      \draw [arrow] (0C) -- (1D);
+
+      \draw [arrow] (0D) -- (1A);
+      \draw [arrow] (0D) -- (1B);
+      \draw [arrow] (0D) -- (1C);
+      \draw [arrow] (0D) -- (1D);
+
+    \end{tikzpicture}
+
+    \caption{Naive $n-to-n$ conversion.}
+    \label{fig:n-to-n-conversion-boxes-without-intermediate-format}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+
+    \begin{tikzpicture}[node distance=1cm]
+      \node (0A)  [dot]              {A};
+      \node (0B)  [dot, below of=0A] {B};
+      \node (0C)  [dot, below of=0B] {..};
+      \node (0D)  [dot, below of=0C] {N};
+
+      \node (mid) [dot, right of=0C, xshift=.5cm] {AST};
+
+
+      \node (1C)  [dot, right of=mid, xshift=.5cm] {..};
+      \node (1B)  [dot, above of=1C] {B};
+      \node (1A)  [dot, above of=1B] {A};
+      \node (1D)  [dot, below of=1C] {N};
+
+      \draw [arrow] (0A) -- (mid);
+      \draw [arrow] (0B) -- (mid);
+      \draw [arrow] (0C) -- (mid);
+      \draw [arrow] (0D) -- (mid);
+
+      \draw [arrow] (mid) -- (1A);
+      \draw [arrow] (mid) -- (1B);
+      \draw [arrow] (mid) -- (1C);
+      \draw [arrow] (mid) -- (1D);
+
+    \end{tikzpicture}
+
+    \caption{$n-to-n$ conversion through intermediate format.}
+    \label{fig:n-to-n-conversion-boxes-with-intermediate-format}
+  \end{subfigure}
+  
+  \label{fig:n-to-n-conversion-boxes}
+\end{figure}
+
 
 
 \paragraph{The starting point of this thesis} is the idea that some formats are significantly easier to convert from, and some are significantly easier to convert to. The hypothesis is that there exist a hierarchy of abstraction, in which conversions are trivial in one direction but significantly more complex in the other. 
