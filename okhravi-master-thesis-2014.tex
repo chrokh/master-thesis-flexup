@@ -259,14 +259,14 @@ Considering the above four different format categories, the need for format conv
 
 Design intentions are of course merely one way of categorizing languages. While this thesis will not attempt to exhaustively identify all possible categorizations, it will attempt to identify some of the, to markup languages, arguably, more significant ones.
 
-\paragraph{Converting between formats while disregarding categorizations} is what this thesis refer to as the $n-to-n$ approach. Conversions of this kind require all formats to be convertible to all formats. If no intermediate format is used then the number of conversion strategies will be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages require 90 unique and full-feathered conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}. A simplified scenario is visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
+\paragraph{Converting between formats while disregarding categorizations} is what this thesis refer to as the $n-to-n$ approach. Conversions of this kind require all formats to be convertible to all formats. If no intermediate format is used then the number of conversion strategies will be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages require 90 unique and full-feathered conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}, and generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
 
 \begin{equation}
 \frac{n!}{(n-k)!} = \frac{10!}{(10-2)!} = 90
 \label{eq:permutations-between-10-languages}
 \end{equation}
 
-Using an intermediate, format this massive number of conversions could be lessened down to simply $2n$. Thus 10 formats would require 20 conversion strategies. A simplified scenario is visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
+Using an intermediate, format this massive number of conversions could be decreased to simply $2n$. Thus 10 formats would require 20 conversion strategies. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
 
 
 
@@ -357,7 +357,7 @@ Using the example of the four categories above, one may for example argue that t
 
 In the specific case of presentation-oriented formats, the argument is strengthened by the well-accepted idea of ``separating presentation from content''. However the hypothesis of this thesis is not only that presentation and content are different. But also that all languages exhibit properties, and that all of these properties can be ordered hierarchically according to their level of abstraction.
 
-While it would be all but trivial to construct such a hierarchy of all the languages and all their properties, an example that convey the idea is depicted in Figure \ref{fig:fictive-specialization-tree}. Let $L$ be a trivial language, such as e.g. the language of equal 0's and 1's (i.e. $0^n1^n$). Let then $L1$ be the language of equal number of 0's and 1's with an extra 0 in the middle (i.e. $0^n0^11^n$). Let $L2$ be the language of any number of repetitions of equal numbers of 0's and 1's (i.e. ($0^n1^n)^*$). The languages $L2$ and $L1$ both exhibit the property of $L$ -- the property of containing a balanced set of 0's and 1's. However either with some addition, or with some variation. Meaning, that if one would remove the specialization from $L1$ one would get $L$.
+While it would be all but trivial to construct such a hierarchy of all the languages and all their properties, an example that convey the idea is depicted in Figure \ref{fig:fictive-specialization-tree}. Let $L$ be a trivial language, such as e.g. the language of equal 0's and 1's (i.e. $0^n1^n$). Let then $L1$ be the language of equal number of 0's and 1's with an extra 0 in the middle (i.e. $0^n0^11^n$). Let $L2$ be the language of any number of repetitions of equal numbers of 0's and 1's (i.e. ($0^n1^n)^*$). The languages $L2$ and $L1$ both exhibit the property of $L$ -- the property of containing a balanced set of 0's and 1's. However either with some addition, or with some variation. Meaning, that $L1$ is more specialized than $L$, and $L$ is more generalized (abstract) than $L1$.
 
 
 
@@ -367,7 +367,7 @@ While it would be all but trivial to construct such a hierarchy of all the langu
   \centering
   \begin{tikzpicture}[
     tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
-    sibling distance=4cm,
+    sibling distance=2.5cm,
   ]
   \node {L}
   child {node {L1}
@@ -383,7 +383,7 @@ While it would be all but trivial to construct such a hierarchy of all the langu
   ;
   \end{tikzpicture}
 
-  \caption{Fictive example of specialization}
+  \caption{Fictive languages ordered according to specialization of language properties}
   \label{fig:fictive-specialization-tree}
 \end{figure}
 
