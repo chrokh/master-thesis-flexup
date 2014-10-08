@@ -252,12 +252,12 @@ For many good reasons, different formats exist. Simple things such as taste, cau
 \item Languages intended to support manual document authoring, but not intended to directly produce visual output (e.g. XML).
 \item Languages intended to support manual document authoring, and also intended to directly produce visual output (e.g. HTML).
 \item Languages not intended to support manual document authoring, but intended to directly produce visual output (e.g. PDF).
-\item Languages neither intended to support manual document authoring, nor directly produce visual output (i.e. transportation formats).
+\item Languages neither intended to support manual document authoring, nor directly produce visual output (e.g. transportation formats).
 \end{enumerate}
 
 Considering the above four different format categories, the need for format conversion programs become apparent. One may for example want to express a document in XML but publish it in PDF. Or express and publish a document in HTML, while however also converting it to some proprietary format of the fourth category in order to feed it as input to some other system.
 
-Design intentions are of course merely one way of categorizing languages. While this thesis will not attempt to exhaustively identify all possible categorizations, it will attempt to identify some of the, to markup languages, arguably, more significant ones.
+Design intentions are of course merely one way of categorizing languages. While this thesis will not attempt to exhaustively identify all possible categorizations, it will attempt to identify some of the, arguably, more significant ones, in regards to markup.
 
 \paragraph{Converting between formats while disregarding categorizations} is what this thesis refer to as the $n-to-n$ approach. Conversions of this kind require all formats to be convertible to all formats. If no intermediate format is used then the number of conversion strategies will be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages require 90 unique and full-feathered conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}, and generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
 
@@ -353,7 +353,7 @@ Using an intermediate, format this massive number of conversions could be decrea
 
 Using the example of the four categories above, one may for example argue that the idea of presentation is a specialization, whereas the description of something outside its domain of presentation is an abstraction. This would mean, that formats concerned with presentation are less abstract (i.e. more specialized) than those not concerned with presentation.
 
-\paragraph{Converting from a non-presentational format to a presentational format} would then (following the hypothesis of this thesis), in general, be a significantly easier task, than converting between two different presentational formats. Or even from a presentational format to a non-presentational format.
+\paragraph{Converting from a non-presentational format to a presentational format} should then (following the hypothesis of this thesis), in general, be a significantly easier task, than converting between two different presentational formats. Or even from a presentational format to a non-presentational format.
 
 In the specific case of presentation-oriented formats, the argument is strengthened by the well-accepted idea of ``separating presentation from content''. However the hypothesis of this thesis is not only that presentation and content are different. But also that all languages exhibit properties, and that all of these properties can be ordered hierarchically according to their level of abstraction.
 
@@ -446,7 +446,139 @@ While it would be all but trivial to construct such a hierarchy of all the langu
   \label{fig:fictive-specialization-tree-example}
 \end{figure}
 
+Expressed in terms of Object Oriented Programming inheritance -- $L1$ is a specialized kind of $L$. All instances of $L1$, can be specialized into are not necessarily equal  neither necessarily equivalent to each other, nor to the same instance(s) of $L$. Furthermore, all instances of $L$ can be converted into $L1$'s.
+
 Consider for example the Chomsky Hierarchy\footnote{TODO: REFERENCE}. A regular language can be expressed in with context-free grammar, but a context-free language cannot necessarily be expressed with a regular grammar. In other words, a language of a simpler grammar can be expressed using a more complex grammar, but a language expressed in a more complex grammar cannot necessarily be expressed in the simpler grammar.
+
+
+\begin{figure}[h]
+\centering
+
+  \begin{subfigure}{.5\textwidth}
+    \centering
+
+    \begin{tikzpicture}[
+      tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=2.5cm,
+    ]
+    \node {$Markdown$}
+      child {node {\LaTeX}
+        child {node {$HTML$}}
+        child {node {$PDF$}}
+      }
+    ;
+    \end{tikzpicture}
+
+    \caption{Strings.}
+    \label{fig:concrete-specialization-tree-example-run}
+
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+
+    \centering
+
+    \begin{tikzpicture}[
+      tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=2.5cm,
+    ]
+    \node {$Markdown$}
+      child {node {$+Numbers$}
+        child {node {$+TOC$}
+          child {node {$PDF$}}
+          child {node {$HTML$}}
+          child {node {\LaTeX}}
+        }
+      }
+    ;
+    \end{tikzpicture}
+
+    \caption{Strings.}
+    \label{fig:concrete-specialization-tree-example-run}
+  \end{subfigure}
+
+
+  \caption{TODO}
+  \label{fig:concrete-specialization-tree-example}
+\end{figure}
+
+
+\paragraph{Conversions outside or inside the boundary of a language.} One way to measure the complexity of a string conversion is to consider whether the output string of the conversion in question lies within the language boundaries of the input string. In other words: assume two strings $S1$, $S2$, and assume one language $L$. Assume that $S1$ is expressed in language $L$. Consider then the process where $S1$ is converted into $S2$. If the new string $S2$ also is expressed in language $L$ then the conversion must be said to have been done within the boundary of the language. If $S2$ is not expressed in language $L$, then the conversion must be said to have been done outside the boundary of the language. In other words a conversion between languages.
+
+Whether all the concepts of $S1$ was transferable to $S2$ is another interesting dimension, and will be the topic of discussion next.
+
+%TODO: Decide whether to use the word transform or convert
+
+\paragraph{Destructive transformations and non-destructive transformations} must, according to this thesis, be considered different, and another measure of conversion. A non-destructive change usually refer to a reversible change. Whereas a destructive change refer to an irreversible change. This thesis adhere to this definition, and consider a conversion to have been destructive if semantics have been lost, and non-destructive if semantics remain intact.
+
+Even with this definition. Determining whether a string conversion is destructive or non-destructive is not trivial. Conversions within a language could be destructive, and conversions out from a language could be non-destructive.
+
+As a means of determining destructiveness of a conversion, this thesis suggest counting the number of distinctly identifiable semantic delimitations. In other words, consider all the denoted substrings of a string within the formalism of the current language. If the number of substrings of different classes are less in the output language than the input language, then the conversion must be considered destructive. Else non-destructive. Figure TODO depicts a trivial example within the boundaries of a language, and Figure TODO outside the boundaries of a language.
+
+
+\begin{figure}[h]
+  \centering
+  
+  \begin{subfigure}{.5\textwidth}
+    \begin{lstlisting}
+      <p>Someone <b>must</b> have</p>
+      <b>Someone <p>must</p> have</b>
+    \end{lstlisting}
+
+    \caption{Non-destructive}
+
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+
+    \begin{lstlisting}
+      <p>Someone <b>must</b> have</p>
+      <p>Someone must have</p>
+    \end{lstlisting}
+
+    \caption{Destructive}
+  \end{subfigure}
+
+  \caption{Within language boundaries.}
+\end{figure}
+
+
+\begin{figure}[h]
+  \centering
+  
+  \begin{subfigure}{.5\textwidth}
+    \begin{lstlisting}
+      <p>Someone <b>must</b> have</p>
+      Someone **must** have
+    \end{lstlisting}
+
+    \caption{Non-destructive}
+
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+
+    \begin{lstlisting}
+      <p>Someone <b>must</b> have</p>
+      **Someone must have**
+    \end{lstlisting}
+
+    \caption{Destructive}
+  \end{subfigure}
+
+  \caption{Outside of language boundaries}
+\end{figure}
+
+
+This thesis suggest an analogy to Object Oriented Programming, and the application of Liskov's Substitution principle. The principle state that it is only allowed to subclass a superclass if any instance of the superclass can be replaced by any instance of the subclass at any point in the code\footnote{TODO: REFERENCE}. In other words, a subclass may only add, or gracefully alter functionality but never remove.
+
+(1)
+Liskov's substitution principle is used as means of determining destructiveness of string conversions. However, instead of considering functionality one must consider semantics. Assume two strings $S1$ and $S2$. Then consider the conversion from $S1$ to $S2$
+
+(2) Number of distinctions.
+
+
+Consider some set of  successfully applies to the two languages transformed between. Given two formats A and B, where A is converted into B. The output format should be considered the subclass, and the input format the superclass. If and only if Liskov's Substitution principle applies, can it be considered a non-destructive transformation.
+
+TODO: Maybe I should argue the whole thing about mentally equivalent or something like that. I.e. that HTML potentially could be considered a subclass of \LaTeX.
+
 
 The argument in this thesis is thus, that when performing document conversion, if complexity is always introduced and never removed one moves from simpler languages to more complex languages. While this example discuss conversion between two different levels of the Chomsky Hierarchy, the same reasoning apply to languages within one level.
 
