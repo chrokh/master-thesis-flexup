@@ -276,15 +276,15 @@ Using an intermediate, format this massive number of conversions could be decrea
     \centering
 
     \begin{tikzpicture}[node distance=1cm]
-      \node (0A)  [dot]              {A};
-      \node (0B)  [dot, below of=0A] {B};
-      \node (0C)  [dot, below of=0B] {..};
-      \node (0D)  [dot, below of=0C] {N};
+      \node (0A)  [dot]              {$N_1$};
+      \node (0B)  [dot, below of=0A] {$N_2$};
+      \node (0C)  [dot, below of=0B] {$..$};
+      \node (0D)  [dot, below of=0C] {$N_n$};
 
-      \node (1A)  [dot, right of=0A, xshift=1cm] {A};
-      \node (1B)  [dot, right of=0B, xshift=1cm] {B};
-      \node (1C)  [dot, right of=0C, xshift=1cm] {..};
-      \node (1D)  [dot, right of=0D, xshift=1cm] {N};
+      \node (1A)  [dot, right of=0A, xshift=1cm] {$N_1$};
+      \node (1B)  [dot, right of=0B, xshift=1cm] {$N_2$};
+      \node (1C)  [dot, right of=0C, xshift=1cm] {$..$};
+      \node (1D)  [dot, right of=0D, xshift=1cm] {$N_n$};
 
       \draw [arrow] (0A) -- (1A);
       \draw [arrow] (0A) -- (1B);
@@ -315,18 +315,18 @@ Using an intermediate, format this massive number of conversions could be decrea
     \centering
 
     \begin{tikzpicture}[node distance=1cm]
-      \node (0A)  [dot]              {A};
-      \node (0B)  [dot, below of=0A] {B};
-      \node (0C)  [dot, below of=0B] {..};
-      \node (0D)  [dot, below of=0C] {N};
+      \node (0A)  [dot]              {$N_1$};
+      \node (0B)  [dot, below of=0A] {$N_2$};
+      \node (0C)  [dot, below of=0B] {$..$};
+      \node (0D)  [dot, below of=0C] {$N_n$};
 
       \node (mid) [dot, right of=0C, xshift=.5cm] {AST};
 
 
-      \node (1C)  [dot, right of=mid, xshift=.5cm] {..};
-      \node (1B)  [dot, above of=1C] {B};
-      \node (1A)  [dot, above of=1B] {A};
-      \node (1D)  [dot, below of=1C] {N};
+      \node (1C)  [dot, right of=mid, xshift=.5cm] {$..$};
+      \node (1B)  [dot, above of=1C] {$N_2$};
+      \node (1A)  [dot, above of=1B] {$N_1$};
+      \node (1D)  [dot, below of=1C] {$N_n$};
 
       \draw [arrow] (0A) -- (mid);
       \draw [arrow] (0B) -- (mid);
