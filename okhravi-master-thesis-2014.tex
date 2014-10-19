@@ -155,9 +155,9 @@
 \section*{Abstract}
 Every day the number of markup languages increase. Every day the number of documents increase. The notion of ``write once, publish everywhere'' most often feels like a sarcastic joke. The two most prominent approaches to document conversion is the $n-to-n$ approach and the $1-to-n$ approach. The first attempting to convert from all conceivable formats to all conceivable formats. The second attempting to standardize the input format.
 
-This thesis suggest an approach less complex than the first, yet flexible than the other. An $M-to-N$ approach. Where the language constructs of $M$ exist in all languages in $N$. This thesis argue the benefit of converting ``down the abstraction chain'', from more abstract formats to less abstract formats. Or in other words, from less complex formats to increasingly complex formats.
+This thesis suggest an approach less complex than the first, yet more flexible than the other. An $M-to-N$ approach. Where the language constructs of $M$ exist in all languages in $N$. This thesis argue the benefit of converting ``down the abstraction chain'', from more abstract formats to less abstract formats. Or in other words, from less complex formats to increasingly complex formats.
 
-The thesis reach two concrete contributions: (1) A suggestion for how to parse a syntax-less language, and (2) a model of an ideal transformation process for markup. Both enforcing the requirements outlined above. This thesis place heavy emphasis on composability, package sharing, and declarative configurability. \\
+The thesis reach two concrete contributions: (1) A suggestion for how to parse a syntax-less language that encapsulate many of the languages in $M$, and (2) a model of an ideal transformation process for markup, that allow for transformations from $M$ to $N$. Positive side-effects of such an approach is composability, package sharing, and declarative configurability. \\
 
 
 Keywords: TODO  \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
@@ -237,16 +237,16 @@ and my significant other (for being awesome).
 % % % % % % % % % % % % % % % % % % % % % %
 
 \chapter{Background}
-The problem approached in this thesis, is perhaps best summarized by the quote raised in a paper by \citet{krijnen}. A paper that approach the same problem from a different angle. That paper employ an $n-to-n$ approach, whereas this thesis explore an $m-to-n$ approach. The meaning of these terms will be further explored in this thesis.
+The problem approached in this thesis, is perhaps best summarized by the quote raised in a paper by \citet{krijnen}. A paper that approach the same problem from a different angle. More precisely an $n-to-n$ approach, whereas this thesis explore an $m-to-n$ approach. The meaning of these terms will be further explored in this thesis.
 
 \begin{quote}
 ``The nice thing about standards is that there are so many to choose from.''\\
 \textit{-- Andy Tanenbaum, as quoted by \citet{krijnen}}
 \end{quote}
 
-For many good reasons, different formats exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. For more complex reasons, languages offer different levels of control, and operate at different levels of abstraction. This thesis build upon the idea that conscious categorization can spawn a set of conversion strategies better than $n-to-n$.
+For many good reasons, different formats exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. More complex things, such as different levels of needed granularity and control, cause languages to express things at different levels of abstraction. The hypothesis of this thesis is that conscious categorization of languages, according to such properties, can spawn a set of conversion strategies superior to $n-to-n$, according to aspects detailed later in this thesis.
 
-\paragraph{Language design intentions} vary from language to language. One may have been designed with the intention of enabling document authors to (more easily) manually author documents. Another may have been designed with intents of compactness and high precision, at the expense of giving up manual authoring. Another factor one can consider is whether a format is presentation oriented. Whether it is designed to directly produce visual output. Combining these two aspects the following four categorizations emerge.
+\paragraph{Intentions of design} vary from language to language. One, may have been designed with the intent of enabling document authors to (more easily) manually author documents (i.e. eliminating the need for a rich GUI). Another may have been designed with intents of compactness and high precision, at the expense of giving up manual authoring. Another factor one can consider is whether a format is presentation oriented or not. Whether it is designed to directly produce visual output or not. Analyzing the different hypothetical combinations of categorizations makes it apparent that lots of formats exist (and can exist). Merely combining the two categories above, the following category sets, and thus formats, emerge.
 
 \begin{enumerate}
 \item Languages intended to support manual document authoring, but not intended to directly produce visual output (e.g. XML).
@@ -257,7 +257,7 @@ For many good reasons, different formats exist. Simple things such as taste, cau
 
 Considering the above four different format categories, the need for format conversion programs become apparent. One may for example want to express a document in XML but publish it in PDF. Or express and publish a document in HTML, while however also converting it to some proprietary format of the fourth category in order to feed it as input to some other system.
 
-Design intentions are of course merely one way of categorizing languages. While this thesis will not attempt to exhaustively identify all possible categorizations, it will attempt to identify some of the, arguably, more significant ones, in regards to markup.
+Exhaustively identifying all possible categorizations of languages is of course all but a trivial task. Thus, this thesis will attempt to identify the more significant ones. Through qualitative analysis of the more influential markup languages and publications related. 
 
 \paragraph{Converting between formats while disregarding categorizations} is what this thesis refer to as the $n-to-n$ approach. Conversions of this kind require all formats to be convertible to all formats. If no intermediate format is used then the number of conversion strategies will be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages require 90 unique and full-feathered conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}, and generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
 
