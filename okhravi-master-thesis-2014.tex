@@ -376,7 +376,7 @@ Consider then the concrete sentence (i.e. document fragment) expressed in all of
 \end{flushright}
 \end{quote}
 
-The semantic encapsulation of the word ``Dog'' is thus intended to be different from the semantic encapsulation of the word ``Cat'' (as they are surrounded by tags with different semantic meaning). The existence of such a difference is the key to understanding the relationship between the abstraction of two languages.
+The semantic encapsulation of the word ``Cats'' (in the document fragment depicted in Figure \ref{fig:hierarchy-of-abstraction-example-tree}) is thus intended to be different from the semantic encapsulation of the word ``Dogs'' (as they are surrounded by tags with different semantic meaning). The existence of such a difference is the key to understanding the relationship between the abstraction of two languages.
 
 \begin{figure}[h]
   \centering
@@ -412,11 +412,11 @@ Converting the fragment (of Figure \ref{fig:hierarchy-of-abstraction-example-tre
 
 The number of semantically different syntactical constructs of a language, perfectly map to the analogy of number of pixels carrying information. As pixels carrying information are destroyed, there is no way to recreate them.
 
-There are of course instances where converting from a low-resolution format to a high-resolution pose no problem at all. Consider for example a 200x200 pixels perfectly black image. Scaling this image down to a resolution of 20x20 pixels, and then scaling it back up to a resolution of 200x200 pose no problem at all. The final image is exactly the same as the original. Consider then a 200x200 pixel portrait photograph. Scaling this image down to a resolution of 20x20, and then scaling it back up to 200x200 cause serious information loss. The final image is now merely an approximation of the original.
+There are of course instances where converting from a low-resolution format to a high-resolution pose no problem at all. Consider for example a 200x200 pixels perfectly black image. Scaling this image down to a resolution of 20x20 pixels, and then scaling it back up to a resolution of 200x200 pose no problem at all. The final image is exactly the same as the original. Consider then on the other hand a 200x200 pixel portrait photograph. Scaling this image down to a resolution of 20x20, and then scaling it back up to 200x200 cause serious information loss. The final image is now merely an approximation of the original.
 
-\paragraph{Information retainment must be determined on the basis of languages, not instances of languages.} In the language of pixels, it is trivial to imagine cases where conversions from low resolution to high resolution indeed cause no loss of information (consider the black square). However, this is, again, a fortunate effect of the specific case. It is equally trivial to imagine a counter-example, where in the same language, such a conversion will cause loss of information (consider the portrait photograph).
+\paragraph{Retainment of distinction must be determined on the basis of languages, not instances of languages.} In the language of pixels, it is trivial to imagine cases where conversions from low resolution to high resolution indeed cause no loss of information (consider the black square). However, this is, again, a fortunate effect of the specific case. It is equally trivial to imagine a counter-example, where in the same language, such a conversion will cause loss of information (consider the portrait photograph).
 
-The same apply to markup languages. It is trivial to imagine an example where conversion from a low-resolution format (e.g. Markdown) to a high-resolution format (e.g. HTML) will cause no information loss. Consider for example how all information is retained in Figure \ref{fig:low-to-high-resolution-non-destructive}, whereas information is lost in Figure \ref{fig:low-to-high-resolution-destructive}.
+The same apply to markup languages. It is trivial to imagine an example where conversion from a low-resolution format (e.g. Markdown) to a high-resolution format (e.g. HTML) will cause no information loss. Consider for example how all information is retained in Figure \ref{fig:low-to-high-resolution-non-destructive}. However, as with pixel resolution, it is equally trivial to imagine an example where information (i.e. distinction) is in fact lost. Consider for example how information is lost in Figure \ref{fig:low-to-high-resolution-destructive}.
 
 
 \begin{figure}[h]
