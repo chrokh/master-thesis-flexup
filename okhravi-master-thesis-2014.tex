@@ -357,9 +357,111 @@ The classical notion of ``separation of concerns'' emphasizes the known benefits
 
 Converting from a non-presentational format to a presentational format is a conversion ``down'' the abstraction chain, if ``level of presentational coupling'' is used as the categorizing property when differentiating between two different languages. Vice versa, the task of converting from a presentational format to a non-presentational format is a conversion ``up'' the abstraction chain. Thus, the latter must be considered a significantly more difficult task than the former, assuming the hypothesis of this thesis is true.
 
-\paragraph{The hypothesis is not merely that presentation and content are different,} but again, that all languages exhibit properties, and that all of these properties can grouped into categories, where these categories can be ordered hierarchically according to their level of abstraction.
+\paragraph{The hypothesis is not merely that presentation and content are different,} but again, that all languages exhibit properties, and that all of these properties can be grouped into categories, where these categories can be ordered hierarchically according to their level of abstraction.
 
-\paragraph{The chain of abstractions is perhaps better explained by analogy of a tree}, rather than a chain. Consider Figure \ref{fig:fictive-specialization-tree}, in which the language $L$ is the most abstract, and the languages ``below'' are specializations of that language. It is important to understand that, like in any hierarchy, branchings may exist. Which becomes apparent through considering the siblings $L1$, $L2$ and their relationship. However, it is also important to remember that the hypothesis suggest to only allow conversions from parent to child (i.e. ``down'') and never from child to parent, nor from child to child.
+\paragraph{The chain of abstractions is perhaps better explained by analogy of a tree,} rather than a chain. Consider Figure \ref{fig:fictive-specialization-tree}, in which the language $L$ is the most abstract, and the languages ``below'' are specializations of that language. It is important to understand that, like in any hierarchy, branchings may exist. Which becomes apparent through considering the siblings $L1$, $L2$ and their relationship. However, it is also important to remember that the hypothesis suggest to only allow conversions from parent to child (i.e. ``down'') and never from child to parent (i.e. ``up''), nor from child to child (i.e. ``sideways'').
+
+\paragraph{Consider the following concrete example of the three languages HTML, \LaTeX, and Markdown.} Figure \ref{fig:hierarchy-of-abstraction-example-tree} depicts one potential interpretation of the relationship between the three languages. The word \emph{one} is used instead of \emph{the} to emphasize that this particular relationship might not hold when considering all properties of these languages. The figure is to be considered an oversimplified example.
+
+HTML is (in Figure \ref{fig:hierarchy-of-abstraction-example-tree}) depicted as the parent language (i.e. the most abstract), while \LaTeX and Markdown, are depicted as children (i.e. derivations) of that language (and are thus more specialized). The hypothesis thus suggests that converting from HTML to either \LaTeX{} or Markdown should be considered a ``safe'' task, while all other conversions (i.e. ``up'' or ``sideways'') should be considered ``unsafe''.
+
+Consider then the concrete sentence (i.e. document fragment) expressed in all of these languages (still Figure \ref{fig:hierarchy-of-abstraction-example-tree}. The fragment, expressed in HTML, employ the use of the two distinct elements \texttt{em} (emphasis) and \texttt{i} (italics). While these two, in web browsers, render the same, the HTML5 specification\footnote{http://www.w3.org/TR/html5/text-level-semantics.html\#the-em-element} explain their semantic difference.
+
+\begin{quote}
+``The \emph{em} element isn't a generic \emph{italics} element. Sometimes, text is intended to stand out from the rest of the paragraph, as if it was in a different mood or voice. For this, the \emph{i} element is more appropriate.''
+\begin{flushright}
+% TODO Make sure all quotes are formatted alike
+\textit{-- HTML5 Recommended specification 2014}
+%TODO: Ref
+\end{flushright}
+\end{quote}
+
+The semantic encapsulation of the word ``Dog'' is thus intended to be different from the semantic encapsulation of the word ``Cat'' (as they are surrounded by tags with different semantic meaning). The existence of such a difference is the key to understanding the relationship between the abstraction of two languages.
+
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=6.5cm,
+    ]
+    \node {
+      \texttt{<i>Cats</i> and <em>Dogs</em>}
+    }
+    child {node {
+      \texttt{\textbackslash textit\{Cats\} and \textbackslash emph\{Dogs\}}
+    }}
+    child {node {
+      \texttt{*Cats* and *Dogs*}
+    }}
+    ;
+  \end{tikzpicture}
+
+  \caption{Hierarchy of abstraction of the three languages HTML, \LaTeX, and Markdown (top-to-bottom, left-to-right).}
+  \label{fig:hierarchy-of-abstraction-example-tree}
+\end{figure}
+
+\paragraph{Preserving the distinction between two elements is the key to determining which language is the child and which is the parent.} If a distinction cannot be preserved when converting from language $A$ to language $B$, then $A$ must be considered the relatively superior (i.e. the more abstract) language.
+
+Converting the fragment (of Figure \ref{fig:hierarchy-of-abstraction-example-tree}) expressed in HTML to \LaTeX{} poses no immediate problem, since the distinction can be preserved. Converting the fragment expressed in HTML to Markdown, however, pose problems since the distinction cannot possibly be preserved, due to the less rich expressiveness of Markdown. Thus, HTML must (in this simplified example) be considered the more abstract language, and Markdown the more concrete (i.e. less abstract).
+
+\paragraph{Preserving difference is more fundamental than equivalence.} While the semantic meaning of the markup keywords (actually macros) \texttt{textit} and \texttt{emph} in the language \LaTeX{} might not refer to the exact same semantic meaning as \texttt{i} and \texttt{emph} of HTML, the importance lies in the preservation of the distinction. If one were to only convert between languages that preserved the exact same semantic meaning, constructing an abstraction tree would be a much more difficult task. Simply because semantic equivalence is a philosophically more difficult question, than syntactical difference. Thus, this thesis explore the concept of preservation of semantic difference (through preservation of syntactic difference), and leave semantic equivalence open for future research.
+
+%TODO: The conversion is the semantically closest, and distinction is preserved.
+
+\paragraph{Conversions ``up'' and ``sideways'' are impossible because distinction may have been lost.} Expanding on the idea that a conversion that cause loss in semantic distinction must be considered a conversion ``down'' the abstraction chain, it becomes apparent that conversions in the opposite direction mean converting from a language with ``less information'' to one with more. Analogy to \emph{resolution} may spawn good understanding. An image of 200x200 pixels may very well be scaled down to 20x20 pixels. However a 20x20 pixels cannot possibly be intelligently scaled up to 200x200 pixels. Simply because the 20x20 pixel image contain ``less information'' than needed to express the original image in 200x200 pixels.
+
+The number of semantically different syntactical constructs of a language, perfectly map to the analogy of number of pixels carrying information. As pixels carrying information are destroyed, there is no way to recreate them.
+
+There are of course instances where converting from a low-resolution format to a high-resolution pose no problem at all. Consider for example a 200x200 pixels perfectly black image. Scaling this image down to a resolution of 20x20 pixels, and then scaling it back up to a resolution of 200x200 pose no problem at all. The final image is exactly the same as the original. Consider then a 200x200 pixel portrait photograph. Scaling this image down to a resolution of 20x20, and then scaling it back up to 200x200 cause serious information loss. The final image is now merely an approximation of the original.
+
+\paragraph{Information retainment must be determined on the basis of languages, not instances of languages.} In the language of pixels, it is trivial to imagine cases where conversions from low resolution to high resolution indeed cause no loss of information (consider the black square). However, this is, again, a fortunate effect of the specific case. It is equally trivial to imagine a counter-example, where in the same language, such a conversion will cause loss of information (consider the portrait photograph).
+
+The same apply to markup languages. It is trivial to imagine an example where conversion from a low-resolution format (e.g. Markdown) to a high-resolution format (e.g. HTML) will cause no information loss. Consider for example how all information is retained in Figure \ref{fig:low-to-high-resolution-non-destructive}, whereas information is lost in Figure \ref{fig:low-to-high-resolution-destructive}.
+
+
+\begin{figure}[h]
+
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \begin{tikzpicture}[
+    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=6.5cm,
+    ]
+    \node {
+      \texttt{<em>Cats</em> and <i>Dogs</i>}
+    }
+    child {node {
+      \texttt{*Cats* and *Dogs*}
+    }}
+    ;
+  \end{tikzpicture}
+
+  \caption{Example of an instance where converting ``up'' the abstraction chain do cause loss of information.}
+  \label{fig:low-to-high-resolution-destructive}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+  \begin{tikzpicture}[
+    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=6.5cm,
+    ]
+    \node {
+      \texttt{<i>Cats</i> and <i>Dogs</i>}
+    }
+    child {node {
+      \texttt{*Cats* and *Dogs*}
+    }}
+    ;
+  \end{tikzpicture}
+
+  \caption{Example of an instance where converting ``up'' the abstraction chain does not cause loss of information.}
+  \label{fig:low-to-high-resolution-non-destructive}
+\end{subfigure}
+
+\caption{Example of how conversions from low resolution to high resolution can not be guaranteed to not cause loss of information.}
+\end{figure}
+
+
 
 \paragraph{Consider a concrete example} where $L$ is a trivial language, such as e.g. the language of equal 0's and 1's (i.e. $0^n1^n$). Let then $L1$ be the language of equal number of 0's and 1's with an extra 0 in the middle (i.e. $0^n0^11^n$). Let $L2$ be the language of any number of repetitions of equal numbers of 0's and 1's (i.e. ($0^n1^n)^*$). The languages $L2$ and $L1$ both exhibit the property of $L$ -- the property of containing a balanced set of 0's and 1's. However either with some addition, or with some variation. Meaning, that $L1$ is more specialized than $L$, and $L$ is more generalized (abstract) than $L1$.
 
