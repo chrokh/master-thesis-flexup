@@ -756,17 +756,28 @@ An author can express her document in an arbitrary XML-format (perhaps imagined 
 
 
 
+\section{Problem Statement}
+To summarize, the problem focus of this thesis is three-fold.
 
-\section{Goals for the transformation program}
-\label{sec:goals-for-the-transformation-program}
-Given the holistic problem outlined in Section \ref{sec:problems}, we will discuss a holistic response, in form of an eco-system of tools. In order to guide the development of the tool-chain, the following requirements have been extracted from the problems outlined in Section \ref{sec:problems}.
+\begin{itemize}
+\item Many languages exist, and converting documents between these languages is non-trivial.
+\item Sharing packages/modules for commonly performed conversions (across) language-boundaries is non-trivial.
+\item Intercepting conversions in order to achieve a high level of control of the output format is non-trivial.
+\end{itemize}
 
-\paragraph{Any output format but reasonable input format}
-As an author I must be able to author my document once, in a ``reasonable'' format. However, as an author, I must be able to publish to multiple platforms -- without \emph{any} rewriting. However, minor configuration must be allowed in order to ensure flexibility in output.
 
-\paragraph{Composable} or code reuse through package friendliness. Code reuse must be a top priority. Not merely within an author's workflow of a single document, but also between authors and documents. Consequently, as much as possible must be able to be distributed as packages.
 
-\paragraph{Extendable} refer to the idea that it must be natural to introduce new packages that intercept the process at any point in time. This requirement encompass the idea that authors must be offered control over the production of the final output.
+
+\section{Research goals}
+The following research goals is this thesis's attempt to mitigate the above problems.
+
+\paragraph{Research Goal 1:} An ideal conversion workflow will be identified through analyzing foundational characteristics of common, current, and previous, markup languages, as well as strengths and fallacies of existing conversion techniques. Ideal is defined as a workflow that never risks loss of markup resolution, where resolution is needed. Further, as enabling package sharing, and high levels of control over conversions.
+
+\paragraph{Research Goal 2:} A high-resolution markup language that fit such an ideal conversion workflow will be suggested.
+
+
+
+
 
 
 
