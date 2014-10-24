@@ -372,7 +372,7 @@ Converting from a non-presentational format to a presentational format is a conv
 
 HTML is (in Figure \ref{fig:hierarchy-of-abstraction-example-tree}) depicted as the parent language (i.e. the most abstract), while \LaTeX and Markdown, are depicted as children (i.e. derivations) of that language (and are thus more specialized). The hypothesis thus suggests that converting from HTML to either \LaTeX{} or Markdown should be considered a ``safe'' task, while all other conversions (i.e. ``up'' or ``sideways'') should be considered ``unsafe''.
 
-Consider then the concrete sentence (i.e. document fragment) expressed in all of these languages (still Figure \ref{fig:hierarchy-of-abstraction-example-tree}. The fragment, expressed in HTML, employ the use of the two distinct elements \texttt{em} (emphasis) and \texttt{i} (italics). While these two, in web browsers, render the same, the HTML5 specification\footnote{http://www.w3.org/TR/html5/text-level-semantics.html\#the-em-element} explain their semantic difference.
+Consider then the concrete sentence (or rather: document fragment) expressed in all of these languages (still Figure \ref{fig:hierarchy-of-abstraction-example-tree}. The fragment, expressed in HTML, employ the use of the two distinct elements \texttt{em} (emphasis) and \texttt{i} (italics). While these two, in web browsers, render the same, the following quote, from the HTML5 specification,\footnote{http://www.w3.org/TR/html5/text-level-semantics.html\#the-em-element} explain the existence of a semantic difference.
 
 \begin{quote}
 ``The \emph{em} element isn't a generic \emph{italics} element. Sometimes, text is intended to stand out from the rest of the paragraph, as if it was in a different mood or voice. For this, the \emph{i} element is more appropriate.''
@@ -407,9 +407,11 @@ The semantic encapsulation of the word ``Cats'' (in the document fragment depict
   \label{fig:hierarchy-of-abstraction-example-tree}
 \end{figure}
 
-\paragraph{Preserving the distinction between two elements is the key to determining which language is the child and which is the parent.} If a distinction cannot be preserved when converting from language $A$ to language $B$, then $A$ must be considered the relatively superior (i.e. the more abstract) language.
+\paragraph{Preservation of the ability to distinguish all elements of different semantic types, should determine whether a string in a language can or cannot be converted to another language.}
 
 Converting the fragment (of Figure \ref{fig:hierarchy-of-abstraction-example-tree}) expressed in HTML to \LaTeX{} poses no immediate problem, since the distinction can be preserved. Converting the fragment expressed in HTML to Markdown, however, pose problems since the distinction cannot possibly be preserved, due to the less rich expressiveness of Markdown. Thus, HTML must (in this simplified example) be considered the more abstract language, and Markdown the more concrete (i.e. less abstract).
+
+To generalize: If a distinction cannot be preserved when converting from language $A$ to language $B$, then $A$ must be considered the relatively superior (i.e. the more abstract) language.
 
 \paragraph{Preserving difference is more fundamental than equivalence.} While the semantic meaning of the markup keywords (actually macros) \texttt{textit} and \texttt{emph} in the language \LaTeX{} might not refer to the exact same semantic meaning as \texttt{i} and \texttt{emph} of HTML, the importance lies in the preservation of the distinction. If one were to only convert between languages that preserved the exact same semantic meaning, constructing an abstraction tree would be a much more difficult task. Simply because semantic equivalence is a philosophically more difficult question, than syntactic difference. Thus, this thesis explore the concept of preservation of semantic difference (through preservation of syntactic difference), and leave semantic equivalence open for future research.
 
