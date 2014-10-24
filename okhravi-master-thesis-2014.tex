@@ -258,7 +258,8 @@ For many good reasons, different formats exist. Simple things such as taste, cau
 
 Considering the above four different format categories, the need for format conversion programs become apparent. One may for example want to express a document in XML but publish it in PDF. Or express and publish a document in HTML, while however also converting it to some proprietary format of the fourth category in order to feed it as input to some other system.
 
-Exhaustively identifying all possible categorizations of languages is of course all but a trivial task. Thus, this thesis will attempt to identify the more significant ones. Through qualitative analysis of the more influential markup languages and publications related. 
+Exhaustively identifying all possible categorizations of languages is of course all but a trivial task.
+% TODO: Thus this is not the goal of this thesis, but rather.... x 
 
 \paragraph{Naive approaches consider conversions between languages, rather than between categories of languages. } Aspiring to be able to convert any input language to any output language is what this thesis refer to as the $n-to-n$ approach. The most trivial approach to this problem is to write a single unique conversion scheme for every input format, mapping it to every output format. Evidently, such an approach would, at the very least, require the number of unique  conversion schemes to be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages would require, at least, 90 unique conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}, and generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
 
