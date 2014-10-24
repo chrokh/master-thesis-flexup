@@ -260,14 +260,18 @@ Considering the above four different format categories, the need for format conv
 
 Exhaustively identifying all possible categorizations of languages is of course all but a trivial task. Thus, this thesis will attempt to identify the more significant ones. Through qualitative analysis of the more influential markup languages and publications related. 
 
-\paragraph{Converting between formats while disregarding categorizations} is what this thesis refer to as the $n-to-n$ approach. Conversions of this kind require all formats to be convertible to all formats. If no intermediate format is used then the number of conversion strategies will be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages require 90 unique and full-feathered conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}, and generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
+\paragraph{Naive approaches consider conversions between languages, rather than between categories of languages. } Aspiring to be able to convert any input language to any output language is what this thesis refer to as the $n-to-n$ approach. The most trivial approach to this problem is to write a single unique conversion scheme for every input format, mapping it to every output format. Evidently, such an approach would, at the very least, require the number of unique  conversion schemes to be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages would require, at least, 90 unique conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}, and generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
+
+An example of such a naive approach to document conversion may be writing ad-hoc conversion schemes in, e.g., XSLT 2.0.
 
 \begin{equation}
 \frac{n!}{(n-k)!} = \frac{10!}{(10-2)!} = 90
 \label{eq:permutations-between-10-languages}
 \end{equation}
 
-Using an intermediate, format this massive number of conversions could be decreased to simply $2n$. Thus 10 formats would require 20 conversion strategies. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
+Two common, and less naive, approaches to $n-to-n$ conversion are that of Pandoc, and that of \citet{krijnen}. The former constructs conversion schemes on a per-language basis, while the latter complements this with the realization that some schemes may actually be constructed on a per-category-basis.
+
+Pandoc, make use of an intermediate format, which essentially mean that merely two conversion schemes has to be written per language. One that converts from the language to the intermediate format, and one that converts from the intermediate format to the language. This essentially decrease the (otherwise exponentially growing) need for unique conversion schemes to merely $2n$. Thus 10 formats would require 20 conversion schemes. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
 
 
 
