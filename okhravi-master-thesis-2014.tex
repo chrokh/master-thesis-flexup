@@ -269,9 +269,7 @@ An example of such a naive approach to document conversion may be writing ad-hoc
 \label{eq:permutations-between-10-languages}
 \end{equation}
 
-Two common, and less naive, approaches to $n-to-n$ conversion are that of Pandoc, and that of \citet{krijnen}. The former constructs conversion schemes on a per-language basis, while the latter complements this with the realization that some schemes may actually be constructed on a per-category-basis.
-
-Pandoc, make use of an intermediate format, which essentially mean that merely two conversion schemes has to be written per language. One that converts from the language to the intermediate format, and one that converts from the intermediate format to the language. This essentially decrease the (otherwise exponentially growing) need for unique conversion schemes to merely $2n$. Thus 10 formats would require 20 conversion schemes. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
+A less naive approach to $n-to-n$ conversion is Pandoc, which make use of an intermediate format. This essentially mean that merely two conversion schemes has to be written per language. One that converts from the language to the intermediate format, and one that converts from the intermediate format to the language. This essentially decrease the (otherwise exponentially) need for unique conversion schemes to merely $2n$. Thus 10 formats would require 20 conversion schemes. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
 
 
 
@@ -351,6 +349,9 @@ Pandoc, make use of an intermediate format, which essentially mean that merely t
   
   \label{fig:n-to-n-conversion-boxes}
 \end{figure}
+
+\paragraph{}
+An even less naive approach that which suggests to extend Pandoc, by \citet{krijnen}. TODO.
 
 
 
