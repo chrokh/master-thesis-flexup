@@ -462,12 +462,17 @@ The main problem of the scripting approach of Pandoc, is that it is, as outlined
       \node (0D)  [dot, below of=0C] {$N_n$};
 
       \node (mid) [dot, right of=0C,  xshift=1cm] {AST};
-      \node (ext) [dot, above of=mid, yshift=1cm] {$E_i$};
+      \node (ext) [dot, above of=mid, yshift=1cm] {$S_i$};
 
       \node (1C)  [dot, right of=mid, xshift=1cm] {$..$};
-      \node (1B)  [dot, above of=1C] {$N_2$};
-      \node (1A)  [dot, above of=1B] {$N_1$};
-      \node (1D)  [dot, below of=1C] {$N_n$};
+      \node (1B)  [dot, above of=1C] {$T_2$};
+      \node (1A)  [dot, above of=1B] {$T_1$};
+      \node (1D)  [dot, below of=1C] {$T_n$};
+
+      \node (2C)  [dot, right of=1C, xshift=1cm] {$..$};
+      \node (2B)  [dot, above of=2C] {$N_2$};
+      \node (2A)  [dot, above of=2B] {$N_1$};
+      \node (2D)  [dot, below of=2C] {$N_n$};
 
       \draw [arrow] (0A) -- (mid);
       \draw [arrow] (0B) -- (mid);
@@ -482,9 +487,14 @@ The main problem of the scripting approach of Pandoc, is that it is, as outlined
       \draw [arrow] (mid) -- (1C);
       \draw [arrow] (mid) -- (1D);
 
+      \draw [arrow] (1A) -- (2A);
+      \draw [arrow] (1B) -- (2B);
+      \draw [arrow] (1C) -- (2C);
+      \draw [arrow] (1D) -- (2D);
+
     \end{tikzpicture}
 
-    \caption{Interpretation of the Pandoc workflow when making use of the templating and scripting facilities.}
+    \caption{Interpretation of the Pandoc workflow when making use of the templating ($T_n$) and scripting ($S$) facilities.}
     \label{fig:interpretation-of-pandoc}
   \end{figure}
 
