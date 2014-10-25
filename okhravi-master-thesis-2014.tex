@@ -354,9 +354,83 @@ A less naive approach to $n-to-n$ conversion is Pandoc, which make use of an int
 
 \paragraph{A single document have multiple potential interpretations, and can thus be expressed differently within the same output language.} The previous sections may have indicated, that given an input document, there exist a single, unanimous, output document, for each output language. While one could argue the truth of such a statement, this thesis considers it untrue.  The opposition may argue, that if there exist, at least one, semantic difference between two output documents, and these documents are claimed to be expressed in the same language, then these two documents cannot possibly be considered to have derived from the same input document. Subsequently, one would reach the conclusion that these output documents, in fact, are either (a) expressed in two different languages, or (b) derived from two different input documents. This thesis argues the opinion of (b), but claim that the difference stem from differences in the interpretation of the same input document, rather than differences caused by different input documents.
 
-In order to clarify the use of the word ``interpretation'', consider the following example. Assume there exist an abstract idea in the mind of a document author. Assume then that the author encodes this idea using some input language. This thesis employ the philosophical standpoint that the concrete input document (i.e. the encoded idea) is always a compromise (i.e. an approximation) of the actual idea. More precisely put, the input document is always an approximation, attempted to, as precisely as possible, encode the envisioned idea. The intent of the conversion tool is then to translate this approximation of the abstract idea, from the input language, to some output language.  However, since the input document is an approximation of the abstract idea, ambiguity arise, and thus multiple different interpretations of the input document are reasonable.
+In order to clarify the use of the word ``interpretation'', consider the following example. Assume there exist an abstract idea in the mind of a document author. Assume then that the author encodes this idea using some input language. This thesis employ the philosophical standpoint that the concrete input document (i.e. the encoded idea) is always a compromise (i.e. an approximation) of the actual idea. More precisely put, the input document is always an approximation, attempted to, as precisely as possible, encode the envisioned idea. The intent of the conversion tool is then to translate this approximation of the abstract idea, from the input language, to some output language.  However, since the input document is an approximation of the abstract idea, ambiguity arise, and thus multiple different interpretations of the input document are reasonable. A visualization of the concept is given in Figure \ref{fig:diagram-explaining-interpretations}.
 
 \paragraph{From a more pragmatic perspective, one could argue that allowing multiple interpretations of a single input document, simply, is a necessary prerequisite if one is to achieve the goal of ``writing once, and publishing everywhere''.} The very nature of such a goal implies that the sought documents one wishes to publish (i.e. the ``everywhere''), are different manifestations of some abstract idea (i.e. the ``once''). The statement of the goal, inherently seem to imply, that what is sought is manifestations (i.e. variations) and not mere translations. Consequently, this is the view employed in this thesis.
+
+
+
+\begin{figure}[h]
+    \centering
+
+    \begin{tikzpicture}[node distance=1.7cm]
+      \node (idea)  [dot]            {$Idea$};
+
+      \node (E2)  [dot, right of=idea, xshift=1cm] {$Encoding_{(...)}$};
+      \node (E1)  [dot, above of=E2]               {$Encoding_{(1)}$};
+      \node (E3)  [dot, below of=E2]               {$Encoding_{(i)}$};
+
+      \node (I3) [dot, right of=E2, xshift=3.8cm] {$Interpretation_{(...)}$};
+      \node (I1) [dot, above of=I3]               {$Interpretation_{(1)}$};
+      \node (I2) [dot, above of=I1]               {$Interpretation_{(2)}$};
+      \node (I4) [dot, below of=I3]               {$Interpretation_{(4)}$};
+      \node (I5) [dot, below of=I4]               {$Interpretation_{(5)}$};
+
+
+      \node (L2)  [dot, right of=I3, xshift=3.8cm] {$Language_{(...)}$};
+      \node (L1)  [dot, above of=L2]               {$Language_{(1)}$};
+      \node (L3)  [dot, below of=L2]               {$Language_{(j)}$};
+
+
+      \draw [arrow] (idea) -- (E1);
+      \draw [arrow] (idea) -- (E2);
+      \draw [arrow] (idea) -- (E3);
+
+      % Encodings to interpretations
+      \draw [arrow] (E1) -- (I1);
+      \draw [arrow] (E1) -- (I2);
+      \draw [arrow] (E1) -- (I3);
+      \draw [arrow] (E1) -- (I4);
+      \draw [arrow] (E1) -- (I5);
+
+      \draw [arrow] (E2) -- (I1);
+      \draw [arrow] (E2) -- (I2);
+      \draw [arrow] (E2) -- (I3);
+      \draw [arrow] (E2) -- (I4);
+      \draw [arrow] (E2) -- (I5);
+
+      \draw [arrow] (E3) -- (I1);
+      \draw [arrow] (E3) -- (I2);
+      \draw [arrow] (E3) -- (I3);
+      \draw [arrow] (E3) -- (I4);
+      \draw [arrow] (E3) -- (I5);
+
+      % Interpretations to languages
+      \draw [arrow] (I1) -- (L1);
+      \draw [arrow] (I1) -- (L2);
+      \draw [arrow] (I1) -- (L3);
+
+      \draw [arrow] (I2) -- (L1);
+      \draw [arrow] (I2) -- (L2);
+      \draw [arrow] (I2) -- (L3);
+
+      \draw [arrow] (I3) -- (L1);
+      \draw [arrow] (I3) -- (L2);
+      \draw [arrow] (I3) -- (L3);
+
+      \draw [arrow] (I4) -- (L1);
+      \draw [arrow] (I4) -- (L2);
+      \draw [arrow] (I4) -- (L3);
+
+      \draw [arrow] (I5) -- (L1);
+      \draw [arrow] (I5) -- (L2);
+      \draw [arrow] (I5) -- (L3);
+    \end{tikzpicture}
+
+    \caption{An abstract idea in the mind of the author may be encoded in multiple ways. Any encoding may be interpreted in multiple ways. Any interpretation may be manifested in multiple languages.}
+    \label{fig:diagram-explaining-interpretations}
+  \end{figure}
+
 
 \paragraph{In order to exemplify the pragmatic usefulness of accepting ambiguous interpretations of input documents, consider an example of a document consisting of a set of paragraphs, intended to be converted to HTML.} One could encode this list of paragraphs, as either a list of \texttt{<li>} elements (i.e. list items), or simply as a set of subsequent \texttt{<p>} elements (i.e. paragraph elements). It is not obvious which one is to be considered the more reasonable, as it depends on how one interprets the subtleties of the input document.
 
