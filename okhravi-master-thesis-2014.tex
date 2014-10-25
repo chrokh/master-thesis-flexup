@@ -246,7 +246,7 @@ The problem approached in this thesis, is perhaps best summarized by the quote r
 
 For many good reasons, different formats exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. More complex things, such as different levels of needed granularity and control, cause languages to express things at different levels of abstraction. The hypothesis of this thesis is that conscious categorization of languages, according to such properties, can spawn a set of conversion strategies superior to $n-to-n$, according to aspects detailed later in this thesis.
 
-%TODO? \section{Markup has resolution}
+\section{Languages exhibit properties}
 \paragraph{Intentions of design} vary from language to language. One, may have been designed with the intent of enabling document authors to (more easily) manually author documents (i.e. eliminating the need for a rich GUI). Another may have been designed with intents of compactness and high precision, at the expense of giving up manual authoring. Another factor one can consider is whether a format is presentation oriented or not. Whether it is designed to directly produce visual output or not. Analyzing the different hypothetical combinations of categorizations makes it apparent that lots of formats exist (and can exist). Merely combining the two categories above, the following category sets, and thus formats, emerge.
 
 \begin{enumerate}
@@ -352,6 +352,9 @@ A less naive approach to $n-to-n$ conversion is Pandoc, which make use of an int
 \end{figure}
 
 
+
+
+\section{Conversions are approximations}
 \paragraph{A single document have multiple potential interpretations, and can thus be expressed differently within the same output language.} The previous sections may have indicated, that given an input document, there exist a single, unanimous, output document, for each output language. While one could argue the truth of such a statement, this thesis considers it untrue.  The opposition may argue, that if there exist, at least one, semantic difference between two output documents, and these documents are claimed to be expressed in the same language, then these two documents cannot possibly be considered to have derived from the same input document. Subsequently, one would reach the conclusion that these output documents, in fact, are either (a) expressed in two different languages, or (b) derived from two different input documents. This thesis argues the opinion of (b), but claim that the difference stem from differences in the interpretation of the same input document, rather than differences caused by different input documents.
 
 In order to clarify the use of the word ``interpretation'', consider the following example. Assume there exist an abstract idea in the mind of a document author. Assume then that the author encodes this idea using some input language. This thesis employ the philosophical standpoint that the concrete input document (i.e. the encoded idea) is always a compromise (i.e. an approximation) of the actual idea. More precisely put, the input document is always an approximation, attempted to, as precisely as possible, encode the envisioned idea. The intent of the conversion tool is then to translate this approximation of the abstract idea, from the input language, to some output language.  However, since the input document is an approximation of the abstract idea, ambiguity arise, and thus multiple different interpretations of the input document are reasonable. A visualization of the concept is given in Figure \ref{fig:diagram-explaining-interpretations}.
@@ -438,7 +441,10 @@ In order to clarify the use of the word ``interpretation'', consider the followi
 
 
 
-\paragraph{TODO}
+
+\paragraph{TODO} How pandoc handles ambiguity in interpretation.
+
+
 \citet{krijnen} suggest an even less naive approach, by demonstrating how conversion schemes can be shared across different input and output formats, if they operate on the intermediate format. An interpretation of that suggested approach is depicted in Figure \ref{fig:interpretation-of-krijnen-extended-pandoc}. While such an approach does still require at least $2n$ number of conversion schemes, the benefit lies in configuration. TODO!
 
 
@@ -481,6 +487,10 @@ In order to clarify the use of the word ``interpretation'', consider the followi
 
 
 
+  
+  
+
+\section{Markup has resolution}
 
 \paragraph{The hypothesis} is that there exist a hierarchy of abstraction, in which conversions are trivial in one direction but significantly more complex in the other. Call the complex direction ``up'', and the trivial ``down''. If true, then it must be considered futile to attempt to convert ``up'' in the chain, and if so, it must be considered a priority to express all documents, in potential need of conversion, in a format as ``low'' in the abstraction chain as possible. 
 
