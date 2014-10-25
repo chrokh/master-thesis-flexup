@@ -442,10 +442,13 @@ In order to clarify the use of the word ``interpretation'', consider the followi
 
 
 
-\paragraph{TODO} How pandoc handles ambiguity in interpretation.
+\paragraph{Pandoc handles the ability to produce different output documents from the same input document through two facilities.} One facility is templating, and the other is what the documentation refer to as ``scripting''\footnote{TODO: Reference}. The first essentially refer to the idea of constructing a template into which the input document is fed. Naturally, a unique template as needed for every unique output document. The second facility, scripting, is more general as it operates on a concrete JSON representation of the abstract syntax tree, i.e. what has previously been referred to as the intermediate format.
 
+A visual interpretation of these facilities of Pandoc is depicted in Figure \ref{fig:interpretation-of-pandoc}.
 
-\citet{krijnen} suggest an even less naive approach, by demonstrating how conversion schemes can be shared across different input and output formats, if they operate on the intermediate format. An interpretation of that suggested approach is depicted in Figure \ref{fig:interpretation-of-krijnen-extended-pandoc}. While such an approach does still require at least $2n$ number of conversion schemes, the benefit lies in configuration. TODO!
+The main problem of the scripting approach of Pandoc, is that it is, as outlined by \citet{krijnen}, coupled to this intermediate format. As \citet{krijnen} suggest, it is ``unrealistic to expect that it can represent all document elements which are introduced by any of the existing or future standards''.
+
+\citet{krijnen} suggest a less naive approach, that demonstrate how conversion schemes can be shared across different input and output formats, through working with grammars and a set of Haskell libraries. The main benefit of such an approach is that it enables flexible package sharing, in ways is similar to the eco-system of \LaTeX{} \citep{krijnen}.
 
 
 
@@ -481,14 +484,14 @@ In order to clarify the use of the word ``interpretation'', consider the followi
 
     \end{tikzpicture}
 
-    \caption{Interpretation of the extended Pandoc system by \citet{krijnen}, enabling package sharing in $n-to-n$ conversion.}
-    \label{fig:interpretation-of-krijnen-extended-pandoc}
+    \caption{Interpretation of the Pandoc workflow when making use of the templating and scripting facilities.}
+    \label{fig:interpretation-of-pandoc}
   \end{figure}
 
 
 
-  
-  
+
+
 
 \section{Markup has resolution}
 
