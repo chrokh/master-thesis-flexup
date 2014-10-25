@@ -356,6 +356,45 @@ An even less naive approach that which suggests to extend Pandoc, by \citet{krij
 
 
 
+
+\begin{figure}[h]
+    \centering
+
+    \begin{tikzpicture}[node distance=1cm]
+      \node (0A)  [dot]              {$N_1$};
+      \node (0B)  [dot, below of=0A] {$N_2$};
+      \node (0C)  [dot, below of=0B] {$..$};
+      \node (0D)  [dot, below of=0C] {$N_n$};
+
+      \node (mid) [dot, right of=0C,  xshift=1cm] {AST};
+      \node (ext) [dot, above of=mid, yshift=1cm] {$E_i$};
+
+      \node (1C)  [dot, right of=mid, xshift=1cm] {$..$};
+      \node (1B)  [dot, above of=1C] {$N_2$};
+      \node (1A)  [dot, above of=1B] {$N_1$};
+      \node (1D)  [dot, below of=1C] {$N_n$};
+
+      \draw [arrow] (0A) -- (mid);
+      \draw [arrow] (0B) -- (mid);
+      \draw [arrow] (0C) -- (mid);
+      \draw [arrow] (0D) -- (mid);
+
+      \draw [arrow] (mid) to[out=120, in=-110] (ext);
+      \draw [arrow] (ext) to[out=-70, in=60] (mid);
+
+      \draw [arrow] (mid) -- (1A);
+      \draw [arrow] (mid) -- (1B);
+      \draw [arrow] (mid) -- (1C);
+      \draw [arrow] (mid) -- (1D);
+
+    \end{tikzpicture}
+
+    \caption{Interpretation of the extended Pandoc system by \citet{krijnen}, enabling package sharing in $n-to-n$ conversion.}
+    \label{fig:interpretation-of-krijnen-extended-pandoc}
+  \end{figure}
+
+
+
 \paragraph{The hypothesis} is that there exist a hierarchy of abstraction, in which conversions are trivial in one direction but significantly more complex in the other. Call the complex direction ``up'', and the trivial ``down''. If true, then it must be considered futile to attempt to convert ``up'' in the chain, and if so, it must be considered a priority to express all documents, in potential need of conversion, in a format as ``low'' in the abstraction chain as possible. 
 
 \paragraph{An example of such a categorization is whether a format is presentation-oriented or not.} One could argue, that the idea of presentation is a specialization, where the idea of describing a thing outside of its domain of presentation is an abstraction. This would mean, that formats concerned with presentation are less abstract (i.e. more specialized) than those not concerned with presentation.
