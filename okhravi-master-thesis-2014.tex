@@ -1312,22 +1312,36 @@ It is important to understand that this thesis employ and endorse the hierarchic
 
 \section{Mixed content}
 \label{sec:mixed-content}
-When discussing markup languages -- it is important to identify the sometimes subtle distinction between languages suitable for (1) \emph{data modeling} and languages suitable for (2) \emph{document authoring}. The prior is concerned with structured data, whereas the second is concerned with structured data that fit within the metaphor  of a document. As the first can be described as referring to datastructures -- one could of course argue that any imaginable document (in the document authoring sense) could be encoded in a particular data structure. Thus that there consequently could not exist any clear distinction between data oriented formats, and document oriented formats. That is however not the argument being opposed here. In order to make unambigious use of these terms in the thesis, below an explenation of one separation is explained. Essentially it encompass the idea that some languages are more suited for intermingling non-marked up text with marked up text.
+\paragraph{Mixed content can be used as a means of distinguishing languages merely intended for data modeling, from languages suitable for document authoring.} The latter (i.e. document authoring) can be considered a specialization of the former (i.e. data modeling). As this thesis is only concerned with understanding conversion between document authoring languages, and not between the much larger body of data modeling languages, it is important to find a way of distinguishing between the two.
+
+\paragraph{The essential difference between documents, and data, is that documents are sequentially ordered whereas data is merely structured.} As documents may indeed exhibit non-sequential properties, one must consider whether the abstract idea of some particular data is intended to be consumed sequentially or not. Even if some abstract idea have multiple sequential interpretations, it should be allowed to be considered a document, and thus even very structured data may be considered documents. Such a high level of structure is for example utterly useful when intending to spawn multiple interpretations from an input document in order to output multiple different manifestations.
+
+Since documents must, necessarily, house sequential properties, a language in which the document is expressed must, necessarily, allow for sequentiality.
+
+\paragraph{Mixed content essentially encapsulate the idea that documents are sequential series of interpolations between the semantically specified and the semantically unspecified.} In other words, that the semantics of some free flowing text may, at any time, be extended with further semantic information. Consider for example the interpolation of the semantic information ``emphasize'' in the example paragraph below.
+
+\begin{lstlisting}
+<quote>I'm sorry, but I don't <bold>want</bold> to be an emperor.</quote>
+\end{lstlisting}
+
+In other words, mixed content is a way of allowing descriptive markup languages to maintain sequentiality, and not introduce procedurality, while still enabling semantic decorations at any point in a document.
 
 % TODO: Use and refer to the terms used by H. Schöning (2001) -- Tamino a DBMS for XML.
 
-The first official W3C working draft of XML (1996)\footnote{http:\/\/www.w3.org/TR/1998/REC-xml-19980210\#sec-mixed-content} already contained the idea of what was referred to as ``mixed content''. Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
+\paragraph{The first official W3C working draft of XML already contained the idea of what was referred to as ``mixed content''.}(1996)\footnote{http:\/\/www.w3.org/TR/1998/REC-xml-19980210\#sec-mixed-content} Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
 
 \begin{lstlisting}
 element ::= EmptyElemTag | STag content ETag 
 content ::= (element | CharData)*
 \end{lstlisting}
 
-In essence -- any non-terminal \texttt{element} can either produce an \texttt{EmptyElemTag} (i.e. self-closing tag), or the set of a \texttt{STag} (i.e. opening tag) followed by \texttt{content}, followed by an \texttt{ETag} (i.e. closing tag). The non-terminals \texttt{start} (e.g. \texttt{<foo>}) and \texttt{end} (e.g. \texttt{</foo>}) will terminate without any risk of indirect recursion back to the non-terminal \texttt{element}. The non-terminal \texttt{content} is the one interesting to this example.
+To summarize the above grammar -- any non-terminal \texttt{element} can either produce an \texttt{EmptyElemTag} (i.e. self-closing tag), or the set of a \texttt{STag} (i.e. opening tag) followed by \texttt{content}, followed by an \texttt{ETag} (i.e. closing tag). The non-terminals \texttt{EmptyElemTag} (e.g. \texttt{<foo/>}), \texttt{STag} (e.g. \texttt{<foo>}) and \texttt{ETag} (e.g. \texttt{</foo>}) will terminate without any risk of indirect recursion back to the non-terminal \texttt{element}. The non-terminal \texttt{content} is the one interesting to this example.
 
 The XML 1.0 (1998) specification use the following flavored syntax\footnote{This is of course merely a partial extraction of the syntax used in the specification.} of EBNF. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
 
-This essentially mean that the non-terminal \texttt{content} can produce either a new \texttt{element} (causing indirect recursion) or \texttt{CharData} (i.e. a string), any number of times. Subsequently allowing for any combination of any length of the two.
+Essentially, the non-terminal \texttt{content} can either produce a new \texttt{element} (causing potential indirect recursion) or \texttt{CharData} (i.e. a string), any number of times. Subsequently allowing for any combination of any length of the two.
+
+In other words, the above EBNF specify that any XML element may contain any interpolation of XML elements and strings.
 
 
 
