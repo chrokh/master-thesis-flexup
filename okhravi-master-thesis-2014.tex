@@ -567,6 +567,7 @@ Converting the fragment (of Figure \ref{fig:hierarchy-of-abstraction-example-tre
 To generalize: If a distinction cannot be preserved when converting from language $A$ to language $B$, then $A$ must be considered the relatively superior (i.e. the more abstract) language.
 
 \paragraph{Preserving difference is more fundamental than equivalence.} While the semantic meaning of the markup keywords (actually macros) \texttt{textit} and \texttt{emph} in the language \LaTeX{} might not refer to the exact same semantic meaning as \texttt{i} and \texttt{emph} of HTML, the importance lies in the preservation of the distinction. If one were to only convert between languages that preserved the exact same semantic meaning, constructing an abstraction tree would be a much more difficult task. Simply because semantic equivalence is a philosophically more difficult question, than syntactic difference. Thus, this thesis explore the concept of preservation of semantic difference (through preservation of syntactic difference), and leave semantic equivalence open for future research.
+\label{sec:difference-is-more-important-than-equivalence}
 
 %TODO: The conversion is the semantically closest, and distinction is preserved.
 
@@ -1063,11 +1064,11 @@ This chapter explores and explains some of the most important characteristics of
 
 \section{Nested markup}
 \label{sec:nesting}
-A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressable than with merely the isolated elements themselves. In most descriptive markup languages, this is implemented as the ability to nest elements in order to create hierarchies. As \citet*{durand} point out, describing documents as ordered hierarchical structures, is the view that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical documents. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the matter of non-hierarchical nesting \footnote{http://xml.coverpages.org/hierarchies.html}. Still, today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML. The generic container element \texttt{<div>}, may, e.g., be nested arbitrarily deep inside any other \texttt{<div>} element.
+\paragraph{A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressible than with merely the isolated elements themselves.} In many markup languages, this is implemented as the ability to nest elements in hierarchies. It is, of course, possible to nest without the use of hierarchies, but as \citet*{durand} point out, hierarchical nesting the the strategy that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical nesting. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the matter of non-hierarchical nesting \footnote{http://xml.coverpages.org/hierarchies.html}. Still, today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML. The generic container element \texttt{<div>}, may, e.g., be nested arbitrarily deep inside any other \texttt{<div>} element.
 
 
 
-To enforce the difference between nesting and not, consider the following example. Assume we have a formatted paragraph of text\footnote{In this example we will disregard whitespace between tokens and assume that whitespace between words in a string remains, but whitespace between strings is omitted and left implicit.}, as outlined in Figure \ref{fig:mixed-content-paragraph}.
+To enforce the difference between nesting and not, consider the following, formatted, paragraph of text\footnote{This thesis ignores discussions of the treatment of whitespace.}, as depicted in Figure \ref{fig:mixed-content-paragraph}.
 
 
 \begin{figure}[h]
@@ -1080,7 +1081,7 @@ The color \underline{is \textbf{now}} \sout{red}.
 \end{figure}
 
 
-Assume that we want to mark up some aspects of the formatting. The important\footnote{...and admittedly fabricated...} characteristics are that the paragraph, from a markup perspective, can be argued to consist of four unique ``token types''. More precisely (1) plain-text, (2) underline, (3) bold-underline, and finally (4) strikethrough.
+Naïvely analyzed, the paragraph consists of the four unique ``token types'' (1) plain-text, (2) underline, (3) bold-underline, and finally (4) strikethrough.
 
 
 
@@ -1115,7 +1116,7 @@ Assume that we want to mark up some aspects of the formatting. The important\foo
 
 
 
-More importantly, two words are underlined, but one of the words that are underlined is actually both underlined and bold. This is an example of a situation where nesting may help us express a string more efficiently. Consider the difference between the non-nested tree representation in Figure \ref{fig:mixed-content-flat-tree} and the nested tree representation in Figure \ref{fig:mixed-content-tree}. In the example that employ nesting, we are actually describing one token as the combination of two others.
+Less naïvely analyzed, two of words are underlined, but one of the words that are underlined is actually both underlined and bold. This is an example of a situation where nesting may be employed to express a thing as a mere combination of two existing things, rather than as a completely new thing. Consider the difference between the non-nested tree representation in Figure \ref{fig:mixed-content-flat-tree} and the nested tree representation in Figure \ref{fig:mixed-content-tree}.
 
 
 \begin{figure}[h]
@@ -1147,57 +1148,38 @@ More importantly, two words are underlined, but one of the words that are underl
 
 
 
-To understand why nesting is a sensible approach to such situations consider the lexing step of a compiler that read the paragraph in question. Without nesting, the number of terminal tokens needed in the lexer would have to be a number that exponentially increase with every introduced new terminal token, because tokens can be combined with tokens. Consider for example if the paragraph above also contained a substring which exhibited the combination of underline, bold and strike-through.
-
-
-
 
 
 
 \subsection{The importance of nesting}
-\paragraph{Nesting, is a fundamental, and necessary property of any pragmatically useful markup language.} I will make four arguments in order to support the use of nesting. First I will argue that (1) there is no semantic difference between an element implied by the use of nesting rather than it's explicit counterpart. Secondly, I argue that (2) no significantly complex cognitive leap is required for humans in order to be able to think and discuss nesting. The two remaining arguments enforce the power of nesting. (3) Nesting can reduce the number of required terminal tokens in a markup compiler exponentially. Finally, (4) nesting allow languages to contain an infinite set of semantic tokens while expressing only a finite set of tokens in the compiler.
+\paragraph{Without the ability to combine tokens, the number of terminal tokens in a hypothetical lexer would exponentially increase for every introduced token.} Nesting, allow, an infinite language to be expressed through a finite set of tokens. Nesting must thus, be considered a fundamental, and necessary, property of any pragmatically useful markup language.
 
-The arguments will be explored in some detail below.
+Below, three arguments will be given in order to enforce the importance of nesting.
 
 
-
-\paragraph{(1) No semantic difference.}
-Other than explicitness, whether a particular string (s) belong to a particular semantic domain (D) is of course constant regardless of what syntax is used to express its belonging. Consider the classic saying ``syntax is not semantics''. Nesting is simply a form of context-sensitive syntax. A form of implicit syntax rather than explicit.
+\paragraph{(1) The potential difference in semantics between the nested, i.e. the implicit, and the non-nested, i.e. the explicit, is irrelevant.}
+This argument stems from the assumption that preservation of semantic difference is more important than preservation of semantic equivalence (as outlined in the Section \ref{sec:difference-is-more-important-than-equivalence}).
 
 Consider for example chapters and subchapters. One explicit way of distinguishing between the two would be to introduce one syntactic keword denoting a chapter, and another denoting a subchapter. This is an explicit approach. An implicit approach however would be to argue that any chapter ``inside'' of another chapter should be considered a subchapter. In this latter case, only the syntactic keywords for denoting a chapter are required.
 
-One may of course argue that there is a subtle difference between a chapter in a chapter, and a subchapter. That would however be to misinterpret the point. Think not in terms of defining a one, true, global language that encompass all envisionable semantics. Think instead in terms of one author defining her own syntax denoting some semantics envisioned by her. If the author claim the implicit syntax is the same as the explicit syntax then there is no point in arguing differences in specific cases. The author has only claimed that the implicit syntax and the explicit syntax are the same in her particular case.
 
-Thus, I argue, that there is no reason write off nesting with arguments of subtle semantic differences. Simply because the author of a language have all the right to couple any kind of semantic to any kind of syntactic construct. Regardless of whether the syntactic construct is context-free or context-sensitive.
+\paragraph{(2) Nesting can reduce the number of required terminal tokens.}
+Assume two unique terminal tokens -- $A$ and $B$. Then assume a language where a string can semantically belong to either class A, class B, or simultaneously to both class A and and class B. Without the power of nesting, this requires the introduction of a third explicit token that represent the the combination of these two - i.e. $AB$.
 
-
-
-
-%\paragraph{(2) No significantly complex cognitive leap.}
-%TODO: This is actually a really poor argument. It's probably the other way around. Put this as %critique instead. Think of the 32-nested stars-example.
-
-
-
-
-
-\paragraph{(2) Nesting reduce the number of terminal tokens.}
-
-Assume two unique terminal tokens -- \(A\) and \(B\). Assume a language where a string can belong to either the class A, or the class B, or simultaneously to the class of both A and B. Without the power of nesting, this requires the introduction of a third explicit token -- call it \(C\). Understand that we started out with two initial unique tokens, and that through allowing these tokens to be combined, we were forced to introduce yet another token in order to be able to encode this ``combined'' token.
-
-Now, understand that the above example only require the introduction of one more token, because the starting point consist of a set of (merely) two unique terminal tokens. You may have realized, that introducing single token, is not sufficient if the starting point is a set of three unique terminal tokens. Subsequently far from sufficient if the starting point is a set of 100 unique terminal tokens.
+However, introducing a single token is not sufficient if the starting point is a set of three unique terminal tokens, rather than, as in the example, two. Subsequently, far from sufficient if the starting point is a set of 100 unique terminal tokens.
 
 
 \begin{figure}[h]
 \centering
 \fbox{
-Lexing \underline{without \textbf{\sout{parsing} often}} \sout{make} \textbf{life \sout{oh so} \underline{cumbersome}}.
+Lexing \underline{without \textbf{\sout{parsing} may}} \sout{make} \textbf{life \sout{oh so} \underline{cumbersome}}.
 }
-\caption{Exhibiting all combinations of \{bold, underline, strikethrough\}.}
+\caption{A string exhausting the combinations of $\{bold, underline, strikethrough\}$.}
 \label{fig:mixed-content-paragraph-complex}
 \end{figure}
 
 
-Analyzing the paragraph outlined in Figure \ref{fig:mixed-content-paragraph}, one may suspect that the underlying language can be described by a grammar consisting of the three tokens outlined in Equation \ref{eq:tokens-as-subset} where plain-text is disregarded. Mixing and matching these tokens, one can trivially create a string, such as Figure \ref{fig:mixed-content-paragraph-complex}, that indeed exhibit the need of more than merely one more terminal token.
+Extracting the tokens from Figure \ref{fig:mixed-content-paragraph}, one reaches the set described by Equation \ref{eq:tokens-as-subset} (assuming plain-text is ignored) and can then trivially construct a string, such as in Figure \ref{fig:mixed-content-paragraph-complex}, that exhaust all possible combinations.
 
 
 
@@ -1208,28 +1190,28 @@ Analyzing the paragraph outlined in Figure \ref{fig:mixed-content-paragraph}, on
 
 
 
-Mathematically, the total number of terminals in a grammar that allow combinations of unique terminal tokens, correspond to the number of k-combinations for all k, of \(n\), where \(n\) is the number of unique terminal tokens before combining. In other words: the total number of tokens is the number of possible subsets of the set of unique terminal tokens. Expressed in Equation \ref{eq:formula-all-subsets}.
+Mathematically, the total number of terminals in a grammar that allow combinations of unique terminal tokens, correspond to the number of $k$-combinations for all $k$, of $n$, where $n$ is the number of unique terminal tokens before combining. In other words: the total number of tokens is the number of possible subsets of the set of unique terminal tokens. Expressed in Equation \ref{eq:formula-all-subsets}.
 
 \begin{equation}
 \sum_{0\leq{k}\leq{n}} {n \choose k} = 2^n
 \label{eq:formula-all-subsets}
 \end{equation}
 
-Since the Equation \ref{eq:formula-all-subsets} also include the empty set we would need to modify the formula such that it subtracts one. However, remember that what we are trying to calculate, is the number of terminal tokens needed to express some grammar of a language where the initial terminal tokens can be combined arbitrarily. Consider the fact that one terminal token of markup languages is plain-text. Consider also the fact that depending on the philosophical orientation of the reader, plain-text can either be considered to be combined with all combinations or none of them. It does not make sense to distinguish between a token that is plain-text-and-bold, from a token that is merely bold. They are essentially the same. In the example, plain-text will be the token that represent the unsuitability of all other tokens -- in other words: if no token match, then the token must be plain-text. Consequently, there will only ever be one combination including the plain-text token regardless of the size of \(n\) and \(k\). Thus, the empty set, in the formula above, will represent the plain-text, and thus there will be no need to subtract one.
+Since plain-text is considered the token that is present when all the other tokens are absent, this means plain-text must not be considered a token possible to combine. In other words plain-text will always be represented by a one, single, token, regardless of the number of other tokens within a set. Since the result of Equation \ref{eq:formula-all-subsets} also include the empty set, this fits naturally to the description of the plain-text token.
 
-Applying this formula to Figure \ref{fig:mixed-content-paragraph} would yield the same number of subsets as depicted in Formula \ref{eq:all-subsets-of-example}. The set used as a starting-point is depicted in Formula \ref{eq:tokens-as-subset}.
+Applying the formula of Equation \ref{eq:formula-all-subsets} to Figure \ref{fig:mixed-content-paragraph} yields the subsets depicted in Formula \ref{eq:all-subsets-of-example}.
 
 \begin{equation}
-|\{\{\};\{B\};\{U\};\{S\};\{BU\};\{BS\};\{US\};\{BUS\}\}|
+\{\{\};\{B\};\{U\};\{S\};\{BU\};\{BS\};\{US\};\{BUS\}\}
 \label{eq:all-subsets-of-example}
 \end{equation}
 
 
-Following this line of thinking an interesting question may be posed. Why merely combinations and not permutations? In other words: many markup languages allow authors to permute the base tokens and not merely combine them. To emphasize the difference consider the subtle distinction between an \textit{\textbf{italicized bold}} string and a \textit{\textbf{bolded italic}} string.
+However, as many markup languages allow authors to permute the base tokens and not merely combine them, it is important to realize that Equation \ref{eq:all-subsets-of-example} only combines, and that the number may thus, in fact, need to be much higher. Consider for example the subtle distinction between an \textit{\textbf{italicized bold}} string and a \textit{\textbf{bolded italic}} string.
 
 Whether such a distinction would matter in a language is of course dependent on that particular language, and might even vary on a per-token-basis within that particular language. While the distinction might be irrelevant in the example above (combining bold and italics), consider instead the semantic distinction between a \emph{paragraph in a figure} and a \emph{figure in a paragraph}.
 
-Assuming a language where all tokens may be permuted and not simply combined, the total number of tokens required in the grammar would be significantly higher than in the combinatorial case. In mathematical terms, the number corresponds to the number of k-permutations of n, for all k, where n is the number of unique terminal tokens before combining (as depicted in Formula \ref{eq:formula-permutations}).
+Assuming a language where all tokens may be permuted and not simply combined, the required total number of tokens, would correspond to the number of $k$-permutations of $n$, for all $k$, where $n$ is the number of unique terminal tokens before combining (as depicted in Formula \ref{eq:formula-permutations}).
 
 
 \begin{equation}
@@ -1238,7 +1220,7 @@ Assuming a language where all tokens may be permuted and not simply combined, th
 \label{eq:formula-permutations}
 \end{equation}
 
-Assuming that the language of the previously discussed paragraph (Figure \ref{fig:mixed-content-paragraph}) allow permutation of tokens. Treating the language as the set of tokens depicted in Equation \ref{eq:tokens-as-subset}, and applying the formula to that set (as depicted in Equation \ref{eq:all-tuples-calculation}), yield 16 tuples, where the tuples in question are depicted in Equation \ref{eq:all-tuples}.
+Applying the formula of Equation \ref{eq:formula-permutations} to the set of Figure \ref{eq:tokens-as-subset}, yield 16 tuples (as depicted in Equation \ref{eq:all-tuples-calculation}), where the resulting tuples depicted in Equation \ref{eq:all-tuples}.
 
 
 
@@ -1252,7 +1234,9 @@ Assuming that the language of the previously discussed paragraph (Figure \ref{fi
 
 
 
-Consequently, if one has a language consisting of three original terminal tokens, and wish to construct a language where each possible k-permutation of the three tokens correspond to unique token, then the language must actually contain 16 tokens. In a language that starts with four terminal tokens, the number of actually required terminal tokens is 65. Obviously this is absurd. And thus, this is a reason as to why nesting is such an important corner stone of markup languages. Because it allow languages to omit the explicit use of terminals in favor of implicit hierarchies.
+In summary, a language with three terminal tokens, where all permutations are allowed, must actually contain $16$ terminal tokens. In a language of four tokens, the number becomes $65$. Obviously this is absurd, a thus, a good reason as to why nesting is such an important corner stone of markup languages. Because it allow languages to omit the explicit use of terminals in favor of implicit hierarchies.
+
+It is important to realize that all these calculations are based upon a nesting depth of 1. If semantics would differ and deeper levels then even more tokens would be required.
 
 
 
