@@ -1058,12 +1058,12 @@ Finally the thesis is finished off with the usual conclusions, analysis, and dis
 
 \chapter{Theory part I -- Characteristics of markup languages}
 \label{sec:theory}
-This chapter is concerned with exploring, discovering and understanding some of the most important characteristics of markup languages.
+This chapter explores and explains some of the most important characteristics of markup languages.
 
 
 \section{Nested markup}
 \label{sec:nesting}
-A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressable than with merely the isolated elements themselves. In most descriptive markup languages, this is implemented as the ability to nest elements in order to create hierarchies. As \citet*{durand} point out, describing documents as ordered hierarchical structures, is the view that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical documents. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the subject matter\footnote{http://xml.coverpages.org/hierarchies.html}. Even today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML.
+A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressable than with merely the isolated elements themselves. In most descriptive markup languages, this is implemented as the ability to nest elements in order to create hierarchies. As \citet*{durand} point out, describing documents as ordered hierarchical structures, is the view that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical documents. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the matter of non-hierarchical nesting \footnote{http://xml.coverpages.org/hierarchies.html}. Still, today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML. The generic container element \texttt{<div>}, may, e.g., be nested arbitrarily deep inside any other \texttt{<div>} element.
 
 
 
@@ -1115,7 +1115,7 @@ Assume that we want to mark up some aspects of the formatting. The important\foo
 
 
 
-More importantly, the fact that two words are underlined, whereas one of the words that are underlined is actually both underlined and bold. This is an example of a situation where nesting may help us express a string more efficiently. Consider the difference between the non-nested tree representation in Figure \ref{fig:mixed-content-flat-tree} and the nested tree representation in Figure \ref{fig:mixed-content-tree}. In the example that employ nesting, we are actually re-using the semantics of one string to partially describe another.
+More importantly, two words are underlined, but one of the words that are underlined is actually both underlined and bold. This is an example of a situation where nesting may help us express a string more efficiently. Consider the difference between the non-nested tree representation in Figure \ref{fig:mixed-content-flat-tree} and the nested tree representation in Figure \ref{fig:mixed-content-tree}. In the example that employ nesting, we are actually describing one token as the combination of two others.
 
 
 \begin{figure}[h]
@@ -1147,15 +1147,15 @@ More importantly, the fact that two words are underlined, whereas one of the wor
 
 
 
-To understand why nesting is a sensible approach to such situations consider the lexing step of a compiler that read the paragraph in question. Without nesting, the number of terminal tokens needed in the lexer would have to be a number that exponentially increase with every introduced new terminal token, because tokens can be combined with tokens.
+To understand why nesting is a sensible approach to such situations consider the lexing step of a compiler that read the paragraph in question. Without nesting, the number of terminal tokens needed in the lexer would have to be a number that exponentially increase with every introduced new terminal token, because tokens can be combined with tokens. Consider for example if the paragraph above also contained a substring which exhibited the combination of underline, bold and strike-through.
 
 
 
 
 
 
-\subsection{Arguing the case of nesting}
-I argue that nested markup is a fundamental, and necessary property of any pragmatically useful markup language. I will make four arguments in order to support the use of nesting. First I will argue that (1) there is no semantic difference between an element implied by the use of nesting rather than it's explicit counterpart. Secondly, I argue that (2) no significantly complex cognitive leap is required for humans in order to be able to think and discuss nesting. The two remaining arguments enforce the power of nesting. (3) Nesting can reduce the number of required terminal tokens in a markup compiler exponentially. Finally, (4) nesting allow languages to contain an infinite set of semantic tokens while expressing only a finite set of tokens in the compiler.
+\subsection{The importance of nesting}
+\paragraph{Nesting, is a fundamental, and necessary property of any pragmatically useful markup language.} I will make four arguments in order to support the use of nesting. First I will argue that (1) there is no semantic difference between an element implied by the use of nesting rather than it's explicit counterpart. Secondly, I argue that (2) no significantly complex cognitive leap is required for humans in order to be able to think and discuss nesting. The two remaining arguments enforce the power of nesting. (3) Nesting can reduce the number of required terminal tokens in a markup compiler exponentially. Finally, (4) nesting allow languages to contain an infinite set of semantic tokens while expressing only a finite set of tokens in the compiler.
 
 The arguments will be explored in some detail below.
 
