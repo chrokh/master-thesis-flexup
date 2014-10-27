@@ -1343,6 +1343,8 @@ Essentially, the non-terminal \texttt{content} can either produce a new \texttt{
 
 In other words, the above EBNF specify that any XML element may contain any interpolation of XML elements and strings.
 
+\paragraph{In terms of formal grammars -- mixed content enable the free text terminal token to be interpolated with tokens of semantic description.} Not with continuous precision, but down to the level of each character of a string. After all, text is not syntactically continuous, but rather discretely bound to its atoms -- the characters of a language. In other words, any number of semantic descriptions must be able to be applied to any character in a string, at any point in the string.
+
 
 
 \subsection{Determining support for mixed content}
