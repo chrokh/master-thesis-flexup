@@ -1345,33 +1345,16 @@ In other words, the above EBNF specify that any XML element may contain any inte
 
 
 
-\subsection{Unsuitable formats for Mixed Content}
-Mixed content becomes utterly difficult to express in languages that lack a canonical way of expressing it. Attempting to express Figure \ref{fig:mixed-content-paragraph} in JSON, one quickly realizes there are multiple ways and that it is not obvious which was is the one to prefer. No approach I have found\footnote{I have merely conducted non-scientific experiments.} is trivial to parse without telling the parser a particular piece of information.
+\subsection{Determining support for mixed content}
+\paragraph{Mixed content cannot be, unanimously, expressed in languages that lack a canonical way of expressing it.} Remember that the definition followed in this thesis, is that languages that support mixed content, support sequential interpolation of semantic keywords in otherwise semantically unspecified text. This thesis propose two tests, one can run, in order to determine whether a language is suitable for mixed content or not.
+
+\begin{enumerate}
+\item All valid strings in the language, must also be valid mixed content\footnote{Some strings may of course not exhibit mixed content, but they must in either case be valid strings according to the parsing strategy of mixed content of that language.}. As depicted using Venn notation in Figure \ref{fig:mixed-content-venn}.
+\item All sequentiality must be preserved.
+\end{enumerate}
+
 
 \begin{figure}[h]
-\begin{lstlisting}
-{
-  "root": [
-    "The color ",
-    { "emph": ["is", { "keyword": "red" }], },
-    "now."
-  ]
-};
-\end{lstlisting}
-\caption{Attempting to express Figure \ref{fig:mixed-content-paragraph} in JSON.}
-\label{fig:mixed-content-json}
-\end{figure}
-
-
-Consider Figure \ref{fig:mixed-content-json}. At first glance it seems like a perfectly reasonable representation of the discussed paragraph. Using Arrays to sequence, and single-key objects to name elements. However, the limitations become painfully apparent if we ask ourselves the question -- what does an object with two keys represent?
-
-One might argue that the counter example is breaking the rules. We did say ``single-key objects'' and not ``n-key objects''. This is a syntactical requirement that can easily be encoded into the parser (or probably even the lexer). This is however to misunderstand the point. The point is that the JSON specification does not actually enforce this behavior today. Meaning, there is (to my knowledge) no way of representing mixed content with labeled elements using JSON, without introducing a requirement that isn't already encoded in the lexer/parser. Meaning, all valid JSON strings, cannot (applying a certain strategy, such as e.g. Figure \ref{fig:mixed-content-json}) be considered valid strings of mixed content. This is visualized in Figure \ref{fig:mixed-content-venn-json}. Ergo, JSON is an unsuitable format for mixed content.
-
-Within this thesis, it is this line of reasoning that is referred to when discussing whether a particular format is suitable for representing mixed content or not.
-
-
-
-\begin{figure}
 \centering
 \begin{subfigure}{.4\textwidth}
   \centering
@@ -1403,6 +1386,40 @@ Within this thesis, it is this line of reasoning that is referred to when discus
 
 
 
+JSON is an example of a language unsuitable for mixed content, as it breaks the second rule, and thus serves as an example on why both rules are necessary. The problem essentially is that the object notation of JSON is a non-sequential key-value-store. If objects in JSON were sequential it would be possible, yet awkward, to express mixed content in JSON.
+
+\begin{figure}[h]
+\begin{lstlisting}
+[
+  "root",
+  "The color ",
+  [
+    ["line", "is", { "key": "red" }]],  // Deliberate use of different syntax..
+    ["line", "and", ["key", "blue"]]],  // ..to exemplify the different alternatives
+  ],
+  "now."
+];
+\end{lstlisting}
+\caption{Attempting to express Figure \ref{fig:mixed-content-paragraph} in JSON.}
+\label{fig:mixed-content-json}
+\end{figure}
+
+The attempt to express mixed content in JSON, in Figure \ref{fig:mixed-content-json}, actually produce an unambiguous mixed content if one employ the following rules. Let all arrays be parsed as non-binary s-expressions where the first element is always the semantic description of the element. Let then all objects be sequences, where all keys are the semantic descriptions of the element given as a value. These simple rules actually allow any valid string of JSON, to be parsed as mixed content. The problem however, again, lies in that we are violating the specification of JSON when saying that all objects must be sequential. Thus the second rule cannot be fulfilled, and thus JSON cannot be considered suitable for mixed content.
+
+\begin{figure}[h]
+\begin{lstlisting}
+<root>
+  The color
+  <line>is <key>red</key></line>
+  <line>and <key>blue</key></line>
+  now.
+</root>
+\end{lstlisting}
+\caption{The XML equivalence of the JSON string in \ref{fig:mixed-content-json}. Line-breaks are only inserted for the sake of readability.}
+\label{fig:json-mixed-content-xml-equivalence}
+\end{figure}
+
+In fact, since JSON objects are non-sequential, no parsing strategy of JSON will ever produce valid mixed content according to the definitions above. Unless, of course, one significantly alter the semantics of the object notation and claim it to be something like a substring randomizer.
 
 
 
