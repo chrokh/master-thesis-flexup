@@ -1485,19 +1485,21 @@ Another more subtle issue, not mentioned by neither \citet{coombs} nor \citet{br
 
 
 \subsection{Procedural}
-The notion of Procedural markup is perhaps most easily communicated through making an analogy to procedural programming languages. Procedural markup refers to the idea of embedding instruction style code directly in the document. Much like as in procedural languages, code duplication, or painful repetition, \citet{bray} argue, can be reduced through elaborate macros or subroutines.
+\paragraph{The notion of Procedural markup is perhaps most easily explained through analogy to procedural programming.} Essentially, procedural markup refers to the idea of embedding code instructions directly in a document.
 
-This is the first category that we have discussed, that actually show the user an abstraction of a particular concept rather than the actual concept. Assume an author is to write a particular sentence in a red font. If done through presentational markup, the user would actually see the sentence in red. If however done through procedural markup the user might something similar to Figure \ref{fig:procedural-markup-red-sentence}.
+Much as in procedural languages, code duplication, or painful repetition, \citet{bray} argue, can be reduced through elaborate macros or subroutines.
+
+This is the first category, of this chapter, that actually show the user an abstraction of a particular concept rather than the actual concept. Assume an author is to write a particular sentence in a red font. If done through presentational markup, the user would actually see the sentence in red. If however done through procedural markup the user would see some code instruction that indicated the switching to the color red, perhaps as depicted in Figure \ref{fig:procedural-markup-red-sentence}.
 
 
 \begin{figure}[h]
 \centering
 \fbox{
 \texttt{
-  \textbackslash begin\{red\} This is a red sentence. \textbackslash end\{red\}
+  \textbackslash color\{red\} This is a red sentence.
   }
 }
-\caption{A fictive example of procedural markup.}
+\caption{A example of procedural markup in the language \LaTeX{}.}
 \label{fig:procedural-markup-red-sentence}
 \end{figure}
 
@@ -1515,7 +1517,7 @@ This is the first category that we have discussed, that actually show the user a
 
 
 
-But depending on the syntax of the language, procedural markup might also turn out like a mess of symbols where the compiler instructions are hard to tell from the actual plain-text -- for the untrained professional of course. \citet{coombs} gives an example of procedural markup, as can be seen in \ref{fig:procedural-markup-coombs}, and suggest that the instructions should be interpreted as follows:
+Depending on the syntax of the language, procedural markup might also turn out like a mess of symbols where a human may have a hard time cognitively separating the compiler instructions from the actual plain-text. \citet{coombs} gives an example of procedural markup, as can be seen in Figure \ref{fig:procedural-markup-coombs}, and suggest that the instructions should be interpreted as follows:
 
 \begin{enumerate}
 \item Skip three lines -- the equivalent of double-spacing twice.
@@ -1524,16 +1526,40 @@ But depending on the syntax of the language, procedural markup might also turn o
 \item Start a new page if fewer than two lines remain on the current page.
 \end{enumerate}
 
-We will discuss syntax in greater length further on. However, please consider the mental distance between syntax and the actual effect, for a minute. Consider how easy (or hard) it would be for a semi-technical author to remember and properly interpolate these commands into a document. I would argue that it is all but trivial.
-
+While the syntax of course is parseable for a computer, it is all but trivial for the untrained human to read. Without syntax highlighting it is even quite hard to give the string of of Figure \ref{fig:procedural-markup-red-sentence} text a glance and quickly figure out what parts are instructions and what parts are characters.
 
 \subsubsection{Mutation}
-An interesting problem that reasonably may cause mental overhead for a document author working with procedural markup, is one of side-effects. Arguably, the notion of ``mutation'' or ``side-effects'' is a great source of power in programming, but also a great source of frustration. Programs that frequently mutate are generally tricky to debug.
+An interesting problem that reasonably may cause mental overhead for a document author working with procedural markup, is that of side-effects. Arguably, the notion of ``mutation'' or ``side-effects'' is a great source of power in programming, but also a great source of frustration. Programs that frequently mutate are often tricky to debug.
 
-The same is true for procedural markup. With the syntax of Figure \ref{fig:procedural-markup-red-sentence} the text that differs from the ``default'' (i.e. the red text) is enclosed between two language constructs that mark its beginning and end. Admittedly, the behavior of the particular code snippet would be reasonably easy to predict, probably even for a semi-technical author. In the case of Figure \ref{fig:procedural-markup-coombs} however, the language construct is an instruction that mutate the state of the current document from that point and onwards. In a 200 page document with this syntax, it would suddenly be non-trivial to tell whether a particular instruction have cascaded down to a particular point or not.
-%TODO: Should I rather use the term control statement
+The same is true for procedural markup. The code instruction in Figure \ref{fig:procedural-markup-red-sentence} could be informally described as ``switch to the red pen, from now and onwards''. If the author of a document only intended to mark some substring as red and not the entire rest of the document in red, then the author must remember to switch back to whichever color the document was in before the instruction.
 
-Consider the simple case where a number of words are marked up such that their font color will be red. A metaphor for the syntax of Figure \ref{fig:procedural-markup-red-sentence} would be equivalent to ``change to the red pen, and then change back to whatever pen you had before'', whereas the syntax of Figure \ref{fig:procedural-markup-coombs} merely would say ``change to the red pen''. Obviously this may cause confusion for a document author.
+To exemplify the problem -- assume that an author wishes to frequently highlight text portions through switching the background color to yellow, the font weight to bold, and the text color to red. At each point the author has to run the commands, and at the end of the highlighted portion the author must ``reset'' these values to whatever they were set to before. The pain of such an approach is visualized in Figure \ref{fig:procedural-markup-set-reset}.
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+  \bg{white} \weight{normal} \color{black} Remember to \bg{yellow} \weight{bold} \color{red} set, then \bg{white} \weight{normal} \color\{black} reset.
+\end{lstlisting}
+\caption{A fictive example of the fragility of having to remember to ``set'' and ``reset'' properties in procedural languages.}
+\label{fig:procedural-markup-set-reset}
+\end{figure}
+
+
+Macros, as previously mentioned, help authors carry out commonly performed tasks. Thus, a way to mitigate the problems depicted in Figure \ref{fig:procedural-markup-set-reset} could be to construct a set of macros for commonly used styles. An example of such an approach is depicted in Figure \ref{fig:procedural-markup-set-reset-macro}. Consequently, the author would be less likely to forget to set or reset some particular property.
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+  \style{normal} Remember to \style{highlight} set, then \style{normal} reset.
+\end{lstlisting}
+\caption{A fictive example of how procedural macros could mitigate the problems depicted in Figure \ref{fig:procedural-markup-set-reset}.}
+\label{fig:procedural-markup-set-reset-macro}
+\end{figure}
+
+
+The problem essentially boils down to mutation. Procedural languages mutate the state of a document from the point of the code instruction and onwards. As a metaphor, the language constructs are essentially built on the form of ``switch to the red pen, from now and onwards'', rather than e.g. ``switch to the red pen, and then switch back'' .
+
+While mistakes are easy to spot in the trivial examples of this thesis, they are much less trivial to spot in, e.g., a 100 page document, or worse, a 1000 page novel. Given a particular point of the document, it is, as a human, tricky to know what instructions have cascaded to that point.
 
 
 
