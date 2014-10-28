@@ -1707,14 +1707,22 @@ In essence, tag-validity describes whether a particular document is a syntactica
 
 \subsection{Arguing the case of Generic Identifiers}
 \label{sec:arguing-the-case-of-generic-identifiers}
-\citet{goldfarb} claimed that the classic markup language Scribe (constructed by \citet{reid}) manage to avoid procedural markup completely, much because of the effectivity of Generic Identifiers (GI's).
+\paragraph{According to \citet{goldfarb}, the classic markup language Scribe (constructed by \citet{reid}) manage to avoid procedural markup completely (i.e. stay descriptive), much because of the effective use of Generic Identifiers (GI's).}
 
-It has already been established, in Section \ref{sec:abstraction-hierarchy}, that in the hierarchy of Markup types, it is desirable to reach a state where all manually authored markup is descriptive. Consider however, how the domain of descriptive markup languages can be divided up into two sub-domains. One in which GI's exist. Where element names may be made up on the fly, by the document author. Then another, in which GI's do not exist. This second language is thus delimited by a fixed number of Identifiers.
+If then, as already established in Section \ref{sec:abstraction-hierarchy}, it is desirable to reach a state where all manually authored markup is descriptive, GI's seem like an invaluable tool.
 
-While the expressiveness of both languages can be argued to be infinite for both languages if they exhibit the nesting property, there is still reason to argue their relative expressiveness. For one, the first language exhibits infinite expressiveness both through nesting and through an infinite number of element names. The second language however, only exhibits infinite expressiveness through nesting. Thus it is reasonable to argue that the infinite expressiveness of language one is greater then the infinite expressiveness of the second language. In the sense that there are some strings that can be encoded in first language which cannot ever possibly be encoded in the second. Consider a GI expressed in the first language that the second language does not allow. In other words, the cardinality of the set of infinite languages expressible in language one is greater than that of in language two.
+\paragraph{Generic identifiers enable languages over infinite words.}
+Consider, how the domain of descriptive markup languages can be divided into two sub-domains. One in which GI's exist, and element names may be made up on the fly, by the document author. Then another, in which GI's do not exist, that consequently is delimited by a fixed number of identifiers.
 
-Another property closely tied to that of expressiveness is the possibility for an author to express some piece of information at the highest possible abstract level. As there exist no limit on the number of elements an author can create, she can describe every object, in an infinitely diverse set of objects, using a single unique GI per object. The author never runs the risk of ``running out of distinctions''.
+If both languages exhibit the nesting property, then both are infinite languages. However, one is an infinite language over finite words, and the other is an infinite language over infinite words. In other words, their relative expressiveness still differ, and consist of different infinities. The languages enable different infinities.
 
+This means, that the cardinality of the set of possible expressions in an infinite language over infinite words, must be greater than that of an infinite language over finite words.
+
+\paragraph{With generic identifiers, authors have an infinite number of names to use for semantic differentiation. }
+An author can thus express everything at the highest possible abstract level. No matter how complex something may be, it is always possible to simply give it a name. As there exist no limit on the number of elements an author can create, one has an infinitely large domain of semantic names to use. In other words, there will always be a new word one can choose in order to semantically describe some new semantic concept, and one thus never run the risk of ``running out of distinctions''.
+
+
+\color{red}
 This last argument has the splendid benefit that an author can allow herself to push decisions into the future. \citet{coombs} argue similarly in regards to Referential markup. An argument which has been accounted for in Section \ref{sec:referential-markup}. However, the idea is that with some forms of markup, authors can enjoy the luxury of simply ignoring how (e.g.) a character such as ``--'' should be formatted. Instead the author simply employ some referential markup such as \texttt{\&mdash;}. Then, later in a stage or document transformation some decision is made on how to format the entity. GI's can be used in a very similar way. With GI's an author does not merely not have to decide upon formatting, even semantics can be delayed. With GI's an author can choose to distinguish between strings that she suspect are different through simply marking them with syntactically different GI's. There is no forced need to consider the semantics, other than the realization that two things seemingly belong to two different domains. Semantics and presentation can then be added later.
 
 Another subtle point related to the one above, is also that GI's allow authors to mark up their documents with names that cognitively make sense to the individual.
@@ -1734,7 +1742,7 @@ Name     ::=  NameStartChar (NameChar)*
 \end{lstlisting}
 
 The EBNF snippet can informally be described as follows. An element can either produce an empty element tag, or the set of a start tag some content and then an ending tag. A start tag must produce a set of balanced chevrons (i.e. $<>$) in which between a name must be produced. A name can produce a non-whitespace-containing string where some characters are not allowed as the first character. And so forth for the closing of the element.
-
+\color{black}
 
 
 
