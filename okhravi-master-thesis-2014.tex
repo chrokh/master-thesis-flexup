@@ -1499,7 +1499,7 @@ This is the first category, of this chapter, that actually show the user an abst
   \textbackslash color\{red\} This is a red sentence.
   }
 }
-\caption{A example of procedural markup in the language \LaTeX{}.}
+\caption{An example of procedural markup in the language \LaTeX{}.}
 \label{fig:procedural-markup-red-sentence}
 \end{figure}
 
@@ -1565,17 +1565,44 @@ While mistakes are easy to spot in the trivial examples of this thesis, they are
 
 
 \subsection{Descriptive}
-Unfortunately there seems to be no unanimous line between procedural and descriptive markup. \citet{coombs} argue that languages such as \TeX{} and \LaTeX{} are descriptive languages, whereas \citet{bray} argue they are procedural. If I am to speculate, I would assume this particular difference in opinion stems from the differences in state-of-the-art practice at the time in which these two publications were authored.
+\paragraph{If procedural markup is best described by parallel to procedural programming, then descriptive markup is best described by parallel to declarative programming.} Descriptive markup describes what something \emph{is} rather what something \emph{does}. In other words, descriptive markup allow authors to encapsulate substrings and denote belonging to semantic domains.
 
-% In order to gain some understanding in why ambiguity might arise -- ask yourself the following question. If a language L, has a declarative syntax (meaning it cannot possibly be procedural), yet the declarative-style syntax clearly describes presentational... TODO: This is not a good example.
 
-In the time of \citet{coombs}, languages like SGML were still fresh out of the oven (the ISO standard for SGML was published in 1986\footnote{http://www.iso.org/iso/catalogue\_detail.htm?csnumber=16387}). So the mere fact that the language provided a way of expressing parts of the document through description rather than through procedure, seemingly was enough for the language to be called descriptive. In other words, I speculate that at that time it was sensible to consider a markup language to be descriptive, so long as it showed significant descriptive capabilities. Regardless of whether it also provided ways of expressing procedural markup. In the case of \LaTeX{}, consider for example language constructs such as \texttt{\textbackslash vspace} (i.e. a command that inserts vertical space). Or consider language constructs such \texttt{\textbackslash color\{red\}} which essentially say -- ``change to the red pen, from now and onwards''. Both examples are clearly procedural.
+Using the metaphor of the red pen, descriptive markup essentially states ``switch to the red pen, and then switch back to whatever pen you had before'', which is much different from the procedural notion of ``switch to the red pen, from now and onwards''. This difference is perhaps best illustrated by contemplating how the descriptive code in Figure \ref{fig:descriptive-markup-red-sentence-latex} and \ref{fig:descriptive-markup-red-sentence-xml} encapsulates some given substring from start to end, whereas the procedural code in Figure \ref{fig:procedural-markup-red-sentence} mutates state from a given point and onwards.
 
-Put this in contrast to the time of \citet{bray}, where languages like XML had succeeded SGML and provided almost purely descriptive facilities. In other words, I argue that markup languages at this point in time, could only be considered descriptive, if they \emph{only} allowed for descriptive (and never procedural) expressions.
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+  \textbackslash begin\{red\} This is a red sentence.\textbackslash end\{red\}
+  }
+}
+\caption{An example of descriptive markup in the language \LaTeX{}.}
+\label{fig:descriptive-markup-red-sentence-latex}
+\end{figure}
 
-Understand, that attributing this difference of opinion to the different contexts at those points in time, is of course completely speculative from my part. Reasonably so I would argue however.
 
-Following in this thesis I will use a notion of descriptive markup, more similar to that of \citet{bray}. Following the definition both stated by \citet{coombs} as well as \citet{bray} -- that descriptive markup denotes what a given part of the document \emph{is} rather that what it \emph{does}. I.e. denoting what parts of the text belong to which class. However, realizing that the mistake I argue \citet{coombs} made, was allowing languages with both procedural and descriptive capabilities to be called descriptive. In this thesis a markup language exhibiting any kind of procedural element will be considered a procedural markup language, regardless of its descriptive capabilities.
+
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+  Descriptions <red>save</red> the day.
+  }
+}
+\caption{An example of descriptive markup in the language XML.}
+\label{fig:descriptive-markup-red-sentence-xml}
+\end{figure}
+
+Unfortunately there seems to be no unanimous line between procedural and descriptive markup. \citet{coombs} argue that languages such as \TeX{} and \LaTeX{} are descriptive languages, whereas \citet{bray} argue they are procedural. It is possible that this particular difference in opinion stems from the differences in state-of-the-art practice at the time in which these two publications were authored.
+
+In the time of \citet{coombs}, languages like SGML were still relatively recently conceived of. The ISO standard for SGML was, e.g., published in 1986\footnote{http://www.iso.org/iso/catalogue\_detail.htm?csnumber=16387}. So the mere fact that the language provided a way of expressing parts of the document through description rather than through procedure, may have been enough for the language to be called descriptive. Regardless of whether it also provided ways of expressing procedural markup. In the case of \LaTeX{}, consider for example the clearly procedural constructs such as \texttt{\textbackslash vspace} which inserts vertical space, or  \texttt{\textbackslash color\{red\}} which essentially says -- ``switch to the red pen, from now and onwards''.
+
+At the time of \citet{bray} however (i.e. \citeyear{bray}), languages like XML had succeeded SGML and provided almost purely descriptive facilities. Thus, it may, at this point in time, have been reasonable to only consider a language descriptive if \emph{all} of the language is descriptive.
+
+This thesis employ the latterly mentioned viewpoint -- that a given language must contain no procedural constructs for it to be considered descriptive. To determine whether a construct is descriptive or not, this thesis employ the definition both stated by \citet{coombs} as well as \citet{bray} -- that descriptive markup denotes what a given part of the document \emph{is} rather that what it \emph{does}.
+
+In summary, this thesis considers languages that only contain procedural constructs -- procedural, languages that only contain descriptive constructs -- descriptive, and languages that contain constructs of both kinds -- hybrid languages.  
 
 
 \subsection{Referential}
