@@ -1670,13 +1670,13 @@ Continuing on the programming language analogy, consider how machine code can be
 \label{sec:theory:generic-identifiers-and-validity}
 \DeclareFixedFootnote{\refXMLspec}{http://www.w3.org/TR/WD-xml-961114}
 
-In XML, the author of a document is given the freedom to mark up her document with whatever combination of element names the author see fit\refXMLspec. As XML is a subset of SGML\refXMLspec, and SGML ascended from XML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that this concept of arbitrary element names was already present in the earlier language GML. In GML, this concept was actually referred to as Generic Identifiers (GI's) \citet{goldfarb}.
+\paragraph{The concept of allowing authors of XML documents to name their elements almost arbitrarily, stems from GML, and was originally called Generic Identifiers (GI's).}  As XML is a subset of SGML\refXMLspec, and SGML ascended from GML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that this concept has been inherited rather than reinvented.
 
-According to \citet{goldfarb}, GML was designed upon two ``novel postulates''. Firstly that (1) markup should describe a document's structure rather than the processing to be performed. A document once expressed descriptively should suffice for all future processing. Secondly that (2) markup should be rigorous. So that programs can be used for processing documents.
+According to \citet{goldfarb}, GML was designed upon two ``novel postulates''. Firstly that (1) markup should describe a document's structure rather than the processing to be performed. A document once expressed descriptively should suffice for all future processing. Secondly that (2) markup should be rigorous, such that programs can be used for processing documents.
 
-The ingenious move of GML was to only let the markup language cover the first point of the two above \citet{goldfarb}. In other words, GML allow an author describe a document's structure in any way she see fit, using the mnemonic tag -- i.e. a GI.
+The ingenious move of GML , according to \citet{goldfarb}, was to only let the markup language cover the first point of the two above. In other words, that GML allow an author describe a document's structure in any way she see fit, using the mnemonic tag -- i.e. GI's. In order to achieve the second goal, \citet{goldfarb} explained that, GML documents ought to be coupled with GML Models. Where the GML Model notation essentially is a notation derived from the Backus Naur Form-notation (BNF), but where the intent is to define the set of all valid elements.
 
-In order to achieve the second goal, \citet{goldfarb} explained that GML documents ought to be coupled with GML Models. Where the GML Model notation essentially is a notation derived from the BNF-notation, but where the intent is to define the set of all valid elements. Perhaps this is the forefather of the Document Type Definition (DTD) together with the Document type Declaration that were introduced into SGML and followed into the subset XML\footnote{http://www.w3.org/TR/WD-xml-961114\#dt-dtd}.
+Perhaps, GML models can be seen as the forefather of the Document Type Definition (DTD) that were introduced into SGML and followed into the subset XML\footnote{http://www.w3.org/TR/WD-xml-961114\#dt-dtd}.
 
 \begin{figure}[h]
 \centering
@@ -1697,13 +1697,12 @@ In order to achieve the second goal, \citet{goldfarb} explained that GML documen
 %TODO: Remember to use this piece of information!!
 \label{sec:tag-validity-type-validity}
 \DeclareFixedFootnote{\refSGMLspec}{http://xml.coverpages.org/wg8-n1929-g.html}
-The observant reader may have noticed that a parallel was drawn between GML Models and DTD's in combination with Document Type Declarations (commonly referred to as DocTypes). In SGML an explicit distinction was made between, what was called, tag-validity and type-validity\refSGMLspec. GML Models made no such distinction and both concepts were thus instead encompassed into the idea of GML Models.
+
+\paragraph{In SGML an explicit distinction was made between, what was called, tag-validity and type-validity\refSGMLspec.} GML Models made no such distinction and both concepts were thus instead encompassed into the idea of GML Models.
 
 The SGML specification\refSGMLspec defined a type-valid SGML document as a document conforming to it's encompassing DTD. Subsequently defined a tag-valid SGML document to be a document that is ``fully tagged''. A document were to be considered ``fully tagged'' if every element in the document is composed of a start-tag with a generic identifier and a corresponding end-tag.
 
-Informally put, the difference between tag-validity and type-validity can be explained as such. Tag-validity describes whether a particular document is a syntactically valid document within the language in question (e.g. XML or SGML). Whereas type-validity describes whether that particular document is semantically valid within a given domain(usually specified via a DTD).
-
-Obviously, both are important for, as \citet{goldfarb} puts it, rigor.
+In essence, tag-validity describes whether a particular document is a syntactically valid document within the language in question (e.g. XML or SGML). Whereas type-validity describes whether that particular document is semantically valid within the given domain (usually specified via a DTD). Both are of course important for, as \citet{goldfarb} puts it, rigor.
 
 
 \subsection{Arguing the case of Generic Identifiers}
