@@ -1626,13 +1626,15 @@ From a linguistic point of view, a metamarkup language can be seen as a metalang
 
 \section{A hierarchy of abstraction}
 \label{sec:abstraction-hierarchy}
-It is important to understand that \citet{coombs} employ the wording ``types of markup'' when discussing the categories explained in section \ref{sec:taxonomy}, whereas \citet{bray} discuss ``a taxonomy of markup''. While similarly sounding indeed, nuances emerge when considering the fact that \citet{bray} only discuss three of the total six categories outlined by \citet{coombs}. The three included in the, so called, taxonomy are (1) presentational, (2) procedural, and (3) descriptive. In fact, also \citeauthor{coombs} specifically highlight these three, and say that they are ``in direct competition''.
+\paragraph{From the six categories of markup, identified by \citet{coombs}, and outlined in Section \ref{sec:taxonomy}, a hierarchical taxonomy of three emerge.} \citet{coombs} employ the wording ``types of markup'', while \citet{bray} talk of it as ``a taxonomy of markup''. Nuances between these two expressions emerge when considering the fact that \citet{bray} only discuss three of six categories outlined by \citet{coombs}. The three included in the, so called, taxonomy are (1) presentational, (2) procedural, and (3) descriptive. In fact, also \citet{coombs}, seem to indicate that these may be grouped, by stating that they are ``in direct competition''.
 
-If you would allow me to speculate, then I would argue this stems from the way these three categories nicely describe three different levels of abstraction given an instance of a document. Or to look at it from the other end, consider the following. Punctuational markup can very well be expressed using presentational markup, as well as procedural, as well as descriptive. Referential markup can be expressed using the two latter, and the same goes for metamarkup.
+Indeed these six categories can be divided into two subgroups. Consider the following: Punctuational markup can very well be expressed using presentational markup, as well as procedural, as well as descriptive. Referential markup can be expressed using the two latter, and the same goes for metamarkup.
 
-In essence -- punctuational, referential and metamarkup are essentially concepts that \emph{can be expressed}. Whereas presentational, procedural and descriptive markup are \emph{ways to express} these concepts (amongst others). Making an analogy to programming languages. Descriptive, procedural and presentational would represent the programming paradigms, and the other markup categories would represent concepts exhibited in these programming paradigms.
+In other words -- punctuational, referential and metamarkup are essentially concepts one \emph{want to express}. Whereas presentational, procedural and descriptive markup describe syntaxes, or in other words \emph{ways to express} these concepts. 
 
-Allow me to stress again, that this is my subjective interpretation of the situation. But consider it for a moment and I assume you also will find it reasonable. Consider for example how machine code can be abstracted into procedural code, and how procedural code can be abstracted into declarative. Then consider how this analogy conveniently align with the types of markup.
+Making an analogy to programming languages, descriptive, procedural and presentational would represent the programming paradigms, while punctuational, referential, and metamarkup, would be manifested as building blocks in languages of these paradigms.
+
+Continuing on the programming language analogy, consider how machine code can be abstracted into procedural code, and how procedural code can be abstracted into declarative. Then consider how this analogy conveniently align with the types of markup. Essentially these three categories can, thus, be considered paradigms of markup language abstraction. Similarly to how programming paradigms have emerged in order to create abstractions upon machine instructions. This hierarchy of abstraction paradigms is visualized in Figure \ref{sec:abstraction-hierarchy}.
 
 
 \begin{figure}[h]
@@ -1654,11 +1656,7 @@ Allow me to stress again, that this is my subjective interpretation of the situa
 \end{figure}
 
 
-
-Consequently I argue that these three ``categories'' of the taxonomy can be viewed as paradigms of markup abstraction. Much like we have invented facilities to abstract away machine level instructions, we have invented facilities to abstract low level instructions for document content transformation. This hierarchy is visualized in Figure \ref{fig:markup-types-hierarchy}.  
-
-
-% We are talking about _instances_ of documents, which is why we are not regarding abstract markup languages.
+% TODO: We are talking about _instances_ of documents, which is why we are not regarding abstract markup languages.
 
 
 
