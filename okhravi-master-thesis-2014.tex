@@ -1607,11 +1607,11 @@ In summary, this thesis considers languages that only contain procedural constru
 
 \subsection{Referential}
 \label{sec:referential-markup}
-Another category of markup described by \citet{coombs} is referential markup. The idea of referential markup essentially encompass the idea that we at some point (P1) in our document want to be able to include another part of a document or some string of characters (P2). Regardless of whether P1 and P2 are specified in different documents or even different machines.
+\paragraph{Referential markup, as defined by \citet{coombs}, essentially encompass the idea that we want to replace some string in our document ($S1$), with some other string from the same, or another, document ($S2$).} Regardless of whether $S1$ and $S2$ are specified in different documents or even different machines. In fact, $S2$ might even come from a database, or be the result of some web query etc. The idea is essentially that all instances of $S1$ in the document, will in the compiled version be replaced with instances of $S2$. In other words, $S1$ \emph{refer} to $S2$ and hence the name.
 
-Returning to the previously mentioned example with the character entity \texttt{\&mdash;}. If treated as referential markup, we might want every occurrence of that character entity (i.e. that piece of referential markup) to be replaced by the actual character ``\texttt{--}''.
+Returning to the previously mentioned example with the character entity \texttt{\&mdash;}. If treated as referential markup, we might want every occurrence of that character entity (i.e. that piece of referential markup) to be replaced by the actual character ``\texttt{--}''. Other examples of a referential markup is the tables of contents and footnotes.
 
-\citet{coombs} argue that referential markup can exist in both procedural markup languages and descriptive. In the first it may take the form of user-defined variables. Whereas in the second, the case of character entity replacement outlined above is a prime example.
+\citet{coombs} argue that referential markup can exist in both procedural markup languages and descriptive. In the first it may take the form of user-defined variables, whereas in the second, the case of character entity replacement outlined above is a prime example.
 
 
 \subsection{Metamarkup}
