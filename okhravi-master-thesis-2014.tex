@@ -953,6 +953,260 @@ An author can express her document in an arbitrary XML-format (perhaps imagined 
 
 
 
+\section{Document processing}
+\label{sec:theory-of-document-processing}
+
+\label{sec:microframework}
+In the spirit of \citet{reid} -- author of the paper that introduced Scribe, one of the earlier document preparation systems that argued for the ``separation of form from content'' -- we will now take a look at some variations of workflows of document authoring. Further I will suggest an ideal alternative, based on the theoretical knowledge from previous chapters.
+
+The process that we are going to analyze is that of file format transformation. The idea of transforming a file expressed in some format $I$ into some other format $O$.
+
+Given the creativity of humans, I would argue that, the number of workflows used in the real world today is likely to be equivalent to, or higher, than the number of people actually employing a workflow. Thus, in order to be able to discuss workflows, we need some way to generalize these workflows, such that most workflows are captured. Thus, Figure \ref{fig:workflows-framework} suggests a micro-framework that will be used as a basis for this argument. Given its utterly high level of abstraction and simplicity there is little reason to argue its representativity.
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {$In$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$Out$};
+
+    % arrows
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      % \node [draw, fill=cyan!25, rectangle, rounded corners, fit={(input) (engine) (output)}] { Foobar };
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{A naive representation document transformation.}
+  \label{fig:workflows-framework}
+\end{figure}
+
+
+\paragraph{The micro-framework stem from the following argument: } To perform the process, previously described as transforming from $I$ to $O$, one can trivially distinguish the three parts of the statement. The pre-state ($I$), the post-state ($O$), and the program ($P$). This is illustrated in Equation \ref{eq:microframework}.
+
+\begin{equation}
+  P : \mathbb{I} \rightarrow \mathbb{O}
+  \label{eq:microframework}
+\end{equation}
+
+Again, as this model simply depicts the transformation as a single joint function there is really no need for arguing its validity. The model simply depicts a function where the domain of all possible inputs is given as input, and the domain of all possible outputs is produced as output. Since the very nature of a markup transformation program is to take a string of some language and produce a string in perhaps another language, then of course all markup transformation programs can be described in this model.
+
+
+Obviously the transformation program in Figure \ref{fig:workflows-framework} and Equation \ref{eq:microframework} need to be refined (i.e. broken down into further detail) in order to accurately represent most actual transformation programs. This refinement will be carried out further on, and is how the ideal model will be derived.
+
+
+
+\section{Determining generality of a transformation program.}
+In order to reason about the level of generality of different transformation programs a more visual notation will be introduced. Figure \ref{fig:workflows-framework-spec-in-spec-out} introduces  a dotted line. This dotted line represents specialization (as an opposite to generalization). If a component is depicted inside the dotted area, it suggests that there exist a language within the domain of the component that cannot possibly be present in any other domain of any other component in the figure. In other words, if the input component is depicted inside the dotted line, this means there exist an input language that cannot be produced as output. In less formal terms, this mean that the transformation program is ``coupled''\footnote{Informal usage of the term} to the formats in the domain of the component within the dotted line. The program will always be depicted within the dotted line to indicate that there exist other programs outside the dotted lines. More concrete examples will be given when discussing possible workflows next.
+
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {$In$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$Out$};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(input) (engine) (output)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{A transformation program that takes specific input formats and produce specific output formats.}
+  \label{fig:workflows-framework-spec-in-spec-out}
+\end{figure}
+
+
+
+
+\section{Possible conversion workflows}
+The intent of this section is to depict all workflows that can be expressed using the simple micro-framework outlined in Section \ref{sec:microframework}. In order to ensure coverage of all possibilities, consider the quadrant diagram depicted in Figure \ref{fig:microframework-quadrant}.
+
+Remember that the terms ``generalized'' and ``specialized'' are used to denote the lack of, or existence (in that order) of items not present in any other domain. To oversimplify -- generalization is considered good and specialization bad. To concretize -- generalization in one end mean that any format can be used in that end. Whereas specialization in one end mean that only one particular set of formats can be used in that end. In the case of the latter, the consequence is that the program $P$ must be rewritten if one desires to make use of a format outside of that set in the specialized end. Consequently this is considered a bad feature because one must write more programs.
+
+\begin{figure}[h]
+  \centering
+
+  \def\arraystretch{2.5}
+  \begin{tabular}{|r|c|c|}
+    \hline
+
+    & \textbf{Generalized out} & \textbf{Specialized out} \\ \hline
+
+    \textbf{Generalized in} &
+    \cellcolor[HTML]{33FF99} A
+    &
+    \cellcolor[HTML]{FFFFCC} C
+
+    \\ \hline
+
+    \textbf{Specialized in} &
+    \cellcolor[HTML]{CCFF99} B
+    &
+    \cellcolor[HTML]{FFFFFF} D
+
+    \\ \hline
+  \end{tabular}
+
+  \caption{All possible combinations of specialization/generalization possible in the micro-framework depicted by Figure \ref{fig:workflows-framework}}
+  \label{fig:microframework-quadrant}
+\end{figure}
+
+
+In a perfect world, transformation programs would painlessly transform any format to any format and thus exist in  Quadrant A. However, as implied in the beginning of this thesis -- writing a Quadrant A program that is both pragmatically useful and yet flexible is all but trivial \footnote{Since Quadrant A is an interesting quadrant I do of course hope exploration of it will continue.}
+
+Instead, this thesis focus on Quadrant B programs. However, reaching for the highest level of flexibility within the quadrant. With the intent of minimizing the risk of coupling the program to a language on the brink of becoming obsolete.
+
+Before exploring Quadrant B further, examples and explanations of each quadrant will be given below, so as to facilitate a deeper understanding of their meanings. The Quadrants will be discussed in reverse order, for the irrelevant sake of increased suspense.
+
+
+
+
+
+\subsection{Specialized in, Specialized out (Quadrant D)}
+Programs in Quadrant D (of Figure \ref{fig:microframework-quadrant}) represent the category of really specialized transformation programs. They convert formats from one specific domain, to formats from another specific domain. Whether or not these domains are the same is irrelevant. In practice, this essentially mean that if one need to facilitate some format from a different domain, the program need to be rewritten. Visually, these programs are described by Figure \ref{fig:workflows-framework-spec-in-spec-out}. Examples of such a program may for example be a \LaTeX{}-to-PDF converter, or a Markdown-to-HTML converter. 
+
+
+
+
+\subsection{Generalized in, Specialized out (Quadrant C)}
+Programs in Quadrant C (of Figure \ref{fig:microframework-quadrant}) represent a, quite odd, set of transformation programs. Namely programs that, in theory, take input from any domain, but always output formats of a specific domain. If one would need to output a format from a different domain, then the program need to be rewritten.
+
+Due to the quite odd nature of these programs, it is difficult to find pramatically useful real-world examples. Perhaps this is because this Quadrant represent a set of programs very different from the intent of this thesis. Very different from the idea of ``writing once and publishing everywhere''.
+
+Nevertheless, such a program might for example be an anything-to-XML converter, that simply slaps a root tag onto whatever string it receives and escape any XML-like syntax from the input string in order to avoid syntax errors. Consequently the program would be able to receive any format, and yet always be able to output valid XML. Pointless, but valid XML. Visually, these programs are described by Figure \ref{fig:workflows-framework-gen-in-spec-out}.
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {$I$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$O$};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(engine) (output)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{Quadrant C programs only suffer from specialized output.}
+  \label{fig:workflows-framework-gen-in-spec-out}
+\end{figure}
+
+
+
+\subsection{Specialized in, Generalized out (Quadrant B)}
+Programs in Quadrant B (of Figure \ref{fig:microframework-quadrant}), can be explained through a (to many) very familiar set of tools. Namely XML combined with XSLT. One express a document in some arbitrary XML format and then use XSLT as a means of outputting multiple different other output formats. Visually, these programs are described by Figure \ref{fig:workflows-framework-spec-in-gen-out}.
+
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io] {$I$};
+    \node (engine) [process, right of=input] {$P$};
+    \node (output) [io,      right of=engine] {$O$};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(input) (engine)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{Quadrant B programs only suffer form specialized input.}
+  \label{fig:workflows-framework-spec-in-gen-out}
+\end{figure}
+
+
+
+\subsection{Generalized in, Generalized out (Quadrant A)}
+Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent the most general kind of markup transformation programs. They take formats from the arbitrary\footnote{As you might have already understood, we are of course not talking about completely arbitrary, but rather the ability to through configuration accept (almost) arbitrary formats.} domain, and generate outputs within any domain. An example program that exhibits this behavior is the widely used software Pandoc. Visually, these programs are described by Figure \ref{fig:workflows-framework-gen-in-gen-out}.
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=2.5cm]
+    \node (input)  [io]                       {$In$};
+    \node (engine) [process, right of=input]  {$P$};
+    \node (output) [io,      right of=engine] {$Out$};
+
+    \draw [arrow] (input)  -- (engine);
+    \draw [arrow] (engine) -- (output);
+
+    \begin{pgfonlayer}{background}
+      \node [dotbox, fit={(engine)}]{};
+    \end{pgfonlayer}
+
+  \end{tikzpicture}
+
+  \caption{Quadrant A programs take general input and produce general output.}
+  \label{fig:workflows-framework-gen-in-gen-out}
+\end{figure}
+
+% TODO: Should I actually write about this?
+% \section{Situational analysis}
+% In this section we will criticize some of the common workflows through employing the quadrant approach already introduced and depicted by Figure \ref{fig:microframework-quadrant}. \emph{(TODO) I will probably remove this section, because I assume the reader has already appreciated the costs of working outside of the A quadrant.}
+% Why are so many documents still procedural?
+% Model information flows of contemporary publishing. Figures describing the current state in contrast to the thesis's subjective idea of the ideal state. Refer to Reid (1980).
+
+% \subsection{Presentational}
+% i.e. Microsoft Word etc.
+% [FIG. ]
+% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+% \subsection{Procedural}
+% i.e. \LaTeX etc.
+% [FIG. ]
+% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+% \subsection{Descriptive}
+% i.e. DocBook, EPUB, Markdown etc.
+% [FIG. ]
+% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
+
+% \subsection{A hypothetical ideal addressing the problems}
+% [FIG.]
+
+% \subsubsection{Composition \& Abstraction}
+% The minimal denominator.
+\color{black}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1051,13 +1305,14 @@ Finally the thesis is finished off with the usual conclusions, analysis, and dis
 %
 %
 %   Theory: Characteristics of markup languages
+%   and language conversion
 %
 %
 %
 % % % % % % % % % % % % % % % % % % % % % %
 
 
-\chapter{Theory part I -- Characteristics of markup languages}
+\chapter{Theory -- characteristics of markup languages and language conversion}
 \label{sec:theory}
 This chapter explores and explains some of the most important characteristics of markup languages.
 
@@ -1793,9 +2048,6 @@ The EBNF snippet can informally be described as follows. An element can either p
 
 
 
-
-
-
 % % % % % % % % % % % % % % % % % % % % % % 
 %
 %
@@ -1806,253 +2058,7 @@ The EBNF snippet can informally be described as follows. An element can either p
 %
 % % % % % % % % % % % % % % % % % % % % % %
 
-
-\chapter{Theory part II -- Document processing}
-\label{sec:theory-of-document-processing}
-
-
-
-\label{sec:microframework}
-In the spirit of \citet{reid} -- author of the paper that introduced Scribe, one of the earlier document preparation systems that argued for the ``separation of form from content'' -- we will now take a look at some variations of workflows of document authoring. Further I will suggest an ideal alternative, based on the theoretical knowledge from previous chapters.
-
-The process that we are going to analyze is that of file format transformation. The idea of transforming a file expressed in some format $I$ into some other format $O$.
-
-Given the creativity of humans, I would argue that, the number of workflows used in the real world today is likely to be equivalent to, or higher, than the number of people actually employing a workflow. Thus, in order to be able to discuss workflows, we need some way to generalize these workflows, such that most workflows are captured. Thus, Figure \ref{fig:workflows-framework} suggests a micro-framework that will be used as a basis for this argument. Given its utterly high level of abstraction and simplicity there is little reason to argue its representativity.
-
-
-\begin{figure}[h]
-  \centering
-
-  \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {$In$};
-    \node (engine) [process, right of=input] {$P$};
-    \node (output) [io,      right of=engine] {$Out$};
-
-    % arrows
-    \draw [arrow] (input)  -- (engine);
-    \draw [arrow] (engine) -- (output);
-
-    \begin{pgfonlayer}{background}
-      % \node [draw, fill=cyan!25, rectangle, rounded corners, fit={(input) (engine) (output)}] { Foobar };
-    \end{pgfonlayer}
-
-  \end{tikzpicture}
-
-  \caption{A naive representation document transformation.}
-  \label{fig:workflows-framework}
-\end{figure}
-
-
-\paragraph{The micro-framework stem from the following argument: } To perform the process, previously described as transforming from $I$ to $O$, one can trivially distinguish the three parts of the statement. The pre-state ($I$), the post-state ($O$), and the program ($P$). This is illustrated in Equation \ref{eq:microframework}.
-
-\begin{equation}
-  P : \mathbb{I} \rightarrow \mathbb{O}
-  \label{eq:microframework}
-\end{equation}
-
-Again, as this model simply depicts the transformation as a single joint function there is really no need for arguing its validity. The model simply depicts a function where the domain of all possible inputs is given as input, and the domain of all possible outputs is produced as output. Since the very nature of a markup transformation program is to take a string of some language and produce a string in perhaps another language, then of course all markup transformation programs can be described in this model.
-
-
-Obviously the transformation program in Figure \ref{fig:workflows-framework} and Equation \ref{eq:microframework} need to be refined (i.e. broken down into further detail) in order to accurately represent most actual transformation programs. This refinement will be carried out further on, and is how the ideal model will be derived.
-
-
-
-\section{Determining generality of a transformation program.}
-In order to reason about the level of generality of different transformation programs a more visual notation will be introduced. Figure \ref{fig:workflows-framework-spec-in-spec-out} introduces  a dotted line. This dotted line represents specialization (as an opposite to generalization). If a component is depicted inside the dotted area, it suggests that there exist a language within the domain of the component that cannot possibly be present in any other domain of any other component in the figure. In other words, if the input component is depicted inside the dotted line, this means there exist an input language that cannot be produced as output. In less formal terms, this mean that the transformation program is ``coupled''\footnote{Informal usage of the term} to the formats in the domain of the component within the dotted line. The program will always be depicted within the dotted line to indicate that there exist other programs outside the dotted lines. More concrete examples will be given when discussing possible workflows next.
-
-
-
-\begin{figure}[h]
-  \centering
-
-  \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {$In$};
-    \node (engine) [process, right of=input] {$P$};
-    \node (output) [io,      right of=engine] {$Out$};
-
-    \draw [arrow] (input)  -- (engine);
-    \draw [arrow] (engine) -- (output);
-
-    \begin{pgfonlayer}{background}
-      \node [dotbox, fit={(input) (engine) (output)}]{};
-    \end{pgfonlayer}
-
-  \end{tikzpicture}
-
-  \caption{A transformation program that takes specific input formats and produce specific output formats.}
-  \label{fig:workflows-framework-spec-in-spec-out}
-\end{figure}
-
-
-
-
-\section{Possible workflows}
-The intent of this section is to depict all workflows that can be expressed using the simple micro-framework outlined in Section \ref{sec:microframework}. In order to ensure coverage of all possibilities, consider the quadrant diagram depicted in Figure \ref{fig:microframework-quadrant}.
-
-Remember that the terms ``generalized'' and ``specialized'' are used to denote the lack of, or existence (in that order) of items not present in any other domain. To oversimplify -- generalization is considered good and specialization bad. To concretize -- generalization in one end mean that any format can be used in that end. Whereas specialization in one end mean that only one particular set of formats can be used in that end. In the case of the latter, the consequence is that the program $P$ must be rewritten if one desires to make use of a format outside of that set in the specialized end. Consequently this is considered a bad feature because one must write more programs.
-
-\begin{figure}[h]
-  \centering
-
-  \def\arraystretch{2.5}
-  \begin{tabular}{|r|c|c|}
-    \hline
-
-    & \textbf{Generalized out} & \textbf{Specialized out} \\ \hline
-
-    \textbf{Generalized in} &
-    \cellcolor[HTML]{33FF99} A
-    &
-    \cellcolor[HTML]{FFFFCC} C
-
-    \\ \hline
-
-    \textbf{Specialized in} &
-    \cellcolor[HTML]{CCFF99} B
-    &
-    \cellcolor[HTML]{FFFFFF} D
-
-    \\ \hline
-  \end{tabular}
-
-  \caption{All possible combinations of specialization/generalization possible in the micro-framework depicted by Figure \ref{fig:workflows-framework}}
-  \label{fig:microframework-quadrant}
-\end{figure}
-
-
-In a perfect world, transformation programs would painlessly transform any format to any format and thus exist in  Quadrant A. However, as implied in the beginning of this thesis -- writing a Quadrant A program that is both pragmatically useful and yet flexible is all but trivial \footnote{Since Quadrant A is an interesting quadrant I do of course hope exploration of it will continue.}
-
-Instead, this thesis focus on Quadrant B programs. However, reaching for the highest level of flexibility within the quadrant. With the intent of minimizing the risk of coupling the program to a language on the brink of becoming obsolete.
-
-Before exploring Quadrant B further, examples and explanations of each quadrant will be given below, so as to facilitate a deeper understanding of their meanings. The Quadrants will be discussed in reverse order, for the irrelevant sake of increased suspense.
-
-
-
-
-
-\subsection{Specialized in, Specialized out (Quadrant D)}
-Programs in Quadrant D (of Figure \ref{fig:microframework-quadrant}) represent the category of really specialized transformation programs. They convert formats from one specific domain, to formats from another specific domain. Whether or not these domains are the same is irrelevant. In practice, this essentially mean that if one need to facilitate some format from a different domain, the program need to be rewritten. Visually, these programs are described by Figure \ref{fig:workflows-framework-spec-in-spec-out}. Examples of such a program may for example be a \LaTeX{}-to-PDF converter, or a Markdown-to-HTML converter. 
-
-
-
-
-\subsection{Generalized in, Specialized out (Quadrant C)}
-Programs in Quadrant C (of Figure \ref{fig:microframework-quadrant}) represent a, quite odd, set of transformation programs. Namely programs that, in theory, take input from any domain, but always output formats of a specific domain. If one would need to output a format from a different domain, then the program need to be rewritten.
-
-Due to the quite odd nature of these programs, it is difficult to find pramatically useful real-world examples. Perhaps this is because this Quadrant represent a set of programs very different from the intent of this thesis. Very different from the idea of ``writing once and publishing everywhere''.
-
-Nevertheless, such a program might for example be an anything-to-XML converter, that simply slaps a root tag onto whatever string it receives and escape any XML-like syntax from the input string in order to avoid syntax errors. Consequently the program would be able to receive any format, and yet always be able to output valid XML. Pointless, but valid XML. Visually, these programs are described by Figure \ref{fig:workflows-framework-gen-in-spec-out}.
-
-\begin{figure}[h]
-  \centering
-
-  \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {$I$};
-    \node (engine) [process, right of=input] {$P$};
-    \node (output) [io,      right of=engine] {$O$};
-
-    \draw [arrow] (input)  -- (engine);
-    \draw [arrow] (engine) -- (output);
-
-    \begin{pgfonlayer}{background}
-      \node [dotbox, fit={(engine) (output)}]{};
-    \end{pgfonlayer}
-
-  \end{tikzpicture}
-
-  \caption{Quadrant C programs only suffer from specialized output.}
-  \label{fig:workflows-framework-gen-in-spec-out}
-\end{figure}
-
-
-
-\subsection{Specialized in, Generalized out (Quadrant B)}
-Programs in Quadrant B (of Figure \ref{fig:microframework-quadrant}), can be explained through a (to many) very familiar set of tools. Namely XML combined with XSLT. One express a document in some arbitrary XML format and then use XSLT as a means of outputting multiple different other output formats. Visually, these programs are described by Figure \ref{fig:workflows-framework-spec-in-gen-out}.
-
-
-\begin{figure}[h]
-  \centering
-
-  \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io] {$I$};
-    \node (engine) [process, right of=input] {$P$};
-    \node (output) [io,      right of=engine] {$O$};
-
-    \draw [arrow] (input)  -- (engine);
-    \draw [arrow] (engine) -- (output);
-
-    \begin{pgfonlayer}{background}
-      \node [dotbox, fit={(input) (engine)}]{};
-    \end{pgfonlayer}
-
-  \end{tikzpicture}
-
-  \caption{Quadrant B programs only suffer form specialized input.}
-  \label{fig:workflows-framework-spec-in-gen-out}
-\end{figure}
-
-
-
-\subsection{Generalized in, Generalized out (Quadrant A)}
-Programs in Quadrant A (of Figure \ref{fig:microframework-quadrant}) represent the most general kind of markup transformation programs. They take formats from the arbitrary\footnote{As you might have already understood, we are of course not talking about completely arbitrary, but rather the ability to through configuration accept (almost) arbitrary formats.} domain, and generate outputs within any domain. An example program that exhibits this behavior is the widely used software Pandoc. Visually, these programs are described by Figure \ref{fig:workflows-framework-gen-in-gen-out}.
-
-\begin{figure}[h]
-  \centering
-
-  \begin{tikzpicture}[node distance=2.5cm]
-    \node (input)  [io]                       {$In$};
-    \node (engine) [process, right of=input]  {$P$};
-    \node (output) [io,      right of=engine] {$Out$};
-
-    \draw [arrow] (input)  -- (engine);
-    \draw [arrow] (engine) -- (output);
-
-    \begin{pgfonlayer}{background}
-      \node [dotbox, fit={(engine)}]{};
-    \end{pgfonlayer}
-
-  \end{tikzpicture}
-
-  \caption{Quadrant A programs take general input and produce general output.}
-  \label{fig:workflows-framework-gen-in-gen-out}
-\end{figure}
-
-% TODO: Should I actually write about this?
-% \section{Situational analysis}
-% In this section we will criticize some of the common workflows through employing the quadrant approach already introduced and depicted by Figure \ref{fig:microframework-quadrant}. \emph{(TODO) I will probably remove this section, because I assume the reader has already appreciated the costs of working outside of the A quadrant.}
-% Why are so many documents still procedural?
-% Model information flows of contemporary publishing. Figures describing the current state in contrast to the thesis's subjective idea of the ideal state. Refer to Reid (1980).
-
-% \subsection{Presentational}
-% i.e. Microsoft Word etc.
-% [FIG. ]
-% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
-
-% \subsection{Procedural}
-% i.e. \LaTeX etc.
-% [FIG. ]
-% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
-
-% \subsection{Descriptive}
-% i.e. DocBook, EPUB, Markdown etc.
-% [FIG. ]
-% Explicit outline of the problems so that we can attack them in the hypothetical ideal.
-
-% \subsection{A hypothetical ideal addressing the problems}
-% [FIG.]
-
-% \subsubsection{Composition \& Abstraction}
-% The minimal denominator.
-
-
-
-
-
-
-
-
-
-\section{A three-step model}
+\section{A three-step model of document processing}
 \label{sec:three-step-model}
 \citet{goldfarb} shed some light onto the issue that descriptive markup is less trivial to parse than procedural. Informally put, to process a procedural document, one simply need to parse the document and carry out each instruction accordingly. But in the case of descriptive markup there is a disconnect between a particular marked up string and its correspondingly appropriate processing functions.
 
