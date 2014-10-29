@@ -1713,29 +1713,52 @@ In essence, tag-validity describes whether a particular document is a syntactica
 \label{sec:arguing-the-case-of-generic-identifiers}
 \paragraph{According to \citet{goldfarb}, the classic markup language Scribe (constructed by \citet{reid}) manage to avoid procedural markup completely (i.e. stay descriptive), much because of the effective use of Generic Identifiers (GI's).}
 
-If then, as already established in Section \ref{sec:abstraction-hierarchy}, it is desirable to reach a state where all manually authored markup is descriptive, GI's seem like an invaluable tool.
+If then, as already established in Section \ref{sec:abstraction-hierarchy}, it is desirable to reach a state where all manually authored markup is descriptive, then GI's seem like an invaluable tool.
 
 \paragraph{Generic identifiers enable languages over infinite words.}
 Consider, how the domain of descriptive markup languages can be divided into two sub-domains. One in which GI's exist, and element names may be made up on the fly, by the document author. Then another, in which GI's do not exist, that consequently is delimited by a fixed number of identifiers.
 
-If both languages exhibit the nesting property, then both are infinite languages. However, one is an infinite language over finite words, and the other is an infinite language over infinite words. In other words, their relative expressiveness still differ, and consist of different infinities. The languages enable different infinities.
+If both languages exhibit the nesting property, then both are infinite languages. However, one is an infinite language over finite words, and the other is an infinite language over infinite words. In other words, their relative expressiveness differ, and consist of different infinities.
 
-This means, that the cardinality of the set of possible expressions in an infinite language over infinite words, must be greater than that of an infinite language over finite words.
+This means, that the cardinality of the set of possible expressions in an infinite language over infinite words, must be greater than that of an infinite language over finite w ords.
 
-\paragraph{With generic identifiers, authors have an infinite number of names to use for semantic differentiation. }
-An author can thus express everything at the highest possible abstract level. No matter how complex something may be, it is always possible to simply give it a name. As there exist no limit on the number of elements an author can create, one has an infinitely large domain of semantic names to use. In other words, there will always be a new word one can choose in order to semantically describe some new semantic concept, and one thus never run the risk of ``running out of distinctions''.
+\paragraph{With generic identifiers, authors have an infinite number of semantic differentiations. }
+This means, that regardless of how complex some thing may be, an author can always reduce the complexity by simply denoting this thing through some generic identifier. Thus, all things can be semantically denoted at their highest possible level of abstraction.
+
+Consider for example that one wants to apply some series of semantic rules to a number of given strings in order to convey the concept highlighting text. Assume, that these rules can be expressed as the combination of the three tags \texttt{<bg>}, \texttt{<emph>}, and \texttt{<bold>} (see Figure \ref{fig:gi-abstraction-before}). While it is of course entirely possible to state these three rules each and every time one wish to highlight a portion of the document, it would be significantly less error-prone to invent an abstraction, such as e.g. \texttt{<highlight>} and then simply use the abstraction at all places (see Figure \ref{fig:gi-abstraction-after}).
+
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+  <bg=''yellow''></emph><bold>Some highlighted text.</bold></emph></bg>
+  }
+}
+\caption{A fictive example, expressed in XML, of a set of elements an author may use repeatedly. Subsequently a good candidate for being replaced by a generic identifier.}
+\label{fig:gi-abstraction-before}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+  <highlight>Some highlighted text.</highlight>
+  }
+}
+\caption{A fictive example of how the complexity of Figure \ref{fig:gi-abstraction-before} is reduced by increasing the level of abstraction, through replacing a series of elements with a single, generic identifier.}
+\label{fig:gi-abstraction-after}
+\end{figure}
 
 
-\color{red}
-This last argument has the splendid benefit that an author can allow herself to push decisions into the future. \citet{coombs} argue similarly in regards to Referential markup. An argument which has been accounted for in Section \ref{sec:referential-markup}. However, the idea is that with some forms of markup, authors can enjoy the luxury of simply ignoring how (e.g.) a character such as ``--'' should be formatted. Instead the author simply employ some referential markup such as \texttt{\&mdash;}. Then, later in a stage or document transformation some decision is made on how to format the entity. GI's can be used in a very similar way. With GI's an author does not merely not have to decide upon formatting, even semantics can be delayed. With GI's an author can choose to distinguish between strings that she suspect are different through simply marking them with syntactically different GI's. There is no forced need to consider the semantics, other than the realization that two things seemingly belong to two different domains. Semantics and presentation can then be added later.
+As there exist no limit of the number of elements an author can create, one has an infinitely large domain of semantic names to use. In other words, there will always be a new word one can choose in order to semantically describe some new semantic concept, and one thus never run the risk of ``running out of distinctions''.
 
-Another subtle point related to the one above, is also that GI's allow authors to mark up their documents with names that cognitively make sense to the individual.
+\paragraph{The infinite set of words enables authors to push decisions into the future.} \citet{coombs} point out the same benefit in relation to Referential markup, which has already been detailed in Section \ref{sec:referential-markup}. However, the idea is that abstractions give authors the luxury of ignoring the specifics, and leave them for figuring out later. For example instead of deciding how a character such as, e.g. ``--'' should be formatted, the author simply employ some referential markup such as \texttt{\&mdash;}, and then in a later stage, in document conversion, the decision is made on what to replace the referential markup with. Naturally, GI's can be used in the same way as referential markup, as they simply allow one to reduce the specifics, in favor of the abstract -- by replacing convoluted orchestrations with names.
 
-The author of this thesis argue that languages with GI features are, in the ways outlined above, superior to languages without them. The author argue that languages that exhibit GI features are more prepared for handling unforeseen change.
+Using GI's, authors can choose to to distinguish between strings that one suspect belong to different semantic domains. Given that one cannot ``run out of'' semantic distinctions, no immediate problem is faced with employing too many distinctions. On the contrary, employing the line of thinking from the background chapter of this thesis, more semantic distinctions essentially mean higher semantic resolution. 
 
+\paragraph{Generic Identifiers allow authors to mark up their documents with names that cognitively make sense to the individual.} As emphasized by \citet{krijnen}, many authors choose to write documents in some simple format (such as e.g. Markdown), and then convert their documents more complex formats (such as e.g. \LaTeX{}), for simple reasons such as preferred syntax. In order to aid less technical document authors in their migration from more problematic word processors (such as most modern GUI-based word processors), the author of this thesis argue that preferred syntactic structure plays an important role.
 
-
-\paragraph{}In the XML specification\footnote{http://www.w3.org/TR/REC-xml/\#sec-logical-struct} Generic Identifiers are defined using EBNF notation as follows\footnote{Some parts of the EBNF example snippet are omitted (such as element attributes), and some altered (such as the letter range) to favor readability.}:
+\paragraph{In the XML specification}\footnote{http://www.w3.org/TR/REC-xml/\#sec-logical-struct} Generic Identifiers are defined using EBNF notation as follows\footnote{Some parts of the EBNF example snippet are omitted (such as element attributes), and some altered (such as the letter range) to favor readability.}:
 
 \begin{lstlisting}
 element  ::=  EmptyElemTag | STag content ETag
@@ -1745,8 +1768,13 @@ NameChar ::=  NameStartChar | "-" | "." | [0-9] | [A-Za-z] | ...
 Name     ::=  NameStartChar (NameChar)*
 \end{lstlisting}
 
-The EBNF snippet can informally be described as follows. An element can either produce an empty element tag, or the set of a start tag some content and then an ending tag. A start tag must produce a set of balanced chevrons (i.e. $<>$) in which between a name must be produced. A name can produce a non-whitespace-containing string where some characters are not allowed as the first character. And so forth for the closing of the element.
-\color{black}
+The EBNF snippet can informally be described as follows. An element can either produce an empty element tag, or the set of a start tag some content and then an ending tag. A start tag must produce a set of balanced chevrons (i.e. $<>$) in which between a name must be produced. A name can produce a non-whitespace-containing string where some characters are not allowed as the first character. And so forth for the closing of the element. A couple of valid examples are outlined below:
+
+\begin{lstlisting}
+<Name>Jane</Name>
+<birthDate>2040</birthDate>
+<divider/>
+\end{lstlisting}
 
 
 
