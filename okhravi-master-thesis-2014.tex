@@ -1670,11 +1670,15 @@ Continuing on the programming language analogy, consider how machine code can be
 \label{sec:theory:generic-identifiers-and-validity}
 \DeclareFixedFootnote{\refXMLspec}{http://www.w3.org/TR/WD-xml-961114}
 
-\paragraph{The concept of allowing authors of XML documents to name their elements almost arbitrarily, stems from GML, and was originally called Generic Identifiers (GI's).}  As XML is a subset of SGML\refXMLspec, and SGML ascended from GML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that this concept has been inherited rather than reinvented.
+\paragraph{The fact that authors of XML documents can name their elements almost arbitrarily is enabled by, what is commonly referred to as, Generic Identifiers (GI's), and give authors the power of languages over infinite words, but also shifts the responsibility of document validation, from the language designer, to the document author.}
+
+Generic Identifiers was already present in GML, and as XML is a subset of SGML\refXMLspec, and SGML ascended from GML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that the concept has been inherited rather than reinvented.
 
 According to \citet{goldfarb}, GML was designed upon two ``novel postulates''. Firstly that (1) markup should describe a document's structure rather than the processing to be performed. A document once expressed descriptively should suffice for all future processing. Secondly that (2) markup should be rigorous, such that programs can be used for processing documents.
 
-The ingenious move of GML , according to \citet{goldfarb}, was to only let the markup language cover the first point of the two above. In other words, that GML allow an author describe a document's structure in any way she see fit, using the mnemonic tag -- i.e. GI's. In order to achieve the second goal, \citet{goldfarb} explained that, GML documents ought to be coupled with GML Models. Where the GML Model notation essentially is a notation derived from the Backus Naur Form-notation (BNF), but where the intent is to define the set of all valid elements.
+% TODO: Here it becomes really obvious that already then one knew one should only need a single input document.
+
+The ingenious move of GML , according to \citet{goldfarb}, was to only let the markup language cover the first point of the two above. In other words, that GML allowed an author to describe a document's structure in any way she see fit, using the mnemonic tag -- i.e. GI's. In order to achieve the second goal, \citet{goldfarb} explained that, GML documents ought to be coupled with GML Models. Where the GML Model notation essentially is a notation derived from the Backus Naur Form-notation (BNF), but where the intent is to define the set of all valid elements (rather than string tokens).
 
 Perhaps, GML models can be seen as the forefather of the Document Type Definition (DTD) that were introduced into SGML and followed into the subset XML\footnote{http://www.w3.org/TR/WD-xml-961114\#dt-dtd}.
 
