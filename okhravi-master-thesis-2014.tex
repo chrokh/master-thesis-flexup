@@ -656,166 +656,6 @@ TODO. Scaling down vs. simply transforming the image within the same resolution.
 
 
 
-\section{(Deprecated)}
-
-% TODO: Change to red to mark beginning of potentially deprecated section
-\color{red}
-
-\paragraph{Conversions outside or inside the boundary of a language.} One way to measure the complexity of a string conversion is to consider whether the output string of the conversion in question lies within the language boundaries of the input string. In other words: assume two strings $S1$, $S2$, and assume one language $L$. Assume that $S1$ is expressed in language $L$. Consider then the process where $S1$ is converted into $S2$. If the new string $S2$ also is expressed in language $L$ then the conversion must be said to have been done within the boundary of the language. If $S2$ is not expressed in language $L$, then the conversion must be said to have been done outside the boundary of the language. In other words a conversion between languages.
-
-Whether all the concepts of $S1$ was transferable to $S2$ is another interesting dimension, and will be the topic of discussion next.
-
-%TODO: Decide whether to use the word transform or convert
-
-\paragraph{Destructive transformations and non-destructive transformations} must, according to this thesis, be considered different, and another measure of conversion. A non-destructive change usually refer to a reversible change. Whereas a destructive change refer to an irreversible change. This thesis adhere to this definition, and consider a conversion to have been destructive if semantics have been lost, and non-destructive if semantics remain intact.
-
-Even with this definition. Determining whether a string conversion is destructive or non-destructive is not trivial. Conversions within a language could be destructive, and conversions out from a language could be non-destructive.
-
-As a means of determining destructiveness of a conversion, this thesis suggest counting the number of distinctly identifiable semantic delimitations. In other words, consider all the denoted substrings of a string within the formalism of the current language. If the number of substrings of different classes are less in the output language than the input language, then the conversion must be considered destructive. Else non-destructive. Figure TODO depicts a trivial example within the boundaries of a language, and Figure TODO outside the boundaries of a language.
-
-
-\begin{figure}[h]
-  \centering
-  
-  \begin{subfigure}{.5\textwidth}
-    \begin{lstlisting}
-      <p>Someone <b>must</b> have</p>
-      <b>Someone <p>must</p> have</b>
-    \end{lstlisting}
-
-    \caption{Non-destructive}
-
-  \end{subfigure}%
-  \begin{subfigure}{.5\textwidth}
-
-    \begin{lstlisting}
-      <p>Someone <b>must</b> have</p>
-      <p>Someone must have</p>
-    \end{lstlisting}
-
-    \caption{Destructive}
-  \end{subfigure}
-
-  \caption{Within language boundaries.}
-\end{figure}
-
-
-\begin{figure}[h]
-  \centering
-  
-  \begin{subfigure}{.5\textwidth}
-    \begin{lstlisting}
-      <p>Someone <b>must</b> have</p>
-      Someone **must** have
-    \end{lstlisting}
-
-    \caption{Non-destructive}
-
-  \end{subfigure}%
-  \begin{subfigure}{.5\textwidth}
-
-    \begin{lstlisting}
-      <p>Someone <b>must</b> have</p>
-      **Someone must have**
-    \end{lstlisting}
-
-    \caption{Destructive}
-  \end{subfigure}
-
-  \caption{Outside of language boundaries}
-\end{figure}
-
-
-This thesis suggest an analogy to Object Oriented Programming, and the application of Liskov's Substitution principle. The principle state that it is only allowed to subclass a superclass if any instance of the superclass can be replaced by any instance of the subclass at any point in the code\footnote{TODO: REFERENCE}. In other words, a subclass may only add, or gracefully alter functionality but never remove.
-
-(1)
-Liskov's substitution principle is used as means of determining destructiveness of string conversions. However, instead of considering functionality one must consider semantics. Assume two strings $S1$ and $S2$. Then consider the conversion from $S1$ to $S2$
-
-(2) Number of distinctions.
-
-
-Consider some set of  successfully applies to the two languages transformed between. Given two formats A and B, where A is converted into B. The output format should be considered the subclass, and the input format the superclass. If and only if Liskov's Substitution principle applies, can it be considered a non-destructive transformation.
-
-TODO: Maybe I should argue the whole thing about mentally equivalent or something like that. I.e. that HTML potentially could be considered a subclass of \LaTeX.
-
-
-The argument in this thesis is thus, that when performing document conversion, if complexity is always introduced and never removed one moves from simpler languages to more complex languages. While this example discuss conversion between two different levels of the Chomsky Hierarchy, the same reasoning apply to languages within one level.
-
-Consider two grammars, $G1$ and $G2$. Let $G1$ be the language of strings matching $(0^n 1^n)$. Let $G2$ be the language of all strings matching $(0^n 1^n)*$. Consequently, $G1$ describes the simpler language of equal number of 0's and 1's (such as $01$ or $00001111$). Whereas the second, more complex, grammar denote the language of any repetition of equal number of 0's and 1's (such as $0101$ or $000111000111$). What's interesting about these two grammars is that $G1$ is contained within $G2$. In other words that all strings of the language defined by $G1$ can also be expressed in the language $G2$.
-
-It is this property of inclusion that this thesis refer to as level of abstraction. Given all this information one might spontaneously approach the problem of markup format conversion with the idea that the ideal would be to have a grammar with such a high level of complexity that it can express any other language. In other words this would mean converting up in the abstraction chain. Considering Figure \ref{fig:fictive-specialization-tree}, a problem with such an approach can be viewed as such. Consider $L$ to be the most specialized language. The language in which all other languages are expressible. As soon as one manages to imagine something that is not expressible in $L$, $L$ need to be rewritten. The severity of the change in the language $L$ will likely depend on how ``deep down'' in the abstraction chain the diversion was discovered. If discovered at a more shallow level the changes will likely be more significant (because the change might have ``ripple effects'' down the chain).
-
-% TODO: Abstraction chain concept still not clear
-
-This thesis however take the opposite approach and suggest that documents should be expressed in the simplest possible language, in an attempt to avoid these unfortunate discoveries of languages outside of the set. Thus the suggestion is that complexity should be layered on top of the simpler language. In other words, if one wants to express a string in the language defined by the grammar $G2$, this thesis suggest that one should express a reasonable simplification in the language defined by $G1$, and then define a process for converting that simpler string into the more complex. Using these two concrete grammars, the transformation would amount to repeating the string some number of times.
-
-
-
-
-
-
-
-\paragraph{TODO -- Old stuff about Pandoc}
-
-Thus, the issues related to Pandoc are two-faceted. On one hand (P1) it may be difficult for semi-programmers to significantly modify the structure of a output document, but on the other -- even (P2) assuming programmers would collectively build an extensive library of transformation scripts for Pandoc, these ``packages'' operate on AST's that represent already complex formats. This facility and it's drawbacks is made clear in the research of \citet{krijnen}, who propose a solution for essentially the same problem as this thesis. The main difference between the approach of this thesis and that of \citet{krijnen} is that they operate on a ``lower level''. Seemingly \citet{krijnen} operate with intents of compilation efficiency through the use of lazy-evaluation, and criticize the Pandoc scripting system for requiring multiple (thus costly) runs over the AST. While the work of \citet{krijnen} is splendid, I unfortunately argue that formal grammars are too complex for such a tool to be used by laymen, or semi-programmers.
-%TODO: Make the P's and their problems more clear. Why are they never referred to?
-
-To put this thesis in relation to Pandoc's Scripting facilities, the argument goes along the lines of readability for the masses. I am not arguing that the current approach of Pandoc is absurd -- in fact, argue the approach of \citet{krijnen} is beautiful from a composition point of view, and I argue that the approach of Pandoc is effective in getting around to solve the problem without too much fuss. In this thesis, we will however look at an approach I argue is even more fuss-free than that of Pandoc Scripting. This is why we talk about a holistic approach to markup languages. Subjectively I would argue that both Pandoc and the work of \citet{krijnen} are \emph{reactive} instead of \emph{proactive}. In this thesis we look at the intents of markup languages from a more abstract point-of-view, revisit the actual intents and needs and not simply argue that the problem is the need to convert all formats to all formats. Since the naive approach of converting all formats to all formats, I argue, is a too massive undertaking to provide significant value\footnote{Which of course may change in the future, so I do not intend to be discouraging towards anyone within that field.}.
-
-\begin{quote}
-``If I had asked people what they wanted, they would have said faster horses.''
-\begin{flushright}
-% TODO Make sure all quotes are formatted alike
-\textit{-- Commonly attributed to Henry Ford}
-\end{flushright}
-\end{quote}
-
-
-\paragraph{Consider instead a ``1-to-n'' problem}. Expressing our documents in a single format but converting into any imaginable format. This approach has been utterly popularized and democratized through the family of languages under XML. If one considers the scenario where an author choose to always express documents in the one format and never in any of the family of n -- then one could argue that solving this problem also solves much of the intent of the ``n-to-n-problem''.
-
-An author can express her document in an arbitrary XML-format (perhaps imagined ``on the fly''), and then use a combination of XSLT and XPath to convert this document into any other imaginable format. Some problems with this approach is (1) the verbosity of the XML languages\footnote{http://www.ibm.com/developerworks/xml/library/x-sbxml/index.html} \footnote{http://blog.codinghorror.com/xml-the-angle-bracket-tax/} \footnote{http://blog.codinghorror.com/revisiting-the-xml-angle-bracket-tax/}, and (2) the fact that because of the lack of any kind of centralization or standardization of format or process, reuse of common transformations become difficult. The composition problem becomes apparent again. Wouldn't you rather use an XML to PDF transformer that the community had curated rather than rewriting one from scratch? Rhetorical question. The problem is again that since XML allows for an infinite number of syntaxes it is non-trivial to encompass all these syntaxes in the transformer.
-
-%TODO: Does it really look like the Pandoc situation?
-\paragraph{Of course there are XML subsets like DocBook} that are more commonly accepted than others. Thus, community curated packages exist that can convert between the commonly used format and some other common presentational format e.g. PDF\footnote{http://docbook.sourceforge.net/}. This makes the XML situation look very much like the Pandoc situation but instead of considering completely different syntaxes as input, one considers the XML-based languages. The main problem with this approach is that the input format is fixed. If (e.g.) the Docbook format is not sufficiently rich to express some concept that the author want to express then the community curated converter will be of limited use. Thus, that is a problem with diverging input. In the other end, we can look at diverging output. If working with standards, it is reasonable to assume that there is a standardized (or set of standardized options) for output. What if the author wishes to diverge from the standard output style? How much is flexible and configurable?
-
-
-\paragraph{Instead, consider the following idea.} Let $N$ be all the languages an author may want to convert to. Let all the concrete languages of $N$ be represented by $n_1, n_2, .., n_n$. Let $M$ be some subset of the languages in $N$ (i.e. $M \subseteq N$). Such that the languages of $M$ exhibit only language properties also exhibited by all languages of $N$. In other words, any string in $M$ must be expressible in any of the languages $n_1, n_2, .., n_n$. In other words, $M$ is a subset of the intersection of all languages in $N$, i.e: $M \subseteq (n_1 \cap n_2 \cap .. \cap n_n)$.
-
-% TODO:
-% However, we are only informally talking about sets and subsets here. Since most languages that we want to convert to (e.g. XML, LaTeX) are definitely not regular they are thus at least context-free. In the Chomsky Hierarchy. And since context-free grammars are not closed under language inclusion, this mean we cannot actually certainly say that some language actually is a subset of another language.
-
-\paragraph{In layman terms} the above formulas encapsulate the idea of only allow string conversions from simpler languages to more complex languages, but never the other way around. Assume the two languages $I$ and $O$. If $O$ is more complex than $I$. Expressing a string from $I$ in language $O$ is likely trivial. However, expressing a string from $O$ in language $I$ is not always trivial, and many times not even possible. Since the language $O$ allow constructs that are not expressible in $I$ information must inevitably be lost in the conversion.
-
-\paragraph{In this thesis I argue} that there is a difference between converting a document when the language is within M, from M to N, or within N. I will also argue that employing this division will spawn much more pragmatic solutions than many-to-many-document conversions.
-
-\paragraph{The aim} of this thesis, is to suggest a software eco-system in which a document author can ``write once, [and] publish everywhere''. But of course, that is an oversimplification. More specifically this thesis suggest a way in which we could write our (1) actual document contents once, (2) the transformation process in which we create, what \citet{reid} refers to as, ``derived text'' once, and finally (3) the mapping onto an output format once (per format of course). Note that the two second parts are generalized, and could be published as packages and reused. Note also that the manually authored files at each step are merely configuration files. Between each above step lives a compiler, and these compilers are \emph{not rewritten} on a per-conversion-basis. What also is not obvious in the above explanation is that this thesis suggest an approach that can be likened by a pipeline of templates (similar to a UNIX pipe\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}) and through this achieve a high level of composability. Instead of a one-pass-transform, transformations are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
-
-
-
-
-
-
-% TODO: Use or remove?
-%\paragraph{Existing solutions}
-%\begin{itemize}
-%\item No proper pipeline for reusing common things, such as the creation of a table of contents.
-%\item Could be solved using e.g XSLT but too verbose. No standard way of sharing libs.
-%\item Pandoc is too difficult to configure. Syntax. Haskell/Python. Lacks an approach to share libs. 
-%\end{itemize}
-
-
-\color{black}
-% TODO: Returning to black, to mark end of potentially deprecated section.
-
-
-
-
-
-
-
-
-
-
 \section{Generality of markup conversion programs}
 \label{sec:theory-of-document-processing}
 \label{sec:microframework}
@@ -1044,6 +884,28 @@ Consequently, this thesis instead explores quadrant B programs, and attempts to 
 % The minimal denominator.
 \color{black}
 
+
+
+
+
+
+
+
+
+
+
+
+\section{Language conversion as a series of pipes}
+\color{red}
+\paragraph{Instead, consider the following idea.} Let $N$ be all the languages an author may want to convert to. Let all the concrete languages of $N$ be represented by $n_1, n_2, .., n_n$. Let $M$ be some subset of the languages in $N$ (i.e. $M \subseteq N$). Such that the languages of $M$ exhibit only language properties also exhibited by all languages of $N$. In other words, any string in $M$ must be expressible in any of the languages $n_1, n_2, .., n_n$. In other words, $M$ is a subset of the intersection of all languages in $N$, i.e: $M \subseteq (n_1 \cap n_2 \cap .. \cap n_n)$.
+
+% TODO:
+% However, we are only informally talking about sets and subsets here. Since most languages that we want to convert to (e.g. XML, LaTeX) are definitely not regular they are thus at least context-free. In the Chomsky Hierarchy. And since context-free grammars are not closed under language inclusion, this mean we cannot actually certainly say that some language actually is a subset of another language.
+
+\paragraph{This thesis suggest an approach that can be similar to a pipeline of template}, much like the notion of UNIX pipes\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}), and through this achieve a high level of composability. Instead of a one-pass-transform, transformations are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
+
+\color{black}
+% TODO: Returning to black, to mark end of potentially deprecated section.
 
 
 
