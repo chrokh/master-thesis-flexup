@@ -1036,6 +1036,235 @@ Finally the thesis is finished off with the usual conclusions, analysis, and dis
 This chapter explores and explains some of the most important characteristics of markup languages.
 
 
+
+
+
+
+
+
+\section{A Taxonomy of Markup Languages}
+\label{sec:taxonomy}
+\paragraph{In \citeyear{coombs}, \citeauthor*{coombs} published an article dubbed \textit{Markup Systems and the Future of Scholarly Text Processing}. While the intent of the article, presumably, was to speculate on the future of markup -- it also provided a solid taxonomy of markup languages.} This thesis utilize the categorizations of ``types of markup'' identified by \citet{coombs}, under the term ``markup theory''. \citet{coombs} divide markup languages into the three categories (1) Punctuational, (2) Presentational, (3) Procedural, (4) Descriptive, and (5) Abstract. The following sections will further explore these categories.
+
+Intermingled in these explanations are also opinions from \citet{bray} -- co-founder of the Open Text Corporation, and co-author of the first XML 1.0 draft specification. The opinions of \citeauthor{bray} was expressed in a blog post exploring the categorizations of \citet{coombs}. It is \citeauthor{bray} that described the work of \citeauthor{coombs} as a ``taxonomy''. The opinions of \citeauthor{bray} are intermingled, both because they contemporize the work of \citeauthor{coombs}, but also because there are some conflicts of opinion between the two, which shed light on how the lines between each category in the taxonomy is yet too vaguely defined, and thus cause fragmentation. While the statements of \citeauthor{bray} are informal in nature, his history in the field bestow him reliability and serve the purpose of emphasizing fragmentation well. 
+
+
+\subsection{Punctuational}
+\paragraph{Punctuational markup refer to the markup that is paid very little attention to in everyday life. Spaces, commas, periods, words, sentences, and so forth.} As \citet{coombs} points out, punctuational markup has been studied by mankind for hundreds of years. The example \citet{coombs} use to underline that punctuational markup should, indeed, be considered markup and not merely a part of our writing system -- is the following. Consider the all the conflicting opinions on how punctuational markup should be used. One argue it ought to be a  semicolon, another argue it should be a colon. One argue space-delimited dash, another argue dash with no space. Consider the author contemplating whether a certain domain of sentences/words should be presented as \textbf{bold} or as \textit{italics}. This is the same kind of choice, as the mentioned choices between semicolon, colon and so forth. However, today, \textbf{bold} and \textit{italics} can clearly be considered markup in languages such as HTML. But the 
+
+Understand, that the term punctuational markup, according to \citet{coombs}, does not refer to the idea of encoding punctuation in some other language (i.e. ``\texttt{\&mdash;}'') but rather the actual punctuation itself (i.e. ``\texttt{--}''). In other words, the use of for example character entities in HTML5\footnote{http://dev.w3.org/html5/html-author/charref} is not to be considered punctuational markup. Rather, if using the the actual dash character and its surrounding space characters is the punctuational markup.
+
+
+
+
+\subsection{Presentational}
+\paragraph{Consider a document written on a very old, mechanical typewriter. Presentational markup, according to \citet{coombs} refer to the practice where the author of a document (e.g.) hit the space key multiple times to center text on the page.} Another example would be to hit the carriage return key multiple times in order to delimit paragraphs or extend line-breaks.
+
+Now, consider a physical paper document written with a ball pen by hand. With a little bit of effort the author can easily distinguish two parts of the text by applying the technique of writing in italics, or even in cursive. So the reader of the document would understand that author is attempting to communicate some semantic difference between the non-italic and the italic parts.
+
+To understand presentational markup, consider the two above cases -- the typewriter document and the handwritten document. In both cases the presentational elements is embedded within the language of the document. The semantics intended by the author (e.g. a paragraph break) is achieved through presentational means.
+
+\citet{bray} makes the concept of presentational markup, more clear by referring to older What You See Is What You Get (WYSIWYG) word processors. Since modern word processors work with (e.g.) descriptive markup ``under the hood'', this analogy generally no longer holds. But for the sake of the argument, imagine some really old version of a visual word processor. By surrounding parts of a document with code specific to a particular word processor that particular word processor would know to (e.g.) display that piece of text centered, in bold, in italics or so forth.
+
+One immediate problem with this, the quick reader probably have noticed, can be extracted from one particular sentence -- ``a specific word processor''. Presentational markup requires standardization of what codes to use to mark things such as bold, breaks, sizes and so forth. As you can probably imagine, with the creativity of programmers, and proprietary incentives, this quickly gets out of scale.
+
+\subsubsection{Implicitness}
+Another more subtle issue, not mentioned by neither \citet{coombs} nor \citet{bray}, is that of implicitness. As the presentational codes of WYSIWYG word processors are not actually visible to the user of the interface -- there exist a mental disconnect. Consider for example the concept of a paragraph break, and the concept of a hard line-break. Now, assume that, in a particular editor, a paragraph break has the same visual appearance as two consecutive hard line-breaks. If one author types up a document, and hands it to another author. How could the second author possibly know whether the first author have employed paragraph breaks or hard line-breaks? Perhaps it is this problem that \citet{bray} refer to, when arguing that What You See Is What You Get essentially is a false claim.
+%TODO: This claim seems to be false! I have misunderstood and this need to be rethought.
+
+
+
+\subsection{Procedural}
+\paragraph{The notion of Procedural markup is perhaps most easily explained through analogy to procedural programming.} Essentially, procedural markup refers to the idea of embedding code instructions directly in a document.
+
+Much as in procedural languages, code duplication, or painful repetition, \citet{bray} argue, can be reduced through elaborate macros or subroutines.
+
+This is the first category, of this chapter, that actually show the user an abstraction of a particular concept rather than the actual concept. Assume an author is to write a particular sentence in a red font. If done through presentational markup, the user would actually see the sentence in red. If however done through procedural markup the user would see some code instruction that indicated the switching to the color red, perhaps as depicted in Figure \ref{fig:procedural-markup-red-sentence}.
+
+
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+  \textbackslash color\{red\} This is a red sentence.
+  }
+}
+\caption{An example of procedural markup in the language \LaTeX{}.}
+\label{fig:procedural-markup-red-sentence}
+\end{figure}
+
+
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+  .sk 3 a;.in +10 -10;.ls 0;.cp 2 Multiple instructions.
+  }
+}
+\caption{An example of procedural markup, as given by \citet{coombs}.}
+\label{fig:procedural-markup-coombs}
+\end{figure}
+
+
+
+Depending on the syntax of the language, procedural markup might also turn out like a mess of symbols where a human may have a hard time cognitively separating the compiler instructions from the actual plain-text. \citet{coombs} gives an example of procedural markup, as can be seen in Figure \ref{fig:procedural-markup-coombs}, and suggest that the instructions should be interpreted as follows:
+
+\begin{enumerate}
+\item Skip three lines -- the equivalent of double-spacing twice.
+\item Indent ten columns from the left and ten columns from the right.
+\item Change to single-spacing.
+\item Start a new page if fewer than two lines remain on the current page.
+\end{enumerate}
+
+While the syntax of course is parseable for a computer, it is all but trivial for the untrained human to read. Without syntax highlighting it is even quite hard to give the string of of Figure \ref{fig:procedural-markup-red-sentence} text a glance and quickly figure out what parts are instructions and what parts are characters.
+
+\subsubsection{Mutation}
+An interesting problem that reasonably may cause mental overhead for a document author working with procedural markup, is that of side-effects. Arguably, the notion of ``mutation'' or ``side-effects'' is a great source of power in programming, but also a great source of frustration. Programs that frequently mutate are often tricky to debug.
+
+The same is true for procedural markup. The code instruction in Figure \ref{fig:procedural-markup-red-sentence} could be informally described as ``switch to the red pen, from now and onwards''. If the author of a document only intended to mark some substring as red and not the entire rest of the document in red, then the author must remember to switch back to whichever color the document was in before the instruction.
+
+To exemplify the problem -- assume that an author wishes to frequently highlight text portions through switching the background color to yellow, the font weight to bold, and the text color to red. At each point the author has to run the commands, and at the end of the highlighted portion the author must ``reset'' these values to whatever they were set to before. The pain of such an approach is visualized in Figure \ref{fig:procedural-markup-set-reset}.
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+  \bg{white} \weight{normal} \color{black} Remember to \bg{yellow} \weight{bold} \color{red} set, then \bg{white} \weight{normal} \color\{black} reset.
+\end{lstlisting}
+\caption{A fictive example of the fragility of having to remember to ``set'' and ``reset'' properties in procedural languages.}
+\label{fig:procedural-markup-set-reset}
+\end{figure}
+
+
+Macros, as previously mentioned, help authors carry out commonly performed tasks. Thus, a way to mitigate the problems depicted in Figure \ref{fig:procedural-markup-set-reset} could be to construct a set of macros for commonly used styles. An example of such an approach is depicted in Figure \ref{fig:procedural-markup-set-reset-macro}. Consequently, the author would be less likely to forget to set or reset some particular property.
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+  \style{normal} Remember to \style{highlight} set, then \style{normal} reset.
+\end{lstlisting}
+\caption{A fictive example of how procedural macros could mitigate the problems depicted in Figure \ref{fig:procedural-markup-set-reset}.}
+\label{fig:procedural-markup-set-reset-macro}
+\end{figure}
+
+
+The problem essentially boils down to mutation. Procedural languages mutate the state of a document from the point of the code instruction and onwards. As a metaphor, the language constructs are essentially built on the form of ``switch to the red pen, from now and onwards'', rather than e.g. ``switch to the red pen, and then switch back'' .
+
+While mistakes are easy to spot in the trivial examples of this thesis, they are much less trivial to spot in, e.g., a 100 page document, or worse, a 1000 page novel. Given a particular point of the document, it is, as a human, tricky to know what instructions have cascaded to that point.
+
+
+
+
+\subsection{Descriptive}
+\paragraph{If procedural markup is best described by parallel to procedural programming, then descriptive markup is best described by parallel to declarative programming.} Descriptive markup describes what something \emph{is} rather what something \emph{does}. In other words, descriptive markup allow authors to encapsulate substrings and denote belonging to semantic domains.
+
+
+Using the metaphor of the red pen, descriptive markup essentially states ``switch to the red pen, and then switch back to whatever pen you had before'', which is much different from the procedural notion of ``switch to the red pen, from now and onwards''. This difference is perhaps best illustrated by contemplating how the descriptive code in Figure \ref{fig:descriptive-markup-red-sentence-latex} and \ref{fig:descriptive-markup-red-sentence-xml} encapsulates some given substring from start to end, whereas the procedural code in Figure \ref{fig:procedural-markup-red-sentence} mutates state from a given point and onwards.
+
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+  \textbackslash begin\{red\} This is a red sentence.\textbackslash end\{red\}
+  }
+}
+\caption{An example of descriptive markup in the language \LaTeX{}.}
+\label{fig:descriptive-markup-red-sentence-latex}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\centering
+\fbox{
+\texttt{
+  Descriptions <red>save</red> the day.
+  }
+}
+\caption{An example of descriptive markup in the language XML.}
+\label{fig:descriptive-markup-red-sentence-xml}
+\end{figure}
+
+Unfortunately there seems to be no unanimous line between procedural and descriptive markup. \citet{coombs} argue that languages such as \TeX{} and \LaTeX{} are descriptive languages, whereas \citet{bray} argue they are procedural. It is possible that this particular difference in opinion stems from the differences in state-of-the-art practice at the time in which these two publications were authored.
+
+In the time of \citet{coombs}, languages like SGML were still relatively recently conceived of. The ISO standard for SGML was, e.g., published in 1986\footnote{http://www.iso.org/iso/catalogue\_detail.htm?csnumber=16387}. So the mere fact that the language provided a way of expressing parts of the document through description rather than through procedure, may have been enough for the language to be called descriptive. Regardless of whether it also provided ways of expressing procedural markup. In the case of \LaTeX{}, consider for example the clearly procedural constructs such as \texttt{\textbackslash vspace} which inserts vertical space, or  \texttt{\textbackslash color\{red\}} which essentially says -- ``switch to the red pen, from now and onwards''.
+
+At the time of \citet{bray} however (i.e. \citeyear{bray}), languages like XML had succeeded SGML and provided almost purely descriptive facilities. Thus, it may, at this point in time, have been reasonable to only consider a language descriptive if \emph{all} of the language is descriptive.
+
+This thesis employ the latterly mentioned viewpoint -- that a given language must contain no procedural constructs for it to be considered descriptive. To determine whether a construct is descriptive or not, this thesis employ the definition both stated by \citet{coombs} as well as \citet{bray} -- that descriptive markup denotes what a given part of the document \emph{is} rather that what it \emph{does}.
+
+In summary, this thesis considers languages that only contain procedural constructs -- procedural, languages that only contain descriptive constructs -- descriptive, and languages that contain constructs of both kinds -- hybrid languages.  
+
+
+\subsection{Referential}
+\label{sec:referential-markup}
+\paragraph{Referential markup, as defined by \citet{coombs}, essentially encompass the idea of replacing some string in our document ($S1$), with some other string ($S2$) from some external source.} Such a replacement is carried out at the time of processing and essentially mean that all instances of $S1$, in the document, will, in the compiled version, be replaced with instances of $S2$. In other words, $S1$ \emph{refers} to $S2$ and hence the name.
+
+Returning to the previously mentioned example with the character entity \texttt{\&mdash;}, if treated as referential markup, we might want every occurrence of that character entity (i.e. that piece of referential markup) to be replaced by the actual dash character (i.e. ``\texttt{--}'').
+
+Referential markup can even, in the view of \citet{coombs}, be used for full file inclusions. The point is essentially that referential markup refers to the concept of a one to one mapping between some keyword, and some external string. Such that the keyword will always be replaced with the external string.
+
+In procedural markup languages, \citet{coombs} argue that referential markup often is employed through the use of user-defined variables, but that referential markup, for the most part, is associated with descriptive markup. Implying examples such as the character replacement example above.
+
+More complex derivations, such as tables of contents, should not be considered referential markup if such derivations require computation, and not mere replacement. Derivations will be discussed further in Section \ref{sec:theory:derived-text}.
+
+
+
+
+
+\subsection{Metamarkup}
+\paragraph{Metamarkup, as defined by \citet{coombs}, refer to markup languages that specify, extend, and/or constraint markup languages.} While not explicitly mentioned by \citet{coombs}, languages such as DTD (Document Type Definition), XML Schema, and RelaxNG are all metamarkup languages.
+
+%TODO: Maybe not mentioned because they were invented later?
+
+From a linguistic point of view, a metamarkup language can be seen as a metalanguage\footnote{http://en.wikipedia.org/wiki/Metalanguage} used to formally discuss an object language. In other words, if the object language is XML (i.e. the language under discussion), the metalanguage could be RelaxNG (i.e. the language used to discuss the language under discussion).
+
+
+
+
+\section{A hierarchy of abstraction}
+\label{sec:abstraction-hierarchy}
+\paragraph{From the six categories of markup, identified by \citet{coombs}, and outlined in Section \ref{sec:taxonomy}, a hierarchical taxonomy of three emerge.} \citet{coombs} employ the wording ``types of markup'', while \citet{bray} talk of it as ``a taxonomy of markup''. Nuances between these two expressions emerge when considering the fact that \citet{bray} only discuss three of six categories outlined by \citet{coombs}. The three included in the, so called, taxonomy are (1) presentational, (2) procedural, and (3) descriptive. In fact, also \citet{coombs}, seem to indicate that these may be grouped, by stating that they are ``in direct competition''.
+
+Indeed these six categories can be divided into two subgroups. Consider the following: Punctuational markup can very well be expressed using presentational markup, as well as procedural, as well as descriptive. Referential markup can be expressed using the two latter, and the same goes for metamarkup.
+
+In other words -- punctuational, referential and metamarkup are essentially concepts one \emph{want to express}. Whereas presentational, procedural and descriptive markup describe syntaxes, or in other words \emph{ways to express} these concepts. 
+
+Making an analogy to programming languages, descriptive, procedural and presentational would represent the programming paradigms, while punctuational, referential, and metamarkup, would be manifested as building blocks in languages of these paradigms.
+
+Continuing on the programming language analogy, consider how machine code can be abstracted into procedural code, and how procedural code can be abstracted into declarative. Then consider how this analogy conveniently align with the types of markup. Essentially these three categories can, thus, be considered paradigms of markup language abstraction. Similarly to how programming paradigms have emerged in order to create abstractions upon machine instructions. This hierarchy of abstraction paradigms is visualized in Figure \ref{sec:abstraction-hierarchy}.
+
+
+\begin{figure}[h]
+\centering
+
+  \begin{tikzpicture}
+  \coordinate (Descriptive) at (-5,0) {};
+  \coordinate (Procedural) at ( 5,0) {};
+  \coordinate (Presentational) at ( 0,4.5) {};
+  \draw (Descriptive) -- (Presentational);
+  \draw (Procedural) -- (Presentational);
+  \foreach \y/\Descriptive in {0/Presentational, 1/Procedural, 2/Descriptive} {
+      \draw ($(Descriptive)!\y/3!(Presentational)$) -- ($(Procedural)!\y/3!(Presentational)$) node[midway,above] {\Descriptive};
+  }
+  \end{tikzpicture}
+
+\caption{A hierarchy of markup language abstraction.}
+\label{fig:markup-types-hierarchy}
+\end{figure}
+
+
+% TODO: We are talking about _instances_ of documents, which is why we are not regarding abstract markup languages.
+
+
+
+
+
+
+
+
+
+
+
 \section{Nested markup}
 \label{sec:nesting}
 \paragraph{A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressible than with merely the isolated elements themselves.} In many markup languages, this is implemented as the ability to nest elements in hierarchies. It is, of course, possible to nest without the use of hierarchies, but as \citet*{durand} point out, hierarchical nesting the the strategy that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical nesting. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the matter of non-hierarchical nesting \footnote{http://xml.coverpages.org/hierarchies.html}. Still, today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML. The generic container element \texttt{<div>}, may, e.g., be nested arbitrarily deep inside any other \texttt{<div>} element.
@@ -1425,219 +1654,6 @@ As a more informal argument, anyone who has ever authored a sequential document 
 
 
 
-
-\section{A Taxonomy of Markup Languages}
-\label{sec:taxonomy}
-\paragraph{In \citeyear{coombs}, \citeauthor*{coombs} published an article dubbed \textit{Markup Systems and the Future of Scholarly Text Processing}. While the intent of the article, presumably, was to speculate on the future of markup -- it also provided a solid taxonomy of markup languages.} This thesis utilize the categorizations of ``types of markup'' identified by \citet{coombs}, under the term ``markup theory''. \citet{coombs} divide markup languages into the three categories (1) Punctuational, (2) Presentational, (3) Procedural, (4) Descriptive, and (5) Abstract. The following sections will further explore these categories.
-
-Intermingled in these explanations are also opinions from \citet{bray} -- co-founder of the Open Text Corporation, and co-author of the first XML 1.0 draft specification. The opinions of \citeauthor{bray} was expressed in a blog post exploring the categorizations of \citet{coombs}. It is \citeauthor{bray} that described the work of \citeauthor{coombs} as a ``taxonomy''. The opinions of \citeauthor{bray} are intermingled, both because they contemporize the work of \citeauthor{coombs}, but also because there are some conflicts of opinion between the two, which shed light on how the lines between each category in the taxonomy is yet too vaguely defined, and thus cause fragmentation. While the statements of \citeauthor{bray} are informal in nature, his history in the field bestow him reliability and serve the purpose of emphasizing fragmentation well. 
-
-
-\subsection{Punctuational}
-\paragraph{Punctuational markup refer to the markup that is paid very little attention to in everyday life. Spaces, commas, periods, words, sentences, and so forth.} As \citet{coombs} points out, punctuational markup has been studied by mankind for hundreds of years. The example \citet{coombs} use to underline that punctuational markup should, indeed, be considered markup and not merely a part of our writing system -- is the following. Consider the all the conflicting opinions on how punctuational markup should be used. One argue it ought to be a  semicolon, another argue it should be a colon. One argue space-delimited dash, another argue dash with no space. Consider the author contemplating whether a certain domain of sentences/words should be presented as \textbf{bold} or as \textit{italics}. This is the same kind of choice, as the mentioned choices between semicolon, colon and so forth. However, today, \textbf{bold} and \textit{italics} can clearly be considered markup in languages such as HTML. But the 
-
-Understand, that the term punctuational markup, according to \citet{coombs}, does not refer to the idea of encoding punctuation in some other language (i.e. ``\texttt{\&mdash;}'') but rather the actual punctuation itself (i.e. ``\texttt{--}''). In other words, the use of for example character entities in HTML5\footnote{http://dev.w3.org/html5/html-author/charref} is not to be considered punctuational markup. Rather, if using the the actual dash character and its surrounding space characters is the punctuational markup.
-
-
-
-
-\subsection{Presentational}
-\paragraph{Consider a document written on a very old, mechanical typewriter. Presentational markup, according to \citet{coombs} refer to the practice where the author of a document (e.g.) hit the space key multiple times to center text on the page.} Another example would be to hit the carriage return key multiple times in order to delimit paragraphs or extend line-breaks.
-
-Now, consider a physical paper document written with a ball pen by hand. With a little bit of effort the author can easily distinguish two parts of the text by applying the technique of writing in italics, or even in cursive. So the reader of the document would understand that author is attempting to communicate some semantic difference between the non-italic and the italic parts.
-
-To understand presentational markup, consider the two above cases -- the typewriter document and the handwritten document. In both cases the presentational elements is embedded within the language of the document. The semantics intended by the author (e.g. a paragraph break) is achieved through presentational means.
-
-\citet{bray} makes the concept of presentational markup, more clear by referring to older What You See Is What You Get (WYSIWYG) word processors. Since modern word processors work with (e.g.) descriptive markup ``under the hood'', this analogy generally no longer holds. But for the sake of the argument, imagine some really old version of a visual word processor. By surrounding parts of a document with code specific to a particular word processor that particular word processor would know to (e.g.) display that piece of text centered, in bold, in italics or so forth.
-
-One immediate problem with this, the quick reader probably have noticed, can be extracted from one particular sentence -- ``a specific word processor''. Presentational markup requires standardization of what codes to use to mark things such as bold, breaks, sizes and so forth. As you can probably imagine, with the creativity of programmers, and proprietary incentives, this quickly gets out of scale.
-
-\subsubsection{Implicitness}
-Another more subtle issue, not mentioned by neither \citet{coombs} nor \citet{bray}, is that of implicitness. As the presentational codes of WYSIWYG word processors are not actually visible to the user of the interface -- there exist a mental disconnect. Consider for example the concept of a paragraph break, and the concept of a hard line-break. Now, assume that, in a particular editor, a paragraph break has the same visual appearance as two consecutive hard line-breaks. If one author types up a document, and hands it to another author. How could the second author possibly know whether the first author have employed paragraph breaks or hard line-breaks? Perhaps it is this problem that \citet{bray} refer to, when arguing that What You See Is What You Get essentially is a false claim.
-%TODO: This claim seems to be false! I have misunderstood and this need to be rethought.
-
-
-
-\subsection{Procedural}
-\paragraph{The notion of Procedural markup is perhaps most easily explained through analogy to procedural programming.} Essentially, procedural markup refers to the idea of embedding code instructions directly in a document.
-
-Much as in procedural languages, code duplication, or painful repetition, \citet{bray} argue, can be reduced through elaborate macros or subroutines.
-
-This is the first category, of this chapter, that actually show the user an abstraction of a particular concept rather than the actual concept. Assume an author is to write a particular sentence in a red font. If done through presentational markup, the user would actually see the sentence in red. If however done through procedural markup the user would see some code instruction that indicated the switching to the color red, perhaps as depicted in Figure \ref{fig:procedural-markup-red-sentence}.
-
-
-\begin{figure}[h]
-\centering
-\fbox{
-\texttt{
-  \textbackslash color\{red\} This is a red sentence.
-  }
-}
-\caption{An example of procedural markup in the language \LaTeX{}.}
-\label{fig:procedural-markup-red-sentence}
-\end{figure}
-
-
-\begin{figure}[h]
-\centering
-\fbox{
-\texttt{
-  .sk 3 a;.in +10 -10;.ls 0;.cp 2 Multiple instructions.
-  }
-}
-\caption{An example of procedural markup, as given by \citet{coombs}.}
-\label{fig:procedural-markup-coombs}
-\end{figure}
-
-
-
-Depending on the syntax of the language, procedural markup might also turn out like a mess of symbols where a human may have a hard time cognitively separating the compiler instructions from the actual plain-text. \citet{coombs} gives an example of procedural markup, as can be seen in Figure \ref{fig:procedural-markup-coombs}, and suggest that the instructions should be interpreted as follows:
-
-\begin{enumerate}
-\item Skip three lines -- the equivalent of double-spacing twice.
-\item Indent ten columns from the left and ten columns from the right.
-\item Change to single-spacing.
-\item Start a new page if fewer than two lines remain on the current page.
-\end{enumerate}
-
-While the syntax of course is parseable for a computer, it is all but trivial for the untrained human to read. Without syntax highlighting it is even quite hard to give the string of of Figure \ref{fig:procedural-markup-red-sentence} text a glance and quickly figure out what parts are instructions and what parts are characters.
-
-\subsubsection{Mutation}
-An interesting problem that reasonably may cause mental overhead for a document author working with procedural markup, is that of side-effects. Arguably, the notion of ``mutation'' or ``side-effects'' is a great source of power in programming, but also a great source of frustration. Programs that frequently mutate are often tricky to debug.
-
-The same is true for procedural markup. The code instruction in Figure \ref{fig:procedural-markup-red-sentence} could be informally described as ``switch to the red pen, from now and onwards''. If the author of a document only intended to mark some substring as red and not the entire rest of the document in red, then the author must remember to switch back to whichever color the document was in before the instruction.
-
-To exemplify the problem -- assume that an author wishes to frequently highlight text portions through switching the background color to yellow, the font weight to bold, and the text color to red. At each point the author has to run the commands, and at the end of the highlighted portion the author must ``reset'' these values to whatever they were set to before. The pain of such an approach is visualized in Figure \ref{fig:procedural-markup-set-reset}.
-
-
-\begin{figure}[h]
-\begin{lstlisting}
-  \bg{white} \weight{normal} \color{black} Remember to \bg{yellow} \weight{bold} \color{red} set, then \bg{white} \weight{normal} \color\{black} reset.
-\end{lstlisting}
-\caption{A fictive example of the fragility of having to remember to ``set'' and ``reset'' properties in procedural languages.}
-\label{fig:procedural-markup-set-reset}
-\end{figure}
-
-
-Macros, as previously mentioned, help authors carry out commonly performed tasks. Thus, a way to mitigate the problems depicted in Figure \ref{fig:procedural-markup-set-reset} could be to construct a set of macros for commonly used styles. An example of such an approach is depicted in Figure \ref{fig:procedural-markup-set-reset-macro}. Consequently, the author would be less likely to forget to set or reset some particular property.
-
-
-\begin{figure}[h]
-\begin{lstlisting}
-  \style{normal} Remember to \style{highlight} set, then \style{normal} reset.
-\end{lstlisting}
-\caption{A fictive example of how procedural macros could mitigate the problems depicted in Figure \ref{fig:procedural-markup-set-reset}.}
-\label{fig:procedural-markup-set-reset-macro}
-\end{figure}
-
-
-The problem essentially boils down to mutation. Procedural languages mutate the state of a document from the point of the code instruction and onwards. As a metaphor, the language constructs are essentially built on the form of ``switch to the red pen, from now and onwards'', rather than e.g. ``switch to the red pen, and then switch back'' .
-
-While mistakes are easy to spot in the trivial examples of this thesis, they are much less trivial to spot in, e.g., a 100 page document, or worse, a 1000 page novel. Given a particular point of the document, it is, as a human, tricky to know what instructions have cascaded to that point.
-
-
-
-
-\subsection{Descriptive}
-\paragraph{If procedural markup is best described by parallel to procedural programming, then descriptive markup is best described by parallel to declarative programming.} Descriptive markup describes what something \emph{is} rather what something \emph{does}. In other words, descriptive markup allow authors to encapsulate substrings and denote belonging to semantic domains.
-
-
-Using the metaphor of the red pen, descriptive markup essentially states ``switch to the red pen, and then switch back to whatever pen you had before'', which is much different from the procedural notion of ``switch to the red pen, from now and onwards''. This difference is perhaps best illustrated by contemplating how the descriptive code in Figure \ref{fig:descriptive-markup-red-sentence-latex} and \ref{fig:descriptive-markup-red-sentence-xml} encapsulates some given substring from start to end, whereas the procedural code in Figure \ref{fig:procedural-markup-red-sentence} mutates state from a given point and onwards.
-
-\begin{figure}[h]
-\centering
-\fbox{
-\texttt{
-  \textbackslash begin\{red\} This is a red sentence.\textbackslash end\{red\}
-  }
-}
-\caption{An example of descriptive markup in the language \LaTeX{}.}
-\label{fig:descriptive-markup-red-sentence-latex}
-\end{figure}
-
-
-
-\begin{figure}[h]
-\centering
-\fbox{
-\texttt{
-  Descriptions <red>save</red> the day.
-  }
-}
-\caption{An example of descriptive markup in the language XML.}
-\label{fig:descriptive-markup-red-sentence-xml}
-\end{figure}
-
-Unfortunately there seems to be no unanimous line between procedural and descriptive markup. \citet{coombs} argue that languages such as \TeX{} and \LaTeX{} are descriptive languages, whereas \citet{bray} argue they are procedural. It is possible that this particular difference in opinion stems from the differences in state-of-the-art practice at the time in which these two publications were authored.
-
-In the time of \citet{coombs}, languages like SGML were still relatively recently conceived of. The ISO standard for SGML was, e.g., published in 1986\footnote{http://www.iso.org/iso/catalogue\_detail.htm?csnumber=16387}. So the mere fact that the language provided a way of expressing parts of the document through description rather than through procedure, may have been enough for the language to be called descriptive. Regardless of whether it also provided ways of expressing procedural markup. In the case of \LaTeX{}, consider for example the clearly procedural constructs such as \texttt{\textbackslash vspace} which inserts vertical space, or  \texttt{\textbackslash color\{red\}} which essentially says -- ``switch to the red pen, from now and onwards''.
-
-At the time of \citet{bray} however (i.e. \citeyear{bray}), languages like XML had succeeded SGML and provided almost purely descriptive facilities. Thus, it may, at this point in time, have been reasonable to only consider a language descriptive if \emph{all} of the language is descriptive.
-
-This thesis employ the latterly mentioned viewpoint -- that a given language must contain no procedural constructs for it to be considered descriptive. To determine whether a construct is descriptive or not, this thesis employ the definition both stated by \citet{coombs} as well as \citet{bray} -- that descriptive markup denotes what a given part of the document \emph{is} rather that what it \emph{does}.
-
-In summary, this thesis considers languages that only contain procedural constructs -- procedural, languages that only contain descriptive constructs -- descriptive, and languages that contain constructs of both kinds -- hybrid languages.  
-
-
-\subsection{Referential}
-\label{sec:referential-markup}
-\paragraph{Referential markup, as defined by \citet{coombs}, essentially encompass the idea of replacing some string in our document ($S1$), with some other string ($S2$) from some external source.} Such a replacement is carried out at the time of processing and essentially mean that all instances of $S1$, in the document, will, in the compiled version, be replaced with instances of $S2$. In other words, $S1$ \emph{refers} to $S2$ and hence the name.
-
-Returning to the previously mentioned example with the character entity \texttt{\&mdash;}, if treated as referential markup, we might want every occurrence of that character entity (i.e. that piece of referential markup) to be replaced by the actual dash character (i.e. ``\texttt{--}'').
-
-Referential markup can even, in the view of \citet{coombs}, be used for full file inclusions. The point is essentially that referential markup refers to the concept of a one to one mapping between some keyword, and some external string. Such that the keyword will always be replaced with the external string.
-
-In procedural markup languages, \citet{coombs} argue that referential markup often is employed through the use of user-defined variables, but that referential markup, for the most part, is associated with descriptive markup. Implying examples such as the character replacement example above.
-
-More complex derivations, such as tables of contents, should not be considered referential markup if such derivations require computation, and not mere replacement. Derivations will be discussed further in Section \ref{sec:theory:derived-text}.
-
-
-
-
-
-\subsection{Metamarkup}
-\paragraph{Metamarkup, as defined by \citet{coombs}, refer to markup languages that specify, extend, and/or constraint markup languages.} While not explicitly mentioned by \citet{coombs}, languages such as DTD (Document Type Definition), XML Schema, and RelaxNG are all metamarkup languages.
-
-%TODO: Maybe not mentioned because they were invented later?
-
-From a linguistic point of view, a metamarkup language can be seen as a metalanguage\footnote{http://en.wikipedia.org/wiki/Metalanguage} used to formally discuss an object language. In other words, if the object language is XML (i.e. the language under discussion), the metalanguage could be RelaxNG (i.e. the language used to discuss the language under discussion).
-
-
-
-
-\section{A hierarchy of abstraction}
-\label{sec:abstraction-hierarchy}
-\paragraph{From the six categories of markup, identified by \citet{coombs}, and outlined in Section \ref{sec:taxonomy}, a hierarchical taxonomy of three emerge.} \citet{coombs} employ the wording ``types of markup'', while \citet{bray} talk of it as ``a taxonomy of markup''. Nuances between these two expressions emerge when considering the fact that \citet{bray} only discuss three of six categories outlined by \citet{coombs}. The three included in the, so called, taxonomy are (1) presentational, (2) procedural, and (3) descriptive. In fact, also \citet{coombs}, seem to indicate that these may be grouped, by stating that they are ``in direct competition''.
-
-Indeed these six categories can be divided into two subgroups. Consider the following: Punctuational markup can very well be expressed using presentational markup, as well as procedural, as well as descriptive. Referential markup can be expressed using the two latter, and the same goes for metamarkup.
-
-In other words -- punctuational, referential and metamarkup are essentially concepts one \emph{want to express}. Whereas presentational, procedural and descriptive markup describe syntaxes, or in other words \emph{ways to express} these concepts. 
-
-Making an analogy to programming languages, descriptive, procedural and presentational would represent the programming paradigms, while punctuational, referential, and metamarkup, would be manifested as building blocks in languages of these paradigms.
-
-Continuing on the programming language analogy, consider how machine code can be abstracted into procedural code, and how procedural code can be abstracted into declarative. Then consider how this analogy conveniently align with the types of markup. Essentially these three categories can, thus, be considered paradigms of markup language abstraction. Similarly to how programming paradigms have emerged in order to create abstractions upon machine instructions. This hierarchy of abstraction paradigms is visualized in Figure \ref{sec:abstraction-hierarchy}.
-
-
-\begin{figure}[h]
-\centering
-
-  \begin{tikzpicture}
-  \coordinate (Descriptive) at (-5,0) {};
-  \coordinate (Procedural) at ( 5,0) {};
-  \coordinate (Presentational) at ( 0,4.5) {};
-  \draw (Descriptive) -- (Presentational);
-  \draw (Procedural) -- (Presentational);
-  \foreach \y/\Descriptive in {0/Presentational, 1/Procedural, 2/Descriptive} {
-      \draw ($(Descriptive)!\y/3!(Presentational)$) -- ($(Procedural)!\y/3!(Presentational)$) node[midway,above] {\Descriptive};
-  }
-  \end{tikzpicture}
-
-\caption{A hierarchy of markup language abstraction.}
-\label{fig:markup-types-hierarchy}
-\end{figure}
-
-
-% TODO: We are talking about _instances_ of documents, which is why we are not regarding abstract markup languages.
 
 
 
