@@ -19,7 +19,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{ulem}
 \usepackage{fancyvrb}
-\usepackage{shorttoc}
 \usepackage{epigraph}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -55,9 +54,6 @@
 \subtitle{In search of a more abstract language.}
 \author{ Christopher OKHRAVI \\ UPPSALA UNIVERSITY }
 
-
-% DETAILED TOC
-\renewcommand*\contentsname{Contents (detailed)}
 
 
 % TAB COMMANDS
@@ -190,7 +186,7 @@ and my significant other (for being awesome).
 % % % % % % % % % % % % % % % % % % % % % %
 
 
-\shorttoc{Contents}{1} % Only sections
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
 \tableofcontents
 \pagebreak
 
