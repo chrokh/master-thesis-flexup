@@ -651,7 +651,9 @@ TODO. "Fika".
 \section{Destructive and non-destructive conversions}
 TODO. Scaling down vs. simply transforming the image within the same resolution.
 
-
+\section{Conversions inside or outside the bounds of a language}
+\label{sec:conversions-in-or-out-of-languages}
+TODO. 
 
 
 
@@ -1788,11 +1790,13 @@ The EBNF snippet can informally be described as follows. An element can either p
 
 To formalize this disconnect, \citet{goldfarb} suggest a three-step model for document processing. The term document processing here refer to the idea of taking some document containing Generic Identifier's (GI's) as input, applying some set of processing functions, to produce some other document as output. The three steps of \citet{goldfarb} are (1) recognition, (2) mapping, and (3) processing. These are explained in closer detail below.
 
-\paragraph{Recognition} refer to the idea of recognizing that some piece of the document string should be considered an element that is marked up. While not explicitly expressed by \citet{goldfarb} it seems reasonable to informally consider this step to be the step of lexing (tokenization) and parsing, where its output would to be the parse tree. \citet{goldfarb} gives the example of an element with the generic identifier ``footnote''. In this step, the processing program would know that a substring is to be considered a ``footnote'', and, is thus semantically differentiated from all things that are not ``footnotes''. While the semantic delimitation is recognized in this step, nothing is known about what this particular semantic delimitation means in terms of processing. 
+\paragraph{Recognition} refer to the idea of recognizing that some piece of the document string should be considered an element that is marked up. While not explicitly expressed by \citet{goldfarb} it seems reasonable to informally consider this step to be the step of lexing (tokenization) and parsing, where its output would to be the parse tree.
 
-\paragraph{Mapping} refers to the idea of pairing processing functions with document elements (or to follow the analogy of the last paragraph -- nodes in the parse tree -- or semantic delimitations). \citet{goldfarb} continue on the previously mentioned example of ``footnotes'', by saying that the element now would be paired up with a processing function, such as e.g. one that collects the content encapsulated in the footnote element, only to later print it at the bottom of that page.
+\citet{goldfarb} gives the example of an element with the generic identifier ``footnote''. In this step, the processing program would know that a substring is to be considered a ``footnote'', and, is thus semantically differentiated from all things that are not ``footnotes''. At this particular step of the three-step model, only semantic delimitation is carried out. Meaning that one knows that all footnote elements are footnotes, but one has no idea of what the semantic meaning of being a footnote is.
 
-\paragraph{Processing} simply refer to the task of actually executing processing functions upon their respectively mapped elements.
+\paragraph{Mapping} refers to the idea of pairing processing functions with document elements (or to follow the analogy of the last paragraph -- semantic delimitations). \citet{goldfarb} continue on the previously mentioned example of ``footnotes'', by saying that the element now would be paired up with a processing function, such as e.g. one that collects the content encapsulated in the footnote element, only to later print it at the bottom of that page.
+
+\paragraph{Processing} simply refer to the task of actually executing processing functions upon their respectively mapped elements. In other words, when an element has been identified, and mapped to some particular processing function, then the processing function is carried out.
 
 
 
@@ -1807,27 +1811,22 @@ Given the widespread use of the XML-family of tools it is apparent that the thre
 
 \section{Derived text}
 \label{sec:theory:derived-text}
-What \citet{goldfarb} refers to as Mapping (discussed in previous Section \ref{sec:three-step-model}) can be likened to the concept of Derived Text, that \citet{reid} discuss in the paper introducing the document processing language Scribe. \citet{reid} exhibit an understanding of the fact that much content in authored documents actually can be considered to be derivations of other parts of the same document. \citet{reid} give examples such as tables of contents, indexes, and glossaries.
+\paragraph{Derived text, as described by \citet{reid} in the paper that introduced Scribe, essentially refer to the idea that many parts of a document actually can be consider to be more or less complex derivations of other parts of the document.} Consider for example a table of contents, a bibliography, or a glossary. By strategically marking up a document, many parts can thus be generated from other parts of the document.
 
-Scribe actually provided a facility for dealing with derived text. \citet{reid} explain the mechanism by pointing out that any part of the text can be ``saved'' during the processing of a manuscript only to later be processed itself as regular manuscript text at certain ``collection points''.
+\citet{reid} describes the Derived Text facility of the markup language Scribe by exemplifying that any part of the text can be ``saved'' during the processing of a manuscript only to then be processed at certain ``collection points''.
 
-Dealing with derived text of course becomes technically trivial in procedural (in terms of procedurality described in Section \ref{sec:taxonomy}) languages that exhibit language features such as variables.
+While Scribe is an example of a descriptive markup language that enable derived text, it could also be implemented in a procedural markup language, perhaps as easily as through the use of variables.
 
-
-\subsection{Derived text beyond a document format}
-While it of course is nifty that a markup language (and it's compiler) have a built in mechanism for deriving text, it is not all positive. As highlighted in a much more recent paper by \citet{krijnen}, it becomes very hard to share derivation strategies between multiple formats. Consider for example the table of contents (TOC), apart from formatting, the underlying idea of generating a TOC is essentially the same, regardless of the markup language in question. While there may of course be variations from format to format, the general intent is very much the same.
-
-\citet{krijnen} extend the commonly used universal document converter Pandoc\footnotePandoc, partially with the intent of making derived text\footnote{\citet{krijnen} does not refer to the concept as derived text, but refer to the same concept at heart.} sharable between readers and writers in the Pandoc system. Pandoc (as previously mentioned) is an ``n-to-n'' document converter that utilizes readers to read documents, and writers to write documents. In between these lie the universal Pandoc format. Anyone can contribute with readers or writers to the Pandoc system. \citet{krijnen} propose a solution where one writes small Haskell (the same language as Pandoc is written in) modules in order to derive text and create (e.g.) numbered headings, TOC's etc. These modules can then be reused in other writers.
+\paragraph{Derived text is not referential markup, but rather in-language document conversions. } This, since (as briefly mentioned in Section \ref{sec:referential-markup}) referential markup represents one-to-one string inclusions from external sources (such as the inclusion of a file into another file), whereas derived text represents the idea of performing some number of conversions over elements in a document (such as the generation of a table of contents). Derived text conversions are thus, rather, to be considered equal to in-language document conversions (as outlined in Section \ref{sec:conversions-in-or-out-of-languages}), in the sense that one or multiple derived text conversions can be referred to as an in-language document conversion.
 
 
 
+\subsection{Derived text across language boundaries}
+\paragraph{Reusing text derivation strategies (i.e. code) across different formats is not unreasonable, but is also not trivial.} Consider for example the concept of a table of contents. While the syntactic implementations details may vary from language to language, the general idea of a table of contents is essentially the same regardless of language. Namely, to traverse the list of headings, into some given depth, and then produce a (perhaps indented) list of these headings.
 
+As highlighted by \citet{krijnen}, coupling a mechanism of derived text to a given format makes it very hard to share derivation strategies (i.e. code) between formats.  \citet{krijnen} extend the commonly used universal document converter Pandoc\footnotePandoc, with the explicit intent of getting back ``the flexibility e.g. offered by the packages in the \LaTeX{} eco-system''. As Pandoc has a ``fixed'' intermediate format, \citet{krijnen} constructs a set of Haskell libraries that enable document authors to, essentially, ``map'' newly introduced elements of some format to the intermediate format. Consequently, if the author then writes text derivation strategies for that particular target of the intermediate format it means that all potential input formats that employ some mapping to that particular target will be able to reuse the text derivation strategy.
 
-
-
-
-
-
+\paragraph{The paper by \citet{krijnen} essentially prove that it is possible allow document authors to merely ``map'' identifiers in an input format, to some intermediate format, and then employ derived text conversions on that intermediate format.} In other words, that it is possible to, with the help of ``mapping'', reuse text derivation strategies across language boundaries.
 
 
 
