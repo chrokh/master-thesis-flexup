@@ -1579,11 +1579,18 @@ In summary, this thesis considers languages that only contain procedural constru
 
 \subsection{Referential}
 \label{sec:referential-markup}
-\paragraph{Referential markup, as defined by \citet{coombs}, essentially encompass the idea that we want to replace some string in our document ($S1$), with some other string from the same, or another, document ($S2$).} Regardless of whether $S1$ and $S2$ are specified in different documents or even different machines. In fact, $S2$ might even come from a database, or be the result of some web query etc. The idea is essentially that all instances of $S1$ in the document, will in the compiled version be replaced with instances of $S2$. In other words, $S1$ \emph{refer} to $S2$ and hence the name.
+\paragraph{Referential markup, as defined by \citet{coombs}, essentially encompass the idea of replacing some string in our document ($S1$), with some other string ($S2$) from some external source.} Such a replacement is carried out at the time of processing and essentially mean that all instances of $S1$, in the document, will, in the compiled version, be replaced with instances of $S2$. In other words, $S1$ \emph{refers} to $S2$ and hence the name.
 
-Returning to the previously mentioned example with the character entity \texttt{\&mdash;}. If treated as referential markup, we might want every occurrence of that character entity (i.e. that piece of referential markup) to be replaced by the actual character ``\texttt{--}''. Other examples of a referential markup is the tables of contents and footnotes.
+Returning to the previously mentioned example with the character entity \texttt{\&mdash;}, if treated as referential markup, we might want every occurrence of that character entity (i.e. that piece of referential markup) to be replaced by the actual dash character (i.e. ``\texttt{--}'').
 
-\citet{coombs} argue that referential markup can exist in both procedural markup languages and descriptive. In the first it may take the form of user-defined variables, whereas in the second, the case of character entity replacement outlined above is a prime example.
+Referential markup can even, in the view of \citet{coombs}, be used for full file inclusions. The point is essentially that referential markup refers to the concept of a one to one mapping between some keyword, and some external string. Such that the keyword will always be replaced with the external string.
+
+In procedural markup languages, \citet{coombs} argue that referential markup often is employed through the use of user-defined variables, but that referential markup, for the most part, is associated with descriptive markup. Implying examples such as the character replacement example above.
+
+More complex derivations, such as tables of contents, should not be considered referential markup if such derivations require computation, and not mere replacement. Derivations will be discussed further in Section \ref{sec:theory:derived-text}.
+
+
+
 
 
 \subsection{Metamarkup}
@@ -1804,7 +1811,7 @@ What \citet{goldfarb} refers to as Mapping (discussed in previous Section \ref{s
 
 Scribe actually provided a facility for dealing with derived text. \citet{reid} explain the mechanism by pointing out that any part of the text can be ``saved'' during the processing of a manuscript only to later be processed itself as regular manuscript text at certain ``collection points''.
 
-Dealing with derived text of course become technically trivial in procedural (in terms of procedurality described in Section \ref{sec:taxonomy}) languages that exhibit language features such as variables.
+Dealing with derived text of course becomes technically trivial in procedural (in terms of procedurality described in Section \ref{sec:taxonomy}) languages that exhibit language features such as variables.
 
 
 \subsection{Derived text beyond a document format}
