@@ -505,6 +505,13 @@ The main problem of the scripting approach of Pandoc, is that it is, as outlined
 
 
 
+\color{red}
+\section{Formats are subsets of languages}
+TODO
+\color{black}
+
+
+
 
 \section{Markup has resolution}
 
@@ -577,6 +584,8 @@ The number of semantically different syntactical constructs of a language, perfe
 
 There are of course instances where converting from a low-resolution format to a high-resolution pose no problem at all. Consider for example a 200x200 pixels perfectly black image. Scaling this image down to a resolution of 20x20 pixels, and then scaling it back up to a resolution of 200x200 pose no problem at all. The final image is exactly the same as the original. Consider then on the other hand a 200x200 pixel portrait photograph. Scaling this image down to a resolution of 20x20, and then scaling it back up to 200x200 cause serious information loss. The final image is now merely an approximation of the original.
 
+
+\paragraph{\color{red}Retainment of distinction must be determined on the basis of FORMATS, not languages, nor instances of languages.}
 \paragraph{Retainment of distinction must be determined on the basis of languages, not instances of languages.} In the language of pixels, it is trivial to imagine cases where conversions from low resolution to high resolution indeed cause no loss of information (consider the black square). However, this is, again, a fortunate effect of the specific case. It is equally trivial to imagine a counter-example, where in the same language, such a conversion will cause loss of information (consider the portrait photograph).
 
 The same apply to markup languages. It is trivial to imagine an example where conversion from a low-resolution format (e.g. Markdown) to a high-resolution format (e.g. HTML) will cause no information loss. Consider for example how all information is retained in Figure \ref{fig:low-to-high-resolution-non-destructive}. However, as with pixel resolution, it is equally trivial to imagine an example where information (i.e. distinction) is in fact lost. Consider for example how information is lost in Figure \ref{fig:low-to-high-resolution-destructive}.
