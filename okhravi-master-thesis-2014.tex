@@ -1152,6 +1152,7 @@ While mistakes are easy to spot in the trivial examples of this thesis, they are
 
 
 \subsection{Descriptive}
+\label{sec:taxonomy-descriptive}
 \paragraph{If procedural markup is best described by parallel to procedural programming, then descriptive markup is best described by parallel to declarative programming.} Descriptive markup describes what something \emph{is} rather what something \emph{does}. In other words, descriptive markup allow authors to encapsulate substrings and denote belonging to semantic domains.
 
 
@@ -1889,18 +1890,33 @@ As highlighted by \citet{krijnen}, coupling a mechanism of derived text to a giv
 
 
 \section{Requirements}
-TODO
+\paragraph{The following paragraphs outline the requirements that were used when developing the artifact.} The requirements are derived from the Theory and Background chapters.
+
+\begin{itemize}
+\item \emph{Descriptive syntax} must be the only syntax allowed in input and intermediate languages. This, because, as outlined in Section \ref{sec:taxonomy-descriptive}, both \citet{coombs} and \citet{bray} seem in agreement on that procedural markup should be avoided in favor of descriptive.
+\end{itemize}
+
+
+\paragraph{In order to respect semantic resolution, i.e. attempt to only convert from languages with higher resolution to languages with lower resolution,} the input language must contain more semantic distinctions than all other conceivable output languages.
+
+The following three are thus properties that must be supported by the input and intermediate languages. Firstly because they increase the number of possible semantic delimitations in languages, and secondly because they, as shown by \citet{coombs}, and by the XML specification\refXMLspec, have been, and are employed in widely used languages. If these properties where not available in the input language, the conversion tool would then risk having to operate at a lower semantic resolution than the output languages.
+
+\begin{itemize}
+\item \emph{Nesting}, as outlined in Section \ref{sec:nesting}, enables infinite languages over finite words.
+\item \emph{Generic Identifiers}, as outlined in Section \ref{sec:theory:generic-identifiers-and-validity}, enables languages over infinite words.
+\item \emph{Mixed content}, as outlined in Section \ref{sec:mixed-content}, is available in common languages, such as XML\refXMLspec, and readily used, as showed by \citet{mignet}.
+\end{itemize}
 
 
 
+\paragraph{In order to facilitate the sharing of packages (i.e. code), for common conversions, across language boundaries, } all processing functions must follow the three-step model as outlined by \citet{goldfarb}, and all mappings must be possible to configure by an author. Using the terminology of the background chapter the suggestion is then that:
+
+\begin{itemize}
+\item \emph{Interpretation conversions} must be allowed to be proceeded by \emph{translation conversions}, so that the translation can map the elements of the input document to the appropriate processing functions of the interpretation conversion.
+\end{itemize}
 
 
 
-% % % % % % % % % % % % % % % % % % % % % % 
-%
-%   LANGUAGE REQUIREMENTS
-%
-% % % % % % % % % % % % % % % % % % % % % %
 
 
 \subsection{Deriving markup language requirements}
