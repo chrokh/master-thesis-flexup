@@ -150,9 +150,9 @@
 
 \begin{abstract}
 \section*{Abstract}
-Every day the number of markup languages increase. Every day the number of documents increase. The notion of ``write once, publish everywhere'' most often feels like a sarcastic joke. The two most prominent approaches to document conversion is the $n-to-n$ approach and the $1-to-n$ approach. The first attempting to convert from all conceivable formats to all conceivable formats. The second attempting to standardize the input format.
+Every day the number of markup languages increase. Every day the number of documents increase. The notion of ``write once, publish everywhere'' most often feels like a sarcastic joke. The two most prominent approaches to document conversion is the $n-to-n$ approach and the $1-to-n$ approach. The first attempting to convert from all conceivable languages to all conceivable languages. The second attempting to standardize the input language.
 
-This thesis suggest an approach less complex than the first, yet more flexible than the other. An $M-to-N$ approach. Where the language constructs of $M$ exist in all languages in $N$. This thesis argue the benefit of converting ``down the abstraction chain'', from more abstract formats to less abstract formats. Or in other words, from less complex formats to increasingly complex formats.
+This thesis suggest an approach less complex than the first, yet more flexible than the other. An $M-to-N$ approach. Where the language constructs of $M$ exist in all languages in $N$. This thesis argue the benefit of converting ``down the abstraction chain'', from more abstract languages to less abstract languages. Or in other words, from less complex languages to increasingly complex languages.
 
 The thesis reach two concrete contributions: (1) A suggestion for how to parse a syntax-less language that encapsulate many of the languages in $M$, and (2) a model of an ideal transformation process for markup, that allow for transformations from $M$ to $N$. Positive side-effects of such an approach is composability, package sharing, and declarative configurability. \\
 
@@ -241,24 +241,24 @@ The problem approached in this thesis, is perhaps best summarized by the quote r
 \textit{-- Andy Tanenbaum, as quoted by \citet{krijnen}}
 \end{quote}
 
-For many good reasons, different formats exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. More complex things, such as different levels of needed granularity and control, cause languages to express things at different levels of abstraction. The hypothesis of this thesis is that conscious categorization of languages, according to such properties, can spawn a set of conversion strategies superior to $n-to-n$, according to aspects detailed later in this thesis.
+For many good reasons, different languages exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. More complex things, such as different levels of needed granularity and control, cause languages to express things at different levels of abstraction. The hypothesis of this thesis is that conscious categorization of languages, according to such properties, can spawn a set of conversion strategies superior to $n-to-n$, according to aspects detailed later in this thesis.
 
 \section{Languages exhibit properties}
-\paragraph{Intentions of design} vary from language to language. One, may have been designed with the intent of enabling document authors to (more easily) manually author documents (i.e. eliminating the need for a rich GUI). Another may have been designed with intents of compactness and high precision, at the expense of giving up manual authoring. Another factor one can consider is whether a format is presentation oriented or not. Whether it is designed to directly produce visual output or not. Analyzing the different hypothetical combinations of categorizations makes it apparent that lots of formats exist (and can exist). Merely combining the two categories above, the following category sets, and thus formats, emerge.
+\paragraph{Intentions of design} vary from language to language. One, may have been designed with the intent of enabling document authors to (more easily) manually author documents (i.e. eliminating the need for a rich GUI). Another may have been designed with intents of compactness and high precision, at the expense of giving up manual authoring. Another factor one can consider is whether a language is presentation oriented or not. Whether it is designed to directly produce visual output or not. Analyzing the different hypothetical combinations of categorizations makes it apparent that lots of languages exist (and can exist). Merely combining the two categories above, the following category sets, and thus languages, emerge.
 
 \begin{enumerate}
 \item Languages intended to support manual document authoring, but not intended to directly produce visual output (e.g. XML).
 \item Languages intended to support manual document authoring, and also intended to directly produce visual output (e.g. HTML).
 \item Languages not intended to support manual document authoring, but intended to directly produce visual output (e.g. PDF).
-\item Languages neither intended to support manual document authoring, nor directly produce visual output (e.g. transportation formats).
+\item Languages neither intended to support manual document authoring, nor directly produce visual output (e.g. transportation languages).
 \end{enumerate}
 
-Considering the above four different format categories, the need for format conversion programs become apparent. One may for example want to express a document in XML but publish it in PDF. Or express and publish a document in HTML, while however also converting it to some proprietary format of the fourth category in order to feed it as input to some other system.
+Considering the above four different language categories, the need for language conversion programs become apparent. One may for example want to express a document in XML but publish it in PDF. Or express and publish a document in HTML, while however also converting it to some proprietary language of the fourth category in order to feed it as input to some other system.
 
 Exhaustively identifying all possible categorizations of languages is of course all but a trivial task.
 % TODO: Thus this is not the goal of this thesis, but rather.... x 
 
-\paragraph{Naive approaches consider conversions between languages, rather than between categories of languages. } Aspiring to be able to convert any input language to any output language is what this thesis refer to as the $n-to-n$ approach. The most trivial approach to this problem is to write a single unique conversion scheme for every input format, mapping it to every output format. Evidently, such an approach would, at the very least, require the number of unique  conversion schemes to be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages would require, at least, 90 unique conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}, and generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
+\paragraph{Naive approaches consider conversions between languages, rather than between categories of languages. } Aspiring to be able to convert any input language to any output language is what this thesis refer to as the $n-to-n$ approach. The most trivial approach to this problem is to write a single unique conversion scheme for every input language, mapping it to every output language. Evidently, such an approach would, at the very least, require the number of unique  conversion schemes to be equal to the number of k-permutations of n, where $k=2$. So converting between 10 languages would require, at least, 90 unique conversion strategies, as outlined in Equation \ref{eq:permutations-between-10-languages}, and generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-without-intermediate-format}.
 
 An example of such a naive approach to document conversion may be writing ad-hoc conversion schemes in, e.g., XSLT 2.0.
 
@@ -267,7 +267,7 @@ An example of such a naive approach to document conversion may be writing ad-hoc
 \label{eq:permutations-between-10-languages}
 \end{equation}
 
-A less naive approach to $n-to-n$ conversion is Pandoc, which make use of an intermediate format. This essentially mean that merely two conversion schemes has to be written per language. One that converts from the language to the intermediate format, and one that converts from the intermediate format to the language. This essentially decrease the (otherwise exponentially increasing) need for unique conversion schemes to merely $2n$. Thus 10 formats would require 20 conversion schemes. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
+A less naive approach to $n-to-n$ conversion is Pandoc, which make use of an intermediate language. This essentially mean that merely two conversion schemes has to be written per language. One that converts from the language to the intermediate language, and one that converts from the intermediate language to the language. This essentially decrease the (otherwise exponentially increasing) need for unique conversion schemes to merely $2n$. Thus 10 languages would require 20 conversion schemes. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
 
 
 
@@ -341,7 +341,7 @@ A less naive approach to $n-to-n$ conversion is Pandoc, which make use of an int
 
     \end{tikzpicture}
 
-    \caption{$n-to-n$ conversion through intermediate format.}
+    \caption{$n-to-n$ conversion through intermediate language.}
     \label{fig:n-to-n-conversion-boxes-with-intermediate-format}
   \end{subfigure}
   
@@ -439,13 +439,13 @@ In order to clarify the use of the word ``interpretation'', consider the followi
 
 
 
-\paragraph{Pandoc handles the ability to produce different output documents from the same input document through two facilities.} One facility is templating, and the other is what the documentation refer to as ``scripting''\footnote{TODO: Reference}. The first essentially refer to the idea of constructing a template into which the input document is fed. Naturally, a unique template as needed for every unique output document. The second facility, scripting, is more general as it operates on a concrete JSON representation of the abstract syntax tree, i.e. what has previously been referred to as the intermediate format.
+\paragraph{Pandoc handles the ability to produce different output documents from the same input document through two facilities.} One facility is templating, and the other is what the documentation refer to as ``scripting''\footnote{TODO: Reference}. The first essentially refer to the idea of constructing a template into which the input document is fed. Naturally, a unique template as needed for every unique output document. The second facility, scripting, is more general as it operates on a concrete JSON representation of the abstract syntax tree, i.e. what has previously been referred to as the intermediate language.
 
 A visual interpretation of these facilities of Pandoc is depicted in Figure \ref{fig:interpretation-of-pandoc}.
 
-The main problem of the scripting approach of Pandoc, is that it is, as outlined by \citet{krijnen}, coupled to this intermediate format. As \citet{krijnen} suggest, it is ``unrealistic to expect that it can represent all document elements which are introduced by any of the existing or future standards''.
+The main problem of the scripting approach of Pandoc, is that it is, as outlined by \citet{krijnen}, coupled to this intermediate language. As \citet{krijnen} suggest, it is ``unrealistic to expect that it can represent all document elements which are introduced by any of the existing or future standards''.
 
-\citet{krijnen} suggest a less naive approach, that demonstrate how conversion schemes can be shared across different input and output formats, through working with grammars and a set of Haskell libraries. The main benefit of such an approach is that it enables flexible package sharing, in ways is similar to the eco-system of \LaTeX{} \citep{krijnen}.
+\citet{krijnen} suggest a less naive approach, that demonstrate how conversion schemes can be shared across different input and output languages, through working with grammars and a set of Haskell libraries. The main benefit of such an approach is that it enables flexible package sharing, in ways is similar to the eco-system of \LaTeX{} \citep{krijnen}.
 
 
 
@@ -497,13 +497,13 @@ The main problem of the scripting approach of Pandoc, is that it is, as outlined
 
 
 
-\paragraph{To summarize, this thesis will concern itself with three types of conversions -- conversions from input format (i.e. encoding) to interpretation, conversions from interpretations to interpretations, and conversions from interpretation to output format.} In other words, this thesis will concern itself only very briefly with conversions from the abstract idea to encodings (i.e. input formats). 
+\paragraph{To summarize, this thesis will concern itself with three types of conversions -- conversions from input language (i.e. encoding) to interpretation, conversions from interpretations to interpretations, and conversions from interpretation to output language.} In other words, this thesis will concern itself only very briefly with conversions from the abstract idea to encodings (i.e. input languages). 
 
 
 
 
 \color{red}
-\section{Formats are subsets of languages}
+\section{languages are subsets of languages}
 TODO
 \color{black}
 
@@ -519,7 +519,7 @@ An example of such a categorization is whether a language is presentation-orient
 
 The classical notion of ``separation of concerns'' emphasizes the known benefits of such a strategy. Thus, the separation of presentation and content not only makes intuitive sense, but have also been successfully applied in the real-world. Consider for example how CSS has successfully separated presentation from content in HTML\footnote{http://www.w3.org/standards/webdesign/htmlcss\#whatcss}.
 
-Converting from a non-presentational format to a presentational format is a conversion ``down'' the abstraction chain, if ``level of presentational coupling'' is used as the categorizing property when differentiating between two different languages. Vice versa, the task of converting from a presentational format to a non-presentational format is a conversion ``up'' the abstraction chain. Thus, the latter must be considered a significantly more difficult task than the former, assuming the hypothesis of this thesis is true.
+Converting from a non-presentational language to a presentational language is a conversion ``down'' the abstraction chain, if ``level of presentational coupling'' is used as the categorizing property when differentiating between two different languages. Vice versa, the task of converting from a presentational language to a non-presentational language is a conversion ``up'' the abstraction chain. Thus, the latter must be considered a significantly more difficult task than the former, assuming the hypothesis of this thesis is true.
 
 \paragraph{The hypothesis is not merely that presentation and content are different,} but again, that all languages exhibit properties, and that all of these properties can be grouped into categories, where these categories can be ordered hierarchically according to their level of abstraction.
 
@@ -534,7 +534,7 @@ Consider then the concrete sentence (or rather: document fragment) expressed in 
 \begin{quote}
 ``The \emph{em} element isn't a generic \emph{italics} element. Sometimes, text is intended to stand out from the rest of the paragraph, as if it was in a different mood or voice. For this, the \emph{i} element is more appropriate.''
 \begin{flushright}
-% TODO Make sure all quotes are formatted alike
+% TODO Make sure all quotes are languageted alike
 \textit{-- HTML5 Recommended specification 2014}
 %TODO: Ref
 \end{flushright}
@@ -579,13 +579,13 @@ To generalize: If a distinction cannot be preserved when converting from languag
 
 The number of semantically different syntactical constructs of a language, perfectly map to the analogy of number of pixels carrying information. As pixels carrying information are destroyed, there is no way to recreate them.
 
-There are of course instances where converting from a low-resolution format to a high-resolution pose no problem at all. Consider for example a 200x200 pixels perfectly black image. Scaling this image down to a resolution of 20x20 pixels, and then scaling it back up to a resolution of 200x200 pose no problem at all. The final image is exactly the same as the original. Consider then on the other hand a 200x200 pixel portrait photograph. Scaling this image down to a resolution of 20x20, and then scaling it back up to 200x200 cause serious information loss. The final image is now merely an approximation of the original.
+There are of course instances where converting from a low-resolution language to a high-resolution pose no problem at all. Consider for example a 200x200 pixels perfectly black image. Scaling this image down to a resolution of 20x20 pixels, and then scaling it back up to a resolution of 200x200 pose no problem at all. The final image is exactly the same as the original. Consider then on the other hand a 200x200 pixel portrait photograph. Scaling this image down to a resolution of 20x20, and then scaling it back up to 200x200 cause serious information loss. The final image is now merely an approximation of the original.
 
 
-\paragraph{\color{red}Retainment of distinction must be determined on the basis of FORMATS, not languages, nor instances of languages.}
+\paragraph{\color{red}Retainment of distinction must be determined on the basis of languages, not languages, nor instances of languages.}
 \paragraph{Retainment of distinction must be determined on the basis of languages, not instances of languages.} In the language of pixels, it is trivial to imagine cases where conversions from low resolution to high resolution indeed cause no loss of information (consider the black square). However, this is, again, a fortunate effect of the specific case. It is equally trivial to imagine a counter-example, where in the same language, such a conversion will cause loss of information (consider the portrait photograph).
 
-The same apply to markup languages. It is trivial to imagine an example where conversion from a low-resolution format (e.g. Markdown) to a high-resolution format (e.g. HTML) will cause no information loss. Consider for example how all information is retained in Figure \ref{fig:low-to-high-resolution-non-destructive}. However, as with pixel resolution, it is equally trivial to imagine an example where information (i.e. distinction) is in fact lost. Consider for example how information is lost in Figure \ref{fig:low-to-high-resolution-destructive}.
+The same apply to markup languages. It is trivial to imagine an example where conversion from a low-resolution language (e.g. Markdown) to a high-resolution language (e.g. HTML) will cause no information loss. Consider for example how all information is retained in Figure \ref{fig:low-to-high-resolution-non-destructive}. However, as with pixel resolution, it is equally trivial to imagine an example where information (i.e. distinction) is in fact lost. Consider for example how information is lost in Figure \ref{fig:low-to-high-resolution-destructive}.
 
 
 \begin{figure}[h]
@@ -672,7 +672,7 @@ In order to discuss the body of all possible markup conversion programs, conside
   \label{eq:microframework-n-n}
 \end{equation}
 
-In order to reason about the generality of conversion programs, assume that all markup conversion programs over the domain $\mathbb{N}$ can be considered to take generalized or specialized input, and then produce generalized or specialized output. Generalized input, would mean that the program in question can take any markup language of the domain $\mathbb{N}$ as input, whereas specialized would mean that it only can take some subset. The same reason applies to the output format. Exhausting all the permutations of these, yield four different types of conversion programs, as depicted through a quadrant diagram in Figure \ref{fig:microframework-quadrant}.
+In order to reason about the generality of conversion programs, assume that all markup conversion programs over the domain $\mathbb{N}$ can be considered to take generalized or specialized input, and then produce generalized or specialized output. Generalized input, would mean that the program in question can take any markup language of the domain $\mathbb{N}$ as input, whereas specialized would mean that it only can take some subset. The same reason applies to the output language. Exhausting all the permutations of these, yield four different types of conversion programs, as depicted through a quadrant diagram in Figure \ref{fig:microframework-quadrant}.
 
 
 \begin{figure}[h]
@@ -708,16 +708,16 @@ In order to reason about the generality of conversion programs, assume that all 
 \paragraph{Quadrant D programs take specialized input, and produce specialized output,}
 and are thus really specialized conversion programs. Conversions are always made from a specific subset, to a specific subset. If these subsets are the same, then the program is one that can create variants of a document within the same language.
 
-The problem however, is of course that if an author wishes to utilize some input or output format outside of the subset, a completely new program is required.
+The problem however, is of course that if an author wishes to utilize some input or output language outside of the subset, a completely new program is required.
 
 Examples of such a program may for example be a \LaTeX{}-to-PDF converter, or a Markdown-to-HTML converter, and is generally visualized in Figure \ref{fig:workflows-framework-spec-in-spec-out}.
 
 
-\paragraph{Quadrant C programs take generalized input, and produce specialized output,} and thus contain a, quite odd, set of conversion programs, that, take input from any subset, but always output formats of a specific subset. If one would need to output a format from a different domain, then the program need to be rewritten.
+\paragraph{Quadrant C programs take generalized input, and produce specialized output,} and thus contain a, quite odd, set of conversion programs, that, take input from any subset, but always output languages of a specific subset. If one would need to output a language from a different domain, then the program need to be rewritten.
 
 It is difficult to find pragmatically useful real-world examples as this quadrant represent programs with a very different intent than the idea of ``writing once and publishing everywhere''.
 
-Nevertheless, such a program might for example be an ``anything-to-XML converter'', that simply slaps a root tag onto whatever string it receives and escape any XML-like syntax from the input string in order to avoid syntax errors. Consequently the program would be able to receive any format, and yet always be able to output valid XML. Such a program is generally visualized in Figure \ref{fig:workflows-framework-gen-in-spec-out}.
+Nevertheless, such a program might for example be an ``anything-to-XML converter'', that simply slaps a root tag onto whatever string it receives and escape any XML-like syntax from the input string in order to avoid syntax errors. Consequently the program would be able to receive any language, and yet always be able to output valid XML. Such a program is generally visualized in Figure \ref{fig:workflows-framework-gen-in-spec-out}.
 
 
 
@@ -842,15 +842,15 @@ Nevertheless, such a program might for example be an ``anything-to-XML converter
 
 
 \paragraph{Quadrant B programs take specialized input, and produce generalized output,}
-and thus resemble the widely employed combination of XML and XSLT. Authors can express a document in some arbitrary XML format and then employ XSLT as a means of converting the document into multiple different output formats. Such a program is generally visualized in Figure \ref{fig:workflows-framework-spec-in-gen-out}.
+and thus resemble the widely employed combination of XML and XSLT. Authors can express a document in some arbitrary XML language and then employ XSLT as a means of converting the document into multiple different output languages. Such a program is generally visualized in Figure \ref{fig:workflows-framework-spec-in-gen-out}.
 
 
 \paragraph{Quadrant A programs take generalized input, and produce generalized output,}
-and thus represent the most general kind of markup conversion programs. They take input in any format of the domain $\mathbb{N}$ and can produce output in any of the formats of the domain $\mathbb{N}$. An example program that exhibits this behavior is the widely used software Pandoc. Naturally, Pandoc is, of course, a pragmatic compromise and does not convert from every conceivable format to every conceivable format. However, it is perhaps the most successful effort in the area yet, and thus also serve as an example of the non-triviality associated with $n-n$ conversion. Such a program is generally visualized in Figure \ref{fig:workflows-framework-gen-in-gen-out}.
+and thus represent the most general kind of markup conversion programs. They take input in any language of the domain $\mathbb{N}$ and can produce output in any of the languages of the domain $\mathbb{N}$. An example program that exhibits this behavior is the widely used software Pandoc. Naturally, Pandoc is, of course, a pragmatic compromise and does not convert from every conceivable language to every conceivable language. However, it is perhaps the most successful effort in the area yet, and thus also serve as an example of the non-triviality associated with $n-n$ conversion. Such a program is generally visualized in Figure \ref{fig:workflows-framework-gen-in-gen-out}.
 
 
 
-\paragraph{In a perfect world, conversion programs would painlessly convert any format to any format and thus exist in  Quadrant A.} However, as implied in the beginning of this thesis -- writing a pragmatically useful Quadrant A program is not trivial because converting any language to any language will require conversions from languages with lower semantic resolution to those with higher, which this thesis argue is an impossibility.
+\paragraph{In a perfect world, conversion programs would painlessly convert any language to any language and thus exist in  Quadrant A.} However, as implied in the beginning of this thesis -- writing a pragmatically useful Quadrant A program is not trivial because converting any language to any language will require conversions from languages with lower semantic resolution to those with higher, which this thesis argue is an impossibility.
 
 Consequently, this thesis instead explores quadrant B programs, and attempts to identify the properties required for a program, and its corresponding input language, to enable $1-n$ while only allowing conversions ``down'' the abstraction chain.
 
@@ -946,7 +946,7 @@ To summarize, the problem focus of this thesis is three-fold.
 \paragraph{The hypothesis is, thus, that it is possible to construct an eco-system of tools, that through respecting semantic resolution, allow authors to:}
 
 \begin{enumerate}
-\item write once and publish everywhere (i.e. convert to any format), and
+\item write once and publish everywhere (i.e. convert to any language), and
 \item share common conversions as packages across output language boundaries (e.g. generation of tables of contents), while
 \item allowing ambiguous interpretations, such that the same input document may have several output documents in a given language.
 \end{enumerate}
@@ -958,7 +958,7 @@ In order to meet the research goal of proving the possibility of converting mark
 
 \paragraph{Deliverable I.} This thesis identifies one potential set of markup categories, that when considered to house different semantic resolutions, and ordered accordingly, mitigate the previously stated problems of conversion.
 
-\paragraph{Deliverable II.} This thesis identifies some fundamental characteristics, required, for a markup language, to have a relatively high enough semantic resolution, as to be used as an input format when converting to common output formats today.
+\paragraph{Deliverable II.} This thesis identifies some fundamental characteristics, required, for a markup language, to have a relatively high enough semantic resolution, as to be used as an input language when converting to common output languages today.
 
 \paragraph{The first deliverable is exemplified through a model, complemented with relevant pieces of program code. Whereas the second deliverable is exemplified through the specification of the language, complemented with examples of conversion.}
 
@@ -1269,7 +1269,7 @@ Continuing on the programming language analogy, consider how machine code can be
 
 
 
-To enforce the difference between nesting and not, consider the following, formatted, paragraph of text\footnote{This thesis ignores discussions of the treatment of whitespace.}, as depicted in Figure \ref{fig:mixed-content-paragraph}.
+To enforce the difference between nesting and not, consider the following, languageted, paragraph of text\footnote{This thesis ignores discussions of the treatment of whitespace.}, as depicted in Figure \ref{fig:mixed-content-paragraph}.
 
 
 \begin{figure}[h]
@@ -1277,7 +1277,7 @@ To enforce the difference between nesting and not, consider the following, forma
 \fbox{
 The color \underline{is \textbf{now}} \sout{red}.
 }
-\caption{An example paragraph with formatting.}
+\caption{An example paragraph with languageting.}
 \label{fig:mixed-content-paragraph}
 \end{figure}
 
@@ -1644,7 +1644,7 @@ As a more informal argument, anyone who has ever authored a sequential document 
 
 % TODO: Should I exemplify more? Do we need to show JSON problems using parse trees? Why else are we showing parse trees?
 % \subsection{Old stuff TODO}
-% Markup is not just data transportation. An explanation as to why object notation is a subset of annotations. Meaning that formats % like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring. \% texttt{XML} for example can be used for data transport, but in this thesis we'll focus on its markup properties. Consequently also%  % ignore formats like \texttt{JSON}, \texttt{YAML} etc.% 
+% Markup is not just data transportation. An explanation as to why object notation is a subset of annotations. Meaning that languages % like \texttt{JSON} are too data-centric and can consequently not, in any sensible manner, be used for manual document authoring. \% texttt{XML} for example can be used for data transport, but in this thesis we'll focus on its markup properties. Consequently also%  % ignore languages like \texttt{JSON}, \texttt{YAML} etc.% 
 % 
 % Maybe we can even use parse-tree's to symbolize the problem. To show that it is not possible to unambiguously represent mixed content. One needs to perform computation on the parse tree to derive the data.
 
@@ -1747,11 +1747,11 @@ Consider for example that one wants to apply some series of semantic rules to a 
 
 As there exist no limit of the number of elements an author can create, one has an infinitely large domain of semantic names to use. In other words, there will always be a new word one can choose in order to semantically describe some new semantic concept, and one thus never run the risk of ``running out of distinctions''.
 
-\paragraph{The infinite set of words enables authors to push decisions into the future.} \citet{coombs} point out the same benefit in relation to Referential markup, which has already been detailed in Section \ref{sec:referential-markup}. However, the idea is that abstractions give authors the luxury of ignoring the specifics, and leave them for figuring out later. For example instead of deciding how a character such as, e.g. ``--'' should be formatted, the author simply employ some referential markup such as \texttt{\&mdash;}, and then in a later stage, in document conversion, the decision is made on what to replace the referential markup with. Naturally, GI's can be used in the same way as referential markup, as they simply allow one to reduce the specifics, in favor of the abstract -- by replacing convoluted orchestrations with names.
+\paragraph{The infinite set of words enables authors to push decisions into the future.} \citet{coombs} point out the same benefit in relation to Referential markup, which has already been detailed in Section \ref{sec:referential-markup}. However, the idea is that abstractions give authors the luxury of ignoring the specifics, and leave them for figuring out later. For example instead of deciding how a character such as, e.g. ``--'' should be languageted, the author simply employ some referential markup such as \texttt{\&mdash;}, and then in a later stage, in document conversion, the decision is made on what to replace the referential markup with. Naturally, GI's can be used in the same way as referential markup, as they simply allow one to reduce the specifics, in favor of the abstract -- by replacing convoluted orchestrations with names.
 
 Using GI's, authors can choose to to distinguish between strings that one suspect belong to different semantic domains. Given that one cannot ``run out of'' semantic distinctions, no immediate problem is faced with employing too many distinctions. On the contrary, employing the line of thinking from the background chapter of this thesis, more semantic distinctions essentially mean higher semantic resolution. 
 
-\paragraph{Generic Identifiers allow authors to mark up their documents with names that cognitively make sense to the individual.} As emphasized by \citet{krijnen}, many authors choose to write documents in some simple format (such as e.g. Markdown), and then convert their documents more complex formats (such as e.g. \LaTeX{}), for simple reasons such as preferred syntax. In order to aid less technical document authors in their migration from more problematic word processors (such as most modern GUI-based word processors), the author of this thesis argue that preferred syntactic structure plays an important role.
+\paragraph{Generic Identifiers allow authors to mark up their documents with names that cognitively make sense to the individual.} As emphasized by \citet{krijnen}, many authors choose to write documents in some simple language (such as e.g. Markdown), and then convert their documents more complex languages (such as e.g. \LaTeX{}), for simple reasons such as preferred syntax. In order to aid less technical document authors in their migration from more problematic word processors (such as most modern GUI-based word processors), the author of this thesis argue that preferred syntactic structure plays an important role.
 
 \paragraph{In the XML specification}\footnote{http://www.w3.org/TR/REC-xml/\#sec-logical-struct} Generic Identifiers are defined using EBNF notation as follows\footnote{Some parts of the EBNF example snippet are omitted (such as element attributes), and some altered (such as the letter range) to favor readability.}:
 
@@ -1836,11 +1836,11 @@ While Scribe is an example of a descriptive markup language that enable derived 
 
 
 \subsection{Derived text across language boundaries}
-\paragraph{Reusing text derivation strategies (i.e. code) across different formats is not unreasonable, but is also not trivial.} Consider for example the concept of a table of contents. While the syntactic implementations details may vary from language to language, the general idea of a table of contents is essentially the same regardless of language. Namely, to traverse the list of headings, into some given depth, and then produce a (perhaps indented) list of these headings.
+\paragraph{Reusing text derivation strategies (i.e. code) across different languages is not unreasonable, but is also not trivial.} Consider for example the concept of a table of contents. While the syntactic implementations details may vary from language to language, the general idea of a table of contents is essentially the same regardless of language. Namely, to traverse the list of headings, into some given depth, and then produce a (perhaps indented) list of these headings.
 
-As highlighted by \citet{krijnen}, coupling a mechanism of derived text to a given format makes it very hard to share derivation strategies (i.e. code) between formats.  \citet{krijnen} extend the commonly used universal document converter Pandoc\footnotePandoc, with the explicit intent of getting back ``the flexibility e.g. offered by the packages in the \LaTeX{} eco-system''. As Pandoc has a ``fixed'' intermediate format, \citet{krijnen} constructs a set of Haskell libraries that enable document authors to, essentially, ``map'' newly introduced elements of some format to the intermediate format. Consequently, if the author then writes text derivation strategies for that particular target of the intermediate format it means that all potential input formats that employ some mapping to that particular target will be able to reuse the text derivation strategy.
+As highlighted by \citet{krijnen}, coupling a mechanism of derived text to a given language makes it very hard to share derivation strategies (i.e. code) between languages.  \citet{krijnen} extend the commonly used universal document converter Pandoc\footnotePandoc, with the explicit intent of getting back ``the flexibility e.g. offered by the packages in the \LaTeX{} eco-system''. As Pandoc has a ``fixed'' intermediate language, \citet{krijnen} constructs a set of Haskell libraries that enable document authors to, essentially, ``map'' newly introduced elements of some language to the intermediate language. Consequently, if the author then writes text derivation strategies for that particular target of the intermediate language it means that all potential input languages that employ some mapping to that particular target will be able to reuse the text derivation strategy.
 
-\paragraph{The paper by \citet{krijnen} essentially prove that it is possible allow document authors to merely ``map'' identifiers in an input format, to some intermediate format, and then employ derived text conversions on that intermediate format.} In other words, that it is possible to, with the help of ``mapping'', reuse text derivation strategies across language boundaries.
+\paragraph{The paper by \citet{krijnen} essentially prove that it is possible allow document authors to merely ``map'' identifiers in an input language, to some intermediate language, and then employ derived text conversions on that intermediate language.} In other words, that it is possible to, with the help of ``mapping'', reuse text derivation strategies across language boundaries.
 
 
 
@@ -1973,7 +1973,7 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 
 \paragraph{In order to facilitate the sharing of packages (i.e. code) for common conversion tasks, the proposed solution is built upon a UNIX-like notion of pipes.}  The core command line tools in UNIX all operate on strings, read from standard in (stdin), and print to standard out (stdout). This standardization enables synergy and make the whole of the core UNIX programs much greater than the sum of its parts.
 
-The prototype proposal follows this notion of pipes, where input to, and output from, all conversion packages are simplified subset of XML, call it \texttt{flXML}. This goes for all conversions except the initial input, and the final output. The initial input is be given in an ad-hoc language constructed by the author of the document, and the final output document may break the language boundary of \texttt{flXML}, in order to be able to output to arbitrary formats such as PDF, CSV, RTF, etc..
+The prototype proposal follows this notion of pipes, where input to, and output from, all conversion packages are simplified subset of XML, call it \texttt{flXML}. This goes for all conversions except the initial input, and the final output. The initial input is be given in an ad-hoc language constructed by the author of the document, and the final output document may break the language boundary of \texttt{flXML}, in order to be able to output to arbitrary languages such as PDF, CSV, RTF, etc..
 
 
 \paragraph{In order to adhere to the last point of the requirements outlined in Section (\ref{sec:empirical-requirements}), interpretation conversions and translation conversions will be separated, and translation conversions will always be allowed to precede interpretation conversions.} This enables authors employ the concept of ``mapping'' from the three-step model of \citet{goldfarb}, and essentially enable authors to ``rename'' elements before sending their documents through some interpretation conversion package, in order for the interpretation conversion package to identify the elements correctly.
@@ -1984,7 +1984,7 @@ Figure \ref{fig:model-of-conversion-prototype-artifact} visualize the suggestion
 
 \item $In$ represents the input document, written by the author in some ad-hoc arbitrary syntax (where double asterisk for example might denote the concept of bold, see Figure \ref{ex:numbered-headings-input} for an example).
 
-\item $Out$ is the final target document, which may be expressed in an arbitrary format if the last step in a particular run was a $Translation$, that brought the document into another language. Only $Translations$ can produce documents in other languages.
+\item $Out$ is the final target document, which may be expressed in an arbitrary language if the last step in a particular run was a $Translation$, that brought the document into another language. Only $Translations$ can produce documents in other languages.
 
 \item $Parse$ is the process in which the document expressed in the arbitrary ad-hoc language gets translated into \texttt{flXML}. This is possible since the ad-hoc language designed by the author must be defined and supplied in a very simple JSON syntax (call it Flexup Definitions -- \texttt{fupd}) -- see Figure \ref{ex:numbered-headings-fupd} for an example. Each ``key'' in the JSON object of the Flexup definition will become the name of all elements captured by that particular syntax definition.
 
@@ -2046,12 +2046,12 @@ A usage example of the program prototype is given in Section \ref{sec:usage-exam
 \section{Usage example}
 \label{sec:usage-example}
 
-\paragraph{The developed prototype will be demonstrated through a usage example where a light-weight ad-hoc format is converted into HTML with auto-numbered headings and sub-headings.} The usage example is heavily inspired by \citet{krijnen}, who also add auto-numbering of headings, but use HTML as the input format.
+\paragraph{The developed prototype will be demonstrated through a usage example where a light-weight ad-hoc language is converted into HTML with auto-numbered headings and sub-headings.} The usage example is heavily inspired by \citet{krijnen}, who also add auto-numbering of headings, but use HTML as the input language.
 
 \paragraph{The developed prototype is intended to illustrate the plausibility of the suggested approach, } and is thus, not intended to be considered production complete. Consequently, details such as alternative input syntaxes, or exhaustive regular expressions that actually lex all obscure characters correctly, are overlooked.
 
 
-\paragraph{Assume that the author types up a document,} such as the one depicted in Figure \ref{ex:numbered-headings-input}. The document is expressed in an arbitrary ad-hoc language (referred to as a Flexup file, or a \texttt{fup}-file) and in order for the Flexup prototype to be able to parse this format, the author also need to supply the grammar (referred to as a Flexup Definition, or a \texttt{fupd}-file). Flexup Definition files are expressed in JSON, and this particular Flexup Definition is depicted in Figure \ref{ex:numbered-headings-fupd}.
+\paragraph{Assume that the author types up a document,} such as the one depicted in Figure \ref{ex:numbered-headings-input}. The document is expressed in an arbitrary ad-hoc language (referred to as a Flexup file, or a \texttt{fup}-file) and in order for the Flexup prototype to be able to parse this language, the author also need to supply the grammar (referred to as a Flexup Definition, or a \texttt{fupd}-file). Flexup Definition files are expressed in JSON, and this particular Flexup Definition is depicted in Figure \ref{ex:numbered-headings-fupd}.
 
 \begin{figure}[h]
 \begin{lstlisting}
@@ -2375,7 +2375,7 @@ This intent has been met through discussing the fallacies of approaches such as 
 
 
 \paragraph{The intent of the thesis}
-was to show that it is significantly easier to convert a document format with utterly few constructs to any other markup language, rather than having to ``make sense'' out of complex constructs that exist in a source language but have no really sensible counterpart in a different destination language.
+was to show that it is significantly easier to convert a document language with utterly few constructs to any other markup language, rather than having to ``make sense'' out of complex constructs that exist in a source language but have no really sensible counterpart in a different destination language.
 
 Also this intent has been satisfied through showing how the transformation process easily can be cut into highly composable pieces as long as the starting point is the most abstract possible representation of a document. Again, there are tendencies pointing towards that ``1-to-n'' might not just be a more realistic approach, but actually a significantly more powerful.
 
@@ -2409,7 +2409,7 @@ Also this intent has been satisfied through showing how the transformation proce
 \chapter{Analysis}
 The most important realization in regards to this project, is that it seem almost trivial to divide the transformation process into composable parts when employing an ``M-to-N'' approach rather than the ``N-to-N''. That producing composable package channels never proved to be cumbersome, as long as the correct packages are used at the correct level in the abstraction chain. As long as each transformation moves the document in the ``right'' way through the abstraction chain. In other words, when each transformation moves the document from a higher level of abstraction to a lower, or of course stays at the same, then packaging and composability seem not to be a major issue. It is likely that many issues in sharing transformation packages may stem from transforming documents in the ``wrong'' way through the abstraction chain. In other words from less abstract to more abstract. Consider scaling a bitmap image. Scaling down works perfectly fine, but scaling up pose highly problematic.
  
-\paragraph{Attempting ``M-to-N'' instead of ``N-to-N''} seem to be another way to look at this ``walking in the right direction'' of the abstraction chain. If one starts ($M$) at the intersection of all possible languages (all $N$) one may want to output to, then it is only reasonable to assume that the level of abstraction will be utterly high from the beginning. Subsequently then decrease as transformations move it closer and closer to concrete formats.
+\paragraph{Attempting ``M-to-N'' instead of ``N-to-N''} seem to be another way to look at this ``walking in the right direction'' of the abstraction chain. If one starts ($M$) at the intersection of all possible languages (all $N$) one may want to output to, then it is only reasonable to assume that the level of abstraction will be utterly high from the beginning. Subsequently then decrease as transformations move it closer and closer to concrete languages.
 
 
 
@@ -2442,7 +2442,7 @@ The most important realization in regards to this project, is that it seem almos
 
 
 \chapter{Discussion}
-The greatest flaw of this paper is the fact that no complete production code was produced. Fragments have been produced to ensure that all snippets in this paper are correct and functional. For example, one discussion that has been avoided is that of the need for some kind of controlled intermediate format that would be used when sending the file from one subprogram to another.
+The greatest flaw of this paper is the fact that no complete production code was produced. Fragments have been produced to ensure that all snippets in this paper are correct and functional. For example, one discussion that has been avoided is that of the need for some kind of controlled intermediate language that would be used when sending the file from one subprogram to another.
 
 The author is currently working on an open-sourced implementation of the ideal model of markup transformation. Contacts are welcome.
 
