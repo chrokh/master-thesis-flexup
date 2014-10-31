@@ -2034,6 +2034,30 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 \chapter{Empirics}
 
 
+\section{Artifact}
+
+\begin{figure}[h]
+\begin{lstlisting}
+start   = (element / text)*
+content = (element / text)*
+text    = t:[a-zA-Z \n]+          {return t.join('');}
+
+/* * * EVERYTHING BELOW IS GENERATED * * */
+
+element = STag1 c:content ETag1   {return {"head"    : c};}
+        / STag2 c:content ETag2   {return {"subhead" : c};}
+
+STag1   = "##"
+ETag1   = "##"
+STag2   = "--"
+ETag2   = "--"
+\end{lstlisting}
+\caption{Example of Parsing expression grammar (in PEG.js syntax) generated from the Flexup Definition in Figure \ref{ex:numbered-headings-fupd}.}
+\label{ex:peg-grammar}
+\end{figure}
+
+
+
 
 \section{Usage example -- numbered headings}
 
