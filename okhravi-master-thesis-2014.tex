@@ -1978,7 +1978,7 @@ The prototype proposal follows this notion of pipes, where input to, and output 
 
 \paragraph{In order to adhere to the last point of the requirements outlined in Section (\ref{sec:empirical-requirements}), interpretation conversions and translation conversions will be separated, and translation conversions will always be allowed to precede interpretation conversions.} This enables authors employ the concept of ``mapping'' from the three-step model of \citet{goldfarb}, and essentially enable authors to ``rename'' elements before sending their documents through some interpretation conversion package, in order for the interpretation conversion package to identify the elements correctly.
 
-Figure \ref{fig:model-of-conversion-protype-artifact} visualize the suggestion of possible ways of converting, and its properties are further explained below:
+Figure \ref{fig:model-of-conversion-prototype-artifact} visualize the suggestion of possible ways of converting, and its properties are further explained below:
 
 \begin{itemize}
 
@@ -2017,7 +2017,7 @@ Figure \ref{fig:model-of-conversion-protype-artifact} visualize the suggestion o
   \end{tikzpicture}
 
   \caption{Model depicting possible conversion workflows of the proposed artifact.}
-  \label{fig:model-of-conversion-protype-artifact}
+  \label{fig:model-of-conversion-prototype-artifact}
 \end{figure}
 
 A usage example of the program prototype is given in Section \ref{sec:prototype}, and an example of the usage of pipes is depicted in Figure \ref{ex:numbered-headings-pipes-1}.
@@ -2058,7 +2058,7 @@ A usage example of the program prototype is given in Section \ref{sec:prototype}
 ## First heading ##
 And then some text
 
-## A sub-heading ##
+## A subheading ##
 And some more text
 
 ## Last heading ##
@@ -2081,7 +2081,7 @@ Flexup Definition files essentially consist of a JSON object, where the keys are
 \label{ex:numbered-headings-fupd}
 \end{figure}
 
-Flexup Definitions will during the $Parse$ step of the conversion process (see Figure \ref{fig:model-of-conversion-protype-artifact}) be converted into a Parsing Expression Grammar, that in turn will be generated into actual parsing code (that will be used to parse the Flexup file, expressed in the arbitrary syntax) using the JavaScript library PEG.js\footnote{https://github.com/dmajda/pegjs}. The PEG generated for this particular Flexup Definition is depicted in Figure \ref{ex:peg-grammar}.
+Flexup Definitions will during the $Parse$ step of the conversion process (see Figure \ref{fig:model-of-conversion-prototype-artifact}) be converted into a Parsing Expression Grammar (PEG), that in turn will be generated into actual parsing code (that will be used to parse the Flexup file, expressed in the arbitrary syntax) using the JavaScript library PEG.js\footnote{https://github.com/dmajda/pegjs}. The PEG generated for this particular Flexup Definition is depicted in Figure \ref{ex:peg-grammar}.
 
 
 \begin{figure}[h]
@@ -2105,18 +2105,74 @@ ETag2   = "--"
 \label{ex:peg-grammar}
 \end{figure}
 
+When the PEG, depicted in Figure \ref{ex:peg-grammar}, is, via the PEG.js library, converted into actual parse code, and then applied to the Flexup document (i.e. the input document) depicted in Figure \ref{ex:numbered-headings-input}, a parse tree is created in memory. The parse tree is nothing spectacular, but the one generated for this particular case is depicted in Figure \ref{ex:generated-parse-tree}.
+
+\begin{figure}[h]
+\begin{lstlisting}
+[
+   {
+      "head": [" First heading "]
+   },
+   "And then some text",
+   {
+      "head": [" A subheading "]
+   },
+   "And some more text",
+   {
+      "head": [" Last heading "]
+   },
+   "And the last paragraph"
+]
+\end{lstlisting}
+\caption{Parse tree generated from applying the PEG depicted in Fig. \ref{ex:peg-grammar}, to the Flexup file depicted in \ref{ex:numbered-headings-input}, by using PEG.js library.}
+\label{ex:generated-parse-tree}
+\end{figure}
+
+What is more interesting, is how the prototype artifact then traverse this parse tree in order to construct the abstract syntax tree (AST). This AST is generated in form of the previously mentioned subset of XML referred to as flXML, and the one for this particular case is depicted in Figure \ref{ex:numbered-headings-flXML-ast-raw}.
 
 
+\begin{figure}[h]
+\begin{lstlisting}
+<head>First heading</head>
+And then some text
+
+<subhead>A subheading</subhead>
+And some more text
+
+<head>Last heading</head>
+And the last paragraph
+\end{lstlisting}
+\caption{First output file (\texttt{[ast].xml}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}}
+\label{ex:numbered-headings-flXML-ast-raw}
+\end{figure}
+
+At the point of the AST, the author has the following three choices of action (as depicted in Figure \ref{fig:model-of-conversion-prototype-artifact}). The author can choose to (1) consider the AST the final output document and produce a physical file, or (2) run the file through a translation conversion, or (3) run the file through a interpretation conversion.
+
+Assume that some other author has written a interpretation conversion package (i.e. some code), that searches a document for headings and subheadings and prepend numbers accordingly. Since interpretation packages in the suggested prototype must be written in XSLT, the package could look like the one depicted in Figure \ref{ex:numbered-headings-xslt-package}.
+
+A discrepancy between the interpretation conversion code (Figure \ref{ex:numbered-headings-xslt-package}) and the current AST (Figure \ref{ex:numbered-headings-flXML-ast-raw}) will cause this particular package to not successfully traverse and number the AST. The problem is that the Flexup Definition caused the headings to be named \texttt{head} and the subheadings to be named \texttt{subhead}, whereas the interpretation conversion package expects them to be named \texttt{heading} and \texttt{subheading}. Thus, this is why translation conversion always are allowed to run before interpretation conversions. Translation conversions (call them Flexup Translations, or \texttt{fupt}) are given as JSON objects where each key denote the XPath of elements to search for, and the value a name to convert the name of all matches to. An appropriate Flexup Translation for this particular case is outlined in Figure \ref{ex:numbered-headings-translation-fupt}.
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+{
+  "//head"    : "heading",
+  "//subhead" : "subheading"
+}
+\end{lstlisting}
+\caption{Translation file.}
+\label{ex:numbered-headings-translation-fupt}
+\end{figure}
 
 
 \begin{figure}[h]
 \begin{lstlisting}
 flexup.in("./[document].fup")
   .pipe(grammar("./[fupd].json"))
-  .out("./[raw].xml")
+  .out("./[ast].xml")
   .pipe(translation({
-    "head"    : "heading",
-    "subhead" : "subheading"
+    "//head"    : "heading",
+    "//subhead" : "subheading"
   }))                    
   .pipe(interpretation("numbered-headings"))
   .out("./[numbered].xml");
@@ -2128,25 +2184,10 @@ flexup.in("./[document].fup")
   .pipe(interpretation("html"));    // use html package that wraps the doc in html tags
   .out("./[numbered].html");        // write to file as numbered HTML
 \end{lstlisting}
-\caption{Orchestration file}
+\caption{Orchestration file.}
 \label{ex:numbered-headings-pipes-1}
 \end{figure}
 
-
-\begin{figure}[h]
-\begin{lstlisting}
-<head>First heading</head>
-And then some text
-
-<subhead>A sub-heading</subhead>
-And some more text
-
-<head>Last heading</head>
-And the last paragraph
-\end{lstlisting}
-\caption{First output file (\texttt{[raw].xml}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}}
-\label{ex:numbered-headings-flXML-raw}
-\end{figure}
 
 
 \begin{figure}[h]
@@ -2168,7 +2209,7 @@ And the last paragraph
   </xsl:template>
 </xsl:stylesheet>
 \end{lstlisting}
-\caption{An XSLT package that traverses all headings and numbers them sequentially.}
+\caption{An XSLT package that traverses all headings and subheadings and prepends numbers accordingly.}
 \label{ex:numbered-headings-xslt-package}
 \end{figure}
 
@@ -2181,7 +2222,7 @@ And the last paragraph
 <heading>1 First heading </heading>
 And then some text
 
-<subheading>1.2 A sub-heading </subheading>
+<subheading>1.2 A subheading </subheading>
 And some more text
 
 <heading>2 Last heading </heading>
@@ -2198,7 +2239,7 @@ And the last paragraph
 <h1>1 First heading </h1>
 <p>And then some text</p>
 
-<h2>1.2 A sub-heading </h2>
+<h2>1.2 A subheading </h2>
 <p>And some more text</p>
 
 <h1>2 Last heading </h1>
