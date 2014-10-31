@@ -2043,12 +2043,14 @@ A usage example of the program prototype is given in Section \ref{sec:usage-exam
 \section{Usage example}
 \label{sec:usage-example}
 
-\paragraph{The developed prototype will be demonstrated through a usage example where a light-weight ad-hoc language is converted into HTML with auto-numbered headings and sub-headings.} The usage example is heavily inspired by \citet{krijnen}, who also add auto-numbering of headings, but use HTML as the input language.
+\paragraph{The developed prototype (call it Flexup) is, below, demonstrated through a usage example where a light-weight ad-hoc language is converted into HTML with auto-numbered headings and sub-headings.} The usage example is heavily inspired by \citet{krijnen}, who also add auto-numbering of headings, but use HTML as the input language.
 
 \paragraph{The developed prototype is intended to illustrate the plausibility of the suggested approach, } and is thus, not intended to be considered production complete. Consequently, details such as alternative input syntaxes, or exhaustive regular expressions that actually lex all obscure characters correctly, are overlooked.
 
 
-\paragraph{Assume that the author types up a document,} such as the one depicted in Figure \ref{ex:numbered-headings-input}. The document is expressed in an arbitrary ad-hoc language (referred to as a Flexup file, or a \texttt{fup}-file) and in order for the Flexup prototype to be able to parse this language, the author also need to supply the grammar (referred to as a Flexup Definition, or a \texttt{fupd}-file). Flexup Definition files are expressed in JSON, and this particular Flexup Definition is depicted in Figure \ref{ex:numbered-headings-fupd}.
+\paragraph{The scenario is such,} that an author has made up an arbitrary, small ad-hoc language and in this language written a document consisting of a number of headings and sub-headings. The aim is for the author to be able to convert this example file into an HTML file, that has running numbers prepended to all the headings.
+
+Assume that the author types up a document, such as the one depicted in Figure \ref{ex:numbered-headings-input}. The document (referred to as a Flexup file, or a \texttt{fup}-file) is, as mentioned, expressed in an arbitrary ad-hoc language and in order for the Flexup prototype to be able to parse this language, the author also need to supply the grammar (referred to as a Flexup Definition, or a \texttt{fupd}-file). Flexup Definition files are expressed in JSON, and this particular Flexup Definition is depicted in Figure \ref{ex:numbered-headings-fupd}.
 
 \begin{figure}[h]
 \begin{lstlisting}
