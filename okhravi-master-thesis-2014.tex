@@ -2155,6 +2155,31 @@ A discrepancy between the interpretation conversion code (Figure \ref{ex:numbere
 
 \begin{figure}[h]
 \begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:template match="//heading">
+    <heading>
+      <xsl:value-of select="count(preceding-sibling::heading)+1"/>)
+      <xsl:value-of select="." />
+    </heading>
+  </xsl:template>
+  <xsl:template match="//subheading">
+    <subheading>
+      <xsl:value-of select="count(preceding-sibling::heading)"/> . 
+      <xsl:value-of select="count(preceding-sibling::subheading)+1"/>
+      <xsl:value-of select="." />
+    </subheading>
+  </xsl:template>
+</xsl:stylesheet>
+\end{lstlisting}
+\caption{An XSLT package that traverses all headings and subheadings and prepends numbers accordingly.}
+\label{ex:numbered-headings-xslt-package}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\begin{lstlisting}
 {
   "//head"    : "heading",
   "//subhead" : "subheading"
@@ -2163,6 +2188,44 @@ A discrepancy between the interpretation conversion code (Figure \ref{ex:numbere
 \caption{Translation file.}
 \label{ex:numbered-headings-translation-fupt}
 \end{figure}
+
+
+Having applied the Flexup Translation (Figure \ref{ex:numbered-headings-translation-fupt}) to the AST (Figure \ref{ex:numbered-headings-flXML-ast-raw}), it is then completely possible to run the XSLT interpretation conversion package (Figure \ref{ex:numbered-headings-xslt-package}). The result of applying the package is a new AST, depicted in Figure \ref{ex:numbered-headings-flXML-ast-numbered}.
+
+\begin{figure}[h]
+\begin{lstlisting}
+<heading>1 First heading </heading>
+And then some text
+
+<subheading>1.2 A subheading </subheading>
+And some more text
+
+<heading>2 Last heading </heading>
+And the last paragraph
+\end{lstlisting}
+\caption{Second output file (\texttt{[numbered].xml}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}.}
+\label{ex:numbered-headings-flXML-ast-numbered}
+\end{figure}
+
+
+Again, the author can make the choice of applying further interpretation conversions, translation conversions, or simply writing the AST as a file to disk. In this particular usage example the goal was to end up with an HTML file, so consequently another XSLT interpretation conversion package must be found. 
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+<h1>1 First heading </h1>
+<p>And then some text</p>
+
+<h2>1.2 A subheading </h2>
+<p>And some more text</p>
+
+<h1>2 Last heading </h1>
+<p>And the last paragraph</p>
+\end{lstlisting}
+\caption{Final output file (\texttt{[numbered].html}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}.}
+\end{figure}
+
+
 
 
 \begin{figure}[h]
@@ -2188,65 +2251,6 @@ flexup.in("./[document].fup")
 \label{ex:numbered-headings-pipes-1}
 \end{figure}
 
-
-
-\begin{figure}[h]
-\begin{lstlisting}
-<?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:template match="//heading">
-    <heading>
-      <xsl:value-of select="count(preceding-sibling::heading)+1"/>)
-      <xsl:value-of select="." />
-    </heading>
-  </xsl:template>
-  <xsl:template match="//subheading">
-    <subheading>
-      <xsl:value-of select="count(preceding-sibling::heading)"/> . 
-      <xsl:value-of select="count(preceding-sibling::subheading)+1"/>
-      <xsl:value-of select="." />
-    </subheading>
-  </xsl:template>
-</xsl:stylesheet>
-\end{lstlisting}
-\caption{An XSLT package that traverses all headings and subheadings and prepends numbers accordingly.}
-\label{ex:numbered-headings-xslt-package}
-\end{figure}
-
-
-
-
-
-\begin{figure}[h]
-\begin{lstlisting}
-<heading>1 First heading </heading>
-And then some text
-
-<subheading>1.2 A subheading </subheading>
-And some more text
-
-<heading>2 Last heading </heading>
-And the last paragraph
-\end{lstlisting}
-\caption{Second output file (\texttt{[numbered].xml}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}.}
-\end{figure}
-
-
-
-
-\begin{figure}[h]
-\begin{lstlisting}
-<h1>1 First heading </h1>
-<p>And then some text</p>
-
-<h2>1.2 A subheading </h2>
-<p>And some more text</p>
-
-<h1>2 Last heading </h1>
-<p>And the last paragraph</p>
-\end{lstlisting}
-\caption{Final output file (\texttt{[numbered].html}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}.}
-\end{figure}
 
 
 
