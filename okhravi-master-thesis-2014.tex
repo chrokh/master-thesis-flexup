@@ -69,6 +69,7 @@
   showstringspaces=false,
   breaklines,
   breakatwhitespace,
+  escapeinside={(*}{*)},%
 }
 
 
@@ -2032,167 +2033,137 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 \color{red}
 \chapter{Empirics}
 
-\section{Simple example}
 
-\paragraph{Given the following input document}:
-
-\begin{lstlisting}
-[q]This **string** exhibits _both **nesting** and **mixed content**_[/q]
-\end{lstlisting}
-
-
-\paragraph{And this language description}:
-
-\begin{lstlisting}
-{
-  "emph"      : "**%**",
-  "underline" : "_%_",
-  "quote"     : "[q]%[/q]"
-}
-\end{lstlisting}
-
-
-\paragraph{We reach this intermediate flXML}:
-
-\begin{lstlisting}
-<quote>
-  <emph>string</emph>
-  exhibits
-  <underline>
-    both
-    <emph>nesting</emph>
-    and
-    <emph>mixed content</emph>
-  </underline>
-</quote>
-\end{lstlisting}
-
-
-
-
-\color{orange}
 
 \section{Numbered headings example}
 
-\paragraph{Given the following input document}:
 
+\begin{figure}[h]
 \begin{lstlisting}
 ## First heading ##
 And then some text
 
-## Second heading ##
+## A sub-heading ##
 And some more text
 
-## Third heading ##
+## Last heading ##
 And the last paragraph
 \end{lstlisting}
+\caption{Input document (\texttt{[document].fup})}
+\label{ex:numbered-headings-input}
+\end{figure}
 
 
-\paragraph{And this language description}:
 
+\begin{figure}[h]
 \begin{lstlisting}
 {
-  "heading" : "##%##"
+  "head"    : "##%##",
+  "subhead" : "--%--"
 }
 \end{lstlisting}
+\caption{Syntax definition (\texttt{[fupd].json})}
+\label{ex:numbered-headings-fupd}
+\end{figure}
 
 
-\paragraph{We reach this intermediate flXML}:
-
-\begin{lstlisting}
-<heading>First heading</heading>
-And then some text
-
-<heading>Second heading</heading>
-And some more text
-
-<heading>Third heading</heading>
-And the last paragraph
-\end{lstlisting}
-
-
-\paragraph{So if there exist an XSLT package for numbered headings}:
-\begin{lstlisting}
-<?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="1.0"
-xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:template match="//numberedHeading">
-  <numberedHeading>
-    (<xsl:value-of select="count(preceding-sibling::numberedHeading)+1"/>)
-    <xsl:value-of select="." />
-  </numberedHeading>
-</xsl:template>
-</xsl:stylesheet>
-\end{lstlisting}
-
-
-\paragraph{We can translate our document so that the domain names of our document match the domain names of the package}, using the following configuration:
-\begin{lstlisting}
-{
-  "heading": "numberedHeading"
-}
-\end{lstlisting}
-
-
-\paragraph{And thus we reach the following output document}:
-\begin{lstlisting}
-<heading>(1) First heading </heading>
-And then some text
-
-<heading>(2) Second heading </heading>
-And some more text
-
-<heading>(3) Third heading </heading>
-And the last paragraph
-\end{lstlisting}
-
-
-
-
-\paragraph{And all of these steps could be carried out using the following orchestration file}:
-
-\begin{lstlisting}
-flexup.in("./[document].fup")
-  .pipe(grammar("./[fupd].json"))              // parse custom syntax
-  .out("./[raw].xml")                          // write to file as raw flXML
-  .pipe(translation({                          // translate the document
-    "heading" : "numberedHeading"
-  }))                    
-  .pipe(interpretation("numbered-headings"))   // add numbers, using package
-  .out("./[numbered].xml");                    // write to file as numbered flXML
-\end{lstlisting}
-
-
-\paragraph{And if we kept on going we could go on an output this document as html}:
-
+\begin{figure}[h]
 \begin{lstlisting}
 flexup.in("./[document].fup")
   .pipe(grammar("./[fupd].json"))
   .out("./[raw].xml")
   .pipe(translation({
-    "heading" : "numberedHeading"
+    "head"    : "heading",
+    "subhead" : "subheading"
   }))                    
   .pipe(interpretation("numbered-headings"))
   .out("./[numbered].xml");
   .pipe(translation({               // translate to appropriate html elements
-    "numberedHeading" : "h1",
-    "."               : "p"
+    "heading"    : "h1",
+    "subheading" : "h2",
+    "."          : "p"
   }))
   .pipe(interpretation("html"));    // use html package that wraps the doc in html tags
   .out("./[numbered].html");        // write to file as numbered HTML
 \end{lstlisting}
+\caption{Orchestration file}
+\label{ex:numbered-headings-pipes-1}
+\end{figure}
 
-Which would bring us the output (numbered.html):
+
+\begin{figure}[h]
 \begin{lstlisting}
-<heading>(1) First heading </heading>
+<head>First heading</head>
 And then some text
 
-<heading>(2) Second heading </heading>
+<subhead>A sub-heading</subhead>
 And some more text
 
-<heading>(3) Third heading </heading>
+<head>Last heading</head>
 And the last paragraph
 \end{lstlisting}
+\caption{First output file (\texttt{[raw].xml}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}}
+\label{ex:numbered-headings-flXML-raw}
+\end{figure}
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:template match="//heading">
+    <heading>
+      <xsl:value-of select="count(preceding-sibling::heading)+1"/>)
+      <xsl:value-of select="." />
+    </heading>
+  </xsl:template>
+  <xsl:template match="//subheading">
+    <subheading>
+      <xsl:value-of select="count(preceding-sibling::heading)"/> . 
+      <xsl:value-of select="count(preceding-sibling::subheading)+1"/>
+      <xsl:value-of select="." />
+    </subheading>
+  </xsl:template>
+</xsl:stylesheet>
+\end{lstlisting}
+\caption{An XSLT package that traverses all headings and numbers them sequentially.}
+\label{ex:numbered-headings-xslt-package}
+\end{figure}
+
+
+
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+<heading>1 First heading </heading>
+And then some text
+
+<subheading>1.2 A sub-heading </subheading>
+And some more text
+
+<heading>2 Last heading </heading>
+And the last paragraph
+\end{lstlisting}
+\caption{Second output file (\texttt{[numbered].xml}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}.}
+\end{figure}
+
+
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+<h1>1 First heading </h1>
+<p>And then some text</p>
+
+<h2>1.2 A sub-heading </h2>
+<p>And some more text</p>
+
+<h1>2 Last heading </h1>
+<p>And the last paragraph</p>
+\end{lstlisting}
+\caption{Final output file (\texttt{[numbered].html}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}.}
+\end{figure}
 
 
 
