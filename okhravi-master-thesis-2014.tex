@@ -2190,7 +2190,7 @@ A discrepancy between the interpretation conversion code (Figure \ref{ex:numbere
 \end{figure}
 
 
-Having applied the Flexup Translation (Figure \ref{ex:numbered-headings-translation-fupt}) to the AST (Figure \ref{ex:numbered-headings-flXML-ast-raw}), it is then completely possible to run the XSLT interpretation conversion package (Figure \ref{ex:numbered-headings-xslt-package}). The result of applying the package is a new AST, depicted in Figure \ref{ex:numbered-headings-flXML-ast-numbered}.
+Having applied the Flexup Translation (Figure \ref{ex:numbered-headings-translation-fupt}) to the AST (Figure \ref{ex:numbered-headings-flXML-ast-raw}), it is then possible to run the XSLT interpretation conversion package (Figure \ref{ex:numbered-headings-xslt-package}). The result of applying the package is a new AST, now with numbered headers, depicted in Figure \ref{ex:numbered-headings-flXML-ast-numbered}.
 
 \begin{figure}[h]
 \begin{lstlisting}
@@ -2208,7 +2208,25 @@ And the last paragraph
 \end{figure}
 
 
-Again, the author can make the choice of applying further interpretation conversions, translation conversions, or simply writing the AST as a file to disk. In this particular usage example the goal was to end up with an HTML file, so consequently another XSLT interpretation conversion package must be found. 
+Again, the author can make the choice of applying further interpretation conversions, translation conversions, or simply writing the AST as a file to disk. In this particular usage example the goal was to end up with an HTML file, so consequently, another XSLT interpretation conversion package must be found, and all non-HTML elements must be translated into HTML-elements.
+
+Figure \ref{ex:numbered-headings-translation-fupt-html-elements} illustrates a Flexup Translation that maps all elements that are not conforming to HTML, present in the AST of Figure \ref{ex:numbered-headings-flXML-ast-numbered}, to elements conforming to HTML. Applying this Translation to the current AST (Figure \ref{ex:numbered-headings-flXML-ast-numbered}) yields a new AST which only contains elements conforming to HTML.
+
+Figure \ref{ex:numbered-headings-xslt-package-html-wrapper} illustrates a Flexup Interpretation that blindly wraps the entire AST in an HTML document. Applying this conversion to the new AST (Figure \ref{ex:numbered-headings-flXML-ast-numbered-html-fragment}) yields an actual HTML document, as depicted in Figure \ref{ex:numbered-headings-html-output}. The destination is now reached, and the document can be written to file. A complete conversion has been carried out.
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+{
+  "//heading"    : "h1",
+  "//subheading" : "h2",
+  "//text()"     : "p"
+}
+\end{lstlisting}
+\caption{Translation file.}
+\label{ex:numbered-headings-translation-fupt-html-elements}
+\end{figure}
+
 
 
 \begin{figure}[h]
@@ -2223,8 +2241,57 @@ Again, the author can make the choice of applying further interpretation convers
 <p>And the last paragraph</p>
 \end{lstlisting}
 \caption{Final output file (\texttt{[numbered].html}), of the conversion process specified by the orchestration file in Figure \ref{ex:numbered-headings-pipes-1}.}
+\label{ex:numbered-headings-flXML-ast-numbered-html-fragment}
 \end{figure}
 
+
+\begin{figure}[h]
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:template match="/">
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Example</title>
+        <meta charset="utf-8">
+      </head>
+      <body>
+        <xsl:value-of select="."/> 
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>
+\end{lstlisting}
+\caption{An XSLT package that wraps the whole document in an HTML document.}
+\label{ex:numbered-headings-xslt-package-html-wrapper}
+\end{figure}
+
+
+
+\begin{figure}[h]
+\begin{lstlisting}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example</title>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <h1>1 First heading </h1>
+    <p>And then some text</p>
+
+    <h2>1.2 A subheading </h2>
+    <p>And some more text</p>
+
+    <h1>2 Last heading </h1>
+    <p>And the last paragraph</p>
+  </body>
+</html>
+\end{lstlisting}
+\caption{Final HTML output with numbered headings.}
+\label{ex:numbered-headings-html-output}
+\end{figure}
 
 
 
