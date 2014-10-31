@@ -1969,8 +1969,40 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 
 
 \section{Proposal}
+\paragraph{The following paragraphs suggest an approach to meeting the artifact requirements.} TODO.
 
 
+
+\begin{figure}[h]
+  \centering
+
+  \begin{tikzpicture}[node distance=1cm]
+    \node (i) [dot]                           {$In$};
+    \node (P) [dot, right of=i, xshift=1cm]  {$Parse$};
+    \node (o) [dot, right of=P, xshift=5cm]  {$Out$};
+    \node (T) [dot, above of=o, xshift=-3cm] {$Translation$};
+    \node (I) [dot, below of=o, xshift=-3cm] {$Interpretation$};
+
+    \draw [arrow] (i) -- (P);
+    \draw [arrow] (P) to[out=90, in=90]  (o);
+    \draw [arrow] (P) -- (T);
+    \draw [arrow] (P) -- (I);
+    \draw [arrow] (T) -- (o);
+    \draw [arrow] (I) -- (o);
+    \draw [arrow] (I) -- (T);
+    \draw [arrow] (I) edge[loop below]();
+    \draw [arrow] (T) edge[loop above]();
+  \end{tikzpicture}
+
+  \caption{TODO.}
+  \label{fig:TODO}
+\end{figure}
+
+
+
+
+
+\color{red}
 % % % % % % % % % % % % % % % % % % % % % % % % % % 
 %
 %   PROPOSING AN IDEAL ABSTRACT LANGUAGE
