@@ -2156,10 +2156,44 @@ flexup.in("./[document].fup")
   .pipe(grammar("./[fupd].json"))              // parse custom syntax
   .out("./[raw].xml")                          // write to file as raw flXML
   .pipe(translation({                          // translate the document
-    "heading" : "numberedHeading"}))                    
+    "heading" : "numberedHeading"
+  }))                    
   .pipe(interpretation("numbered-headings"))   // add numbers, using package
   .out("./[numbered].xml");                    // write to file as numbered flXML
 \end{lstlisting}
+
+
+\paragraph{And if we kept on going we could go on an output this document as html}:
+
+\begin{lstlisting}
+flexup.in("./[document].fup")
+  .pipe(grammar("./[fupd].json"))
+  .out("./[raw].xml")
+  .pipe(translation({
+    "heading" : "numberedHeading"
+  }))                    
+  .pipe(interpretation("numbered-headings"))
+  .out("./[numbered].xml");
+  .pipe(translation({               // translate to appropriate html elements
+    "numberedHeading" : "h1",
+    "."               : "p"
+  }))
+  .pipe(interpretation("html"));    // use html package that wraps the doc in html tags
+  .out("./[numbered].html");        // write to file as numbered HTML
+\end{lstlisting}
+
+Which would bring us the output (numbered.html):
+\begin{lstlisting}
+<heading>(1) First heading </heading>
+And then some text
+
+<heading>(2) Second heading </heading>
+And some more text
+
+<heading>(3) Third heading </heading>
+And the last paragraph
+\end{lstlisting}
+
 
 
 \color{black}
