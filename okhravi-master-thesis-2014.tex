@@ -267,7 +267,7 @@ An example of such a naive approach to document conversion may be writing ad-hoc
 \label{eq:permutations-between-10-languages}
 \end{equation}
 
-A less naive approach to $n-to-n$ conversion is Pandoc, which make use of an intermediate language. This essentially mean that merely two conversion schemes has to be written per language. One that converts from the language to the intermediate language, and one that converts from the intermediate language to the language. This essentially decrease the (otherwise exponentially increasing) need for unique conversion schemes to merely $2n$. Thus 10 languages would require 20 conversion schemes. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
+A less naive approach to $n-to-n$ conversion is Pandoc\footnotePandoc{}, which make use of an intermediate language. This essentially mean that merely two conversion schemes has to be written per language. One that converts from the language to the intermediate language, and one that converts from the intermediate language to the language. This essentially decrease the (otherwise exponentially increasing) need for unique conversion schemes to merely $2n$. Thus 10 languages would require 20 conversion schemes. Generally visualized in Figure \ref{fig:n-to-n-conversion-boxes-with-intermediate-format}.
 
 
 
@@ -439,11 +439,11 @@ In order to clarify the use of the word ``interpretation'', consider the followi
 
 
 
-\paragraph{Pandoc handles the ability to produce different output documents from the same input document through two facilities.} One facility is templating, and the other is what the documentation refer to as ``scripting''\footnote{TODO: Reference}. The first essentially refer to the idea of constructing a template into which the input document is fed. Naturally, a unique template as needed for every unique output document. The second facility, scripting, is more general as it operates on a concrete JSON representation of the abstract syntax tree, i.e. what has previously been referred to as the intermediate language.
+\paragraph{Pandoc\footnotePandoc{} handles the ability to produce different output documents from the same input document through two facilities.} One facility is templating, and the other is what the documentation refer to as ``scripting''\footnote{TODO: Reference}. The first essentially refer to the idea of constructing a template into which the input document is fed. Naturally, a unique template as needed for every unique output document. The second facility, scripting, is more general as it operates on a concrete JSON representation of the abstract syntax tree, i.e. what has previously been referred to as the intermediate language.
 
-A visual interpretation of these facilities of Pandoc is depicted in Figure \ref{fig:interpretation-of-pandoc}.
+A visual interpretation of these facilities of Pandoc\footnotePandoc{} is depicted in Figure \ref{fig:interpretation-of-pandoc}.
 
-The main problem of the scripting approach of Pandoc, is that it is, as outlined by \citet{krijnen}, coupled to this intermediate language. As \citet{krijnen} suggest, it is ``unrealistic to expect that it can represent all document elements which are introduced by any of the existing or future standards''.
+The main problem of the scripting approach of Pandoc\footnotePandoc{}, is that it is, as outlined by \citet{krijnen}, coupled to this intermediate language. As \citet{krijnen} suggest, it is ``unrealistic to expect that it can represent all document elements which are introduced by any of the existing or future standards''.
 
 \citet{krijnen} suggest a less naive approach, that demonstrate how conversion schemes can be shared across different input and output languages, through working with grammars and a set of Haskell libraries. The main benefit of such an approach is that it enables flexible package sharing, in ways is similar to the eco-system of \LaTeX{} \citep{krijnen}.
 
@@ -718,9 +718,7 @@ Examples of such a program may for example be a \LaTeX{}-to-PDF converter, or a 
 
 \paragraph{Quadrant C programs take generalized input, and produce specialized output,} and thus contain a, quite odd, set of conversion programs, that, take input from any subset, but always output languages of a specific subset. If one would need to output a language from a different domain, then the program need to be rewritten.
 
-It is difficult to find pragmatically useful real-world examples as this quadrant represent programs with a very different intent than the idea of ``writing once and publishing everywhere''.
-
-Nevertheless, such a program might for example be an ``anything-to-XML converter'', that simply slaps a root tag onto whatever string it receives and escape any XML-like syntax from the input string in order to avoid syntax errors. Consequently the program would be able to receive any language, and yet always be able to output valid XML. Such a program is generally visualized in Figure \ref{fig:workflows-framework-gen-in-spec-out}.
+Such a program might for example be an ``anything-to-XML converter'', that simply encapsulates any string with a root tag and escapes any XML-like syntax from the input string in order to avoid syntax errors. Consequently the program would be able to receive any language, and yet always be able to output valid XML. Such a program is generally visualized in Figure \ref{fig:workflows-framework-gen-in-spec-out}.
 
 
 
@@ -849,7 +847,7 @@ and thus resemble the widely employed combination of XML and XSLT. Authors can e
 
 
 \paragraph{Quadrant A programs take generalized input, and produce generalized output,}
-and thus represent the most general kind of markup conversion programs. They take input in any language of the domain $\mathbb{N}$ and can produce output in any of the languages of the domain $\mathbb{N}$. An example program that exhibits this behavior is the widely used software Pandoc. Naturally, Pandoc is, of course, a pragmatic compromise and does not convert from every conceivable language to every conceivable language. However, it is perhaps the most successful effort in the area yet, and thus also serve as an example of the non-triviality associated with $n-n$ conversion. Such a program is generally visualized in Figure \ref{fig:workflows-framework-gen-in-gen-out}.
+and thus represent the most general kind of markup conversion programs. They take input in any language of the domain $\mathbb{N}$ and can produce output in any of the languages of the domain $\mathbb{N}$. An example program that exhibits this behavior is the widely used software Pandoc\footnotePandoc{}. Naturally, Pandoc\footnotePandoc{} is, of course, a pragmatic compromise and does not convert from every conceivable language to every conceivable language. However, it is perhaps the most successful effort in the area yet, and thus also serve as an example of the non-triviality associated with $n-to-n$ conversion. Such a program is generally visualized in Figure \ref{fig:workflows-framework-gen-in-gen-out}.
 
 
 
@@ -1841,7 +1839,7 @@ While Scribe is an example of a descriptive markup language that enable derived 
 \subsection{Derived text across language boundaries}
 \paragraph{Reusing text derivation strategies (i.e. code) across different languages is not unreasonable, but is also not trivial.} Consider for example the concept of a table of contents. While the syntactic implementations details may vary from language to language, the general idea of a table of contents is essentially the same regardless of language. Namely, to traverse the list of headings, into some given depth, and then produce a (perhaps indented) list of these headings.
 
-As highlighted by \citet{krijnen}, coupling a mechanism of derived text to a given language makes it very hard to share derivation strategies (i.e. code) between languages.  \citet{krijnen} extend the commonly used universal document converter Pandoc\footnotePandoc, with the explicit intent of getting back ``the flexibility e.g. offered by the packages in the \LaTeX{} eco-system''. As Pandoc has a ``fixed'' intermediate language, \citet{krijnen} constructs a set of Haskell libraries that enable document authors to, essentially, ``map'' newly introduced elements of some language to the intermediate language. Consequently, if the author then writes text derivation strategies for that particular target of the intermediate language it means that all potential input languages that employ some mapping to that particular target will be able to reuse the text derivation strategy.
+As highlighted by \citet{krijnen}, coupling a mechanism of derived text to a given language makes it very hard to share derivation strategies (i.e. code) between languages.  \citet{krijnen} extend the commonly used universal document converter Pandoc\footnotePandoc{}, with the explicit intent of getting back ``the flexibility e.g. offered by the packages in the \LaTeX{} eco-system''. As Pandoc\footnotePandoc{} has a ``fixed'' intermediate language, \citet{krijnen} constructs a set of Haskell libraries that enable document authors to, essentially, ``map'' newly introduced elements of some language to the intermediate language. Consequently, if the author then writes text derivation strategies for that particular target of the intermediate language it means that all potential input languages that employ some mapping to that particular target will be able to reuse the text derivation strategy.
 
 \paragraph{The paper by \citet{krijnen} essentially prove that it is possible allow document authors to merely ``map'' identifiers in an input language, to some intermediate language, and then employ derived text conversions on that intermediate language.} In other words, that it is possible to, with the help of ``mapping'', reuse text derivation strategies across language boundaries.
 
@@ -2374,7 +2372,7 @@ This thesis set out with the intent of reaching two deliverables. Both of which 
 \paragraph{The intent of the thesis}
 was to show that the idea of ``n-to-n'' document conversion is so utterly complicated that it is more pragmatic to consider alternative ways of approaching the problem from an ``1-to-n'' perspective.
 
-This intent has been met through discussing the fallacies of approaches such as Pandoc, and allowing the ideal workflow suggested in this thesis to contrast. In retrospect one could argue this thesis shows tendencies towards that ``1-to-n'' document conversions actually may be a significantly more satisfying approach to the notion of ``write once, publish everywhere''.
+This intent has been met through discussing the fallacies of approaches such as Pandoc\footnotePandoc{}, and allowing the ideal workflow suggested in this thesis to contrast. In retrospect one could argue this thesis shows tendencies towards that ``1-to-n'' document conversions actually may be a significantly more satisfying approach to the notion of ``write once, publish everywhere''.
 
 
 \paragraph{The intent of the thesis}
