@@ -154,7 +154,7 @@ Every day the number of markup languages increase. Every day the number of docum
 
 This thesis suggest an approach less complex than the first, yet more flexible than the other. An $M-to-N$ approach. Where the language constructs of $M$ exist in all languages in $N$. This thesis argue the benefit of converting ``down the abstraction chain'', from more abstract languages to less abstract languages. Or in other words, from less complex languages to increasingly complex languages.
 
-The thesis reach two concrete contributions: (1) A suggestion for how to parse a syntax-less language that encapsulate many of the languages in $M$, and (2) a model of an ideal transformation process for markup, that allow for transformations from $M$ to $N$. Positive side-effects of such an approach is composability, package sharing, and declarative configurability. \\
+The thesis reach two concrete contributions: (1) A suggestion for how to parse a syntax-less language that encapsulate many of the languages in $M$, and (2) a model of an ideal conversion process for markup, that allow for conversions from $M$ to $N$. Positive side-effects of such an approach is composability, package sharing, and declarative configurability. \\
 
 
 Keywords: TODO  \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
@@ -646,7 +646,7 @@ TODO. "Fika".
 
 
 \section{Destructive and non-destructive conversions}
-TODO. Scaling down vs. simply transforming the image within the same resolution.
+TODO. Scaling down vs. simply converting the image within the same resolution.
 
 \section{Conversions inside or outside the bounds of a language}
 \label{sec:conversions-in-or-out-of-languages}
@@ -901,7 +901,7 @@ Consequently, this thesis instead explores quadrant B programs, and attempts to 
 % TODO:
 % However, we are only informally talking about sets and subsets here. Since most languages that we want to convert to (e.g. XML, LaTeX) are definitely not regular they are thus at least context-free. In the Chomsky Hierarchy. And since context-free grammars are not closed under language inclusion, this mean we cannot actually certainly say that some language actually is a subset of another language.
 
-\paragraph{This thesis suggest an approach that can be similar to a pipeline of template}, much like the notion of UNIX pipes\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}), and through this achieve a high level of composability. Instead of a one-pass-transform, transformations are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
+\paragraph{This thesis suggest an approach that can be similar to a pipeline of template}, much like the notion of UNIX pipes\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}), and through this achieve a high level of composability. Instead of a one-pass-conversion, conversions are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
 
 \color{black}
 % TODO: Returning to black, to mark end of potentially deprecated section.
@@ -977,7 +977,7 @@ The research goals have been met through analyzing foundational characteristics 
 
 \section{Thesis outline}
 \color{red}
-This thesis is centered around two major contributions. A new markup language, and a model for markup transformation.
+This thesis is centered around two major contributions. A new markup language, and a model for markup conversion.
 
 The high-level goals already introduced in this background chapter is aimed to guide these two contributions, and will constantly be returned to, and reflected upon, throughout the thesis.
 
@@ -1921,9 +1921,9 @@ The following three are thus properties that must be supported by the input and 
 \color{red}
 \subsubsection{Using configurations to map processing functions (TODO -- remove?)}
 \label{sec:applying-three-step-model-to-quad-b}
-In order to truly adhere to the second and third high-level goals (composability, and extendability), one sensible, and obvious, approach would be to allow transformations to be configured. Consider XSLT as en example. Assume one were to construct a package system (such as the package system of \LaTeX) or (perhaps even) a public package channel\footnote{A ``package channel'' refer here to the idea of a unified publicly accessible package system, such as e.g. \texttt{apt-get}, \texttt{RubyGems} or \texttt{npm}}. Consider now that authors are free to choose element names freely in XML. This mean it would either be utterly difficult for a package creator to assume the right names for some set of elements when constructing the package, or it would spawn a situation where document authors would have to constantly adapt to the names used in packages. This of course violates the second high-level goal as it makes the package-eco-system significantly less composable.
+In order to truly adhere to the second and third high-level goals (composability, and extendability), one sensible, and obvious, approach would be to allow conversions to be configured. Consider XSLT as en example. Assume one were to construct a package system (such as the package system of \LaTeX) or (perhaps even) a public package channel\footnote{A ``package channel'' refer here to the idea of a unified publicly accessible package system, such as e.g. \texttt{apt-get}, \texttt{RubyGems} or \texttt{npm}}. Consider now that authors are free to choose element names freely in XML. This mean it would either be utterly difficult for a package creator to assume the right names for some set of elements when constructing the package, or it would spawn a situation where document authors would have to constantly adapt to the names used in packages. This of course violates the second high-level goal as it makes the package-eco-system significantly less composable.
 
-One sensible alternative would be to apply the three-step approach to document conversion, proposed by \citet{goldfarb}. Applying this three-step process allow different intents to be left to different parts of the eco-system. Step one and two (recognition and mapping) would be carried out by the individual that aim to \emph{use} the package. Where the second step would allow the user to map the names of her elements onto the names of the elements in the ``processing function'' (PF) (i.e. the package). The package creator would thus create, only the PF. It is important of course that the PF would have to be created in a way such that it allows arguments to be passed, and thus mapped onto the variable element names within the PF.  Step three would be carried out by the transformation program itself.
+One sensible alternative would be to apply the three-step approach to document conversion, proposed by \citet{goldfarb}. Applying this three-step process allow different intents to be left to different parts of the eco-system. Step one and two (recognition and mapping) would be carried out by the individual that aim to \emph{use} the package. Where the second step would allow the user to map the names of her elements onto the names of the elements in the ``processing function'' (PF) (i.e. the package). The package creator would thus create, only the PF. It is important of course that the PF would have to be created in a way such that it allows arguments to be passed, and thus mapped onto the variable element names within the PF.  Step three would be carried out by the conversion program itself.
 
 For the sake of standardization it would of course, and again, proper composability, it would of course make sense to standardize the way that a PF exposes its arguments.
 
@@ -2360,7 +2360,7 @@ This thesis set out with the intent of reaching two deliverables. Both of which 
 
 \begin{enumerate}
 \item A suggestion for a minimal markup language with no default syntax,
-\item A model depicting an ideal workflow for markup transformations.
+\item A model depicting an ideal workflow for markup conversions.
 \end{enumerate}
 
 \paragraph{Regarding the first deliverable,} it is indeed not a full specification for a language, but some strategic extracts depicting the lexing, parsing and usage of such a language family. The extracts underline the actual realizability of such a language. Even though much is left before such a language can be considered sound, it is apparent there exist no obvious barriers to as why such a language should not be able to be constructed.
@@ -2377,7 +2377,7 @@ This intent has been met through discussing the fallacies of approaches such as 
 \paragraph{The intent of the thesis}
 was to show that it is significantly easier to convert a document language with utterly few constructs to any other markup language, rather than having to ``make sense'' out of complex constructs that exist in a source language but have no really sensible counterpart in a different destination language.
 
-Also this intent has been satisfied through showing how the transformation process easily can be cut into highly composable pieces as long as the starting point is the most abstract possible representation of a document. Again, there are tendencies pointing towards that ``1-to-n'' might not just be a more realistic approach, but actually a significantly more powerful.
+Also this intent has been satisfied through showing how the conversion process easily can be cut into highly composable pieces as long as the starting point is the most abstract possible representation of a document. Again, there are tendencies pointing towards that ``1-to-n'' might not just be a more realistic approach, but actually a significantly more powerful.
 
 
 
@@ -2407,9 +2407,9 @@ Also this intent has been satisfied through showing how the transformation proce
 
 
 \chapter{Analysis}
-The most important realization in regards to this project, is that it seem almost trivial to divide the transformation process into composable parts when employing an ``M-to-N'' approach rather than the ``N-to-N''. That producing composable package channels never proved to be cumbersome, as long as the correct packages are used at the correct level in the abstraction chain. As long as each transformation moves the document in the ``right'' way through the abstraction chain. In other words, when each transformation moves the document from a higher level of abstraction to a lower, or of course stays at the same, then packaging and composability seem not to be a major issue. It is likely that many issues in sharing transformation packages may stem from transforming documents in the ``wrong'' way through the abstraction chain. In other words from less abstract to more abstract. Consider scaling a bitmap image. Scaling down works perfectly fine, but scaling up pose highly problematic.
+The most important realization in regards to this project, is that it seem almost trivial to divide the conversion process into composable parts when employing an ``M-to-N'' approach rather than the ``N-to-N''. That producing composable package channels never proved to be cumbersome, as long as the correct packages are used at the correct level in the abstraction chain. As long as each conversion moves the document in the ``right'' way through the abstraction chain. In other words, when each conversion moves the document from a higher level of abstraction to a lower, or of course stays at the same, then packaging and composability seem not to be a major issue. It is likely that many issues in sharing conversion packages may stem from converting documents in the ``wrong'' way through the abstraction chain. In other words from less abstract to more abstract. Consider scaling a bitmap image. Scaling down works perfectly fine, but scaling up pose highly problematic.
  
-\paragraph{Attempting ``M-to-N'' instead of ``N-to-N''} seem to be another way to look at this ``walking in the right direction'' of the abstraction chain. If one starts ($M$) at the intersection of all possible languages (all $N$) one may want to output to, then it is only reasonable to assume that the level of abstraction will be utterly high from the beginning. Subsequently then decrease as transformations move it closer and closer to concrete languages.
+\paragraph{Attempting ``M-to-N'' instead of ``N-to-N''} seem to be another way to look at this ``walking in the right direction'' of the abstraction chain. If one starts ($M$) at the intersection of all possible languages (all $N$) one may want to output to, then it is only reasonable to assume that the level of abstraction will be utterly high from the beginning. Subsequently then decrease as conversions move it closer and closer to concrete languages.
 
 
 
@@ -2444,7 +2444,7 @@ The most important realization in regards to this project, is that it seem almos
 \chapter{Discussion}
 The greatest flaw of this paper is the fact that no complete production code was produced. Fragments have been produced to ensure that all snippets in this paper are correct and functional. For example, one discussion that has been avoided is that of the need for some kind of controlled intermediate language that would be used when sending the file from one subprogram to another.
 
-The author is currently working on an open-sourced implementation of the ideal model of markup transformation. Contacts are welcome.
+The author is currently working on an open-sourced implementation of the ideal model of markup conversion. Contacts are welcome.
 
 
 
@@ -2459,10 +2459,10 @@ For future research the author of this paper would be very interesting to see an
 \item An actual implementation of the programs and languages described in this paper.
 \item Approaches to handle non-hierarchical markup.
 \item A deeper analysis of the different kind of syntaxes that would be possible to express through a simple Formal Grammar DSL such as the one outlined in this thesis. Consider for example the many different ways of marking up content using SGML (through e.g. omitting tags).
-\item Alternative models of ideal transformation workflows.
-\item Approaches on how to write the configuration files depicted in the transformation models.
-\item Attempts to harmonize the use of many different programming languages within this transformation model.
-\item Attempts to carry out the modeled transformation processes without compiling in each step. It seems reasonable to assume that it could be done through constant remapping, and thus only compiled in the very end.
+\item Alternative models of ideal conversion workflows.
+\item Approaches on how to write the configuration files depicted in the conversion models.
+\item Attempts to harmonize the use of many different programming languages within this conversion model.
+\item Attempts to carry out the modeled conversion processes without compiling in each step. It seems reasonable to assume that it could be done through constant remapping, and thus only compiled in the very end.
 \end{itemize}
 
 
