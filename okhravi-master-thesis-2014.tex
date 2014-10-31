@@ -853,7 +853,7 @@ and thus represent the most general kind of markup conversion programs. They tak
 
 \paragraph{In a perfect world, conversion programs would painlessly convert any language to any language and thus exist in  Quadrant A.} However, as implied in the beginning of this thesis -- writing a pragmatically useful Quadrant A program is not trivial because converting any language to any language will require conversions from languages with lower semantic resolution to those with higher, which this thesis argue is an impossibility.
 
-Consequently, this thesis instead explores quadrant B programs, and attempts to identify the properties required for a program, and its corresponding input language, to enable $1-n$ while only allowing conversions ``down'' the abstraction chain.
+Consequently, this thesis instead explores quadrant B programs, and attempts to identify the properties required for a program, and its corresponding input language, to enable $1-to-n$ conversions while, to the greatest extent possible, only converting ``down'' the abstraction chain (i.e. from higher resolution, to lower resolution).
 
 
 % TODO: Should I actually write about this?
@@ -882,7 +882,6 @@ Consequently, this thesis instead explores quadrant B programs, and attempts to 
 
 % \subsubsection{Composition \& Abstraction}
 % The minimal denominator.
-\color{black}
 
 
 
@@ -892,19 +891,16 @@ Consequently, this thesis instead explores quadrant B programs, and attempts to 
 
 
 
-
-
-
-\section{Language conversion as a series of pipes}
-\color{red}
-\paragraph{Instead, consider the following idea.} Let $N$ be all the languages an author may want to convert to. Let all the concrete languages of $N$ be represented by $n_1, n_2, .., n_n$. Let $M$ be some subset of the languages in $N$ (i.e. $M \subseteq N$). Such that the languages of $M$ exhibit only language properties also exhibited by all languages of $N$. In other words, any string in $M$ must be expressible in any of the languages $n_1, n_2, .., n_n$. In other words, $M$ is a subset of the intersection of all languages in $N$, i.e: $M \subseteq (n_1 \cap n_2 \cap .. \cap n_n)$.
+% \section{Language conversion as a series of pipes}
+% \color{red}
+% \paragraph{Instead, consider the following idea.} Let $N$ be all the languages an author may want to convert to. Let all the concrete languages of $N$ be represented by $n_1, n_2, .., n_n$. Let $M$ be some subset of the languages in $N$ (i.e. $M \subseteq N$). Such that the languages of $M$ exhibit only language properties also exhibited by all languages of $N$. In other words, any string in $M$ must be expressible in any of the languages $n_1, n_2, .., n_n$. In other words, $M$ is a subset of the intersection of all languages in $N$, i.e: $M \subseteq (n_1 \cap n_2 \cap .. \cap n_n)$.
 
 % TODO:
 % However, we are only informally talking about sets and subsets here. Since most languages that we want to convert to (e.g. XML, LaTeX) are definitely not regular they are thus at least context-free. In the Chomsky Hierarchy. And since context-free grammars are not closed under language inclusion, this mean we cannot actually certainly say that some language actually is a subset of another language.
 
-\paragraph{This thesis suggest an approach that can be similar to a pipeline of template}, much like the notion of UNIX pipes\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}), and through this achieve a high level of composability. Instead of a one-pass-conversion, conversions are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
+%\paragraph{This thesis suggest an approach that can be similar to a pipeline of template}, much like the notion of UNIX pipes\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}), and through this achieve a high level of composability. Instead of a one-pass-conversion, conversions are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
 
-\color{black}
+%\color{black}
 % TODO: Returning to black, to mark end of potentially deprecated section.
 
 
