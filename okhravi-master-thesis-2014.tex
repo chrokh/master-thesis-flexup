@@ -2018,10 +2018,151 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 
 
 
+% % % % % % % % % % % % % % % % % % % % % % % % % % 
+%
+%
+%
+%   EMPIRICS
+%
+%
+%
+% % % % % % % % % % % % % % % % % % % % % % % % % % 
+
+
+\color{red}
+\chapter{Empirics}
+
+\section{Simple example}
+
+\paragraph{Given the following input document}:
+
+\begin{lstlisting}
+[q]This **string** exhibits _both **nesting** and **mixed content**_[/q]
+\end{lstlisting}
+
+
+\paragraph{And this language description}:
+
+\begin{lstlisting}
+{
+  "emph"      : "**%**",
+  "underline" : "_%_",
+  "quote"     : "[q]%[/q]"
+}
+\end{lstlisting}
+
+
+\paragraph{We reach this intermediate flXML}:
+
+\begin{lstlisting}
+<quote>
+  <emph>string</emph>
+  exhibits
+  <underline>
+    both
+    <emph>nesting</emph>
+    and
+    <emph>mixed content</emph>
+  </underline>
+</quote>
+\end{lstlisting}
 
 
 
 
+\color{orange}
+
+\section{Numbered headings example}
+
+\paragraph{Given the following input document}:
+
+\begin{lstlisting}
+## First heading ##
+And then some text
+
+## Second heading ##
+And some more text
+
+## Third heading ##
+And the last paragraph
+\end{lstlisting}
+
+
+\paragraph{And this language description}:
+
+\begin{lstlisting}
+{
+  "heading" : "##%##"
+}
+\end{lstlisting}
+
+
+\paragraph{We reach this intermediate flXML}:
+
+\begin{lstlisting}
+<heading>First heading</heading>
+And then some text
+
+<heading>Second heading</heading>
+And some more text
+
+<heading>Third heading</heading>
+And the last paragraph
+\end{lstlisting}
+
+
+\paragraph{So if there exist an XSLT package for numbered headings}:
+\begin{lstlisting}
+<?xml version="1.0" encoding="utf-8"?>
+<xsl:stylesheet version="1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:template match="//numberedHeading">
+  <numberedHeading>
+    (<xsl:value-of select="count(preceding-sibling::numberedHeading)+1"/>)
+    <xsl:value-of select="." />
+  </numberedHeading>
+</xsl:template>
+</xsl:stylesheet>
+\end{lstlisting}
+
+
+\paragraph{We can translate our document so that the domain names of our document match the domain names of the package}, using the following configuration:
+\begin{lstlisting}
+{
+  "heading": "numberedHeading"
+}
+\end{lstlisting}
+
+
+\paragraph{And thus we reach the following output document}:
+\begin{lstlisting}
+<heading>(1) First heading </heading>
+And then some text
+
+<heading>(2) Second heading </heading>
+And some more text
+
+<heading>(3) Third heading </heading>
+And the last paragraph
+\end{lstlisting}
+
+
+
+
+\paragraph{And all of these steps could be carried out using the following orchestration file}:
+
+\begin{lstlisting}
+flexup.in("./[document].fup")
+  .pipe(grammar("./[fupd].json"))              // parse custom syntax
+  .out("./[raw].xml")                          // write to file as raw flXML
+  .pipe(translation({                          // translate the document
+    "heading" : "numberedHeading"}))                    
+  .pipe(interpretation("numbered-headings"))   // add numbers, using package
+  .out("./[numbered].xml");                    // write to file as numbered flXML
+\end{lstlisting}
+
+
+\color{black}
 
 
 
