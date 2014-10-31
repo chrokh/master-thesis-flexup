@@ -507,7 +507,7 @@ The main problem of the scripting approach of Pandoc, is that it is, as outlined
 
 \section{Markup has resolution}
 
-\paragraph{This thesis is based upon the hypothesis that there exist a hierarchy of abstraction, in which conversions are trivial in one direction but significantly more complex in the other.} Call the complex direction ``up'', and the trivial ``down''. If true, then it must be considered futile to attempt to convert ``up'' in the chain, and if converting ``up'' is futile, then it must be considered a priority to express all documents, in potential need of conversion, in a language as ``low'' in the abstraction chain as possible. 
+\paragraph{This thesis is based upon the hypothesis that there exist a hierarchy of abstraction, in which conversions are trivial in one direction but significantly more complex in the other.} Call the complex direction ``up'', and the trivial ``down''. If true, then it must be considered futile to attempt to convert ``up'' in the chain, and if converting ``up'' is futile, then it must be considered a priority to express all documents, in potential need of conversion, in a language as ``high'' up in the abstraction chain as possible. 
 
 \paragraph{It has already been argued that markup languages can be categorized according to properties, and it is such properties must determine whether a given language is more abstract than another, i.e. weather one language can be converted to another or not.}
 An example of such a categorization is whether a language is presentation-oriented or not. One could argue, that the idea of presentation is a specialization, where the idea of describing a thing outside of its domain of presentation is an abstraction. This would mean, that languages concerned with presentation are less abstract (i.e. more specialized) than those not concerned with presentation.
@@ -520,11 +520,27 @@ Converting from a non-presentational language to a presentational language is a 
 
 \paragraph{The chain of abstractions is perhaps better explained by analogy of a tree,} rather than a chain. Consider Figure \ref{fig:fictive-specialization-tree}, in which the language $L$ is the most abstract, and the languages ``below'' are specializations of that language. It is important to understand that, like in any hierarchy, branchings may exist. Which becomes apparent through considering the siblings $L1$, $L2$ and their relationship. However, it is also important to remember that the hypothesis suggest to only allow conversions from parent to child (i.e. ``down'') and never from child to parent (i.e. ``up''), nor from child to child (i.e. ``sideways'').
 
-\paragraph{Consider the following concrete example of the three languages HTML, \LaTeX, and Markdown.} Figure \ref{fig:hierarchy-of-abstraction-example-tree} depicts one potential interpretation of the relationship between the three languages. The word \emph{one} is used instead of \emph{the} to emphasize that this particular relationship might not hold when considering all properties of these languages. The figure is to be considered an oversimplified example.
+\begin{figure}[h]
+  \centering
+  \begin{tikzpicture}[
+    tlabel/.style={pos=1,right=2pt,font=\footnotesize\color{red!70!black}},
+      sibling distance=1.5cm,
+    ]
+    \node {$L$}
+    child {node {$L1$}}
+    child {node {$L2$}}
+    ;
+  \end{tikzpicture}
+
+  \caption{Fictive tree of abstraction, over the three languages $\{L, L1, L2\}$.}
+  \label{fig:fictive-specialization-tree}
+\end{figure}
+
+\paragraph{Consider the following concrete example of the three languages HTML, \LaTeX{}, and Markdown.} Figure \ref{fig:hierarchy-of-abstraction-example-tree} depicts one potential interpretation of the relationship between the three languages. The word \emph{one} is used instead of \emph{the} to emphasize that this particular relationship might not hold when considering all properties of these languages. The figure is to be considered an oversimplified example.
 
 HTML is (in Figure \ref{fig:hierarchy-of-abstraction-example-tree}) depicted as the parent language (i.e. the most abstract), while \LaTeX and Markdown, are depicted as children (i.e. derivations) of that language (and are thus more specialized). The hypothesis thus suggests that converting from HTML to either \LaTeX{} or Markdown should be considered a ``safe'' task, while all other conversions (i.e. ``up'' or ``sideways'') should be considered ``unsafe''.
 
-Consider then the concrete sentence (or rather: document fragment) expressed in all of these languages (still Figure \ref{fig:hierarchy-of-abstraction-example-tree}. The fragment, expressed in HTML, employ the use of the two distinct elements \texttt{em} (emphasis) and \texttt{i} (italics). While these two, in web browsers, render the same, the following quote, from the HTML5 specification,\footnote{http://www.w3.org/TR/html5/text-level-semantics.html\#the-em-element} explain the existence of a semantic difference.
+Consider then the concrete sentence (or rather: document fragment) expressed in all of these languages (still Figure \ref{fig:hierarchy-of-abstraction-example-tree}). The fragment, expressed in HTML, employ the use of the two distinct elements \texttt{em} (emphasis) and \texttt{i} (italics). While these two, in web browsers, render the same, the following quote, from the HTML5 specification,\footnote{http://www.w3.org/TR/html5/text-level-semantics.html\#the-em-element} explain the existence of a semantic difference.
 
 \begin{quote}
 ``The \emph{em} element isn't a generic \emph{italics} element. Sometimes, text is intended to stand out from the rest of the paragraph, as if it was in a different mood or voice. For this, the \emph{i} element is more appropriate.''
@@ -577,8 +593,8 @@ The number of semantically different syntactical constructs of a language, perfe
 There are of course instances where converting from a low-resolution language to a high-resolution pose no problem at all. Consider for example a 200x200 pixels perfectly black image. Scaling this image down to a resolution of 20x20 pixels, and then scaling it back up to a resolution of 200x200 pose no problem at all. The final image is exactly the same as the original. Consider then on the other hand a 200x200 pixel portrait photograph. Scaling this image down to a resolution of 20x20, and then scaling it back up to 200x200 cause serious information loss. The final image is now merely an approximation of the original.
 
 
-\paragraph{\color{red}Retainment of distinction must be determined on the basis of languages, not languages, nor instances of languages.}
-\paragraph{Retainment of distinction must be determined on the basis of languages, not instances of languages.} In the language of pixels, it is trivial to imagine cases where conversions from low resolution to high resolution indeed cause no loss of information (consider the black square). However, this is, again, a fortunate effect of the specific case. It is equally trivial to imagine a counter-example, where in the same language, such a conversion will cause loss of information (consider the portrait photograph).
+\paragraph{Thus, retainment of distinction between two languages must be determined on the basis of all syntactical constructs of a language, and not merely those utilized in particular instances.}
+In the language of pixels, it is trivial to imagine cases where conversions from low resolution to high resolution indeed cause no loss of information (consider the black square). However, this is, again, a fortunate effect of the specific case. It is equally trivial to imagine a counter-example, where in the same language, such a conversion will cause loss of information (consider the portrait photograph).
 
 The same apply to markup languages. It is trivial to imagine an example where conversion from a low-resolution language (e.g. Markdown) to a high-resolution language (e.g. HTML) will cause no information loss. Consider for example how all information is retained in Figure \ref{fig:low-to-high-resolution-non-destructive}. However, as with pixel resolution, it is equally trivial to imagine an example where information (i.e. distinction) is in fact lost. Consider for example how information is lost in Figure \ref{fig:low-to-high-resolution-destructive}.
 
@@ -626,8 +642,6 @@ The same apply to markup languages. It is trivial to imagine an example where co
 \end{figure}
 
 
-
-TODO. Perhaps draw pixels on grids to exemplify.
 
 
 
