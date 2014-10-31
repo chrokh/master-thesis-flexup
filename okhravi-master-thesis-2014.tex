@@ -1889,6 +1889,7 @@ As highlighted by \citet{krijnen}, coupling a mechanism of derived text to a giv
 
 
 \section{Requirements}
+\label{sec:empirical-requirements}
 \paragraph{The following paragraphs outline the requirements that were used when developing the artifact.} The requirements are derived from the Theory and Background chapters.
 
 \begin{itemize}
@@ -1967,17 +1968,37 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
 %
 % % % % % % % % % % % % % % % % % % % % % %
 
-
+\color{black}
 \section{Proposal}
-\paragraph{The following paragraphs suggest an approach to meeting the artifact requirements.} TODO.
+
+\paragraph{In order to facilitate the sharing of packages (i.e. code) for common conversion tasks, the proposed solution is built upon a UNIX-like notion of pipes.}  The core command line tools in UNIX all operate on strings, read from standard in (stdin), and print to standard out (stdout). This standardization enables synergy and make the whole of the core UNIX programs much greater than the sum of its parts.
+
+The prototype proposal follows this notion of pipes, where input to, and output from, all conversion packages are simplified subset of XML, call it \texttt{flXML}. This goes for all conversions except the initial input, and the final output. The initial input is be given in an ad-hoc language constructed by the author of the document, and the final output document may break the language boundary of \texttt{flXML}, in order to be able to output to arbitrary formats such as PDF, CSV, RTF, etc..
 
 
+\paragraph{In order to adhere to the last point of the requirements outlined in Section (\ref{sec:empirical-requirements}), interpretation conversions and translation conversions will be separated, and translation conversions will always be allowed to precede interpretation conversions.} This enables authors employ the concept of ``mapping'' from the three-step model of \citet{goldfarb}, and essentially enable authors to ``rename'' elements before sending their documents through some interpretation conversion package, in order for the interpretation conversion package to identify the elements correctly.
+
+Figure \ref{fig:model-of-conversion-protype-artifact} visualize the suggestion of possible ways of converting, and its properties are further explained below:
+
+\begin{itemize}
+
+\item $In$ represents the input document, written by the author in some ad-hoc arbitrary syntax (where double asterisk for example might denote the concept of bold, see Figure \ref{ex:numbered-headings-input} for an example).
+
+\item $Out$ is the final target document, which may be expressed in an arbitrary format if the last step in a particular run was a $Translation$, that brought the document into another language. Only $Translations$ can produce documents in other languages.
+
+\item $Parse$ is the process in which the document expressed in the arbitrary ad-hoc language gets translated into \texttt{flXML}. This is possible since the ad-hoc language designed by the author must be defined and supplied in a very simple JSON syntax (call it Flexup Definitions -- \texttt{fupd}) -- see Figure \ref{ex:numbered-headings-fupd} for an example. Each ``key'' in the JSON object of the Flexup definition will become the name of all elements captured by that particular syntax definition.
+
+\item $Translation$ represents translation conversions, in other words, simple in-language conversions that may or may not be destructive. Translations are, as described in the background chapter, always one-to-one conversions, i.e. no elements are introduced and no elements are removed in such a conversion.
+
+\item $Interpretation$ represents the package-sharable conversions. Since \texttt{flXML} is a subset of XML, interpretation conversion packages are written using XSLT. If an author wishes to use an interpretation conversion package that utilize elements with different names than the author currently have in the document, then the author can simply pipe the document through a $Translation$ and rename all elements in need of renaming.
+
+\end{itemize}
 
 \begin{figure}[h]
   \centering
 
   \begin{tikzpicture}[node distance=1cm]
-    \node (i) [dot]                           {$In$};
+    \node (i) [dot]                          {$In$};
     \node (P) [dot, right of=i, xshift=1cm]  {$Parse$};
     \node (o) [dot, right of=P, xshift=5cm]  {$Out$};
     \node (T) [dot, above of=o, xshift=-3cm] {$Translation$};
@@ -1989,14 +2010,17 @@ Figure \ref{fig:quad-b-with-three-step-process} depict the Quadrant B model refi
     \draw [arrow] (P) -- (I);
     \draw [arrow] (T) -- (o);
     \draw [arrow] (I) -- (o);
-    \draw [arrow] (I) -- (T);
+    \draw [arrow] (I) to[out=110, in=-110] (T);
+    \draw [arrow] (T) to[out=-70, in=70] (I);
     \draw [arrow] (I) edge[loop below]();
     \draw [arrow] (T) edge[loop above]();
   \end{tikzpicture}
 
-  \caption{TODO.}
-  \label{fig:TODO}
+  \caption{Model depicting possible conversion workflows of the proposed artifact.}
+  \label{fig:model-of-conversion-protype-artifact}
 \end{figure}
+
+A usage example of the program prototype is given in Section \ref{sec:prototype}, and an example of the usage of pipes is depicted in Figure \ref{ex:numbered-headings-pipes-1}.
 
 
 
@@ -2468,7 +2492,7 @@ While the author of this paper would suggest it sensible to initially build one 
 
 
 \section{Prototype}
-
+\label{sec:prototype}
 \begin{figure}[h]
 \begin{lstlisting}
 start   = (element / text)*
