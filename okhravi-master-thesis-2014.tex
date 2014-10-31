@@ -2297,32 +2297,29 @@ Figure \ref{ex:numbered-headings-xslt-package-html-wrapper} illustrates a Flexup
 
 \begin{figure}[h]
 \begin{lstlisting}
-flexup.in("./[document].fup")
-  .pipe(grammar("./[fupd].json"))
-  .out("./[ast].xml")
-  .pipe(translation({
+flexup.in("./[document].fup")                 // read input file
+  .pipe(grammar("./[fupd].json"))             // parse using fupd
+  .out("./[ast].xml")                         // write raw ast to disk
+  .pipe(translation({                         // translation
     "//head"    : "heading",
     "//subhead" : "subheading"
   }))                    
-  .pipe(interpretation("numbered-headings"))
-  .out("./[numbered].xml");
-  .pipe(translation({               // translate to appropriate html elements
+  .pipe(interpretation("number-headings"))    // interpretation package
+  .out("./[numbered].xml");                   // write ast to disk
+  .pipe(translation({                         // translation
     "heading"    : "h1",
     "subheading" : "h2",
     "."          : "p"
   }))
-  .pipe(interpretation("html"));    // use html package that wraps the doc in html tags
-  .out("./[numbered].html");        // write to file as numbered HTML
+  .pipe(interpretation("html-wrap"));         // interpretation package
+  .out("./[numbered].html");                  // write output to disk
 \end{lstlisting}
 \caption{Orchestration file.}
 \label{ex:numbered-headings-pipes-1}
 \end{figure}
 
 
-
-
-\color{black}
-
+\paragraph{In order to orchestrate all of the steps above, the artifact has an API in which the pipes can be utilized.} The syntax of the orchestration file is heavily inspired by the ``streaming build system'' gulp.js\footnote{https://github.com/gulpjs}. All of the steps of the usage example in this section could be carried out through usage of the API, as depicted in Figure \ref{ex:numbered-headings-pipes-1}.
 
 
 
