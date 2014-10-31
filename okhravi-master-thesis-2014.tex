@@ -1968,7 +1968,7 @@ The following three are thus properties that must be supported by the input and 
 \color{black}
 \section{Proposal}
 
-\paragraph{In order to facilitate the sharing of packages (i.e. code) for common conversion tasks, the proposed solution is built upon a UNIX-like notion of pipes.}  The core command line tools in UNIX all operate on strings, read from standard in (stdin), and print to standard out (stdout). This standardization enables synergy and make the whole of the core UNIX programs much greater than the sum of its parts.
+\paragraph{In order to facilitate the sharing of packages (i.e. code) for common conversion tasks, the proposed solution is built upon a UNIX-like notion of pipes.}  The core command line tools in UNIX all read from standard in (stdin), and print to standard out (stdout)\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}. This standardization enables synergy and make the whole of the core UNIX programs much greater than the sum of its parts.
 
 The prototype proposal follows this notion of pipes, where input to, and output from, all conversion packages are simplified subset of XML, call it \texttt{flXML}. This goes for all conversions except the initial input, and the final output. The initial input is be given in an ad-hoc language constructed by the author of the document, and the final output document may break the language boundary of \texttt{flXML}, in order to be able to output to arbitrary languages such as PDF, CSV, RTF, etc..
 
