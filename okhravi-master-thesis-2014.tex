@@ -1677,7 +1677,7 @@ As a more informal argument, anyone who has ever authored a sequential document 
 
 \paragraph{The fact that authors of XML documents can name their elements almost arbitrarily is enabled by, what is commonly referred to as, Generic Identifiers (GI's), and give authors the power of languages over infinite words, but also shifts the responsibility of document validation, from the language designer, to the document author.}
 
-Generic Identifiers was already present in GML, and as XML is a subset of SGML\citep{xmlFirstWorkingDraft}, and SGML ascended from GML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that the concept has been inherited rather than reinvented.
+Generic Identifiers was already present in GML, and as XML is a subset of SGML\citep{xmlFirstWorkingDraft}, and SGML, as recollected by \citet{goldfarbBlog}, ascended from GML, it is only reasonable to assume that the concept has been inherited rather than reinvented.
 
 According to \citet{goldfarb}, GML was designed upon two ``novel postulates''. Firstly that (1) markup should describe a document's structure rather than the processing to be performed. A document once expressed descriptively should suffice for all future processing. Secondly that (2) markup should be rigorous, such that programs can be used for processing documents.
 
@@ -1705,11 +1705,10 @@ Perhaps, GML models can be seen as the forefather of the Document Type Definitio
 \subsection{Tag-validity and type-validity}
 %TODO: Remember to use this piece of information!!
 \label{sec:tag-validity-type-validity}
-\DeclareFixedFootnote{\refSGMLspec}{http://xml.coverpages.org/wg8-n1929-g.html}
 
-\paragraph{In SGML an explicit distinction was made between, what was called, tag-validity and type-validity\refSGMLspec.} GML Models made no such distinction and both concepts were thus instead encompassed into the idea of GML Models.
+\paragraph{In SGML an explicit distinction was made between, what was called, tag-validity and type-validity, } as outlined in a standards document by \citet{goldfarbXMLcoverpages}. GML Models made no such distinction and both concepts were thus instead encompassed into the idea of GML Models.
 
-The SGML specification\refSGMLspec defined a type-valid SGML document as a document conforming to it's encompassing DTD. Subsequently defined a tag-valid SGML document to be a document that is ``fully tagged''. A document were to be considered ``fully tagged'' if every element in the document is composed of a start-tag with a generic identifier and a corresponding end-tag.
+The SGML specification\citep{goldfarbXMLcoverpages}, defined a type-valid SGML document as a document conforming to it's encompassing DTD. Subsequently defined a tag-valid SGML document to be a document that is ``fully tagged''. A document were to be considered ``fully tagged'' if every element in the document is composed of a start-tag with a generic identifier and a corresponding end-tag.
 
 In essence, tag-validity describes whether a particular document is a syntactically valid document within the language in question (e.g. XML or SGML). Whereas type-validity describes whether that particular document is semantically valid within the given domain (usually specified via a DTD). Both are of course important for, as \citet{goldfarb} puts it, rigor.
 
