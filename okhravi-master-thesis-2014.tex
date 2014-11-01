@@ -233,18 +233,24 @@ In regards to the high-resolution language, this thesis delivers a set of requir
 %
 % % % % % % % % % % % % % % % % % % % % % %
 
+
 \chapter{Background}
-The problem approached in this thesis, is perhaps best summarized by the quote raised in a paper by \citet{krijnen}. A paper that approach the same problem from a different angle. More precisely an $n-to-n$ approach, whereas this thesis explore an $m-to-n$ approach. The meaning of these terms will be further explored in this thesis.
 
 \begin{quote}
 ``The nice thing about standards is that there are so many to choose from.''\\
 \textit{-- Andy Tanenbaum, as quoted by \citet{krijnen}}
 \end{quote}
 
-For many good reasons, different languages exist. Simple things such as taste, cause different languages to express the same things through different syntactical constructs. More complex things, such as different levels of needed granularity and control, cause languages to express things at different levels of abstraction. The hypothesis of this thesis is that conscious categorization of languages, according to such properties, can spawn a set of conversion strategies superior to $n-to-n$, according to aspects detailed later in this thesis.
+\paragraph{While there are many good reasons for different markup languages to exist,} such as individual taste, portability, level of abstraction etc., it is also a great source of complication when it comes to converting between languages. The notion of ``write once, publish everywhere'' almost seem like a sarcastic joke.
+
+\paragraph{The argument in this thesis is that markup has semantic resolution, much like images have pixel resolution,} and that much of the pain related to markup language conversions stem from lack of respect for this resolution. Consequently, that it simply is not reasonable to expect all languages to be convertible into all languages. Much like it is not reasonable to assume that images with a low resolution can be greatly scaled up.
+
+
+
+
 
 \section{Languages exhibit properties}
-\paragraph{Intentions of design} vary from language to language. One, may have been designed with the intent of enabling document authors to (more easily) manually author documents (i.e. eliminating the need for a rich GUI). Another may have been designed with intents of compactness and high precision, at the expense of giving up manual authoring. Another factor one can consider is whether a language is presentation oriented or not. Whether it is designed to directly produce visual output or not. Analyzing the different hypothetical combinations of categorizations makes it apparent that lots of languages exist (and can exist). Merely combining the two categories above, the following category sets, and thus languages, emerge.
+\paragraph{Intentions of design vary from language to language.} One, may have been designed with the intent of enabling document authors to (more easily) manually author documents (i.e. eliminating the need for a rich GUI). Another may have been designed with intents of compactness and high precision, at the expense of giving up manual authoring. Another factor one can consider is whether a language is presentation oriented or not. Whether it is designed to directly produce visual output or not. Analyzing the different hypothetical combinations of categorizations makes it apparent that lots of languages exist (and can exist). Merely combining the two categories above, the following category sets, and thus languages, emerge.
 
 \begin{enumerate}
 \item Languages intended to support manual document authoring, but not intended to directly produce visual output (e.g. XML).
@@ -439,7 +445,7 @@ In order to clarify the use of the word ``interpretation'', consider the followi
 
 
 
-\paragraph{Pandoc\footnotePandoc{} handles the ability to produce different output documents from the same input document through two facilities.} One facility is templating, and the other is what the documentation refer to as ``scripting''\footnote{TODO: Reference}. The first essentially refer to the idea of constructing a template into which the input document is fed. Naturally, a unique template as needed for every unique output document. The second facility, scripting, is more general as it operates on a concrete JSON representation of the abstract syntax tree, i.e. what has previously been referred to as the intermediate language.
+\paragraph{Pandoc\footnotePandoc{} handles the ability to produce different output documents from the same input document through two facilities.} One facility is templating, and the other is what the documentation refer to as ``scripting''\footnotePandoc{}. The first essentially refer to the idea of constructing a template into which the input document is fed. Naturally, a unique template as needed for every unique output document. The second facility, scripting, is more general as it operates on a concrete JSON representation of the abstract syntax tree, i.e. what has previously been referred to as the intermediate language.
 
 A visual interpretation of these facilities of Pandoc\footnotePandoc{} is depicted in Figure \ref{fig:interpretation-of-pandoc}.
 
