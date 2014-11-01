@@ -1540,7 +1540,7 @@ In other words, mixed content is a way of allowing descriptive markup languages 
 
 % TODO: Use and refer to the terms used by H. Schöning (2001) -- Tamino a DBMS for XML.
 
-\paragraph{The first official W3C working draft of XML already contained the idea of what was referred to as ``mixed content''.}(1996)\footnote{http:\/\/www.w3.org/TR/1998/REC-xml-19980210\#sec-mixed-content} Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
+\paragraph{The first official W3C working draft\citep{xmlFirstWorkingDraft} of XML already contained the idea of what was referred to as ``mixed content''.} Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
 
 \begin{lstlisting}
 element ::= EmptyElemTag | STag content ETag 
@@ -1549,7 +1549,7 @@ content ::= (element | CharData)*
 
 To summarize the above grammar -- any non-terminal \texttt{element} can either produce an \texttt{EmptyElemTag} (i.e. self-closing tag), or the set of a \texttt{STag} (i.e. opening tag) followed by \texttt{content}, followed by an \texttt{ETag} (i.e. closing tag). The non-terminals \texttt{EmptyElemTag} (e.g. \texttt{<foo/>}), \texttt{STag} (e.g. \texttt{<foo>}) and \texttt{ETag} (e.g. \texttt{</foo>}) will terminate without any risk of indirect recursion back to the non-terminal \texttt{element}. The non-terminal \texttt{content} is the one interesting to this example.
 
-The XML 1.0 (1998) specification use the following flavored syntax\footnote{This is of course merely a partial extraction of the syntax used in the specification.} of EBNF. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
+The first official XML 1.0 recommended specification \citep{xmlFirstRecommendation}, \citeyear{xmlFirstRecommendation}, use the following flavored syntax\footnote{Partial extraction from the specification.} of EBNF. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
 
 Essentially, the non-terminal \texttt{content} can either produce a new \texttt{element} (causing potential indirect recursion) or \texttt{CharData} (i.e. a string), any number of times. Subsequently allowing for any combination of any length of the two.
 
@@ -1674,11 +1674,10 @@ As a more informal argument, anyone who has ever authored a sequential document 
 
 \section{Generic Identifiers and Validity}
 \label{sec:theory:generic-identifiers-and-validity}
-\DeclareFixedFootnote{\refXMLspec}{http://www.w3.org/TR/WD-xml-961114}
 
 \paragraph{The fact that authors of XML documents can name their elements almost arbitrarily is enabled by, what is commonly referred to as, Generic Identifiers (GI's), and give authors the power of languages over infinite words, but also shifts the responsibility of document validation, from the language designer, to the document author.}
 
-Generic Identifiers was already present in GML, and as XML is a subset of SGML\refXMLspec, and SGML ascended from GML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that the concept has been inherited rather than reinvented.
+Generic Identifiers was already present in GML, and as XML is a subset of SGML\citep{xmlFirstWorkingDraft}, and SGML ascended from GML\footnote{http://www.sgmlsource.com/history/roots.htm}, it is only reasonable to assume that the concept has been inherited rather than reinvented.
 
 According to \citet{goldfarb}, GML was designed upon two ``novel postulates''. Firstly that (1) markup should describe a document's structure rather than the processing to be performed. A document once expressed descriptively should suffice for all future processing. Secondly that (2) markup should be rigorous, such that programs can be used for processing documents.
 
@@ -1686,7 +1685,7 @@ According to \citet{goldfarb}, GML was designed upon two ``novel postulates''. F
 
 The ingenious move of GML , according to \citet{goldfarb}, was to only let the markup language cover the first point of the two above. In other words, that GML allowed an author to describe a document's structure in any way she see fit, using the mnemonic tag -- i.e. GI's. In order to achieve the second goal, \citet{goldfarb} explained that, GML documents ought to be coupled with GML Models. Where the GML Model notation essentially is a notation derived from the Backus Naur Form-notation (BNF), but where the intent is to define the set of all valid elements (rather than string tokens).
 
-Perhaps, GML models can be seen as the forefather of the Document Type Definition (DTD) that were introduced into SGML and followed into the subset XML\footnote{http://www.w3.org/TR/WD-xml-961114\#dt-dtd}.
+Perhaps, GML models can be seen as the forefather of the Document Type Definition (DTD) that were introduced into SGML and followed into the subset XML\citep{xmlFirstWorkingDraft}.
 
 \begin{figure}[h]
 \centering
@@ -1910,12 +1909,12 @@ As highlighted by \citet{krijnen}, coupling a mechanism of derived text to a giv
 
 \paragraph{In order to respect semantic resolution, i.e. attempt to only convert from languages with higher resolution to languages with lower resolution,} the input language must contain more semantic distinctions than all other conceivable output languages.
 
-The following three are thus properties that must be supported by the input and intermediate languages. Firstly because they increase the number of possible semantic delimitations in languages, and secondly because they, as shown by \citet{coombs}, and by the XML specification\refXMLspec, have been, and are employed in widely used languages. If these properties where not available in the input language, the conversion tool would then risk having to operate at a lower semantic resolution than the output languages. The three properties of markup languages that are needed in order to respect semantic resolution are as follows:
+The following three are thus properties that must be supported by the input and intermediate languages. Firstly because they increase the number of possible semantic delimitations in languages, and secondly because they, as shown by \citet{coombs}, and by the XML specification\citep{xmlFirstWorkingDraft}, have been, and are employed in widely used languages. If these properties where not available in the input language, the conversion tool would then risk having to operate at a lower semantic resolution than the output languages. The three properties of markup languages that are needed in order to respect semantic resolution are as follows:
 
 \begin{itemize}
 \item \emph{Nesting}, as outlined in Section \ref{sec:nesting}, enables infinite languages over finite words.
 \item \emph{Generic Identifiers}, as outlined in Section \ref{sec:theory:generic-identifiers-and-validity}, enables languages over infinite words.
-\item \emph{Mixed content}, as outlined in Section \ref{sec:mixed-content}, is available in common languages, such as XML\refXMLspec, and readily used, as showed by \citet{mignet}.
+\item \emph{Mixed content}, as outlined in Section \ref{sec:mixed-content}, is available in common languages, such as XML\citep{xmlFirstRecommendation}, and readily used, as showed by \citet{mignet}.
 \end{itemize}
 
 
