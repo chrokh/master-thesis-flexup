@@ -150,21 +150,21 @@
 
 \begin{abstract}
 \section*{Abstract}
-Every day the number of markup languages increase. Every day the number of documents increase. The notion of ``write once, publish everywhere'' most often feels like a sarcastic joke. The two most prominent approaches to document conversion is the $n-to-n$ approach and the $1-to-n$ approach. The first attempting to convert from all conceivable languages to all conceivable languages. The second attempting to standardize the input language.
+The number of markup languages have reached the point where the notion of ``write once, publish everywhere'' feels like a sarcastic joke. The two most prominent approaches to document conversion are the $n-to-n$ approach and the $1-to-n$ approach. The first, attempts to convert from all conceivable languages to all conceivable languages, whereas the second attempts to standardize the input language.
 
-This thesis suggest an approach less complex than the first, yet more flexible than the other. An $M-to-N$ approach. Where the language constructs of $M$ exist in all languages in $N$. This thesis argue the benefit of converting ``down the abstraction chain'', from more abstract languages to less abstract languages. Or in other words, from less complex languages to increasingly complex languages.
+This thesis suggest an approach less complex than the first, yet more flexible than the other. By analyzing the semantic resolution of two markup languages, one can determine whether non-destructive conversions can be made between them or not. The argument is that conversions can only be conducted from higher resolution to lower resolution, because otherwise one has to invent information where none exist.
 
-The thesis reach two concrete contributions: (1) A suggestion for how to parse a syntax-less language that encapsulate many of the languages in $M$, and (2) a model of an ideal conversion process for markup, that allow for conversions from $M$ to $N$. Positive side-effects of such an approach is composability, package sharing, and declarative configurability. \\
+With markup resolution as the point of departure, this thesis explore papers and standards documents about current and historic markup languages, in search of two things: (1) a markup language with a relative, higher resolution, and (2) a ideal process for markup conversion that (a) enable package-based sharing of commonly performed conversions across language boundaries, (b) enable authors to respect the resolution of markup, while (c) enabling this input language to be converted into any conceivable output format.
+
+In regards to the high-resolution language, this thesis delivers a set of requirements, and a partial example implementation. In regards to the conversion strategy, this thesis delivers a model and a prototype artifact.\\
 
 
-Keywords: TODO  \\ \\ \\ \\ \\ \\ \\ \\ \\ \\
+\paragraph{Keywords:} markup resolution, markup transformation, document conversion, new markup language \\ \\
 
 
 \smaller
 \paragraph{}
-\noindent Thank you Fredrik Bengtsson (for being a supervising supervisor), 
-Steve McKeever (for down-to-earth technical advice),
-and my significant other (for being awesome).
+\noindent Thank you: Fredrik Bengtsson, Steve McKeever, and my significant other.
 \end{abstract}
 
 
