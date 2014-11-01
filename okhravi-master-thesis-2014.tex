@@ -518,7 +518,7 @@ The main problem of the scripting approach of Pandoc\footnotePandoc{}, is that i
 \paragraph{It has already been argued that markup languages can be categorized according to properties, and it is such properties must determine whether a given language is more abstract than another, i.e. weather one language can be converted to another or not.}
 An example of such a categorization is whether a language is presentation-oriented or not. One could argue, that the idea of presentation is a specialization, where the idea of describing a thing outside of its domain of presentation is an abstraction. This would mean, that languages concerned with presentation are less abstract (i.e. more specialized) than those not concerned with presentation.
 
-The classical notion of ``separation of concerns'' emphasizes the known benefits of such a strategy. Thus, the separation of presentation and content not only makes intuitive sense, but have also been successfully applied in the real-world. Consider for example how CSS has successfully separated presentation from content in HTML\footnote{http://www.w3.org/standards/webdesign/htmlcss\#whatcss}.
+The classical notion of ``separation of concerns'' emphasizes the known benefits of such a strategy. Thus, the separation of presentation and content not only makes intuitive sense, but have also been successfully applied in the real-world. Consider for example how CSS has successfully separated presentation from content in HTML\footnote{ http://www.w3.org/standards/webdesign/htmlcss\#whatcss}.
 
 Converting from a non-presentational language to a presentational language is a conversion ``down'' the abstraction chain, if ``level of presentational coupling'' is used as the categorizing property when differentiating between two different languages. Vice versa, the task of converting from a presentational language to a non-presentational language is a conversion ``up'' the abstraction chain. Thus, the latter must be considered a significantly more difficult task than the former, assuming the hypothesis of this thesis is true.
 
@@ -546,7 +546,7 @@ Converting from a non-presentational language to a presentational language is a 
 
 HTML is (in Figure \ref{fig:hierarchy-of-abstraction-example-tree}) depicted as the parent language (i.e. the most abstract), while \LaTeX and Markdown, are depicted as children (i.e. derivations) of that language (and are thus more specialized). The hypothesis thus suggests that converting from HTML to either \LaTeX{} or Markdown should be considered a ``safe'' task, while all other conversions (i.e. ``up'' or ``sideways'') should be considered ``unsafe''.
 
-Consider then the concrete sentence (or rather: document fragment) expressed in all of these languages (still Figure \ref{fig:hierarchy-of-abstraction-example-tree}). The fragment, expressed in HTML, employ the use of the two distinct elements \texttt{em} (emphasis) and \texttt{i} (italics). While these two, in web browsers, render the same, the following quote, from the HTML5 specification,\footnote{http://www.w3.org/TR/html5/text-level-semantics.html\#the-em-element} explain the existence of a semantic difference.
+Consider then the concrete sentence (or rather: document fragment) expressed in all of these languages (still Figure \ref{fig:hierarchy-of-abstraction-example-tree}). The fragment, expressed in HTML, employ the use of the two distinct elements \texttt{em} (emphasis) and \texttt{i} (italics). While these two, in web browsers, render the same, the following quote, from the HTML5 specification,\footnote{ http://www.w3.org/TR/html5/text-level-semantics.html\#the-em-element} explain the existence of a semantic difference.
 
 \begin{quote}
 ``The \emph{em} element isn't a generic \emph{italics} element. Sometimes, text is intended to stand out from the rest of the paragraph, as if it was in a different mood or voice. For this, the \emph{i} element is more appropriate.''
@@ -904,7 +904,7 @@ Consequently, this thesis instead explores quadrant B programs, and attempts to 
 % TODO:
 % However, we are only informally talking about sets and subsets here. Since most languages that we want to convert to (e.g. XML, LaTeX) are definitely not regular they are thus at least context-free. In the Chomsky Hierarchy. And since context-free grammars are not closed under language inclusion, this mean we cannot actually certainly say that some language actually is a subset of another language.
 
-%\paragraph{This thesis suggest an approach that can be similar to a pipeline of template}, much like the notion of UNIX pipes\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}), and through this achieve a high level of composability. Instead of a one-pass-conversion, conversions are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
+%\paragraph{This thesis suggest an approach that can be similar to a pipeline of template}, much like the notion of UNIX pipes\footnote{ http://en.wikipedia.org/wiki/Pipeline\_(Unix)}), and through this achieve a high level of composability. Instead of a one-pass-conversion, conversions are split into composable chunks at different levels of abstraction. But all this will be discussed further on in the thesis.
 
 %\color{black}
 % TODO: Returning to black, to mark end of potentially deprecated section.
@@ -1060,7 +1060,7 @@ Intermingled in these explanations are also opinions from \citet{bray} -- co-fou
 \subsection{Punctuational}
 \paragraph{Punctuational markup refer to the markup that is paid very little attention to in everyday life. Spaces, commas, periods, words, sentences, and so forth.} As \citet{coombs} points out, punctuational markup has been studied by mankind for hundreds of years. The example \citet{coombs} use to underline that punctuational markup should, indeed, be considered markup and not merely a part of our writing system -- is the following. Consider the all the conflicting opinions on how punctuational markup should be used. One argue it ought to be a  semicolon, another argue it should be a colon. One argue space-delimited dash, another argue dash with no space. Consider the author contemplating whether a certain domain of sentences/words should be presented as \textbf{bold} or as \textit{italics}. This is the same kind of choice, as the mentioned choices between semicolon, colon and so forth. However, today, \textbf{bold} and \textit{italics} can clearly be considered markup in languages such as HTML. But the 
 
-Understand, that the term punctuational markup, according to \citet{coombs}, does not refer to the idea of encoding punctuation in some other language (i.e. ``\texttt{\&mdash;}'') but rather the actual punctuation itself (i.e. ``\texttt{--}''). In other words, the use of for example character entities in HTML5\footnote{http://dev.w3.org/html5/html-author/charref} is not to be considered punctuational markup. Rather, if using the the actual dash character and its surrounding space characters is the punctuational markup.
+Understand, that the term punctuational markup, according to \citet{coombs}, does not refer to the idea of encoding punctuation in some other language (i.e. ``\texttt{\&mdash;}'') but rather the actual punctuation itself (i.e. ``\texttt{--}''). In other words, the use of for example character entities in HTML5\footnote{ http://dev.w3.org/html5/html-author/charref} is not to be considered punctuational markup. Rather, if using the the actual dash character and its surrounding space characters is the punctuational markup.
 
 
 
@@ -1195,7 +1195,7 @@ Using the metaphor of the red pen, descriptive markup essentially states ``switc
 
 Unfortunately there seems to be no unanimous line between procedural and descriptive markup. \citet{coombs} argue that languages such as \TeX{} and \LaTeX{} are descriptive languages, whereas \citet{bray} argue they are procedural. It is possible that this particular difference in opinion stems from the differences in state-of-the-art practice at the time in which these two publications were authored.
 
-In the time of \citet{coombs}, languages like SGML were still relatively recently conceived of. The ISO standard for SGML was, e.g., published in 1986\footnote{http://www.iso.org/iso/catalogue\_detail.htm?csnumber=16387}. So the mere fact that the language provided a way of expressing parts of the document through description rather than through procedure, may have been enough for the language to be called descriptive. Regardless of whether it also provided ways of expressing procedural markup. In the case of \LaTeX{}, consider for example the clearly procedural constructs such as \texttt{\textbackslash vspace} which inserts vertical space, or  \texttt{\textbackslash color\{red\}} which essentially says -- ``switch to the red pen, from now and onwards''.
+In the time of \citet{coombs}, languages like SGML were still relatively recently conceived of. The ISO standard for SGML was, e.g., published in 1986\footnote{ http://www.iso.org/iso/catalogue\_detail.htm?csnumber=16387}. So the mere fact that the language provided a way of expressing parts of the document through description rather than through procedure, may have been enough for the language to be called descriptive. Regardless of whether it also provided ways of expressing procedural markup. In the case of \LaTeX{}, consider for example the clearly procedural constructs such as \texttt{\textbackslash vspace} which inserts vertical space, or  \texttt{\textbackslash color\{red\}} which essentially says -- ``switch to the red pen, from now and onwards''.
 
 At the time of \citet{bray} however (i.e. \citeyear{bray}), languages like XML had succeeded SGML and provided almost purely descriptive facilities. Thus, it may, at this point in time, have been reasonable to only consider a language descriptive if \emph{all} of the language is descriptive.
 
@@ -1225,7 +1225,7 @@ More complex derivations, such as tables of contents, should not be considered r
 
 %TODO: Maybe not mentioned because they were invented later?
 
-From a linguistic point of view, a metamarkup language can be seen as a metalanguage\footnote{http://en.wikipedia.org/wiki/Metalanguage} used to formally discuss an object language. In other words, if the object language is XML (i.e. the language under discussion), the metalanguage could be RelaxNG (i.e. the language used to discuss the language under discussion).
+From a linguistic point of view, a metamarkup language can be seen as a metalanguage\footnote{ http://en.wikipedia.org/wiki/Metalanguage} used to formally discuss an object language. In other words, if the object language is XML (i.e. the language under discussion), the metalanguage could be RelaxNG (i.e. the language used to discuss the language under discussion).
 
 
 
@@ -1276,7 +1276,7 @@ Continuing on the programming language analogy, consider how machine code can be
 
 \section{Nested markup}
 \label{sec:nesting}
-\paragraph{A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressible than with merely the isolated elements themselves.} In many markup languages, this is implemented as the ability to nest elements in hierarchies. It is, of course, possible to nest without the use of hierarchies, but as \citet*{durand} point out, hierarchical nesting the the strategy that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical nesting. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the matter of non-hierarchical nesting \footnote{http://xml.coverpages.org/hierarchies.html}. Still, today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML. The generic container element \texttt{<div>}, may, e.g., be nested arbitrarily deep inside any other \texttt{<div>} element.
+\paragraph{A fundamental feature of (many) descriptive markup languages is the ability to nest elements such that a larger set of semantics is expressible than with merely the isolated elements themselves.} In many markup languages, this is implemented as the ability to nest elements in hierarchies. It is, of course, possible to nest without the use of hierarchies, but as \citet*{durand} point out, hierarchical nesting the the strategy that has been most prominent. Perhaps because there exist many conflicting suggestions on how to approach non-hierarchical nesting. Some of these are outlined by \citet{durand} but an extensive amount of papers have been written on the matter of non-hierarchical nesting \footnote{ http://xml.coverpages.org/hierarchies.html}. Still, today, hierarchical document structures enjoy the most widespread use. Consider, for example, the large family of XML-based languages such as HTML. The generic container element \texttt{<div>}, may, e.g., be nested arbitrarily deep inside any other \texttt{<div>} element.
 
 
 
@@ -1488,7 +1488,7 @@ This can be easily understood by contemplating the language of infinitely nestab
 
 in terms of formal grammars, nesting allow non-terminals to, directly, or indirectly, produce themselves. Thus, enabling languages to be infinitely complex, even through finite sets of terminal tokens. This is, obviously, a common, and powerful, phenomenon in regards to markup languages. As without nesting, it would be impossible to achieve infinite languages over finite words.
 
-Another example is the Dyck\footnote{http://en.wikipedia.org/wiki/Dyck\_language}-like languages of infinite, balanced parentheses, as shown in Figure \ref{fig:mixed-content-nesting}.
+Another example is the Dyck\footnote{ http://en.wikipedia.org/wiki/Dyck\_language}-like languages of infinite, balanced parentheses, as shown in Figure \ref{fig:mixed-content-nesting}.
 
 % TODO: I'm on some very thin ice over here.
 
@@ -1510,7 +1510,7 @@ Consider (the (infinite (nesting) of (parentheses))).
 
 \subsection{Non-hierarchical nesting}
 \label{sec:non-hierarchical-nesting}
-It is important to understand that this thesis employ and endorse the hierarchical model of nesting for delimitational and pragmatic reasons. This thesis argue that the necessary property, is nesting, but not necessarily hierarchical such. Since there (as previously discussed) is disagreement in the community, and exist a number of conflicting papers\footnote{http://xml.coverpages.org/hierarchies.html}, with no consensus, on how to approach non-hierarchical nesting, this thesis is delimited to nesting of the hierarchical kind.
+It is important to understand that this thesis employ and endorse the hierarchical model of nesting for delimitational and pragmatic reasons. This thesis argue that the necessary property, is nesting, but not necessarily hierarchical such. Since there (as previously discussed) is disagreement in the community, and exist a number of conflicting papers\footnote{ http://xml.coverpages.org/hierarchies.html}, with no consensus, on how to approach non-hierarchical nesting, this thesis is delimited to nesting of the hierarchical kind.
 
 
 
@@ -1540,7 +1540,7 @@ In other words, mixed content is a way of allowing descriptive markup languages 
 
 % TODO: Use and refer to the terms used by H. Schöning (2001) -- Tamino a DBMS for XML.
 
-\paragraph{The first official W3C working draft\citep{xmlFirstWorkingDraft} of XML already contained the idea of what was referred to as ``mixed content''.} Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
+\paragraph{The first official W3C working draft\citep{xmlFirstWorkingDraft} of XML already contained the idea of what was referred to as ``mixed content''.} Simplified, the idea was that an element may either contain a string of text, or another element, or any combination of the two. In (1998) W3C published a recommended specification of XML 1.0, where the concept of mixed content was expressed as a grammar in Extended Backus-Naur Form (subsequently referred to as EBNF) as follows\footnote{ Part of the production for the non-terminal ``content'' has been omitted in favor of readability.}.
 
 \begin{lstlisting}
 element ::= EmptyElemTag | STag content ETag 
@@ -1549,7 +1549,7 @@ content ::= (element | CharData)*
 
 To summarize the above grammar -- any non-terminal \texttt{element} can either produce an \texttt{EmptyElemTag} (i.e. self-closing tag), or the set of a \texttt{STag} (i.e. opening tag) followed by \texttt{content}, followed by an \texttt{ETag} (i.e. closing tag). The non-terminals \texttt{EmptyElemTag} (e.g. \texttt{<foo/>}), \texttt{STag} (e.g. \texttt{<foo>}) and \texttt{ETag} (e.g. \texttt{</foo>}) will terminate without any risk of indirect recursion back to the non-terminal \texttt{element}. The non-terminal \texttt{content} is the one interesting to this example.
 
-The first official XML 1.0 recommended specification \citep{xmlFirstRecommendation}, \citeyear{xmlFirstRecommendation}, use the following flavored syntax\footnote{Partial extraction from the specification.} of EBNF. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
+The first official XML 1.0 recommended specification \citep{xmlFirstRecommendation}, \citeyear{xmlFirstRecommendation}, use the following flavored syntax\footnote{ Partial extraction from the specification.} of EBNF. The character ``pipe'' (|) represent an \texttt{XOR} choice such that \texttt{A | B} match ``A or B but not both''. The character ``star'' (*) is used as a ``Kleene Star'' such that \texttt{A*} matches ``zero or more occurrences of A''. Parentheses is used to group expressions such that the two mentioned operators can be used on an expression group.
 
 Essentially, the non-terminal \texttt{content} can either produce a new \texttt{element} (causing potential indirect recursion) or \texttt{CharData} (i.e. a string), any number of times. Subsequently allowing for any combination of any length of the two.
 
@@ -1563,7 +1563,7 @@ In other words, the above EBNF specify that any XML element may contain any inte
 \paragraph{Mixed content cannot be, unanimously, expressed in languages that lack a canonical way of expressing it.} Remember that the definition followed in this thesis, is that languages that support mixed content, support sequential interpolation of semantic keywords in otherwise semantically unspecified text. This thesis propose two tests, one can run, in order to determine whether a language is suitable for mixed content or not.
 
 \begin{enumerate}
-\item All valid strings in the language, must also be valid mixed content\footnote{Some strings may of course not exhibit mixed content, but they must in either case be valid strings according to the parsing strategy of mixed content of that language.}. As depicted using Venn notation in Figure \ref{fig:mixed-content-venn}.
+\item All valid strings in the language, must also be valid mixed content\footnote{ Some strings may of course not exhibit mixed content, but they must in either case be valid strings according to the parsing strategy of mixed content of that language.}. As depicted using Venn notation in Figure \ref{fig:mixed-content-venn}.
 \item All sequentiality must be preserved.
 \end{enumerate}
 
@@ -1762,7 +1762,7 @@ Using GI's, authors can choose to to distinguish between strings that one suspec
 
 \paragraph{Generic Identifiers allow authors to mark up their documents with names that cognitively make sense to the individual.} As emphasized by \citet{krijnen}, many authors choose to write documents in some simple language (such as e.g. Markdown), and then convert their documents more complex languages (such as e.g. \LaTeX{}), for simple reasons such as preferred syntax. In order to aid less technical document authors in their migration from more problematic word processors (such as most modern GUI-based word processors), the author of this thesis argue that preferred syntactic structure plays an important role.
 
-\paragraph{In the XML specification}\citep{xmlRecommendation2008} Generic Identifiers are defined using EBNF notation as follows\footnote{Some parts of the EBNF example snippet are omitted (such as element attributes), and some altered (such as the letter range) to favor readability.}:
+\paragraph{In the XML specification}\citep{xmlRecommendation2008} Generic Identifiers are defined using EBNF notation as follows\footnote{ Some parts of the EBNF example snippet are omitted (such as element attributes), and some altered (such as the letter range) to favor readability.}:
 
 \begin{lstlisting}
 element  ::=  EmptyElemTag | STag content ETag
@@ -1824,7 +1824,7 @@ To formalize this disconnect, \citet{goldfarb} suggest a three-step model for do
 
 
 \subsection{The importance of the three-step model}
-\paragraph{Considering the XML eco-system, it becomes apparent how the three-step model of \citet{goldfarb} is applicable to tools that are highly useful today.} The recognition step is essentially carried out in all XML parsers. Considering the specific case of using XSLT to transform (in terms of this thesis: convert) documents, XPath could be used for traversing the parsed XML tree in order to locate some particular element (or set of elements) one wish to map some processing function, expressed in XSLT, to. Finally, the step of processing would be carried out by some XSLT processor such as, e.g. SAXON\footnote{http://en.wikipedia.org/wiki/Saxon\_XSLT}.
+\paragraph{Considering the XML eco-system, it becomes apparent how the three-step model of \citet{goldfarb} is applicable to tools that are highly useful today.} The recognition step is essentially carried out in all XML parsers. Considering the specific case of using XSLT to transform (in terms of this thesis: convert) documents, XPath could be used for traversing the parsed XML tree in order to locate some particular element (or set of elements) one wish to map some processing function, expressed in XSLT, to. Finally, the step of processing would be carried out by some XSLT processor such as, e.g. SAXON\footnote{ http://en.wikipedia.org/wiki/Saxon\_XSLT}.
 
 Given the widespread use of the XML-family of tools it is apparent that the three-step model of \citet{goldfarb} is not only readily applied, but also applied with success.
 
@@ -1930,7 +1930,7 @@ The following three are thus properties that must be supported by the input and 
 %\color{red}
 %\subsubsection{Using configurations to map processing functions (TODO -- remove?)}
 %\label{sec:applying-three-step-model-to-quad-b}
-%In order to truly adhere to the second and third high-level goals (composability, and extendability), one sensible, and obvious, approach would be to allow conversions to be configured. Consider XSLT as en example. Assume one were to construct a package system (such as the package system of \LaTeX) or (perhaps even) a public package channel\footnote{A ``package channel'' refer here to the idea of a unified publicly accessible package system, such as e.g. \texttt{apt-get}, \texttt{RubyGems} or \texttt{npm}}. Consider now that authors are free to choose element names freely in XML. This mean it would either be utterly difficult for a package creator to assume the right names for some set of elements when constructing the package, or it would spawn a situation where document authors would have to constantly adapt to the names used in packages. This of course violates the second high-level goal as it makes the package-eco-system significantly less composable.
+%In order to truly adhere to the second and third high-level goals (composability, and extendability), one sensible, and obvious, approach would be to allow conversions to be configured. Consider XSLT as en example. Assume one were to construct a package system (such as the package system of \LaTeX) or (perhaps even) a public package channel\footnote{ A ``package channel'' refer here to the idea of a unified publicly accessible package system, such as e.g. \texttt{apt-get}, \texttt{RubyGems} or \texttt{npm}}. Consider now that authors are free to choose element names freely in XML. This mean it would either be utterly difficult for a package creator to assume the right names for some set of elements when constructing the package, or it would spawn a situation where document authors would have to constantly adapt to the names used in packages. This of course violates the second high-level goal as it makes the package-eco-system significantly less composable.
 
 %One sensible alternative would be to apply the three-step approach to document conversion, proposed by \citet{goldfarb}. Applying this three-step process allow different intents to be left to different parts of the eco-system. Step one and two (recognition and mapping) would be carried out by the individual that aim to \emph{use} the package. Where the second step would allow the user to map the names of her elements onto the names of the elements in the ``processing function'' (PF) (i.e. the package). The package creator would thus create, only the PF. It is important of course that the PF would have to be created in a way such that it allows arguments to be passed, and thus mapped onto the variable element names within the PF.  Step three would be carried out by the conversion program itself.
 
@@ -1980,7 +1980,7 @@ The following three are thus properties that must be supported by the input and 
 \color{black}
 \section{Proposal}
 
-\paragraph{In order to facilitate the sharing of packages (i.e. code) for common conversion tasks, the proposed solution is built upon a UNIX-like notion of pipes.}  The core command line tools in UNIX all read from standard in (stdin), and print to standard out (stdout)\footnote{http://en.wikipedia.org/wiki/Pipeline\_(Unix)}. This standardization enables synergy and make the whole of the core UNIX programs much greater than the sum of its parts.
+\paragraph{In order to facilitate the sharing of packages (i.e. code) for common conversion tasks, the proposed solution is built upon a UNIX-like notion of pipes.}  The core command line tools in UNIX all read from standard in (stdin), and print to standard out (stdout)\footnote{ http://en.wikipedia.org/wiki/Pipeline\_(Unix)}. This standardization enables synergy and make the whole of the core UNIX programs much greater than the sum of its parts.
 
 The prototype proposal follows this notion of pipes, where input to, and output from, all conversion packages are simplified subset of XML, call it \texttt{flXML}. This goes for all conversions except the initial input, and the final output. The initial input is be given in an ad-hoc language constructed by the author of the document, and the final output document may break the language boundary of \texttt{flXML}, in order to be able to output to arbitrary languages such as PDF, CSV, RTF, etc..
 
@@ -2092,7 +2092,7 @@ Flexup Definition files essentially consist of a JSON object, where the keys are
 \label{ex:numbered-headings-fupd}
 \end{figure}
 
-Flexup Definitions will during the $Parse$ step of the conversion process (see Figure \ref{fig:model-of-conversion-prototype-artifact}) be converted into a Parsing Expression Grammar (PEG), that in turn will be generated into actual parsing code (that will be used to parse the Flexup file, expressed in the arbitrary syntax) using the JavaScript library PEG.js\footnote{https://github.com/dmajda/pegjs}. The PEG generated for this particular Flexup Definition is depicted in Figure \ref{ex:peg-grammar}.
+Flexup Definitions will during the $Parse$ step of the conversion process (see Figure \ref{fig:model-of-conversion-prototype-artifact}) be converted into a Parsing Expression Grammar (PEG), that in turn will be generated into actual parsing code (that will be used to parse the Flexup file, expressed in the arbitrary syntax) using the JavaScript library PEG.js\footnote{ https://github.com/dmajda/pegjs}. The PEG generated for this particular Flexup Definition is depicted in Figure \ref{ex:peg-grammar}.
 
 
 \begin{figure}[h]
@@ -2330,7 +2330,7 @@ flexup.in("./[document].fup")                 // read input file
 \end{figure}
 
 
-\paragraph{In order to orchestrate all of the steps above, the artifact has an API in which the pipes can be utilized.} The syntax of the orchestration file is heavily inspired by the ``streaming build system'' gulp.js\footnote{https://github.com/gulpjs}. All of the steps of the usage example in this section could be carried out through usage of the API, as depicted in Figure \ref{ex:numbered-headings-pipes-1}.
+\paragraph{In order to orchestrate all of the steps above, the artifact has an API in which the pipes can be utilized.} The syntax of the orchestration file is heavily inspired by the ``streaming build system'' gulp.js\footnote{ https://github.com/gulpjs}. All of the steps of the usage example in this section could be carried out through usage of the API, as depicted in Figure \ref{ex:numbered-headings-pipes-1}.
 
 
 
@@ -2420,7 +2420,7 @@ Any new efforts to approach non-hierarchical markup would be highly valuable, as
 
 While the artifact implemented in this thesis indeed must be considered a prototype, the validating effect it has on the concept of Markup Resolution, must be taken seriously, and into further consideration. Many interesting questions still hide on the boundaries of linguistics, semantics, formal grammars, and philosophy.\\ \\
 
-The prototype discussed in this thesis is distributed online as open source, package contributions are most welcome\footnote{https://github.com/chrokh/flexup}.
+The prototype discussed in this thesis is distributed online as open source, package contributions are most welcome\footnote{ https://github.com/chrokh/flexup}.
 
 
 
