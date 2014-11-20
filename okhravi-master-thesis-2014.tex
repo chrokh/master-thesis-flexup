@@ -156,7 +156,7 @@ This thesis suggests an approach less complex than the first, yet more flexible 
 
 With markup resolution as the point of departure, this thesis explores papers and standards documents about current and historic markup languages, in search of two things: (1) a markup language with a relative, higher resolution, and (2) a ideal process for markup conversion that (a) enable package-based sharing of commonly performed conversions across language boundaries, (b) enable authors to respect the resolution of markup, while (c) enabling this input language to be converted into any conceivable output format.
 
-In regards to the high-resolution language, this thesis delivers a set of requirements, and a prototype implementation. In regards to the conversion strategy, this thesis delivers a model and a prototype artifact.\\
+In regards to the high-resolution language, this thesis delivers a set of requirements, and a partial example implementation. In regards to the conversion strategy, this thesis delivers a model and a prototype artifact.\\
 
 
 \paragraph{Keywords:} markup resolution, markup transformation, document conversion, new markup language \\ \\
@@ -2058,19 +2058,17 @@ A usage example of the program prototype is given in Section \ref{sec:usage-exam
 
 \paragraph{The developed prototype (call it Flexup) is, below, demonstrated through a usage example where a light-weight ad-hoc language is converted into HTML with auto-numbered headings and sub-headings.} The usage example is heavily inspired by \citet{krijnen}, who also add auto-numbering of headings, but use HTML as the input language.
 
-\paragraph{The developed prototype is intended to illustrate the plausibility of the suggested approach, } and is thus, not intended to be considered production complete. Consequently, details such as alternative input syntaxes, or exhaustive regular expressions that actually lex all obscure characters correctly, are overlooked.
+\paragraph{The developed prototype is intended to illustrate the plausibility of the suggested approach, } and is thus, not intended to be considered production complete. Consequently, details such as alternative grammar syntaxes, or exhaustive regular expressions that actually lex all obscure characters correctly, are overlooked.
 
 
-\paragraph{The scenario is such,} that an author has made up an arbitrary, small ad-hoc language and in this language written a document consisting of a number of headings and sub-headings. The aim is for the author to be able to convert this example file into an HTML file, that has running numbers prepended to all the headings.
+\paragraph{Consider a scenario} where an author has made up an arbitrary, small ad-hoc language and in this language written a document consisting of a number of headings and sub-headings. The aim is for the author to be able to convert this example file into an HTML file, that has running numbers prepended to all the headings.
 
-Assume that the author types up a document, such as the one depicted in Figure \ref{ex:numbered-headings-input}. The document (referred to as a Flexup file, or a \texttt{fup}-file) is, as mentioned, expressed in an arbitrary ad-hoc language and in order for the Flexup prototype to be able to parse this language, the author also need to supply the grammar (referred to as a Flexup Definition, or a \texttt{fupd}-file). Flexup Definition files are expressed in JSON, and this particular Flexup Definition is depicted in Figure \ref{ex:numbered-headings-fupd}.
-
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 ## First heading ##
 And then some text
 
-## A subheading ##
+-- A subheading --
 And some more text
 
 ## Last heading ##
@@ -2080,9 +2078,8 @@ And the last paragraph
 \label{ex:numbered-headings-input}
 \end{figure}
 
-Flexup Definition files essentially consist of a JSON object, where the keys are arbitrary names that describe some syntactical construct (i.e. an element). Each value corresponding to a key, is a very simple pattern that defines the syntactic structure of the element. Any number of characters, followed by a percentage sign, followed by any number of characters. The percentage sign is essentially a delimiter between the start tag and the end tag. Everything on the left of the percentage sign is considered the start tag, and everything on the right of the percentage sign is considered the end tag.
 
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 {
   "head"    : "##%##",
@@ -2093,10 +2090,18 @@ Flexup Definition files essentially consist of a JSON object, where the keys are
 \label{ex:numbered-headings-fupd}
 \end{figure}
 
+
+Assume that the author types up a document, such as the one depicted in Figure \ref{ex:numbered-headings-input}. The document (referred to as a Flexup file, or a \texttt{fup}-file) is, as mentioned, expressed in an arbitrary ad-hoc language and in order for the Flexup prototype to be able to parse this language, the author also need to supply the grammar (referred to as a Flexup Definition, or a \texttt{fupd}-file). Flexup Definition files are expressed in JSON, and this particular Flexup Definition is depicted in Figure \ref{ex:numbered-headings-fupd}.
+
+Flexup Definition files essentially consist of JSON objects, where the keys are arbitrary names that describe some syntactical construct (i.e. a potentially semantically distinct element). Each value corresponding to a key, is a very simple pattern that defines the syntactic structure of the element. Any number of characters, followed by a percentage sign, followed by any number of characters. The percentage sign is essentially a delimiter between the start tag and the end tag. Everything on the left of the percentage sign is considered the start tag, and everything on the right of the percentage sign is considered the end tag.
+
+
 Flexup Definitions will during the $Parse$ step of the conversion process (see Figure \ref{fig:model-of-conversion-prototype-artifact}) be converted into a Parsing Expression Grammar (PEG), that in turn will be generated into actual parsing code (that will be used to parse the Flexup file, expressed in the arbitrary syntax) using the JavaScript library PEG.js\footnote{ https://github.com/dmajda/pegjs}. The PEG generated for this particular Flexup Definition is depicted in Figure \ref{ex:peg-grammar}.
 
 
-\begin{figure}[h]
+
+
+\begin{figure}[p]
 \centering
 \begin{lstlisting}
 start   = (element / text)*
@@ -2117,9 +2122,8 @@ ETag2   = "--"
 \label{ex:peg-grammar}
 \end{figure}
 
-When the PEG, depicted in Figure \ref{ex:peg-grammar}, is, via the PEG.js library, converted into actual parse code, and then applied to the Flexup document (i.e. the input document) depicted in Figure \ref{ex:numbered-headings-input}, a parse tree is created in memory. The parse tree is nothing spectacular, but the one generated for this particular case is depicted in Figure \ref{ex:generated-parse-tree}.
 
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 [
    {
@@ -2127,7 +2131,7 @@ When the PEG, depicted in Figure \ref{ex:peg-grammar}, is, via the PEG.js librar
    },
    "And then some text",
    {
-      "head": [" A subheading "]
+      "subhead": [" A subheading "]
    },
    "And some more text",
    {
@@ -2136,14 +2140,16 @@ When the PEG, depicted in Figure \ref{ex:peg-grammar}, is, via the PEG.js librar
    "And the last paragraph"
 ]
 \end{lstlisting}
-\caption{Parse tree generated from applying the PEG depicted in Fig. \ref{ex:peg-grammar}, to the Flexup file depicted in \ref{ex:numbered-headings-input}, by using PEG.js library.}
+\caption{Parse tree generated from applying the PEG depicted in Fig. \ref{ex:peg-grammar}, to the Flexup file depicted in \ref{ex:numbered-headings-input}, via the PEG.js library.}
 \label{ex:generated-parse-tree}
 \end{figure}
 
-What is more interesting, is how the prototype artifact then traverse this parse tree in order to construct the abstract syntax tree (AST). This AST is generated in form of the previously mentioned subset of XML referred to as flXML, and the one for this particular case is depicted in Figure \ref{ex:numbered-headings-flXML-ast-raw}.
 
 
-\begin{figure}[h]
+
+
+
+\begin{figure}[p]
 \begin{lstlisting}
 <head>First heading</head>
 And then some text
@@ -2158,14 +2164,8 @@ And the last paragraph
 \label{ex:numbered-headings-flXML-ast-raw}
 \end{figure}
 
-At the point of the AST, the author has the following three choices of action (as depicted in Figure \ref{fig:model-of-conversion-prototype-artifact}). The author can choose to (1) consider the AST the final output document and produce a physical file, or (2) run the file through a translation conversion, or (3) run the file through a interpretation conversion.
 
-Assume that some other author has written a interpretation conversion package (i.e. some code), that searches a document for headings and subheadings and prepend numbers accordingly. Since interpretation packages in the suggested prototype must be written in XSLT, the package could look like the one depicted in Figure \ref{ex:numbered-headings-xslt-package}.
-
-A discrepancy between the interpretation conversion code (Figure \ref{ex:numbered-headings-xslt-package}) and the current AST (Figure \ref{ex:numbered-headings-flXML-ast-raw}) will cause this particular package to not successfully traverse and number the AST. The problem is that the Flexup Definition caused the headings to be named \texttt{head} and the subheadings to be named \texttt{subhead}, whereas the interpretation conversion package expects them to be named \texttt{heading} and \texttt{subheading}. Thus, this is why translation conversion always are allowed to run before interpretation conversions. Translation conversions (call them Flexup Translations, or \texttt{fupt}) are given as JSON objects where each key denote the XPath of elements to search for, and a name to convert the name of all the matches to. An appropriate Flexup Translation for this particular case is outlined in Figure \ref{ex:numbered-headings-translation-fupt}.
-
-
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -2190,21 +2190,38 @@ A discrepancy between the interpretation conversion code (Figure \ref{ex:numbere
 
 
 
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 {
   "//head"    : "heading",
   "//subhead" : "subheading"
 }
 \end{lstlisting}
-\caption{Translation file.}
+\caption{Translation file, where the keys are XPath selectors (i.e. names to search for), and the values are output names (i.e. names to translate to).}
 \label{ex:numbered-headings-translation-fupt}
 \end{figure}
 
 
-Having applied the Flexup Translation (Figure \ref{ex:numbered-headings-translation-fupt}) to the AST (Figure \ref{ex:numbered-headings-flXML-ast-raw}), it is then possible to run the XSLT interpretation conversion package (Figure \ref{ex:numbered-headings-xslt-package}). The result of applying the package is a new AST, now with numbered headers, depicted in Figure \ref{ex:numbered-headings-flXML-ast-numbered}.
 
-\begin{figure}[h]
+
+When the PEG, depicted in Figure \ref{ex:peg-grammar}, is, via the PEG.js library, converted into actual parse code, and then applied to the Flexup document (i.e. the input document) depicted in Figure \ref{ex:numbered-headings-input}, a parse tree is created in memory. The parse tree is nothing spectacular, but the one generated for this particular case is depicted in Figure \ref{ex:generated-parse-tree}.
+
+
+
+
+What is more interesting, is how the prototype artifact then traverses this parse tree in order to construct the abstract syntax tree (AST). This AST is generated in form of the previously mentioned subset of XML referred to as flXML, and the one for this particular case is depicted in Figure \ref{ex:numbered-headings-flXML-ast-raw}.
+
+
+
+At the point of the AST, the author has the following three choices of action (as depicted in Figure \ref{fig:model-of-conversion-prototype-artifact}). The author can choose to (1) consider the AST the final output document and produce a physical file, or (2) run the file through a translation conversion, or (3) run the file through an interpretation conversion.
+
+Assume that some other author has written an interpretation conversion package (i.e. some code), that searches a document for headings and subheadings and prepend numbers accordingly. Since interpretation packages in the suggested prototype must be written in XSLT, the package could look like the one depicted in Figure \ref{ex:numbered-headings-xslt-package}.
+
+A discrepancy between the interpretation conversion code (Figure \ref{ex:numbered-headings-xslt-package}) and the current AST (Figure \ref{ex:numbered-headings-flXML-ast-raw}) will cause this particular package to not successfully traverse and number the AST. The problem is that the Flexup Definition caused the headings to be named \texttt{head} and the subheadings to be named \texttt{subhead}, whereas the interpretation conversion package expects them to be named \texttt{heading} and \texttt{subheading}. This is why both translations and conversions are needed to enable useful package sharing. Translation conversions (call them Flexup Translations, or \texttt{fupt}) are given as JSON objects where each key denote the XPath of elements to search for, and a name to convert the name of all the matches to. An appropriate Flexup Translation for this particular case is outlined in Figure \ref{ex:numbered-headings-translation-fupt}.
+
+Having applied the Flexup Translation (Figure \ref{ex:numbered-headings-translation-fupt}) to the AST (Figure \ref{ex:numbered-headings-flXML-ast-raw}), it is then possible to run the XSLT interpretation conversion package (Figure \ref{ex:numbered-headings-xslt-package}). The result of applying the package is a new AST with numbered headers as depicted in Figure \ref{ex:numbered-headings-flXML-ast-numbered}.
+
+\begin{figure}[p]
 \begin{lstlisting}
 <heading>1 First heading </heading>
 And then some text
@@ -2220,19 +2237,25 @@ And the last paragraph
 \end{figure}
 
 
-Again, the author can make the choice of applying further interpretation conversions, translation conversions, or simply writing the AST as a file to disk. In this particular usage example the goal was to end up with an HTML file, so consequently, another XSLT interpretation conversion package must be found, and all non-HTML elements must be translated into HTML-elements.
+Again, the author can make the choice of applying further interpretation conversions, translation conversions, or simply writing the AST as a file to disk. In this particular usage example the goal was to end up with an HTML file, so consequently, another XSLT interpretation conversion package must be found, that translates all non-HTML elements into HTML-elements.
 
 Figure \ref{ex:numbered-headings-translation-fupt-html-elements} illustrates a Flexup Translation that maps all elements that are not conforming to HTML, present in the AST of Figure \ref{ex:numbered-headings-flXML-ast-numbered}, to elements conforming to HTML. Applying this Translation to the current AST (Figure \ref{ex:numbered-headings-flXML-ast-numbered}) yields a new AST which only contains elements conforming to HTML.
 
 Figure \ref{ex:numbered-headings-xslt-package-html-wrapper} illustrates a Flexup Interpretation that blindly wraps the entire AST in an HTML document. Applying this conversion to the new AST (Figure \ref{ex:numbered-headings-flXML-ast-numbered-html-fragment}) yields an actual HTML document, as depicted in Figure \ref{ex:numbered-headings-html-output}. The destination is now reached, and the document can be written to file. A complete conversion has been carried out.
 
 
-\begin{figure}[h]
+\paragraph{In order to orchestrate all of the steps above, the artifact has an API in which the pipes can be utilized.} The syntax of the orchestration file is heavily inspired by the ``streaming build system'' gulp.js\footnote{ https://github.com/gulpjs}. All of the steps of the usage example in this section could be carried out through usage of the API, as depicted in Figure \ref{ex:numbered-headings-pipes-1}.
+
+
+
+
+
+\begin{figure}[p]
 \begin{lstlisting}
 {
   "//heading"    : "h1",
   "//subheading" : "h2",
-  "//text()"     : "p"
+  "/text()"     : "p"
 }
 \end{lstlisting}
 \caption{Translation file.}
@@ -2241,7 +2264,7 @@ Figure \ref{ex:numbered-headings-xslt-package-html-wrapper} illustrates a Flexup
 
 
 
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 <h1>1 First heading </h1>
 <p>And then some text</p>
@@ -2257,7 +2280,7 @@ Figure \ref{ex:numbered-headings-xslt-package-html-wrapper} illustrates a Flexup
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -2281,7 +2304,7 @@ Figure \ref{ex:numbered-headings-xslt-package-html-wrapper} illustrates a Flexup
 
 
 
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 <!DOCTYPE html>
 <html>
@@ -2307,7 +2330,7 @@ Figure \ref{ex:numbered-headings-xslt-package-html-wrapper} illustrates a Flexup
 
 
 
-\begin{figure}[h]
+\begin{figure}[p]
 \begin{lstlisting}
 flexup.in("./[document].fup")                 // read input file
   .pipe(grammar("./[fupd].json"))             // parse using fupd
@@ -2329,11 +2352,6 @@ flexup.in("./[document].fup")                 // read input file
 \caption{Orchestration file.}
 \label{ex:numbered-headings-pipes-1}
 \end{figure}
-
-
-\paragraph{In order to orchestrate all of the steps above, the artifact has an API in which the pipes can be utilized.} The syntax of the orchestration file is heavily inspired by the ``streaming build system'' gulp.js\footnote{ https://github.com/gulpjs}. All of the steps of the usage example in this section could be carried out through usage of the API, as depicted in Figure \ref{ex:numbered-headings-pipes-1}.
-
-
 
 
 
