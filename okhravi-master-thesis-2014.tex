@@ -2390,11 +2390,11 @@ flexup.in("./[document].fup")                 // read input file
 \paragraph{Regarding Deliverable I -- a workflow that enable the respecting of markup resolution, sharing of packages, and the ability to produce any output language. } A workflow has been identified, and a prototype built.
 
 \begin{itemize}
-\item Regarding the enabling of respect for markup resolution, the conversion workflow utilize an input language that can be described as an ``infinite language over infinite words'', which in theory can describe any imaginable string. In the particular prototype implementation, the Flexup Definition facility is currently not competent enough to enable the author to express all domains of infinite words. It is sufficiently competent for expressing infinite words, but it is simply not competent for expressing \emph{all} the domains of infinite words. Importantly though, the domains of infinite words expressible by Flexup Definitions is still greater than the domains of infinite words expressible by languages such as XML. As, XML for example is bound to the syntactic construct of chevrons, whereas Flexup Definitions, are only coupled to the concept of a starting tag and an ending tag, without saying anything about what a starting tag and an ending tag should look like.
+\item Regarding the enabling of respect for markup resolution, the conversion workflow utilizes an input language that can be described as an ``infinite language over infinite words'', which in theory can describe any imaginable string. In the particular prototype implementation, the Flexup Definition facility is currently not competent enough to enable the author to express all domains of infinite words. It is sufficiently competent for expressing infinite words, but it is simply not competent for expressing \emph{all} the domains of infinite words. Importantly though, the domains of infinite words expressible by Flexup Definitions is still greater than the domains of infinite words expressible by languages such as XML. As, XML for example is bound to the syntactic construct of chevrons, whereas Flexup Definitions, are only coupled to the concept of a starting tag and an ending tag, without saying anything about what a starting tag and an ending tag should look like.
 
 In other words, given that one starts from such an incredibly abstract language, and then can apply arbitrarily small conversions, it is only reasonable to assume that authors, through the use of Flexup, can respect markup resolution.
 
-\item Regarding the sharing of packages, the differentiation between Interpretation conversions, and Translation conversions, seemingly makes a great difference in regards to ease of use, when sharing packages.
+\item Regarding the sharing of packages, the differentiation between Interpretation conversions, and Translation conversions, seemingly makes a great difference in regards to ease of use, when sharing packages, since discrepancies between a conversion package and a given document can be bridged through conversions.
 
 \item The ability to produce any conceivable output format is undoubtedly fulfilled, because of the delegation to the language XSLT. Given that XSLT is a Turing Complete language, it is thus safe to say that any string produced by a Turing Machine (or less) also can be produced by Flexup.
 \end{itemize}
@@ -2402,12 +2402,12 @@ In other words, given that one starts from such an incredibly abstract language,
 
 \paragraph{Regarding Deliverable II -- the identification of fundamental characteristics of a markup language in order to achieve a relative, high level of abstraction. }
 \begin{itemize}
-\item The fundamental characteristics identified are descriptive syntax (Section \ref{sec:taxonomy-descriptive}), nesting (Section \ref{sec:nesting}), mixed content (Section \ref{sec:mixed-content}), generic identifiers (Section \ref{sec:theory:generic-identifiers-and-validity}), and derived text (Section \ref{sec:theory:derived-text}) which together enable infinite languages over infinite words. It is obvious that there is no reason to assume that this list is neither the only way to reach such a language, nor the best. If one is to however, argue that a higher number of semantic delimitations is required than those in the identified set of infinite languages over infinite words, the author argue that further research in Formal Grammars must be identified, or carried out. As it currently stands, the identified properties are deemed more than sufficient, if seeking an input markup language with a relative, high abstraction.
+\item The fundamental characteristics identified are descriptive syntax (Section \ref{sec:taxonomy-descriptive}), nesting (Section \ref{sec:nesting}), mixed content (Section \ref{sec:mixed-content}), generic identifiers (Section \ref{sec:theory:generic-identifiers-and-validity}), and derived text (Section \ref{sec:theory:derived-text}) which together enable infinite languages over infinite words. It is obvious that there is no reason to assume that this list is neither the only way to reach such a language, nor the best. However, if one is to argue that a higher number of semantic delimitations, than those in the identified set of infinite languages over infinite words, is required, then the author argue that the field of Formal Grammars must be explored in further depth. As it currently stands, the identified properties are deemed more than sufficient, if seeking an input markup language with a relative, high abstraction.
 \end{itemize}
 
 
 
-\paragraph{In conclusion, there is good reason to believe that the concept of markup resolution plays an important role in the collectivizing of a markup conversion eco-system,} where package sharing is used as a means of enabling all authors to ``write once, and publish everywhere''.
+\paragraph{In conclusion, there is thus reason to believe that the concept of markup resolution plays a role in the collectivizing of a markup conversion eco-system, if package sharable conversion strategies are to be used as a mean of enabling authors to ``write once, and publish everywhere''}.
 
 
 
@@ -2435,11 +2435,11 @@ Further use cases, and real world tests must be carried out before it is safe to
 
 It is also important to realize that many smaller implementation details have been put aside (as previously discussed in Section \ref{sec:usage-example}) during the development of this prototype. While there is currently no reason to suspect that anything significantly hazardous may hide in the implementation details, it would still be relevant to find out whether what seems theoretically reasonable in this thesis, also holds in practice, even when faced with all the implementation details.
 
-Any new efforts to approach non-hierarchical markup would be highly valuable, as the eco-system in this thesis, as most other markup languages today, is not canonically able to deal with nested structures.
+Any new efforts to approach non-hierarchical markup would be highly valuable, as the eco-system in this thesis, as most other markup languages today, is not canonically able to deal with non-hierarchically nested structures.
 
-While the artifact implemented in this thesis indeed must be considered a prototype, the validating effect it has on the concept of Markup Resolution, must be taken seriously, and into further consideration. Many interesting questions still hide on the boundaries of linguistics, semantics, formal grammars, and philosophy.\\ \\
+While the artifact implemented in this thesis indeed must be considered a prototype, it still emphasizes the importance of the concept of Markup Resolution. However, many interesting questions still hide in the boundaries of linguistics, semantics, formal grammars, and philosophy, in order to reach better solutions to the notion of ``write once, publish everywhere''.\\ \\
 
-The prototype discussed in this thesis is distributed online as open source, package contributions are most welcome\footnote{ https://github.com/chrokh/flexup}.
+The prototype is distributed as open source, and package contributions are most welcome\footnote{ https://github.com/chrokh/flexup}.
 
 
 
